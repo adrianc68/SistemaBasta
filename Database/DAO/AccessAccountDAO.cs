@@ -1,15 +1,8 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
 
-namespace Database.DAO {
+namespace Database.DAO
+{
     public class AccessAccountDAO : IAccessAccountDAO {
         private DatabaseConnection databaseConnection;
 
@@ -17,7 +10,31 @@ namespace Database.DAO {
             databaseConnection = new DatabaseConnection();
         }
 
-        public bool IAccessAccountDAO.ChangePasswordByEmail(string email, string password) {
+        public bool AccountAlreadyRegistered(string email) {
+            bool isEmailRegistered = false;
+            MySqlDataReader reader = null;
+            try
+            {
+                MySqlCommand queryCommand = new MySqlCommand("", databaseConnection.GetConnection())
+                {
+                    CommandText = "SELECT email FROM AccessAccount WHERE email = @email ORDER BY email DESC LIMIT 1"
+                };
+
+                queryCommand.Parameters.Add("@email", MySqlDbType.VarChar, 75).Value = email;
+                reader = queryCommand.ExecuteReader();
+                isEmailRegistered = reader.IsDBNull(1);
+            }
+            catch (MySqlException) {
+                throw;
+            } finally {
+                if (reader != null) {
+                    reader.Close();
+                }
+            }
+            return isEmailRegistered;
+        }
+
+        bool IAccessAccountDAO.ChangePasswordByEmail(string email, string password) {
             try {
                 MySqlCommand updateCommand = new MySqlCommand("", databaseConnection.GetConnection() ) {
                     CommandText = "UPDATE AccessAccount SET password = @password WHERE email = @email"
@@ -31,7 +48,9 @@ namespace Database.DAO {
             return false;
         }
 
-        public string IAccessAccountDAO.GenerateRecoveryCodeByEmail(string email) {
+
+
+        string IAccessAccountDAO.GenerateRecoveryCodeByEmail(string email) {
             String codeGenerated = null;
             try {
                 MySqlCommand updateCommand = new MySqlCommand("", databaseConnection.GetConnection())

@@ -6,7 +6,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:Basta.GUI.Login"
         mc:Ignorable="d"
-        Title="¡Basta! El juego de hoy" Height="448" Width="805">
+        Title="¡Basta! El juego de hoy" Height="515.674" Width="941.701">
     <Grid>
 
         <Grid.Background>
@@ -18,7 +18,7 @@
 
 
 
-        <Border Height="334" VerticalAlignment="Bottom" CornerRadius="0 0 180 0" Background="#FFF9F9F9" RenderTransformOrigin="0.5,0.5" Margin="0,0,0,83"></Border>
+        <Border Height="402" VerticalAlignment="Bottom" CornerRadius="0 0 180 0" Background="#FFF9F9F9" RenderTransformOrigin="0.5,0.5" Margin="0,0,0,83"></Border>
 
         <StackPanel Orientation="Horizontal">
             <StackPanel Width="350">
@@ -26,17 +26,17 @@
             </StackPanel>
             <StackPanel Margin="0">
 
-                <StackPanel Margin="20">
+                <StackPanel Margin="20,65,20,20">
 
-                    <TextBlock Text="Iniciar sesión" Margin="20" Foreground="Black" TextAlignment="Center" FontSize="38" FontFamily="Great Vibes"></TextBlock>
+                    <TextBlock Text="Iniciar sesión" Margin="20" Foreground="Black" TextAlignment="Center" FontSize="38" FontFamily="Segoe UI Light"></TextBlock>
                     <StackPanel Orientation="Horizontal" Margin="10">
                         <materialDesign:PackIcon Kind="User" Width="25" Height="25" Foreground="Black"/>
-                        <TextBox x:Name="usernameTextField" Margin="10 0" materialDesign:HintAssist.Hint="Enter Username / Email" Foreground="Black" Width="250" BorderBrush="White" CaretBrush="#FFD94448" SelectionBrush="#FFD94448" />
+                        <TextBox x:Name="usernameTextField" Margin="10 0" materialDesign:HintAssist.Hint="Enter Username / Email" Foreground="Black" Width="250" BorderBrush="#FFB84A31" CaretBrush="#FFD94448" SelectionBrush="#FFD94448" />
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" Margin="10">
                         <materialDesign:PackIcon Kind="Lock" Width="25" Height="25" Foreground="Black"/>
-                        <PasswordBox x:Name="passwordTextField" Margin="10 0" materialDesign:HintAssist.Hint="********" Foreground="Black" Width="250" BorderBrush="White" CaretBrush="#FFD94448" SelectionBrush="#FFD94448" />
+                        <PasswordBox x:Name="passwordTextField" Margin="10 0" materialDesign:HintAssist.Hint="********" Foreground="Black" Width="250" BorderBrush="#FFB84A31" CaretBrush="#FFD94448" SelectionBrush="#FFD94448" />
                     </StackPanel>
 
                     <StackPanel Margin="10" Orientation="Horizontal" HorizontalAlignment="Center">

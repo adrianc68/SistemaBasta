@@ -11,5 +11,6 @@ namespace Database.DAO
         String GenerateRecoveryCodeByEmail(String email);
         bool ChangePasswordByEmail(String email, String password);
 
+        bool AccountAlreadyRegistered(String email);
     }
 }
