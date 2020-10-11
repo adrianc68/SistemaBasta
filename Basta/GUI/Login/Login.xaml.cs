@@ -1,16 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using System.Windows;
 
 namespace Basta.GUI.Login
 {
@@ -22,6 +10,17 @@ namespace Basta.GUI.Login
         public Login()
         {
             InitializeComponent();
+        }
+
+        private void SignUpButtonClicked(object sender, RoutedEventArgs e)
+        {
+            GUI.Login.SignUp.SignUp signUp = new SignUp.SignUp();
+            signUp.ShowDialog();
+        }
+
+        private void LoginButtonClicked(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

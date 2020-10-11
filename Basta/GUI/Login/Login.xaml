@@ -6,7 +6,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:Basta.GUI.Login"
         mc:Ignorable="d"
-        Title="¡Basta! El juego de hoy" Height="447.946" Width="804.415">
+        Title="¡Basta! El juego de hoy" Height="448" Width="805">
     <Grid>
 
         <Grid.Background>
@@ -40,8 +40,8 @@
                     </StackPanel>
 
                     <StackPanel Margin="10" Orientation="Horizontal" HorizontalAlignment="Center">
-                        <Button Width="143" Height="42" Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="10" BorderThickness="2" BorderBrush="#D94448" Background="#D94448" Foreground="White" ToolTip="Login" Content="Login"></Button>
-                        <Button Width="143" Height="42" Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="10" BorderThickness="2" BorderBrush="#D94448" Background="#D94448" Foreground="White" ToolTip="Registrarse" Content="Registrarse" Grid.IsSharedSizeScope="True" Margin="10,0,0,0"></Button>
+                        <Button Width="143" Height="42" Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="10" BorderThickness="2" BorderBrush="#D94448" Background="#D94448" Foreground="White" ToolTip="Login" Content="Login" Click="LoginButtonClicked"></Button>
+                        <Button Width="143" Height="42" Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="10" BorderThickness="2" BorderBrush="#D94448" Background="#D94448" Foreground="White" ToolTip="Registrarse" Content="Registrarse" Grid.IsSharedSizeScope="True" Margin="10,0,0,0" Click="SignUpButtonClicked"></Button>
                     </StackPanel>
                     <TextBlock Margin="0" Foreground="Black" TextAlignment="Center" FontSize="10" FontFamily="Great Vibes"><Run Text="¿Olvidaste tu contraseña? "/><LineBreak/><Run Text="Haz clic aquí para recuperarla."/></TextBlock>
 
