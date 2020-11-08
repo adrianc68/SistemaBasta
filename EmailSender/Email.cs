@@ -5,7 +5,16 @@ using EmailSender.Properties.Configuration;
 using Domain.Exceptions;
 
 namespace EmailSender {
+    /*
+        The Email class
+        Contains all methods for send a message by smtp
+    */
     public class Email {
+        // Send a message to specified email
+        /// <summary>
+        /// It sends a message by smtp with content.
+        /// </summary>
+        /// <exception cref="Exception"> Thrown when an exception occurs.</exception>
         public static void SendMessage( string emailToSend, string content ) {
             string FROM = Resource.From_Email;
             string FROMNAME = Resource.From_Email_Name;

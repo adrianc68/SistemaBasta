@@ -3,6 +3,11 @@ using MySql.Data.MySqlClient;
 using System.Data;
 
 namespace Database.DAO {
+
+    /*
+        The PlayerDAO class
+        Contains all methods for getting and setting data from database.
+    */
     public class HostDAO: IHostDAO {
         private DatabaseConnection databaseConnection;
 
@@ -10,6 +15,13 @@ namespace Database.DAO {
             databaseConnection = new DatabaseConnection();
         }
 
+        // Get attempts from database
+        /// <summary>
+        /// It get the actually attempts perfomed by a user who is tryng to login to App.
+        /// </summary>
+        /// <returns>
+        /// returns int representing the attempts.
+        /// </returns>
         public int getAttemptsByMacAddress( string address ) {
             int attempsByAddress = -1;
             using ( MySqlConnection connection = databaseConnection.GetConnection() ) {
@@ -27,6 +39,13 @@ namespace Database.DAO {
             return attempsByAddress;
         }
 
+        // Set attempts to 0 in database
+        /// <summary>
+        /// It should be used to reset the attempts perfomed by a user.
+        /// </summary>
+        /// <returns>
+        /// returns true if any row was affected otherwise false.
+        /// </returns>
         public bool resetAttempts( string address ) {
             bool isAttemptsReset = false;
             using ( MySqlConnection connection = databaseConnection.GetConnection() ) {
@@ -42,6 +61,13 @@ namespace Database.DAO {
             return isAttemptsReset;
         }
 
+        // Set an attempt to database
+        /// <summary>
+        /// Add an attempt to database to a specified macAddress.
+        /// </summary>
+        /// <returns>
+        /// returns true if any row was affected otherwise false.
+        /// </returns>
         public bool sendActualMacAddress( string address ) {
             bool isAddressSent = false;
             try {

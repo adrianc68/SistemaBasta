@@ -5,6 +5,11 @@ using System;
 using System.Data;
 
 namespace Database.DAO {
+
+    /*
+        The PlayerDAO class
+        Contains all methods for getting and setting data from database.
+    */
     public class PlayerDAO: IPlayerDAO {
         private DatabaseConnection databaseConnection;
 
@@ -12,6 +17,13 @@ namespace Database.DAO {
             databaseConnection = new DatabaseConnection();
         }
 
+        // Add a Player in Database.
+        /// <summary>
+        /// It adds a specified Player in database.
+        /// </summary>
+        /// <returns>
+        /// returns true if callableStatement was perfomed otherwise false.
+        /// </returns>
         public bool AddPlayerAccount( Player player ) {
             bool isPlayerAdded = false;
             try {
@@ -34,6 +46,13 @@ namespace Database.DAO {
             return isPlayerAdded;
         }
 
+        // Get a Player from Database.
+        /// <summary>
+        /// It gets a Player by a email and password. It is used by a Login system.
+        /// </summary>
+        /// <returns>
+        /// returns Player if exist Player otherwise null.
+        /// </returns>
         public Player GetPlayerAccount( string email, string password ) {
             Player player = null;
             using ( MySqlConnection connection = databaseConnection.GetConnection() ) {
