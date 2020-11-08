@@ -4,48 +4,60 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        xmlns:local="clr-namespace:Basta.GUI.Login"
         mc:Ignorable="d"
-        Title="¡Basta! El juego de hoy" Height="515.674" Width="941.701">
+        xmlns:languages="clr-namespace:Basta.Properties"
+        Title="{x:Static languages:Resource.login_Label_login}" Height="515.674" Width="941.701" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
 
         <Grid.Background>
             <LinearGradientBrush StartPoint="0.1,0" EndPoint="0.9,1">
-                <GradientStop Color="#FFE63070" Offset="1" />
-                <GradientStop Color="#FFFE8704" Offset="0" />
+                <GradientStop Color="#FFF01461" Offset="1" />
+                <GradientStop Color="#FF0023C3" Offset="0" />
             </LinearGradientBrush>
         </Grid.Background>
 
 
 
-        <Border Height="402" VerticalAlignment="Bottom" CornerRadius="0 0 180 0" Background="#FFF9F9F9" RenderTransformOrigin="0.5,0.5" Margin="0,0,0,83"></Border>
+        <Border Height="402" VerticalAlignment="Bottom" CornerRadius="0,0,145,0" Background="#FFF9F9F9" RenderTransformOrigin="0.5,0.5" Margin="0,0,0,85">
+            <Image Source="palmera.png" Margin="529,2,31,-1" RenderTransformOrigin="0.5,0.5" StretchDirection="UpOnly">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform AngleY="0.298"/>
+                        <RotateTransform/>
+                        <TranslateTransform Y="-0.995"/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
+        </Border>
 
         <StackPanel Orientation="Horizontal">
             <StackPanel Width="350">
-                <Image Width="300" Height="300" VerticalAlignment="Top" Margin="15,30,30,30" Stretch="Fill" />
+                <Image Height="392" Margin="-3,0,18,0" Source="personLogin.png" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </StackPanel>
-            <StackPanel Margin="0">
+            <StackPanel Margin="0" HorizontalAlignment="Center">
 
-                <StackPanel Margin="20,65,20,20">
+                <StackPanel Margin="20,45,20,20">
 
-                    <TextBlock Text="Iniciar sesión" Margin="20" Foreground="Black" TextAlignment="Center" FontSize="38" FontFamily="Segoe UI Light"></TextBlock>
+                    <TextBlock Text="{x:Static languages:Resource.login_Label_login}" Margin="20" Foreground="Black" TextAlignment="Center" FontSize="48" FontFamily="PriceDown"></TextBlock>
                     <StackPanel Orientation="Horizontal" Margin="10">
                         <materialDesign:PackIcon Kind="User" Width="25" Height="25" Foreground="Black"/>
-                        <TextBox x:Name="usernameTextField" Margin="10 0" materialDesign:HintAssist.Hint="Enter Username / Email" Foreground="Black" Width="250" BorderBrush="#FFB84A31" CaretBrush="#FFD94448" SelectionBrush="#FFD94448" />
+                        <TextBox x:Name="usernameTextField" Margin="10 0" materialDesign:HintAssist.Hint="{x:Static languages:Resource.login_TextField_userOrEmail}" Foreground="Black" Width="250" BorderBrush="#FFB84A31" CaretBrush="#FFD94448" SelectionBrush="#FFD94448" FontFamily="Vice City Sans" />
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" Margin="10">
                         <materialDesign:PackIcon Kind="Lock" Width="25" Height="25" Foreground="Black"/>
-                        <PasswordBox x:Name="passwordTextField" Margin="10 0" materialDesign:HintAssist.Hint="********" Foreground="Black" Width="250" BorderBrush="#FFB84A31" CaretBrush="#FFD94448" SelectionBrush="#FFD94448" />
+                        <PasswordBox x:Name="passwordTextField" Margin="10 0" materialDesign:HintAssist.Hint="********" Foreground="Black" Width="250" BorderBrush="#FFB84A31" CaretBrush="#FFD94448" SelectionBrush="#FFD94448" FontFamily="Vice City Sans" />
                     </StackPanel>
 
                     <StackPanel Margin="10" Orientation="Horizontal" HorizontalAlignment="Center">
-                        <Button Width="143" Height="42" Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="10" BorderThickness="2" BorderBrush="#D94448" Background="#D94448" Foreground="White" ToolTip="Login" Content="Login" Click="LoginButtonClicked"></Button>
-                        <Button Width="143" Height="42" Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="10" BorderThickness="2" BorderBrush="#D94448" Background="#D94448" Foreground="White" ToolTip="Registrarse" Content="Registrarse" Grid.IsSharedSizeScope="True" Margin="10,0,0,0" Click="SignUpButtonClicked"></Button>
+                        <Button Width="143" Height="42" Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="10" BorderThickness="2" BorderBrush="#D94448" Background="#D94448" Foreground="White" Content="{x:Static languages:Resource.login_Label_login}" Click="LoginButtonClicked"></Button>
+                        <Button Width="143" Height="42" Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="10" BorderThickness="2" BorderBrush="#D94448" Background="#D94448" Foreground="White" Content="{x:Static languages:Resource.login_Button_signUp}" Grid.IsSharedSizeScope="True" Margin="10,0,0,0" Click="SignUpButtonClicked"></Button>
                     </StackPanel>
-                    <TextBlock Margin="0" Foreground="Black" TextAlignment="Center" FontSize="10" FontFamily="Great Vibes"><Run Text="¿Olvidaste tu contraseña? "/><LineBreak/><Run Text="Haz clic aquí para recuperarla."/></TextBlock>
-
+                    <TextBlock Margin="0" Foreground="#D81D229B" TextAlignment="Center" FontSize="10" FontFamily="Vice city sans" MouseLeftButtonDown="RecoveryPasswordLabelClicked" TextDecorations="Underline"><Run Text="{x:Static languages:Resource.login_Label_forgottenPassword}"/><LineBreak/><Run Text="{x:Static languages:Resource.login_Label_forgottenPassword2}"/></TextBlock>
+                    <Label x:Name="systemLabel" Content="" Foreground="#DDFF0808" RenderTransformOrigin="6.75,6.083" Margin="0,0,0,15" DockPanel.Dock="Bottom" Padding="0" Height="36" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="14" Background="{x:Null}" VerticalAlignment="Bottom" FontFamily="Vice City Sans"/>
                 </StackPanel>
+                <Button Width="162" Height="25" Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="10" BorderThickness="2" BorderBrush="{x:Null}" Background="{x:Null}" Foreground="#FF101576" Content="{x:Static languages:Resource.changeLanguageButton}" Grid.IsSharedSizeScope="True" Margin="10,-25,0,0" Click="ChangeLanguageButtonClicked" HorizontalAlignment="Center" FontSize="11" FontWeight="Normal"/>
 
             </StackPanel>
         </StackPanel>

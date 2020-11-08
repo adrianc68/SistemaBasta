@@ -10,9 +10,11 @@ namespace Domain.Domain {
         private string name;
         private string country;
         private AccessAccount accessAccount;
+
         public int Age { get => age; set => age = value; }
         public string Name { get => name; set => name = value; }
         public string Country { get => country; set => country = value; }
+     
         public AccessAccount AccessAccount { get => accessAccount; set => accessAccount = value; }
 
     }

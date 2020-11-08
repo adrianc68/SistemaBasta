@@ -1,92 +1,111 @@
-﻿using MySql.Data.MySqlClient;
+﻿using Domain.Domain;
+using MySql.Data.MySqlClient;
 using System;
 
-namespace Database.DAO
-{
-    public class AccessAccountDAO : IAccessAccountDAO {
+namespace Database.DAO {
+    public class AccessAccountDAO: IAccessAccountDAO {
         private DatabaseConnection databaseConnection;
 
         public AccessAccountDAO() {
             databaseConnection = new DatabaseConnection();
         }
 
-        public bool AccountAlreadyRegistered(string email) {
-            bool isEmailRegistered = false;
-            MySqlDataReader reader = null;
-            try
-            {
-                MySqlCommand queryCommand = new MySqlCommand("", databaseConnection.GetConnection())
-                {
-                    CommandText = "SELECT email FROM AccessAccount WHERE email = @email ORDER BY email DESC LIMIT 1"
-                };
-
-                queryCommand.Parameters.Add("@email", MySqlDbType.VarChar, 75).Value = email;
-                reader = queryCommand.ExecuteReader();
-                isEmailRegistered = reader.IsDBNull(1);
+        public bool verifyExistingUsername( string username ) {
+            bool isUsernameRegistered = false;
+            using ( MySqlConnection connection = databaseConnection.GetConnection() ) {
+                using ( MySqlCommand command = connection.CreateCommand() ) {
+                    command.CommandText = "SELECT username FROM AccessAccount WHERE username = @username;";
+                    command.Parameters.Add( "username", MySqlDbType.VarChar );
+                    command.Parameters[0].Value = username;
+                    using ( MySqlDataReader reader = command.ExecuteReader() ) {
+                        if ( reader.Read() ) {
+                            isUsernameRegistered = true;
+                        }
+                    }
+                }
             }
-            catch (MySqlException) {
-                throw;
-            } finally {
-                if (reader != null) {
-                    reader.Close();
+            return isUsernameRegistered;
+        }
+
+        public bool verifyExistingEmail( string email ) {
+            bool isEmailRegistered = false;
+            using ( MySqlConnection connection = databaseConnection.GetConnection() ) {
+                using ( MySqlCommand command = connection.CreateCommand() ) {
+                    command.CommandText = "SELECT email FROM AccessAccount WHERE email = @email;";
+                    command.Parameters.Add( "email", MySqlDbType.VarChar );
+                    command.Parameters[0].Value = email;
+                    using ( MySqlDataReader reader = command.ExecuteReader() ) {
+                        if ( reader.Read() ) {
+                            isEmailRegistered = true;
+                        }
+                    }
                 }
             }
             return isEmailRegistered;
         }
 
-        bool IAccessAccountDAO.ChangePasswordByEmail(string email, string password) {
-            try {
-                MySqlCommand updateCommand = new MySqlCommand("", databaseConnection.GetConnection() ) {
-                    CommandText = "UPDATE AccessAccount SET password = @password WHERE email = @email"
-                };
-                updateCommand.Parameters.Add("@password", MySqlDbType.VarChar, 75).Value = email;
-                 
-
-            } catch (MySqlException e) {
-                Console.WriteLine(e + "AccessAccountDAO ");
+        public bool ChangePasswordByEmail( string email, string password ) {
+            bool isPasswordChanged = false;
+            using ( MySqlConnection connection = databaseConnection.GetConnection() ) {
+                using ( MySqlCommand command = connection.CreateCommand() ) {
+                    command.CommandText = "UPDATE AccessAccount SET password = @password WHERE email = @email";
+                    command.Parameters.Add( "password", MySqlDbType.VarChar ).Value = password;
+                    command.Parameters.Add( "email", MySqlDbType.VarChar ).Value = email;
+                    int rowsAffected = command.ExecuteNonQuery();
+                    if ( rowsAffected > 0 ) {
+                        isPasswordChanged = true;
+                    }
+                }
             }
-            return false;
+            return isPasswordChanged;
         }
 
-
-
-        string IAccessAccountDAO.GenerateRecoveryCodeByEmail(string email) {
-            String codeGenerated = null;
-            try {
-                MySqlCommand updateCommand = new MySqlCommand("", databaseConnection.GetConnection())
-                {
-                    CommandText = "UPDATE AccessAccount SET recovery_code = SUBSTRING(MD5(RAND()),-8) WHERE email = @email ORDER BY id_user DESC LIMIT 1"
-                };
-                updateCommand.Parameters.Add("@email", MySqlDbType.VarChar, 75).Value = email;
-                updateCommand.ExecuteNonQuery();
-                codeGenerated = GetRecoveryCode(email);
-            } catch (MySqlException e) {
-                Console.WriteLine(e);
+        public string GenerateRecoveryCodeByEmail( string email ) {
+            string recoveryCode;
+            using ( MySqlConnection connection = databaseConnection.GetConnection() ) {
+                using ( MySqlCommand command = connection.CreateCommand() ) {
+                    command.CommandText = "UPDATE AccessAccount SET recovery_code = SUBSTRING(MD5(RAND()),-8) WHERE email = @email";
+                    command.Parameters.Add( "email", MySqlDbType.VarChar );
+                    command.Parameters[0].Value = email;
+                    command.ExecuteNonQuery();
+                    recoveryCode = GetRecoveryCode( email );
+                }
             }
-            return codeGenerated;
+            return recoveryCode;
         }
 
-        private string GetRecoveryCode(String email) {
-            String code = null;
-            MySqlDataReader reader = null;
-            try {
-                MySqlCommand queryCommand = new MySqlCommand("", databaseConnection.GetConnection() ) {
-                    CommandText = "SELECT recovery_code FROM AccessAccount WHERE email = @email ORDER BY email DESC LIMIT 1"
-                };
-
-                queryCommand.Parameters.Add("@email", MySqlDbType.VarChar, 75).Value = email;
-                reader = queryCommand.ExecuteReader();
-                code = reader.GetString(1);
-
-            } catch (MySqlException) {
-                throw;
-            } finally {
-                if( reader != null ) {
-                    reader.Close();
+        private string GetRecoveryCode( string email ) {
+            string code = null;
+            using ( MySqlConnection connection = databaseConnection.GetConnection() ) {
+                using ( MySqlCommand command = connection.CreateCommand() ) {
+                    command.CommandText = "SELECT recovery_code FROM AccessAccount WHERE email = @email ORDER BY email DESC LIMIT 1";
+                    command.Parameters.Add( "email", MySqlDbType.VarChar );
+                    command.Parameters[0].Value = email;
+                    using ( MySqlDataReader reader = command.ExecuteReader() ) {
+                        if ( reader.Read() ) {
+                            code = reader.GetString( 0 );
+                        }
+                    }
                 }
             }
             return code;
         }
 
+        public AccountState CheckAccountState( string email ) {
+            AccountState state = AccountState.NULL;
+            using ( MySqlConnection connection = databaseConnection.GetConnection() ) {
+                using ( MySqlCommand command = connection.CreateCommand() ) {
+                    command.CommandText = "SELECT account_state FROM AccessAccount WHERE email = @email";
+                    command.Parameters.Add( "email", MySqlDbType.VarChar );
+                    command.Parameters[0].Value = email;
+                    using ( MySqlDataReader reader = command.ExecuteReader() ) {
+                        if ( reader.Read() ) {
+                            state = (AccountState) Enum.Parse( typeof( AccountState ), reader.GetString( 0 ) );
+                        }
+                    }
+                }
+            }
+            return state;
+        }
     }
 }

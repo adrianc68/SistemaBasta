@@ -12,18 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Basta.GUI.Login.Lobby
-{
+namespace Basta.GUI.Login.Lobby {
     /// <summary>
     /// Lógica de interacción para LobbyWindow.xaml
     /// </summary>
-    public partial class LobbyWindow : Window
-    {
-        public LobbyWindow()
-        {
+    public partial class LobbyWindow : Window {
+        public LobbyWindow() {
             InitializeComponent();
         }
 
- 
+        private void exitButtonClicked(object sender, RoutedEventArgs e) {
+            Close();
+        }
     }
 }

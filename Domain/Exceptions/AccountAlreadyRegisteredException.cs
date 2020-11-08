@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Domain.Exceptions {
-    class AccountAlreadyRegisteredException : Exception {
-        public AccountAlreadyRegisteredException() : base("La cuenta ya está registrada") {
+    class AccountAlreadyRegisteredException: Exception {
+        public AccountAlreadyRegisteredException( string message ) : base( message ) { }
 
-        }
+        public AccountAlreadyRegisteredException( string message, Exception innerException ) : base( message, innerException ) { }
+
     }
 
 }

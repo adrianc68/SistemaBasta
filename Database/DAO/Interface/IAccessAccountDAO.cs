@@ -1,16 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Domain.Domain;
+using System;
 
-namespace Database.DAO
-{
-    interface IAccessAccountDAO
-    {
-        String GenerateRecoveryCodeByEmail(String email);
-        bool ChangePasswordByEmail(String email, String password);
+namespace Database.DAO {
+    interface IAccessAccountDAO {
+        string GenerateRecoveryCodeByEmail( string email );
 
-        bool AccountAlreadyRegistered(String email);
+        bool ChangePasswordByEmail( string email, string password );
+
+        bool verifyExistingUsername( string username );
+
+        bool verifyExistingEmail( string email );
+
+        AccountState CheckAccountState( string email );
+
     }
 }
+

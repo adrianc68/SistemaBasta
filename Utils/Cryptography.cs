@@ -8,7 +8,6 @@ namespace Utils {
 
         public static String SHA256_Hash(String value) {
             StringBuilder stringBuilder = new StringBuilder();
-
             using (SHA256 hash = SHA256Managed.Create() ) {
                 Encoding encoding = Encoding.UTF8;
                 Byte[] result = hash.ComputeHash( encoding.GetBytes(value) );

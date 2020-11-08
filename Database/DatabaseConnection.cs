@@ -3,10 +3,8 @@ using System;
 using System.Configuration;
 using System.Data;
 
-namespace Database
-{
-    public class DatabaseConnection
-    {
+namespace Database {
+    public class DatabaseConnection {
         private MySqlConnection connection;
 
         public MySqlConnection GetConnection() {
@@ -15,12 +13,12 @@ namespace Database
         }
 
         public void CloseConnection() {
-            if (connection != null) {
+            if ( connection != null ) {
                 try {
-                    if( connection.State == ConnectionState.Open) {
+                    if ( connection.State == ConnectionState.Open ) {
                         connection.Close();
                     }
-                } catch (MySqlException) {
+                } catch ( MySqlException ) {
                     throw;
                 }
             }
@@ -30,7 +28,8 @@ namespace Database
             connection = null;
             try {
                 connection = new MySqlConnection( GetConnectionString() );
-            } catch (MySqlException) {
+                connection.Open();
+            } catch ( MySqlException ) {
                 throw;
             }
         }
@@ -39,7 +38,5 @@ namespace Database
             return ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString;
         }
 
-
     }
-
 }

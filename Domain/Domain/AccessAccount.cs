@@ -4,17 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Domain
-{
+namespace Domain.Domain {
     public class AccessAccount {
         private string email;
-        private int id;
         private string username;
         private string password;
+        private AccountState accountState;
 
         public string Email { get => email; set => email = value; }
-        public int Id { get => id; set => id = value; }
         public string Username { get => username; set => username = value; }
         public string Password { get => password; set => password = value; }
+        public AccountState AccountState { get => accountState; set => accountState = value ; }
+
     }
 }
