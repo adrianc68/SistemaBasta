@@ -6,12 +6,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace Basta
-{
+namespace Basta {
     /// <summary>
     /// Lógica de interacción para App.xaml
     /// </summary>
-    public partial class App : Application
-    {
+    public partial class App: Application {
     }
 }

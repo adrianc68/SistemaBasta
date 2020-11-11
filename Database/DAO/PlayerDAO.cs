@@ -1,8 +1,8 @@
 ﻿using Database.DAO.Interface;
-using Domain.Domain;
-using MySql.Data.MySqlClient;
+using Database.Entity;
 using System;
 using System.Data;
+using System.Linq;
 
 namespace Database.DAO {
 
@@ -11,12 +11,7 @@ namespace Database.DAO {
         Contains all methods for getting and setting data from database.
     */
     public class PlayerDAO: IPlayerDAO {
-        private DatabaseConnection databaseConnection;
-
-        public PlayerDAO() {
-            databaseConnection = new DatabaseConnection();
-        }
-
+   
         // Add a Player in Database.
         /// <summary>
         /// It adds a specified Player in database.
@@ -27,20 +22,15 @@ namespace Database.DAO {
         public bool AddPlayerAccount( Player player ) {
             bool isPlayerAdded = false;
             try {
-                using ( MySqlConnection mySqlConnection = databaseConnection.GetConnection() ) {
-                    using ( MySqlCommand callableCommand = new MySqlCommand( "addPlayerAccount", mySqlConnection ) ) {
-                        callableCommand.CommandType = CommandType.StoredProcedure;
-                        callableCommand.Parameters.Add( "email_in", MySqlDbType.VarChar ).Value = player.AccessAccount.Email;
-                        callableCommand.Parameters.Add( "age_in", MySqlDbType.Int32 ).Value = player.Age;
-                        callableCommand.Parameters.Add( "country_in", MySqlDbType.VarChar ).Value = player.Country;
-                        callableCommand.Parameters.Add( "username_in", MySqlDbType.VarChar ).Value = player.AccessAccount.Username;
-                        callableCommand.Parameters.Add( "password_in", MySqlDbType.VarChar ).Value = player.AccessAccount.Password;
-                        callableCommand.Parameters.Add( "name_in", MySqlDbType.VarChar ).Value = player.Name;
-                        int result = callableCommand.ExecuteNonQuery();
-                        isPlayerAdded = ( result != 0 );
-                    }
+                using ( BastaEntityModelContainer database = new BastaEntityModelContainer() ) {
+                    player.AccessAccount.account_state = AccountState.FREE;
+                    player.location = Location.NORTH;
+                    database.AccessAccounts.Add( player.AccessAccount );
+                    database.Players.Add( player );
+                    database.SaveChanges();
+                    isPlayerAdded = true;
                 }
-            } catch ( MySqlException ) {
+            } catch(Exception ) {
                 throw;
             }
             return isPlayerAdded;
@@ -54,29 +44,26 @@ namespace Database.DAO {
         /// returns Player if exist Player otherwise null.
         /// </returns>
         public Player GetPlayerAccount( string email, string password ) {
-            Player player = null;
-            using ( MySqlConnection connection = databaseConnection.GetConnection() ) {
-                using ( MySqlCommand command = connection.CreateCommand() ) {
-                    command.CommandText = "SELECT ACA.username, ACA.email, ACA.password, ACA.account_state, PLA.name, PLA.age, PLA.country, PLA.location FROM AccessAccount AS ACA INNER JOIN Player AS PLA ON ACA.email = PLA.email AND ACA.email = @email AND ACA.password = @password";
-                    command.Parameters.Add( "email", MySqlDbType.VarChar ).Value = email;
-                    command.Parameters.Add( "password", MySqlDbType.VarChar ).Value = password;
-                    using ( MySqlDataReader reader = command.ExecuteReader() ) {
-                        if ( reader.Read() ) {
-                            AccessAccount account = new AccessAccount();
-                            account.AccountState = (AccountState) Enum.Parse( typeof( AccountState ), reader.GetString( "account_state" ) ); ;
-                            account.Email = reader.GetString( "email" );
-                            account.Password = reader.GetString( "password" );
-                            account.Username = reader.GetString( "username" );
-                            player = new Player();
-                            player.AccessAccount = account;
-                            player.Age = reader.GetInt16( "age" );
-                            player.Country = reader.GetString( "country" );
-                            player.Name = reader.GetString( "name" );
-                        }
+            Player playerDatabase = null;
+            try {
+                using ( BastaEntityModelContainer database = new BastaEntityModelContainer() ) {
+                    var account = database.AccessAccounts
+                        .Where( b => b.email == email ).Where( b => b.password == password)
+                        .FirstOrDefault();
+
+                    var player = database.Players
+                        .Where( b => b.email == email )
+                        .FirstOrDefault();
+
+                    if(account != null) {
+                        player.AccessAccount = account;
                     }
+                    playerDatabase = player;
                 }
+            } catch ( Exception ) {
+                throw;
             }
-            return player;
+            return playerDatabase;
         }
     }
 

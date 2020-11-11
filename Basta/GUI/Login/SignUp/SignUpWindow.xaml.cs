@@ -1,6 +1,6 @@
 ﻿using Basta.GUI.Validator;
 using Database.DAO;
-using Domain.Domain;
+using Database.Entity;
 using System;
 using System.Collections.Generic;
 using System.Windows;
@@ -29,31 +29,32 @@ namespace Basta.GUI.Login.SignUp {
 
         private void registerPlayer() {
             Player player = new Player();
-            player.Age = (int) signUpComboBoxAge.SelectedValue;
-            player.Country = signUpCountryTextBox.Text.Trim();
-            player.Name = signUpFirstNameTextBox.Text.Trim() + " " + signUpLastNameTextBox.Text.Trim();
+            player.age = (short) signUpComboBoxAge.SelectedItem;
+            player.country = signUpCountryTextBox.Text.Trim();
+            player.name = signUpFirstNameTextBox.Text.Trim() + " " + signUpLastNameTextBox.Text.Trim();
             AccessAccount accessAccount = new AccessAccount();
-            accessAccount.Username = signUpUsernameTextBox.Text.Trim();
-            accessAccount.Email = signUpEmailTextBox.Text.Trim();
-            accessAccount.Password = passwordTextBox.Password.Trim();
-            accessAccount.AccountState = AccountState.FREE;
-            player.AccessAccount = accessAccount;
+            accessAccount.account_state = AccountState.FREE;
+            accessAccount.username = signUpUsernameTextBox.Text.Trim();
+            accessAccount.email = signUpEmailTextBox.Text.Trim();
+            accessAccount.password = passwordTextBox.Password.Trim();
             PlayerDAO playerDAO = new PlayerDAO();
+
             AccessAccountDAO accessAccountDAO = new AccessAccountDAO();
-            if ( accessAccountDAO.verifyExistingEmail( accessAccount.Email ) ) {
+            if ( accessAccountDAO.verifyExistingEmail( accessAccount.email ) ) {
                 systemLabel.Content = Basta.Properties.Resource.SystemExistingEmail;
-            } else if ( accessAccountDAO.verifyExistingUsername( accessAccount.Username ) ) {
+            } else if ( accessAccountDAO.verifyExistingUsername( accessAccount.username ) ) {
                 systemLabel.Content = Basta.Properties.Resource.SystemExistingUsername;
             } else {
+                player.AccessAccount = accessAccount;
                 playerDAO.AddPlayerAccount( player );
                 Close();
             }
         }
 
         private void SignUpComboBoxLoaded( object sender, RoutedEventArgs e ) {
-            List<int> data = new List<int>();
+            List<Int16> data = new List<Int16>();
             for ( int i = 4; i < 120; i++ ) {
-                data.Add( i );
+                data.Add( (short) i );
             }
             var combo = sender as ComboBox;
             combo.ItemsSource = data;
@@ -69,7 +70,6 @@ namespace Basta.GUI.Login.SignUp {
                 signUpFirstNameTextBox.BorderBrush = Brushes.Red;
                 signUpFirstNameTextBox.BorderThickness = new Thickness( 0, 0, 0, 3 );
                 elementsValid[signUpFirstNameTextBox] = false;
-
             }
         }
 

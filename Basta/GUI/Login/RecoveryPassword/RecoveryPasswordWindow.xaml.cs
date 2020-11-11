@@ -1,10 +1,11 @@
-﻿using Database.DAO;
-using Domain.Exceptions;
-using EmailSender;
+﻿using Domain.Exceptions;
+using Utils;
 using System;
 using System.Windows;
 using Basta.Properties;
 using Basta.GUI.Login.ChangePassword;
+using EmailSender;
+using Database.DAO;
 
 namespace Basta.GUI.Login.RecoveryPassword {
     /// <summary>
@@ -58,7 +59,7 @@ namespace Basta.GUI.Login.RecoveryPassword {
         }
 
         private bool VerifyEmailRegistered( string email ) {
-            bool isEmailRegistered;
+            bool isEmailRegistered = false;
             AccessAccountDAO accessAccountDAO = new AccessAccountDAO();
             isEmailRegistered = accessAccountDAO.verifyExistingEmail( email );
             if ( !isEmailRegistered ) {

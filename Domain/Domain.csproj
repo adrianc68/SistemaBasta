@@ -12,6 +12,8 @@
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -32,7 +34,17 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -42,8 +54,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Domain\AccessAccount.cs" />
+    <Compile Include="Domain\Game.cs" />
+    <Compile Include="Domain\GameConfiguration.cs" />
+    <Compile Include="Domain\GameCategory.cs" />
+    <Compile Include="Domain\Message.cs" />
     <Compile Include="Domain\Player.cs" />
     <Compile Include="Domain\AccountState.cs" />
+    <Compile Include="Domain\Room.cs" />
+    <Compile Include="Domain\RoomConfiguration.cs" />
+    <Compile Include="Domain\RoomState.cs" />
+    <Compile Include="Domain\Round.cs" />
     <Compile Include="Exceptions\AccessAccountNotFoundException.cs" />
     <Compile Include="Exceptions\AccountAlreadyRegisteredException.cs" />
     <Compile Include="Exceptions\BannedAccountException.cs" />
@@ -51,6 +71,9 @@
     <Compile Include="Exceptions\EmailSenderException.cs" />
     <Compile Include="Exceptions\LimitReachedException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,4 +1,5 @@
-﻿using Domain.Domain;
+﻿
+using Database.Entity;
 
 namespace Database.DAO.Interface {
     interface IPlayerDAO {

@@ -1,5 +1,4 @@
-﻿using Database.DAO;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -36,8 +35,8 @@ namespace Basta.GUI.Login.ChangePassword {
         }
 
         private void ChangePassword() {
-            AccessAccountDAO accessAccountDAO = new AccessAccountDAO();
-            accessAccountDAO.ChangePasswordByEmail( email, Cryptography.SHA256_Hash( firstPasswordTextBox.Text.Trim() ) );
+            //AccessAccountDAO accessAccountDAO = new AccessAccountDAO();
+            //accessAccountDAO.ChangePasswordByEmail( email, Cryptography.SHA256_Hash( firstPasswordTextBox.Text.Trim() ) );
         }
 
         private void ChangeButtonClicked( object sender, RoutedEventArgs e ) {
