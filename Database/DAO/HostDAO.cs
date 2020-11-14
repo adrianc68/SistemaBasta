@@ -1,5 +1,8 @@
 ﻿using Database.DAO.Interface;
+using Database.Entity;
+using System;
 using System.Data;
+using System.Linq;
 
 namespace Database.DAO {
 
@@ -18,18 +21,15 @@ namespace Database.DAO {
         /// </returns>
         public int getAttemptsByMacAddress( string address ) {
             int attempsByAddress = -1;
-            //using ( MySqlConnection connection = databaseConnection.GetConnection() ) {
-            //    using ( MySqlCommand command = connection.CreateCommand() ) {
-            //        command.CommandText = "SELECT attempts FROM Host WHERE mac_address = @mac_adress";
-            //        command.Parameters.Add( "mac_adress", MySqlDbType.VarChar );
-            //        command.Parameters[0].Value = address;
-            //        using ( MySqlDataReader reader = command.ExecuteReader() ) {
-            //            if ( reader.Read() ) {
-            //                attempsByAddress = reader.GetInt16(0);
-            //            }
-            //        }
-            //    }
-            //}
+            using ( BastaEntityModelContainer database = new BastaEntityModelContainer() ) {
+                var macAddress = database.Hosts
+                    .Where( b => b.mac_address == address )
+                    .FirstOrDefault();
+                if ( macAddress != null ) {
+                    attempsByAddress = macAddress.attempts;
+                }
+            }
+
             return attempsByAddress;
         }
 
@@ -42,16 +42,15 @@ namespace Database.DAO {
         /// </returns>
         public bool resetAttempts( string address ) {
             bool isAttemptsReset = false;
-            //using ( MySqlConnection connection = databaseConnection.GetConnection() ) {
-            //    using ( MySqlCommand command = connection.CreateCommand() ) {
-            //        command.CommandText = "UPDATE Host SET attempts = 0 WHERE mac_address = @mac_address";
-            //        command.Parameters.Add( "mac_address", MySqlDbType.VarChar ).Value = address;
-            //        int rowsAffected = command.ExecuteNonQuery();
-            //        if ( rowsAffected > 0 ) {
-            //            isAttemptsReset = true;
-            //        }
-            //    }
-            //}
+            using ( BastaEntityModelContainer database = new BastaEntityModelContainer() ) {
+                var macAddress = database.Hosts
+                    .Where( b => b.mac_address == address )
+                    .FirstOrDefault();
+                if ( macAddress != null ) {
+                    macAddress.attempts = 0;
+                }
+                database.SaveChanges();
+            }
             return isAttemptsReset;
         }
 
@@ -64,19 +63,23 @@ namespace Database.DAO {
         /// </returns>
         public bool sendActualMacAddress( string address ) {
             bool isAddressSent = false;
-            //try {
-            //    using ( MySqlConnection mySqlConnection = databaseConnection.GetConnection() ) {
-            //        using ( MySqlCommand callableCommand = new MySqlCommand( "sendAddress", mySqlConnection ) ) {
-            //            callableCommand.CommandType = CommandType.StoredProcedure;
-            //            callableCommand.Parameters.Add( "dir", MySqlDbType.VarChar ).Value = address;
-            //            int result = callableCommand.ExecuteNonQuery();
-            //            isAddressSent = ( result != 0 );
-            //        }
-            //    }
-            //} catch ( MySqlException ) {
-            //    throw;
-            //}
+            using ( BastaEntityModelContainer database = new BastaEntityModelContainer() ) {
+                var macAddress = database.Hosts
+                    .Where( b => b.mac_address == address )
+                    .FirstOrDefault();
+                if ( macAddress == null ) {
+                    Host host = new Host();
+                    host.mac_address = address;
+                    host.attempts = 1;
+                    database.Hosts.Add( host );
+                    isAddressSent = true;
+                } else {
+                    macAddress.attempts++;
+                }
+                database.SaveChanges();
+            }
             return isAddressSent;
         }
+
     }
 }

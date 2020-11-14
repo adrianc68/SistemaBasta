@@ -1,8 +1,7 @@
 ﻿using System.Net.Mail;
 using System.Net;
 using System;
-using EmailSender.Properties.Configuration;
-using Domain.Exceptions;
+using Basta.Service.Properties.Configuration;
 
 namespace EmailSender {
     /*

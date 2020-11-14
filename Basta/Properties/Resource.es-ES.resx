@@ -361,6 +361,9 @@
   <data name="SystemNoExistingEmail" xml:space="preserve">
     <value>¡El correo electrónico no está registrado!</value>
   </data>
+  <data name="SystemPasswordChangingError" xml:space="preserve">
+    <value>No se pudo cambiar la contraseña ¡Intenta más tarde!</value>
+  </data>
   <data name="SystemPasswordNoMatch" xml:space="preserve">
     <value>¡Las contraseñas no coinciden!</value>
   </data>

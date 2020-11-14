@@ -11,7 +11,7 @@ namespace Database.DAO {
         Contains all methods for getting and setting data from database.
     */
     public class PlayerDAO: IPlayerDAO {
-   
+
         // Add a Player in Database.
         /// <summary>
         /// It adds a specified Player in database.
@@ -21,17 +21,13 @@ namespace Database.DAO {
         /// </returns>
         public bool AddPlayerAccount( Player player ) {
             bool isPlayerAdded = false;
-            try {
-                using ( BastaEntityModelContainer database = new BastaEntityModelContainer() ) {
-                    player.AccessAccount.account_state = AccountState.FREE;
-                    player.location = Location.NORTH;
-                    database.AccessAccounts.Add( player.AccessAccount );
-                    database.Players.Add( player );
-                    database.SaveChanges();
-                    isPlayerAdded = true;
-                }
-            } catch(Exception ) {
-                throw;
+            using ( BastaEntityModelContainer database = new BastaEntityModelContainer() ) {
+                player.AccessAccount.account_state = AccountState.FREE;
+                player.location = Location.NORTH;
+                database.AccessAccounts.Add( player.AccessAccount );
+                database.Players.Add( player );
+                database.SaveChanges();
+                isPlayerAdded = true;
             }
             return isPlayerAdded;
         }
@@ -45,23 +41,13 @@ namespace Database.DAO {
         /// </returns>
         public Player GetPlayerAccount( string email, string password ) {
             Player playerDatabase = null;
-            try {
-                using ( BastaEntityModelContainer database = new BastaEntityModelContainer() ) {
-                    var account = database.AccessAccounts
-                        .Where( b => b.email == email ).Where( b => b.password == password)
-                        .FirstOrDefault();
-
-                    var player = database.Players
-                        .Where( b => b.email == email )
-                        .FirstOrDefault();
-
-                    if(account != null) {
-                        player.AccessAccount = account;
-                    }
-                    playerDatabase = player;
+            using ( BastaEntityModelContainer database = new BastaEntityModelContainer() ) {
+                var account = database.AccessAccounts
+                    .Where( b => b.email == email ).Where( b => b.password == password )
+                    .FirstOrDefault();
+                if ( account != null ) {
+                    playerDatabase = account.Player;
                 }
-            } catch ( Exception ) {
-                throw;
             }
             return playerDatabase;
         }

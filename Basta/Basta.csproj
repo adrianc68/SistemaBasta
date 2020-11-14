@@ -102,7 +102,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Autentication.cs" />
     <Compile Include="Connected Services\Proxy\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -161,16 +160,23 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <None Include="Connected Services\Proxy\BastaService.wsdl" />
-    <None Include="Connected Services\Proxy\item.xsd">
+    <None Include="Connected Services\Proxy\BastaService.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\Proxy\item1.xsd">
+    <None Include="Connected Services\Proxy\BastaService1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\Proxy\item2.xsd">
+    <None Include="Connected Services\Proxy\BastaService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\Proxy\BastaService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\Proxy\BastaService4.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\Database.Entity.Player.datasource" />
     <None Include="Properties\DataSources\Domain.Domain.Player.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>PublicSettingsSingleFileGenerator</Generator>
@@ -201,6 +207,14 @@
     <Resource Include="GUI\Images\recoveryPassword.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Basta.Contracts\Basta.Contracts.csproj">
+      <Project>{B1E94ACD-B560-4969-B5F7-217020F07F0A}</Project>
+      <Name>Basta.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Basta.Service\Basta.Service.csproj">
+      <Project>{B072BDF6-DCD0-438D-A801-0D9E6D658A65}</Project>
+      <Name>Basta.Service</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Database\Database.csproj">
       <Project>{33661354-1E02-4EF0-9EFD-9CD81A7F4E17}</Project>
       <Name>Database</Name>
@@ -254,7 +268,7 @@
     <WCFMetadataStorage Include="Connected Services\Proxy\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\Proxy\item.disco" />
+    <None Include="Connected Services\Proxy\BastaService.disco" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\Proxy\configuration91.svcinfo" />

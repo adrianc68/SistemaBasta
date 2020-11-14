@@ -1,8 +1,9 @@
-﻿using Basta.GUI.Validator;
-using Database.DAO;
+﻿using Basta.Contracts.Faults;
+using Basta.GUI.Validator;
 using Database.Entity;
 using System;
 using System.Collections.Generic;
+using System.ServiceModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -37,17 +38,17 @@ namespace Basta.GUI.Login.SignUp {
             accessAccount.username = signUpUsernameTextBox.Text.Trim();
             accessAccount.email = signUpEmailTextBox.Text.Trim();
             accessAccount.password = passwordTextBox.Password.Trim();
-            PlayerDAO playerDAO = new PlayerDAO();
-
-            AccessAccountDAO accessAccountDAO = new AccessAccountDAO();
-            if ( accessAccountDAO.verifyExistingEmail( accessAccount.email ) ) {
-                systemLabel.Content = Basta.Properties.Resource.SystemExistingEmail;
-            } else if ( accessAccountDAO.verifyExistingUsername( accessAccount.username ) ) {
-                systemLabel.Content = Basta.Properties.Resource.SystemExistingUsername;
-            } else {
-                player.AccessAccount = accessAccount;
-                playerDAO.AddPlayerAccount( player );
+            player.AccessAccount = accessAccount;
+            Proxy.LoginServiceClient server = new Proxy.LoginServiceClient();
+            try {
+                server.SignUp( player );
                 Close();
+            } catch ( FaultException<EmailAlreadyRegisteredFault> ) {
+                systemLabel.Content = Properties.Resource.SystemExistingEmail;
+            } catch ( FaultException<UsernameRegisteredAlreadyFault> ) {
+                systemLabel.Content = Properties.Resource.SystemExistingUsername;
+            } catch ( FaultException ) {
+                systemLabel.Content = Properties.Resource.SystemFatalError;
             }
         }
 

@@ -34,17 +34,22 @@ namespace Basta.GUI.Login.ChangePassword {
             return isValidPassword;
         }
 
-        private void ChangePassword() {
-            //AccessAccountDAO accessAccountDAO = new AccessAccountDAO();
-            //accessAccountDAO.ChangePasswordByEmail( email, Cryptography.SHA256_Hash( firstPasswordTextBox.Text.Trim() ) );
+        private bool ChangePassword() {
+            bool isPasswordChanged = false;
+            Proxy.LoginServiceClient server = new Proxy.LoginServiceClient();
+            isPasswordChanged = server.ChangePassword( email, Cryptography.SHA256_Hash( firstPasswordTextBox.Text.Trim() ) );
+            return isPasswordChanged;
         }
 
         private void ChangeButtonClicked( object sender, RoutedEventArgs e ) {
             ClearData();
             if ( isValidPassword( firstPasswordTextBox.Text.Trim() ) ) {
                 if ( firstPasswordTextBox.Text.Trim().Equals( secondPasswordTextBox.Text.Trim() ) ) {
-                    ChangePassword();
-                    Close();
+                    if ( ChangePassword() ) {
+                        Close();
+                    } else {
+                        systemLabel.Content = Resource.SystemPasswordChangingError;
+                    }
                 } else {
                     systemLabel.Content = Resource.SystemPasswordNoMatch;
                 }

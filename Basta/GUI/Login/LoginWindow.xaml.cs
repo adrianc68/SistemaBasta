@@ -1,9 +1,10 @@
-﻿using Basta.GUI.Login.Main;
+﻿using Basta.Contracts.Faults;
+using Basta.GUI.Login.Main;
 using Basta.GUI.Login.RecoveryPassword;
 using Database.DAO;
 using Database.Entity;
-using Domain.Exceptions;
 using System;
+using System.ServiceModel;
 using System.Windows;
 using System.Windows.Navigation;
 using Utils;
@@ -27,24 +28,27 @@ namespace Basta.GUI.Login {
         }
 
         private void LoginButtonClicked( object sender, RoutedEventArgs e ) {
-            Autentication autentication = Autentication.GetInstance();
-            systemLabel.Content = "";
+            Player player = null;
             try {
-                if ( autentication.LogIn( usernameTextField.Text.Trim(), Cryptography.SHA256_Hash( passwordTextField.Password.Trim() ) ) ) {
-                    Hide();
-                    MainWindow mainWindow = new MainWindow();
-                    mainWindow.ShowDialog();
-                    Show();
-                }
-            } catch ( AccessAccountNotFoundException ) {
+                Proxy.LoginServiceClient server = new Proxy.LoginServiceClient();
+                player = server.Login( Cryptography.SHA256_Hash( NetworkAddress.GetMacAddress() ), usernameTextField.Text.Trim(), passwordTextField.Password.Trim() );
+            } catch ( FaultException<AccessAccountNotFoundFault> ) {
                 systemLabel.Content = Properties.Resource.SystemLoginError;
-            } catch ( BannedAccountException ) {
+            } catch ( FaultException<BannedAccountFault> ) {
                 systemLabel.Content = Properties.Resource.SystemLoginAccountBanned;
-            } catch ( LimitReachedException ) {
+            } catch ( FaultException<LimitReachedFault> ) {
                 systemLabel.Content = Properties.Resource.SystemAttemptsLimitReached;
-            } catch ( Exception ) {
+            } catch ( FaultException ) {
                 systemLabel.Content = Properties.Resource.SystemFatalError;
             }
+      
+            if ( player != null) {
+                
+                MainWindow mainWindow = new MainWindow();
+                mainWindow.ShowDialog();
+                
+            }
+
         }
 
         private void RecoveryPasswordLabelClicked( object sender, System.Windows.Input.MouseButtonEventArgs e ) {
@@ -64,7 +68,7 @@ namespace Basta.GUI.Login {
             }
             Properties.Settings.Default.Save();
             DataContext = this;
-            
+
 
         }
     }

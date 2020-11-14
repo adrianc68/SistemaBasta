@@ -361,6 +361,9 @@
   <data name="SystemNoExistingEmail" xml:space="preserve">
     <value>The email is not registered!</value>
   </data>
+  <data name="SystemPasswordChangingError" xml:space="preserve">
+    <value>Couldn't change the password, try later!</value>
+  </data>
   <data name="SystemPasswordNoMatch" xml:space="preserve">
     <value>Passwords don't match!</value>
   </data>

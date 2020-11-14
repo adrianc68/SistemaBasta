@@ -33,6 +33,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -42,10 +43,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Faults\AccessAccountNotFoundFault.cs" />
+    <Compile Include="Faults\AccountAlreadyRegisteredFault.cs" />
+    <Compile Include="Faults\BannedAccountFault.cs" />
+    <Compile Include="Faults\EmailAlreadyRegisteredFault.cs" />
+    <Compile Include="Faults\EmailNotRegisteredYetFault.cs" />
+    <Compile Include="Faults\EmailSenderFault.cs" />
+    <Compile Include="Faults\ErrorFault.cs" />
+    <Compile Include="Faults\LimitReachedFault.cs" />
+    <Compile Include="Faults\UsernameRegisteredAlreadyFault.cs" />
     <Compile Include="IChatService.cs" />
+    <Compile Include="ILoginService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Database\Database.csproj">
+      <Project>{33661354-1E02-4EF0-9EFD-9CD81A7F4E17}</Project>
+      <Name>Database</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{3C84DBB8-798A-4EBC-BF74-AC0EDE32332A}</Project>
       <Name>Domain</Name>

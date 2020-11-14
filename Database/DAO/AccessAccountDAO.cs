@@ -21,15 +21,11 @@ namespace Database.DAO {
         /// </returns>
         public bool verifyExistingUsername( string username ) {
             bool isUsernameRegistered = false;
-            try {
-                using ( BastaEntityModelContainer database = new BastaEntityModelContainer() ) {
-                    var usernameQuery = database.AccessAccounts
-                        .Where( b => b.username == username )
-                        .FirstOrDefault();
-                    isUsernameRegistered = usernameQuery != null;
-                }
-            } catch ( Exception ) {
-                throw;
+            using ( BastaEntityModelContainer database = new BastaEntityModelContainer() ) {
+                var usernameQuery = database.AccessAccounts
+                    .Where( b => b.username == username )
+                    .FirstOrDefault();
+                isUsernameRegistered = usernameQuery != null;
             }
             return isUsernameRegistered;
         }
@@ -43,15 +39,11 @@ namespace Database.DAO {
         /// </returns>
         public bool verifyExistingEmail( string email ) {
             bool isEmailRegistered = false;
-            try {
-                using ( BastaEntityModelContainer database = new BastaEntityModelContainer() ) {
-                    var emailQuery = database.AccessAccounts
-                        .Where( b => b.email == email )
-                        .FirstOrDefault();
-                    isEmailRegistered = emailQuery != null;
-                }
-            } catch ( Exception ) {
-                throw;
+            using ( BastaEntityModelContainer database = new BastaEntityModelContainer() ) {
+                var emailQuery = database.AccessAccounts
+                    .Where( b => b.email == email )
+                    .FirstOrDefault();
+                isEmailRegistered = emailQuery != null;
             }
             return isEmailRegistered;
         }
@@ -65,15 +57,12 @@ namespace Database.DAO {
         /// </returns>
         public bool ChangePasswordByEmail( string email, string password ) {
             bool isPasswordChanged = false;
-            try {
-                using ( BastaEntityModelContainer database = new BastaEntityModelContainer() ) {
-                    var account = database.AccessAccounts
-                        .Where( s => s.email == email ).First();
-                    account.password = password;
-                    isPasswordChanged = true;
-                }
-            } catch ( Exception ) {
-                throw;
+            using ( BastaEntityModelContainer database = new BastaEntityModelContainer() ) {
+                var account = database.AccessAccounts
+                    .Where( s => s.email == email ).First();
+                account.password = password;
+                database.SaveChanges();
+                isPasswordChanged = true;
             }
             return isPasswordChanged;
         }
@@ -88,15 +77,12 @@ namespace Database.DAO {
         /// </returns>
         public string GenerateRecoveryCodeByEmail( string email ) {
             string recoveryCode = null;
-            try {
-                using ( BastaEntityModelContainer database = new BastaEntityModelContainer() ) {
-                    var account = database.AccessAccounts
-                        .Where( s => s.email == email ).First();
-                    account.recovery_code = Cryptography.RandomString().Substring( 0, 8 );
-                    recoveryCode = account.recovery_code;
-                }
-            } catch ( Exception ) {
-                throw;
+            using ( BastaEntityModelContainer database = new BastaEntityModelContainer() ) {
+                var account = database.AccessAccounts
+                    .Where( s => s.email == email ).First();
+                account.recovery_code = Cryptography.RandomString().Substring( 0, 8 );
+                database.SaveChanges();
+                recoveryCode = account.recovery_code;
             }
             return recoveryCode;
         }
@@ -109,15 +95,13 @@ namespace Database.DAO {
         /// returns the Account's AccountState.
         /// </returns>
         public AccountState CheckAccountState( string email ) {
-            AccountState state;
-            try {
-                using ( BastaEntityModelContainer database = new BastaEntityModelContainer() ) {
-                    var account = database.AccessAccounts
-                        .Where( s => s.email == email ).First();
+            AccountState state = AccountState.FREE;
+            using ( BastaEntityModelContainer database = new BastaEntityModelContainer() ) {
+                var account = database.AccessAccounts
+                    .Where( s => s.email == email ).First();
+                if ( account != null ) {
                     state = account.account_state;
                 }
-            } catch ( Exception ) {
-                throw;
             }
             return state;
         }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="a77a2495-e937-47da-a300-c8122b2497f8" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="520127a0-57be-4964-b86c-3ad907319ba1" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -19,14 +19,16 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:80/" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://localhost:4200/BastaService" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="item.xsd" MetadataType="Schema" ID="b13daae6-1dd7-416e-89e1-841fa88c2fcd" SourceId="1" SourceUrl="http://localhost/?xsd=xsd1" />
-    <MetadataFile FileName="item1.xsd" MetadataType="Schema" ID="0d88acff-4aee-4635-8e13-feaebba88d1b" SourceId="1" SourceUrl="http://localhost/?xsd=xsd0" />
-    <MetadataFile FileName="item2.xsd" MetadataType="Schema" ID="2cf719d5-78fb-4dbe-a668-c123694e4634" SourceId="1" SourceUrl="http://localhost/?xsd=xsd2" />
-    <MetadataFile FileName="item.disco" MetadataType="Disco" ID="8f524d89-15cf-498e-934f-f913763edc9d" SourceId="1" SourceUrl="http://localhost/?disco" />
-    <MetadataFile FileName="BastaService.wsdl" MetadataType="Wsdl" ID="85e0d43f-cdbe-41dc-ac1c-4ed967e37cec" SourceId="1" SourceUrl="http://localhost/?wsdl" />
+    <MetadataFile FileName="BastaService.disco" MetadataType="Disco" ID="43e49182-ad7a-4f47-9cbe-2a1f087720a0" SourceId="1" SourceUrl="http://localhost:4200/BastaService?disco" />
+    <MetadataFile FileName="BastaService.xsd" MetadataType="Schema" ID="ad8841b9-8f15-41d7-9e6a-57aceefbdb02" SourceId="1" SourceUrl="http://localhost:4200/BastaService?xsd=xsd4" />
+    <MetadataFile FileName="BastaService1.xsd" MetadataType="Schema" ID="2b4f53a5-a5c0-4e4e-b25c-c87950787dc2" SourceId="1" SourceUrl="http://localhost:4200/BastaService?xsd=xsd0" />
+    <MetadataFile FileName="BastaService2.xsd" MetadataType="Schema" ID="c8f7abc6-1c53-4c14-81f2-60d25b01b34a" SourceId="1" SourceUrl="http://localhost:4200/BastaService?xsd=xsd1" />
+    <MetadataFile FileName="BastaService3.xsd" MetadataType="Schema" ID="b4d81d9a-b701-46de-b131-a63b9e9b9de5" SourceId="1" SourceUrl="http://localhost:4200/BastaService?xsd=xsd3" />
+    <MetadataFile FileName="BastaService.wsdl" MetadataType="Wsdl" ID="b98caaf5-7ffa-4620-9cb2-a81693b8748f" SourceId="1" SourceUrl="http://localhost:4200/BastaService?wsdl" />
+    <MetadataFile FileName="BastaService4.xsd" MetadataType="Schema" ID="dd26c91c-1c55-4d0f-bbd1-2b243f41eb3e" SourceId="1" SourceUrl="http://localhost:4200/BastaService?xsd=xsd2" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

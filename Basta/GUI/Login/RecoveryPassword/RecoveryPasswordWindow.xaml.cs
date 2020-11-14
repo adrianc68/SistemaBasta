@@ -1,11 +1,9 @@
-﻿using Domain.Exceptions;
-using Utils;
-using System;
+﻿using System;
 using System.Windows;
 using Basta.Properties;
 using Basta.GUI.Login.ChangePassword;
-using EmailSender;
-using Database.DAO;
+using Basta.Contracts.Faults;
+using System.ServiceModel;
 
 namespace Basta.GUI.Login.RecoveryPassword {
     /// <summary>
@@ -21,51 +19,25 @@ namespace Basta.GUI.Login.RecoveryPassword {
             String email = emailTextField.Text.Trim();
             ClearData();
             try {
-                VerifyEmailRegistered( email );
-                this.code = GenerateCode( email );
+                Proxy.LoginServiceClient server = new Proxy.LoginServiceClient();
+                this.code = server.GenerateCode( email );
                 string content = Basta.Properties.Resource.recoveryPassword_Message_Contenthtml;
-                if ( SendMessage( email, content.Replace( "$$$", code ) ) ) {
+                content = content.Replace( "$$$", code );
+                if ( server.SendMessageByEmail( email, content ) ) {
                     sendCodeStackPanel.IsEnabled = false;
                     codeRecuperationStackPanel.IsEnabled = true;
                     sendCodeButton.Visibility = Visibility.Hidden;
                     verifyCodeButton.Visibility = Visibility.Visible;
                 }
-            } catch ( EmailNotRegisteredYetException ex ) {
-                systemLabel.Content = ex.Message;
-            } catch ( Exception ) {
+            } catch ( FaultException<EmailNotRegisteredYetFault> ) {
+                systemLabel.Content = Resource.SystemNoExistingEmail;
+            } catch ( FaultException<EmailSenderFault> ) {
                 systemLabel.Content = Resource.SystemErrorSendMessage;
             }
         }
 
         private void ClearData() {
             systemLabel.Content = "";
-        }
-
-        private string GenerateCode( string email ) {
-            AccessAccountDAO accessAccountDAO = new AccessAccountDAO();
-            string code = accessAccountDAO.GenerateRecoveryCodeByEmail( email );
-            return code;
-        }
-
-        private bool SendMessage( string email, string message ) {
-            bool isMessageSent = false;
-            try {
-                Email.SendMessage( email, message );
-                isMessageSent = true;
-            } catch ( Exception ) {
-                throw;
-            }
-            return isMessageSent;
-        }
-
-        private bool VerifyEmailRegistered( string email ) {
-            bool isEmailRegistered = false;
-            AccessAccountDAO accessAccountDAO = new AccessAccountDAO();
-            isEmailRegistered = accessAccountDAO.verifyExistingEmail( email );
-            if ( !isEmailRegistered ) {
-                throw new EmailNotRegisteredYetException( Basta.Properties.Resource.SystemNoExistingEmail );
-            }
-            return isEmailRegistered;
         }
 
         private void VerifyCodeButtonClicked( object sender, RoutedEventArgs e ) {

@@ -1,4 +1,4 @@
-﻿using Domain.Domain;
+﻿using Database.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +13,7 @@ namespace Basta.Contracts {
         void Connect( Player player );
 
         [OperationContract( IsOneWay = true )]
-        void SendMessage( Message message );
+        void SendMessage( Domain.Domain.Message message );
 
         [OperationContract( IsOneWay = false )]
         List<Player> GetConnectedUsers();
@@ -22,6 +22,6 @@ namespace Basta.Contracts {
     [ServiceContract]
     public interface IChatClient {
         [OperationContract( IsOneWay = true )]
-        void ReciveMessage( Player player, Message message );
+        void ReciveMessage( Player player, Domain.Domain.Message message );
     }
 }

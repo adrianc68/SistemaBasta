@@ -43,6 +43,7 @@
     <Reference Include="System.Drawing.Design" />
     <Reference Include="System.Management" />
     <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
@@ -64,12 +65,6 @@
     <Compile Include="Domain\RoomConfiguration.cs" />
     <Compile Include="Domain\RoomState.cs" />
     <Compile Include="Domain\Round.cs" />
-    <Compile Include="Exceptions\AccessAccountNotFoundException.cs" />
-    <Compile Include="Exceptions\AccountAlreadyRegisteredException.cs" />
-    <Compile Include="Exceptions\BannedAccountException.cs" />
-    <Compile Include="Exceptions\EmailNotRegisteredYetException.cs" />
-    <Compile Include="Exceptions\EmailSenderException.cs" />
-    <Compile Include="Exceptions\LimitReachedException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

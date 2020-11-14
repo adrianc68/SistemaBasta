@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 11/10/2020 17:17:40
+-- Date Created: 11/13/2020 15:46:41
 -- Generated from EDMX file: C:\Users\adrian\Desktop\Basta\Database\Entity\BastaEntityModel.edmx
 -- --------------------------------------------------
 

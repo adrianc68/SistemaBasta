@@ -768,6 +768,15 @@ namespace Basta.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a No se pudo cambiar la contraseña ¡Intenta más tarde!.
+        /// </summary>
+        public static string SystemPasswordChangingError {
+            get {
+                return ResourceManager.GetString("SystemPasswordChangingError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a ¡Las contraseñas no coinciden!.
         /// </summary>
         public static string SystemPasswordNoMatch {

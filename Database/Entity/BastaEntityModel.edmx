@@ -28,7 +28,7 @@
     <Key>
       <PropertyRef Name="mac_address" />
     </Key>
-    <Property Name="mac_address" Type="nvarchar" StoreGeneratedPattern="Identity" Nullable="false" MaxLength="75" />
+    <Property Name="mac_address" Type="nvarchar" Nullable="false" MaxLength="75" />
     <Property Name="attempts" Type="smallint" Nullable="false" />
   </EntityType>
   <EntityType Name="AccessAccounts">
@@ -81,7 +81,7 @@
           <Key>
             <PropertyRef Name="mac_address" />
           </Key>
-          <Property Name="mac_address" Type="String" Nullable="false" annotation:StoreGeneratedPattern="Identity" MaxLength="75" />
+          <Property Name="mac_address" Type="String" Nullable="false" annotation:StoreGeneratedPattern="None" MaxLength="75" />
           <Property Name="attempts" Type="Int16" Nullable="false" />
         </EntityType>
         <EntityType Name="AccessAccount">
