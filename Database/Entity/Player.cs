@@ -7,19 +7,17 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Database.Entity
-{
+namespace Database.Entity {
     using System;
     using System.Collections.Generic;
-    
-    public partial class Player
-    {
+
+    public partial class Player {
         public string email { get; set; }
         public short age { get; set; }
         public string country { get; set; }
         public Location location { get; set; }
         public string name { get; set; }
-    
+
         public virtual AccessAccount AccessAccount { get; set; }
     }
 }

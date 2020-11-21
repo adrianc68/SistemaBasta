@@ -1,5 +1,5 @@
 ﻿
-using Database.Entity;
+using Domain.Domain;
 
 namespace Database.DAO.Interface {
     interface IPlayerDAO {
@@ -10,7 +10,7 @@ namespace Database.DAO.Interface {
         /// <returns>
         /// returns true if callableStatement was perfomed otherwise false.
         /// </returns>
-        bool AddPlayerAccount(Player player);
+        bool AddPlayerAccount( Player player );
         // Get a Player from Database.
         /// <summary>
         /// It gets a Player by a email and password. It is used by a Login system.
@@ -18,6 +18,6 @@ namespace Database.DAO.Interface {
         /// <returns>
         /// returns Player if exist Player otherwise null.
         /// </returns>
-        Player GetPlayerAccount(string email, string password);
+        Player GetPlayerAccount( string email, string password );
     }
 }

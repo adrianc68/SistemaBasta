@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Runtime.Serialization;
 
 namespace Domain.Domain {
-    public enum AccountState {
-        BANNED,
-        FREE,
-        NULL
+    [DataContract]
+    public enum AccountState: int {
+        [EnumMember]
+        FREE = 0,
+        [EnumMember]
+        BANNED = 1
     }
 }

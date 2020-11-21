@@ -61,6 +61,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAO\AccessAccountDAO.cs" />
+    <Compile Include="DAO\Interface\IRoomDAO.cs" />
+    <Compile Include="DAO\RoomDAO.cs" />
     <Compile Include="Entity\AccessAccount.cs">
       <DependentUpon>BastaEntityModel.tt</DependentUpon>
     </Compile>
@@ -87,6 +89,9 @@
     <Compile Include="DAO\Interface\IHostDAO.cs" />
     <Compile Include="DAO\Interface\IPlayerDAO.cs" />
     <Compile Include="DAO\PlayerDAO.cs" />
+    <Compile Include="Entity\GameCategory.cs">
+      <DependentUpon>BastaEntityModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entity\Host.cs">
       <DependentUpon>BastaEntityModel.tt</DependentUpon>
     </Compile>
@@ -94,6 +99,15 @@
       <DependentUpon>BastaEntityModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\Player.cs">
+      <DependentUpon>BastaEntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\Room.cs">
+      <DependentUpon>BastaEntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\RoomConfiguration.cs">
+      <DependentUpon>BastaEntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\RoomState.cs">
       <DependentUpon>BastaEntityModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

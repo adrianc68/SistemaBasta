@@ -4,11 +4,14 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="0d50ebb165a04304b73ec6a391fc4acf" Name="Diagram1" >
-        <EntityTypeShape EntityType="BastaEntityModel.Player" Width="1.5" PointX="4.625" PointY="3.125" />
-        <EntityTypeShape EntityType="BastaEntityModel.Host" Width="1.5" PointX="6.75" PointY="1.25" />
-        <EntityTypeShape EntityType="BastaEntityModel.AccessAccount" Width="1.5" PointX="2.125" PointY="1.125" />
+      <Diagram DiagramId="0d50ebb165a04304b73ec6a391fc4acf" Name="Diagram1" ZoomLevel="79" >
+        <EntityTypeShape EntityType="BastaEntityModel.Player" Width="1.5" PointX="5.5" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BastaEntityModel.Host" Width="1.5" PointX="5.5" PointY="0.75" />
+        <EntityTypeShape EntityType="BastaEntityModel.AccessAccount" Width="1.5" PointX="3" PointY="0.75" />
         <AssociationConnector Association="BastaEntityModel.PlayerAccessAccount" />
+        <EntityTypeShape EntityType="BastaEntityModel.RoomConfiguration" PointX="11.625" PointY="3.75" Width="1.5" />
+        <EntityTypeShape EntityType="BastaEntityModel.Room" Width="1.5" PointX="8.625" PointY="3.75" />
+        <AssociationConnector Association="BastaEntityModel.RoomRoomConfiguration" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

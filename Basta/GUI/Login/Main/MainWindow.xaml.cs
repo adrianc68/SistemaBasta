@@ -6,10 +6,12 @@ using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using Basta.Properties;
+using Database.DAO;
+using System.ServiceModel;
 using Domain.Domain;
-using Domain.Domain.gameConfiguration;
 
 namespace Basta.GUI.Login.Main {
+
     /// <summary>
     /// Lógica de interacción para MainWindow.xaml
     /// </summary>
@@ -20,6 +22,8 @@ namespace Basta.GUI.Login.Main {
 
         private void PlayButtonClicked( object sender, RoutedEventArgs e ) {
             selectStackPanel.Visibility = Visibility.Visible;
+            RoomDAO roomDAO = new RoomDAO();
+            roomDAO.GetRoomAvailable().ForEach( c => Console.WriteLine( c.Code ) );
         }
 
         private void JoinToRoomButtonClicked( object sender, RoutedEventArgs e ) {
@@ -27,25 +31,38 @@ namespace Basta.GUI.Login.Main {
         }
 
         private void CreateConfiguredRoomButtonClicked( object sender, RoutedEventArgs e ) {
-            //Room room = new Room();
-            //RoomConfiguration roomConfiguration = new RoomConfiguration();
-            //roomConfiguration.Playerslimit = (int) personLimitComboBox.SelectedItem;
-            //roomConfiguration.RoomState = RoomState.PUBLIC;
+            Room room = new Room();
+            RoomConfiguration roomConfigurations = new RoomConfiguration();
+            roomConfigurations.PlayerLimit = (int) personLimitComboBox.SelectedItem;
+            roomConfigurations.RoomState = RoomState.PUBLIC;
 
-            //Game game = new Game();
-            //game.Players = new List<Player>( (int) personLimitComboBox.SelectedItem );
-            //game.Players.Add( Autentication.GetInstance().GetPlayer() );
+            room.RoomConfiguration = roomConfigurations;
 
-            //GameConfiguration gameConfiguration = new GameConfiguration();
-            //gameConfiguration.Rounds = new List<Round>( (int) roundLimitComboBox.SelectedItem );
-            //gameConfiguration.Timer = (double) gameTimeComboBox.SelectedItem;
+            RoomDAO roomDAO = new RoomDAO();
+            room.Code = roomDAO.CreateRoom( room );
 
-            //game.GameConfiguration = gameConfiguration;
-            //room.Game = game;
 
-            //Console.WriteLine( room.ToString() );
+            InstanceContext context = new InstanceContext( new RoomServiceCallBack() );
+            Proxy.RoomServiceClient server = new Proxy.RoomServiceClient( context );
+
+
+            Player player = new Player();
+            player.Email = "angeladriancamalgarcia@hotmail.com";
+            player.Name = "angel adrian";
+            AccessAccount account = new AccessAccount();
+            account.Email = "angeladriancamalgarcia@hotmail.com";
+            account.Account_state = 0;
+            account.Player = player;
+            account.Username = "root";
+            player.AccessAccount = account;
+
+            server.CreateRoom( player, room );
+            
             LobbyWindow lobbyWindow = new LobbyWindow();
             lobbyWindow.ShowDialog();
+
+
+
             // SALA PROPIA
         }
 
@@ -75,6 +92,7 @@ namespace Basta.GUI.Login.Main {
         }
 
         private void exitButtonClicked( object sender, RoutedEventArgs e ) {
+            Autentication.GetInstance().LogOut();
             Close();
         }
 

@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 11/13/2020 15:46:41
+-- Date Created: 11/17/2020 23:41:12
 -- Generated from EDMX file: C:\Users\adrian\Desktop\Basta\Database\Entity\BastaEntityModel.edmx
 -- --------------------------------------------------
 
@@ -20,6 +20,9 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_PlayerAccessAccount]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Players] DROP CONSTRAINT [FK_PlayerAccessAccount];
 GO
+IF OBJECT_ID(N'[dbo].[FK_RoomRoomConfiguration]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[RomConfigurations] DROP CONSTRAINT [FK_RoomRoomConfiguration];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -33,6 +36,12 @@ IF OBJECT_ID(N'[dbo].[Hosts]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[AccessAccounts]', 'U') IS NOT NULL
     DROP TABLE [dbo].[AccessAccounts];
+GO
+IF OBJECT_ID(N'[dbo].[RomConfigurations]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[RomConfigurations];
+GO
+IF OBJECT_ID(N'[dbo].[Rooms]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Rooms];
 GO
 
 -- --------------------------------------------------
@@ -66,6 +75,20 @@ CREATE TABLE [dbo].[AccessAccounts] (
 );
 GO
 
+-- Creating table 'RomConfigurations'
+CREATE TABLE [dbo].[RomConfigurations] (
+    [playerLimit] int  NOT NULL,
+    [roomState] int  NOT NULL,
+    [code] nvarchar(10)  NOT NULL
+);
+GO
+
+-- Creating table 'Rooms'
+CREATE TABLE [dbo].[Rooms] (
+    [code] nvarchar(10)  NOT NULL
+);
+GO
+
 -- --------------------------------------------------
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
@@ -88,6 +111,18 @@ ADD CONSTRAINT [PK_AccessAccounts]
     PRIMARY KEY CLUSTERED ([email] ASC);
 GO
 
+-- Creating primary key on [code] in table 'RomConfigurations'
+ALTER TABLE [dbo].[RomConfigurations]
+ADD CONSTRAINT [PK_RomConfigurations]
+    PRIMARY KEY CLUSTERED ([code] ASC);
+GO
+
+-- Creating primary key on [code] in table 'Rooms'
+ALTER TABLE [dbo].[Rooms]
+ADD CONSTRAINT [PK_Rooms]
+    PRIMARY KEY CLUSTERED ([code] ASC);
+GO
+
 -- --------------------------------------------------
 -- Creating all FOREIGN KEY constraints
 -- --------------------------------------------------
@@ -98,6 +133,15 @@ ADD CONSTRAINT [FK_PlayerAccessAccount]
     FOREIGN KEY ([email])
     REFERENCES [dbo].[AccessAccounts]
         ([email])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [code] in table 'RomConfigurations'
+ALTER TABLE [dbo].[RomConfigurations]
+ADD CONSTRAINT [FK_RoomRoomConfiguration]
+    FOREIGN KEY ([code])
+    REFERENCES [dbo].[Rooms]
+        ([code])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 

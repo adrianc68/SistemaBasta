@@ -1,13 +1,8 @@
 ﻿using Basta.Contracts.Faults;
 using Basta.GUI.Login.Main;
 using Basta.GUI.Login.RecoveryPassword;
-using Database.DAO;
-using Database.Entity;
-using System;
 using System.ServiceModel;
 using System.Windows;
-using System.Windows.Navigation;
-using Utils;
 
 namespace Basta.GUI.Login {
     /// <summary>
@@ -28,10 +23,9 @@ namespace Basta.GUI.Login {
         }
 
         private void LoginButtonClicked( object sender, RoutedEventArgs e ) {
-            Player player = null;
+            Autentication autentication = Autentication.GetInstance();
             try {
-                Proxy.LoginServiceClient server = new Proxy.LoginServiceClient();
-                player = server.Login( Cryptography.SHA256_Hash( NetworkAddress.GetMacAddress() ), usernameTextField.Text.Trim(), passwordTextField.Password.Trim() );
+                autentication.LogIn( usernameTextField.Text.Trim(), passwordTextField.Password.Trim() );
             } catch ( FaultException<AccessAccountNotFoundFault> ) {
                 systemLabel.Content = Properties.Resource.SystemLoginError;
             } catch ( FaultException<BannedAccountFault> ) {
@@ -41,14 +35,11 @@ namespace Basta.GUI.Login {
             } catch ( FaultException ) {
                 systemLabel.Content = Properties.Resource.SystemFatalError;
             }
-      
-            if ( player != null) {
-                
+
+            if ( autentication.Player != null ) {
                 MainWindow mainWindow = new MainWindow();
                 mainWindow.ShowDialog();
-                
             }
-
         }
 
         private void RecoveryPasswordLabelClicked( object sender, System.Windows.Input.MouseButtonEventArgs e ) {
@@ -68,8 +59,7 @@ namespace Basta.GUI.Login {
             }
             Properties.Settings.Default.Save();
             DataContext = this;
-
-
         }
     }
+
 }

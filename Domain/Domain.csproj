@@ -55,16 +55,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Domain\AccessAccount.cs" />
-    <Compile Include="Domain\Game.cs" />
-    <Compile Include="Domain\GameConfiguration.cs" />
-    <Compile Include="Domain\GameCategory.cs" />
-    <Compile Include="Domain\Message.cs" />
-    <Compile Include="Domain\Player.cs" />
     <Compile Include="Domain\AccountState.cs" />
+    <Compile Include="Domain\Location.cs" />
+    <Compile Include="Domain\Player.cs" />
     <Compile Include="Domain\Room.cs" />
     <Compile Include="Domain\RoomConfiguration.cs" />
     <Compile Include="Domain\RoomState.cs" />
-    <Compile Include="Domain\Round.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

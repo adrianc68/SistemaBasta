@@ -1,15 +1,12 @@
-﻿using Database.Entity;
+﻿using Domain.Domain;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Basta.Client {
-    //public class MyCallBack: IChatServiceCallback {
-    //    public void ReciveMessage( Player player, Message message ) {
-    //        Console.WriteLine( player.AccessAccount.Username + ": " + message.MessageSent);
+    //public class MyCallBack: Proxy.IChatServiceCallback {
+ 
+    //    public void ReciveMessage( Player player, string message ) {
+    //        Console.WriteLine( player + message );
     //    }
     //}
     //class Program {
@@ -18,21 +15,19 @@ namespace Basta.Client {
     //        Proxy.ChatServiceClient server = new Proxy.ChatServiceClient( context );
     //        Console.WriteLine( "Enter username" );
     //        var username = Console.ReadLine();
-    //        server.Connect( new Player { AccessAccount = new AccessAccount { Username = username } } );
+    //        server.Connect( new Player() { AccessAccount = new AccessAccount { Username = username} } );
     //        Console.WriteLine();
     //        Console.WriteLine( "Enter message" );
-    //        Console.WriteLine("Press Q To Exit");
+    //        Console.WriteLine( "Press Q To Exit" );
     //        var message = Console.ReadLine();
-            
-    //        while(message != "Q") {
-    //            if( !string.IsNullOrEmpty(message)) {
-    //                server.SendMessage(new Message { MessageSent = message} );
+
+    //        while ( message != "Q" ) {
+    //            if ( !string.IsNullOrEmpty( message ) ) {
+    //                server.SendMessage( message );
     //            }
     //            message = Console.ReadLine();
     //        }
 
     //    }
     //}
-
-
 }

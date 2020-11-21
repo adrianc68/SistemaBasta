@@ -1,10 +1,6 @@
-﻿using Database.Entity;
-using System;
+﻿using Domain.Domain;
 using System.Collections.Generic;
-using System.Linq;
 using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Basta.Contracts {
     [ServiceContract( CallbackContract = typeof( IChatClient ) )]
@@ -13,7 +9,7 @@ namespace Basta.Contracts {
         void Connect( Player player );
 
         [OperationContract( IsOneWay = true )]
-        void SendMessage( Domain.Domain.Message message );
+        void SendMessage( string message );
 
         [OperationContract( IsOneWay = false )]
         List<Player> GetConnectedUsers();
@@ -22,6 +18,6 @@ namespace Basta.Contracts {
     [ServiceContract]
     public interface IChatClient {
         [OperationContract( IsOneWay = true )]
-        void ReciveMessage( Player player, Domain.Domain.Message message );
+        void ReciveMessage( Player player, string message );
     }
 }

@@ -1,5 +1,4 @@
 ﻿using Domain.Domain;
-using System;
 
 namespace Database.DAO {
     interface IAccessAccountDAO {

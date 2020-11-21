@@ -5,7 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Domain.Domain {
-    public enum RoomState {
-        PUBLIC,PRIVATE
+    public enum RoomState: int {
+        PUBLIC = 0,
+        PRIVATE = 1
     }
 }

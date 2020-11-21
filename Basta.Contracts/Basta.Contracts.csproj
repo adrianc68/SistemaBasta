@@ -54,6 +54,7 @@
     <Compile Include="Faults\UsernameRegisteredAlreadyFault.cs" />
     <Compile Include="IChatService.cs" />
     <Compile Include="ILoginService.cs" />
+    <Compile Include="IRoomService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

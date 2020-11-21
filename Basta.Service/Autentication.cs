@@ -1,6 +1,6 @@
 ﻿using Basta.Contracts.Faults;
 using Database.DAO;
-using Database.Entity;
+using Domain.Domain;
 using System;
 using System.ServiceModel;
 

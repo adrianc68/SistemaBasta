@@ -1,6 +1,6 @@
 ﻿using Basta.Contracts.Faults;
 using Basta.GUI.Validator;
-using Database.Entity;
+using Domain.Domain;
 using System;
 using System.Collections.Generic;
 using System.ServiceModel;
@@ -30,26 +30,44 @@ namespace Basta.GUI.Login.SignUp {
 
         private void registerPlayer() {
             Player player = new Player();
-            player.age = (short) signUpComboBoxAge.SelectedItem;
-            player.country = signUpCountryTextBox.Text.Trim();
-            player.name = signUpFirstNameTextBox.Text.Trim() + " " + signUpLastNameTextBox.Text.Trim();
+            player.Age = (short) signUpComboBoxAge.SelectedItem;
+            player.Country = signUpCountryTextBox.Text.Trim();
+            player.Name = signUpFirstNameTextBox.Text.Trim() + " " + signUpLastNameTextBox.Text.Trim();
+            player.Email = signUpEmailTextBox.Text.Trim();
             AccessAccount accessAccount = new AccessAccount();
-            accessAccount.account_state = AccountState.FREE;
-            accessAccount.username = signUpUsernameTextBox.Text.Trim();
-            accessAccount.email = signUpEmailTextBox.Text.Trim();
-            accessAccount.password = passwordTextBox.Password.Trim();
+            accessAccount.Account_state = AccountState.FREE;
+            accessAccount.Username = signUpUsernameTextBox.Text.Trim();
+            accessAccount.Email = signUpEmailTextBox.Text.Trim();
+            accessAccount.Password = passwordTextBox.Password.Trim();
+            accessAccount.Player = player;
             player.AccessAccount = accessAccount;
-            Proxy.LoginServiceClient server = new Proxy.LoginServiceClient();
+
+            Console.WriteLine( "Player email: " + player.Email );
+            Console.WriteLine( "Player age: " + player.Age );
+            Console.WriteLine( "Player country: " + player.Country );
+            Console.WriteLine( "Player location: " + player.Location );
+            Console.WriteLine( "Player name: " + player.Name );
+            Console.WriteLine( "Player email: " + player.AccessAccount.Email );
+            Console.WriteLine( "Player account state: " + player.AccessAccount.Account_state );
+            Console.WriteLine( "Player password: " + player.AccessAccount.Password );
+            Console.WriteLine( "Player username: " + player.AccessAccount.Username );
+
+      
             try {
+                Proxy.LoginServiceClient server = new Proxy.LoginServiceClient();
+                
                 server.SignUp( player );
                 Close();
             } catch ( FaultException<EmailAlreadyRegisteredFault> ) {
                 systemLabel.Content = Properties.Resource.SystemExistingEmail;
             } catch ( FaultException<UsernameRegisteredAlreadyFault> ) {
                 systemLabel.Content = Properties.Resource.SystemExistingUsername;
-            } catch ( FaultException ) {
+            } catch ( FaultException fa ) {
                 systemLabel.Content = Properties.Resource.SystemFatalError;
+                Console.WriteLine( fa );
             }
+
+
         }
 
         private void SignUpComboBoxLoaded( object sender, RoutedEventArgs e ) {

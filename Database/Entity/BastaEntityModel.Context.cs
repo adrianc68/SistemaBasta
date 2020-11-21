@@ -28,5 +28,7 @@ namespace Database.Entity
         public virtual DbSet<Player> Players { get; set; }
         public virtual DbSet<Host> Hosts { get; set; }
         public virtual DbSet<AccessAccount> AccessAccounts { get; set; }
+        public virtual DbSet<RoomConfiguration> RomConfigurations { get; set; }
+        public virtual DbSet<Room> Rooms { get; set; }
     }
 }

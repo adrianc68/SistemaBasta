@@ -1,7 +1,5 @@
 ﻿using Database.Entity;
-using System;
 using System.Linq;
-using System.Security.Cryptography;
 using Utils;
 
 namespace Database.DAO {
@@ -94,7 +92,7 @@ namespace Database.DAO {
         /// <returns>
         /// returns the Account's AccountState.
         /// </returns>
-        public AccountState CheckAccountState( string email ) {
+        public Domain.Domain.AccountState CheckAccountState( string email ) {
             AccountState state = AccountState.FREE;
             using ( BastaEntityModelContainer database = new BastaEntityModelContainer() ) {
                 var account = database.AccessAccounts
@@ -103,7 +101,7 @@ namespace Database.DAO {
                     state = account.account_state;
                 }
             }
-            return state;
+            return (Domain.Domain.AccountState) state;
         }
     }
 }

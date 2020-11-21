@@ -102,6 +102,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Autentication.cs" />
     <Compile Include="Connected Services\Proxy\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -129,6 +130,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="RoomServiceCallBack.cs" />
     <Compile Include="GUI\Login\RecoveryPassword\RecoveryPasswordWindow.xaml.cs">
       <DependentUpon>RecoveryPasswordWindow.xaml</DependentUpon>
     </Compile>
@@ -160,23 +162,22 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <None Include="Connected Services\Proxy\BastaService.wsdl" />
-    <None Include="Connected Services\Proxy\BastaService.xsd">
+    <None Include="Connected Services\Proxy\item.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\Proxy\BastaService1.xsd">
+    <None Include="Connected Services\Proxy\item1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\Proxy\BastaService2.xsd">
+    <None Include="Connected Services\Proxy\item2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\Proxy\BastaService3.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\Proxy\BastaService4.xsd">
+    <None Include="Connected Services\Proxy\item3.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\Basta.Contracts.Jugador.datasource" />
     <None Include="Properties\DataSources\Database.Entity.Player.datasource" />
+    <None Include="Properties\DataSources\Database.Entity.Player1.datasource" />
     <None Include="Properties\DataSources\Domain.Domain.Player.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>PublicSettingsSingleFileGenerator</Generator>
@@ -268,7 +269,7 @@
     <WCFMetadataStorage Include="Connected Services\Proxy\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\Proxy\BastaService.disco" />
+    <None Include="Connected Services\Proxy\item.disco" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\Proxy\configuration91.svcinfo" />

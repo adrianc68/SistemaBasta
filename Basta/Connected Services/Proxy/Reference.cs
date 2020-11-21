@@ -16,29 +16,29 @@ namespace Basta.Proxy {
     public interface IChatService {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/Connect")]
-        void Connect(Database.Entity.Player player);
+        void Connect(Domain.Domain.Player player);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/Connect")]
-        System.Threading.Tasks.Task ConnectAsync(Database.Entity.Player player);
+        System.Threading.Tasks.Task ConnectAsync(Domain.Domain.Player player);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/SendMessage")]
-        void SendMessage(Domain.Domain.Message message);
+        void SendMessage(string message);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/SendMessage")]
-        System.Threading.Tasks.Task SendMessageAsync(Domain.Domain.Message message);
+        System.Threading.Tasks.Task SendMessageAsync(string message);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChatService/GetConnectedUsers", ReplyAction="http://tempuri.org/IChatService/GetConnectedUsersResponse")]
-        Database.Entity.Player[] GetConnectedUsers();
+        Domain.Domain.Player[] GetConnectedUsers();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChatService/GetConnectedUsers", ReplyAction="http://tempuri.org/IChatService/GetConnectedUsersResponse")]
-        System.Threading.Tasks.Task<Database.Entity.Player[]> GetConnectedUsersAsync();
+        System.Threading.Tasks.Task<Domain.Domain.Player[]> GetConnectedUsersAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface IChatServiceCallback {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/ReciveMessage")]
-        void ReciveMessage(Database.Entity.Player player, Domain.Domain.Message message);
+        void ReciveMessage(Domain.Domain.Player player, string message);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -69,27 +69,27 @@ namespace Basta.Proxy {
                 base(callbackInstance, binding, remoteAddress) {
         }
         
-        public void Connect(Database.Entity.Player player) {
+        public void Connect(Domain.Domain.Player player) {
             base.Channel.Connect(player);
         }
         
-        public System.Threading.Tasks.Task ConnectAsync(Database.Entity.Player player) {
+        public System.Threading.Tasks.Task ConnectAsync(Domain.Domain.Player player) {
             return base.Channel.ConnectAsync(player);
         }
         
-        public void SendMessage(Domain.Domain.Message message) {
+        public void SendMessage(string message) {
             base.Channel.SendMessage(message);
         }
         
-        public System.Threading.Tasks.Task SendMessageAsync(Domain.Domain.Message message) {
+        public System.Threading.Tasks.Task SendMessageAsync(string message) {
             return base.Channel.SendMessageAsync(message);
         }
         
-        public Database.Entity.Player[] GetConnectedUsers() {
+        public Domain.Domain.Player[] GetConnectedUsers() {
             return base.Channel.GetConnectedUsers();
         }
         
-        public System.Threading.Tasks.Task<Database.Entity.Player[]> GetConnectedUsersAsync() {
+        public System.Threading.Tasks.Task<Domain.Domain.Player[]> GetConnectedUsersAsync() {
             return base.Channel.GetConnectedUsersAsync();
         }
     }
@@ -102,24 +102,18 @@ namespace Basta.Proxy {
         [System.ServiceModel.FaultContractAttribute(typeof(Basta.Contracts.Faults.AccessAccountNotFoundFault), Action="http://tempuri.org/ILoginService/LoginAccessAccountNotFoundFaultFault", Name="AccessAccountNotFoundFault", Namespace="http://schemas.datacontract.org/2004/07/Basta.Contracts.Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(Basta.Contracts.Faults.BannedAccountFault), Action="http://tempuri.org/ILoginService/LoginBannedAccountFaultFault", Name="BannedAccountFault", Namespace="http://schemas.datacontract.org/2004/07/Basta.Contracts.Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(Basta.Contracts.Faults.LimitReachedFault), Action="http://tempuri.org/ILoginService/LoginLimitReachedFaultFault", Name="LimitReachedFault", Namespace="http://schemas.datacontract.org/2004/07/Basta.Contracts.Faults")]
-        Database.Entity.Player Login(string macAddress, string email, string password);
+        Domain.Domain.Player Login(string macAddress, string email, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILoginService/Login", ReplyAction="http://tempuri.org/ILoginService/LoginResponse")]
-        System.Threading.Tasks.Task<Database.Entity.Player> LoginAsync(string macAddress, string email, string password);
+        System.Threading.Tasks.Task<Domain.Domain.Player> LoginAsync(string macAddress, string email, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILoginService/SignUp", ReplyAction="http://tempuri.org/ILoginService/SignUpResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(Basta.Contracts.Faults.EmailAlreadyRegisteredFault), Action="http://tempuri.org/ILoginService/SignUpEmailAlreadyRegisteredFaultFault", Name="EmailAlreadyRegisteredFault", Namespace="http://schemas.datacontract.org/2004/07/Basta.Contracts.Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(Basta.Contracts.Faults.UsernameRegisteredAlreadyFault), Action="http://tempuri.org/ILoginService/SignUpUsernameRegisteredAlreadyFaultFault", Name="UsernameRegisteredAlreadyFault", Namespace="http://schemas.datacontract.org/2004/07/Basta.Contracts.Faults")]
-        bool SignUp(Database.Entity.Player player);
+        bool SignUp(Domain.Domain.Player player);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILoginService/SignUp", ReplyAction="http://tempuri.org/ILoginService/SignUpResponse")]
-        System.Threading.Tasks.Task<bool> SignUpAsync(Database.Entity.Player player);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILoginService/RecoverPassword", ReplyAction="http://tempuri.org/ILoginService/RecoverPasswordResponse")]
-        string RecoverPassword(string email, string password);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILoginService/RecoverPassword", ReplyAction="http://tempuri.org/ILoginService/RecoverPasswordResponse")]
-        System.Threading.Tasks.Task<string> RecoverPasswordAsync(string email, string password);
+        System.Threading.Tasks.Task<bool> SignUpAsync(Domain.Domain.Player player);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILoginService/ChangePassword", ReplyAction="http://tempuri.org/ILoginService/ChangePasswordResponse")]
         bool ChangePassword(string email, string password);
@@ -169,28 +163,20 @@ namespace Basta.Proxy {
                 base(binding, remoteAddress) {
         }
         
-        public Database.Entity.Player Login(string macAddress, string email, string password) {
+        public Domain.Domain.Player Login(string macAddress, string email, string password) {
             return base.Channel.Login(macAddress, email, password);
         }
         
-        public System.Threading.Tasks.Task<Database.Entity.Player> LoginAsync(string macAddress, string email, string password) {
+        public System.Threading.Tasks.Task<Domain.Domain.Player> LoginAsync(string macAddress, string email, string password) {
             return base.Channel.LoginAsync(macAddress, email, password);
         }
         
-        public bool SignUp(Database.Entity.Player player) {
+        public bool SignUp(Domain.Domain.Player player) {
             return base.Channel.SignUp(player);
         }
         
-        public System.Threading.Tasks.Task<bool> SignUpAsync(Database.Entity.Player player) {
+        public System.Threading.Tasks.Task<bool> SignUpAsync(Domain.Domain.Player player) {
             return base.Channel.SignUpAsync(player);
-        }
-        
-        public string RecoverPassword(string email, string password) {
-            return base.Channel.RecoverPassword(email, password);
-        }
-        
-        public System.Threading.Tasks.Task<string> RecoverPasswordAsync(string email, string password) {
-            return base.Channel.RecoverPasswordAsync(email, password);
         }
         
         public bool ChangePassword(string email, string password) {
@@ -215,6 +201,145 @@ namespace Basta.Proxy {
         
         public System.Threading.Tasks.Task<bool> SendMessageByEmailAsync(string email, string content) {
             return base.Channel.SendMessageByEmailAsync(email, content);
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="Proxy.IRoomService", CallbackContract=typeof(Basta.Proxy.IRoomServiceCallback))]
+    public interface IRoomService {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRoomService/CreateRoom", ReplyAction="http://tempuri.org/IRoomService/CreateRoomResponse")]
+        void CreateRoom(Domain.Domain.Player player, Domain.Domain.Room room);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRoomService/CreateRoom", ReplyAction="http://tempuri.org/IRoomService/CreateRoomResponse")]
+        System.Threading.Tasks.Task CreateRoomAsync(Domain.Domain.Player player, Domain.Domain.Room room);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRoomService/JoinRoom")]
+        void JoinRoom(Domain.Domain.Player player, Domain.Domain.Room room);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRoomService/JoinRoom")]
+        System.Threading.Tasks.Task JoinRoomAsync(Domain.Domain.Player player, Domain.Domain.Room room);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRoomService/DeleteRoom", ReplyAction="http://tempuri.org/IRoomService/DeleteRoomResponse")]
+        void DeleteRoom();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRoomService/DeleteRoom", ReplyAction="http://tempuri.org/IRoomService/DeleteRoomResponse")]
+        System.Threading.Tasks.Task DeleteRoomAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRoomService/SetUpRoom", ReplyAction="http://tempuri.org/IRoomService/SetUpRoomResponse")]
+        void SetUpRoom();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRoomService/SetUpRoom", ReplyAction="http://tempuri.org/IRoomService/SetUpRoomResponse")]
+        System.Threading.Tasks.Task SetUpRoomAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRoomService/ConnectToRoom")]
+        void ConnectToRoom(Domain.Domain.Player player);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRoomService/ConnectToRoom")]
+        System.Threading.Tasks.Task ConnectToRoomAsync(Domain.Domain.Player player);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRoomService/SendMessageRoomChat")]
+        void SendMessageRoomChat(string message);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRoomService/SendMessageRoomChat")]
+        System.Threading.Tasks.Task SendMessageRoomChatAsync(string message);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRoomService/GetConnectedUsersFromRoom", ReplyAction="http://tempuri.org/IRoomService/GetConnectedUsersFromRoomResponse")]
+        Domain.Domain.Player[] GetConnectedUsersFromRoom(string codeRoom);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRoomService/GetConnectedUsersFromRoom", ReplyAction="http://tempuri.org/IRoomService/GetConnectedUsersFromRoomResponse")]
+        System.Threading.Tasks.Task<Domain.Domain.Player[]> GetConnectedUsersFromRoomAsync(string codeRoom);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IRoomServiceCallback {
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRoomService/ReciveMessageRoom")]
+        void ReciveMessageRoom(Domain.Domain.Player player, string message);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IRoomServiceChannel : Basta.Proxy.IRoomService, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class RoomServiceClient : System.ServiceModel.DuplexClientBase<Basta.Proxy.IRoomService>, Basta.Proxy.IRoomService {
+        
+        public RoomServiceClient(System.ServiceModel.InstanceContext callbackInstance) : 
+                base(callbackInstance) {
+        }
+        
+        public RoomServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName) : 
+                base(callbackInstance, endpointConfigurationName) {
+        }
+        
+        public RoomServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, string remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        }
+        
+        public RoomServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        }
+        
+        public RoomServiceClient(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, binding, remoteAddress) {
+        }
+        
+        public void CreateRoom(Domain.Domain.Player player, Domain.Domain.Room room) {
+            base.Channel.CreateRoom(player, room);
+        }
+        
+        public System.Threading.Tasks.Task CreateRoomAsync(Domain.Domain.Player player, Domain.Domain.Room room) {
+            return base.Channel.CreateRoomAsync(player, room);
+        }
+        
+        public void JoinRoom(Domain.Domain.Player player, Domain.Domain.Room room) {
+            base.Channel.JoinRoom(player, room);
+        }
+        
+        public System.Threading.Tasks.Task JoinRoomAsync(Domain.Domain.Player player, Domain.Domain.Room room) {
+            return base.Channel.JoinRoomAsync(player, room);
+        }
+        
+        public void DeleteRoom() {
+            base.Channel.DeleteRoom();
+        }
+        
+        public System.Threading.Tasks.Task DeleteRoomAsync() {
+            return base.Channel.DeleteRoomAsync();
+        }
+        
+        public void SetUpRoom() {
+            base.Channel.SetUpRoom();
+        }
+        
+        public System.Threading.Tasks.Task SetUpRoomAsync() {
+            return base.Channel.SetUpRoomAsync();
+        }
+        
+        public void ConnectToRoom(Domain.Domain.Player player) {
+            base.Channel.ConnectToRoom(player);
+        }
+        
+        public System.Threading.Tasks.Task ConnectToRoomAsync(Domain.Domain.Player player) {
+            return base.Channel.ConnectToRoomAsync(player);
+        }
+        
+        public void SendMessageRoomChat(string message) {
+            base.Channel.SendMessageRoomChat(message);
+        }
+        
+        public System.Threading.Tasks.Task SendMessageRoomChatAsync(string message) {
+            return base.Channel.SendMessageRoomChatAsync(message);
+        }
+        
+        public Domain.Domain.Player[] GetConnectedUsersFromRoom(string codeRoom) {
+            return base.Channel.GetConnectedUsersFromRoom(codeRoom);
+        }
+        
+        public System.Threading.Tasks.Task<Domain.Domain.Player[]> GetConnectedUsersFromRoomAsync(string codeRoom) {
+            return base.Channel.GetConnectedUsersFromRoomAsync(codeRoom);
         }
     }
 }
