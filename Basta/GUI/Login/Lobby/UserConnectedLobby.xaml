@@ -1,0 +1,37 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Basta.GUI.Login.Lobby"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="Basta.GUI.Login.Lobby.UserConnectedLobby"
+             mc:Ignorable="d" Width="163.333" Height="243">
+    <Border BorderBrush="Black" BorderThickness="1" Background="#FFFBFBFB" Padding="0" Margin="15,0" CornerRadius="10">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="107*"/>
+                <RowDefinition Height="152*"/>
+            </Grid.RowDefinitions>
+            <DockPanel LastChildFill="False">
+                <materialDesign:PackIcon Height="75" VerticalAlignment="Center" Width="75" Kind="UserCircle" HorizontalAlignment="Center" DockPanel.Dock="Top" Margin="1,0,0,0" Foreground="#FF272727"/>
+                <TextBlock x:Name="usernameLabel" TextWrapping="Wrap" Text="UsernameLabel" FontFamily="Vice City Sans" FontSize="14" DockPanel.Dock="Top" TextAlignment="Center" Height="16" Width="131"/>
+            </DockPanel>
+
+            <DockPanel Grid.Row="1" Margin="0" LastChildFill="False">
+                <Button Content="Enviar mensaje" Height="32" Padding="0" FontSize="12" BorderBrush="{x:Null}" Foreground="White" Background="#FF303030" Margin="0" VerticalAlignment="Top" DockPanel.Dock="Top" HorizontalAlignment="Center" Width="110"/>
+
+                <Button Content="Expulsar jugador" Height="32" Padding="0" FontSize="12" BorderBrush="{x:Null}" Foreground="White" Background="#FF303030" Margin="0,10,0,0" VerticalAlignment="Center" DockPanel.Dock="Top" HorizontalAlignment="Center" Width="110"/>
+
+                <Button Content="Reportar" Height="32" Padding="0" FontSize="12" BorderBrush="{x:Null}" Foreground="White" Background="#FF303030" Margin="0,10,0,0" VerticalAlignment="Center" DockPanel.Dock="Top" HorizontalAlignment="Center" Width="110"/>
+
+
+            </DockPanel>
+
+
+
+
+
+        </Grid>
+    </Border>
+
+</UserControl>

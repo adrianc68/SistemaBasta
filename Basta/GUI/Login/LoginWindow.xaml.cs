@@ -32,13 +32,19 @@ namespace Basta.GUI.Login {
                 systemLabel.Content = Properties.Resource.SystemLoginAccountBanned;
             } catch ( FaultException<LimitReachedFault> ) {
                 systemLabel.Content = Properties.Resource.SystemAttemptsLimitReached;
+            } catch ( FaultException<AccountAlreadyLoggedFault> ) {
+                systemLabel.Content = Properties.Resource.SystemLoginAccountAlreadyLogged;
             } catch ( FaultException ) {
                 systemLabel.Content = Properties.Resource.SystemFatalError;
+            } catch ( EndpointNotFoundException ) {
+                systemLabel.Content = Properties.Resource.SystemServerNotFound;
             }
 
             if ( autentication.Player != null ) {
+                Hide();
                 MainWindow mainWindow = new MainWindow();
                 mainWindow.ShowDialog();
+                Show();
             }
         }
 

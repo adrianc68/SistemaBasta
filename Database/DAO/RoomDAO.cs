@@ -14,10 +14,11 @@ namespace Database.DAO {
             using ( BastaEntityModelContainer database = new BastaEntityModelContainer() ) {
                 Entity.Room roomDatabase = new Database.Entity.Room();
                 roomDatabase.code = GenerateRoomCode();
-                Entity.RoomConfiguration roomConfigurationDatabase = new Database.Entity.RoomConfiguration();
-                roomDatabase.RoomConfiguration = roomConfigurationDatabase;
+                roomDatabase.RoomConfiguration = new Entity.RoomConfiguration();
+                roomDatabase.RoomConfiguration.playerLimit = room.RoomConfiguration.PlayerLimit;
                 roomDatabase.RoomConfiguration.code = roomDatabase.code;
-                roomCode = room.Code;
+                roomDatabase.RoomConfiguration.roomState = (Entity.RoomState) room.RoomConfiguration.RoomState;
+                roomCode = roomDatabase.code;
                 database.Rooms.Add( roomDatabase );
                 database.RomConfigurations.Add( roomDatabase.RoomConfiguration );
                 database.SaveChanges();
@@ -25,13 +26,14 @@ namespace Database.DAO {
             return roomCode;
         }
 
-        public bool DeleteRoom( string code ) {
+        public bool DeleteRoom( Domain.Domain.Room room ) {
             bool isDeleted = false;
             using ( BastaEntityModelContainer database = new BastaEntityModelContainer() ) {
-                var room = database.Rooms
-                    .Where( b => b.code == code )
-                    .FirstOrDefault();
-                database.Rooms.Remove( room );
+                var roomDatabase = database.Rooms
+                    .Where( b => b.code == room.Code ).FirstOrDefault();
+                database.RomConfigurations.Remove(roomDatabase.RoomConfiguration);
+                database.Rooms.Remove(roomDatabase);
+                database.SaveChanges();
                 isDeleted = true;
             }
             return isDeleted;
@@ -43,7 +45,7 @@ namespace Database.DAO {
                 var room = database.Rooms
                     .Where( b => b.code == code )
                     .FirstOrDefault();
-                
+
                 Database.Entity.RoomConfiguration roomConfigurationDatabase = new Database.Entity.RoomConfiguration();
                 roomConfigurationDatabase.roomState = (Entity.RoomState) roomConfiguration.RoomState;
                 roomConfigurationDatabase.code = roomConfiguration.Code;
@@ -69,9 +71,9 @@ namespace Database.DAO {
 
         private string GenerateRoomCode() {
             string code = null;
-            code = Cryptography.RandomString().Substring( 0,6 );
-            while( VerifyExistingRoom(code) ) {
-                code = Cryptography.RandomString().Substring( 0,6 );
+            code = Cryptography.RandomString().Substring( 0, 6 );
+            while ( VerifyExistingRoom( code ) ) {
+                code = Cryptography.RandomString().Substring( 0, 6 );
             }
             return code;
         }
@@ -81,14 +83,14 @@ namespace Database.DAO {
             using ( BastaEntityModelContainer database = new BastaEntityModelContainer() ) {
                 var room = database.Rooms.Where( b => b.RoomConfiguration.roomState == Entity.RoomState.PUBLIC ).ToList();
                 roomsAvailable = new List<Domain.Domain.Room>();
-                foreach(var roomDatabase in room) {
+                foreach ( var roomDatabase in room ) {
                     Domain.Domain.Room roomDomain = new Domain.Domain.Room();
                     roomDomain.Code = roomDatabase.code;
-                    Domain.Domain.RoomConfiguration roomConfigurationDomain = new Domain.Domain.RoomConfiguration();
-                    roomConfigurationDomain.Code = roomDatabase.code;
-                    roomConfigurationDomain.PlayerLimit = roomDatabase.RoomConfiguration.playerLimit;
-                    roomConfigurationDomain.RoomState = (Domain.Domain.RoomState) roomDatabase.RoomConfiguration.roomState;
-                    roomConfigurationDomain.Room = roomDomain;
+                    roomDomain.RoomConfiguration = new Domain.Domain.RoomConfiguration();
+                    roomDomain.RoomConfiguration.Code = roomDatabase.code;
+                    roomDomain.RoomConfiguration.PlayerLimit = roomDatabase.RoomConfiguration.playerLimit;
+                    roomDomain.RoomConfiguration.RoomState = (Domain.Domain.RoomState) roomDatabase.RoomConfiguration.roomState;
+                    roomDomain.RoomConfiguration.Room = roomDomain;
                     roomsAvailable.Add( roomDomain );
                 }
             }

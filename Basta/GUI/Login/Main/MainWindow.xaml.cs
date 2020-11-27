@@ -2,11 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using Basta.Properties;
-using Database.DAO;
 using System.ServiceModel;
 using Domain.Domain;
 
@@ -16,54 +14,63 @@ namespace Basta.GUI.Login.Main {
     /// Lógica de interacción para MainWindow.xaml
     /// </summary>
     public partial class MainWindow: Window {
+
+        Autentication autentication;
+
         public MainWindow() {
             InitializeComponent();
+            autentication = Autentication.GetInstance();
+            autentication.RoomServiceCallBack = new RoomServiceCallBack();
+            InstanceContext context = new InstanceContext( Autentication.GetInstance().RoomServiceCallBack );
+            autentication.RoomServer = new Proxy.RoomServiceClient( context );
         }
 
         private void PlayButtonClicked( object sender, RoutedEventArgs e ) {
             selectStackPanel.Visibility = Visibility.Visible;
-            RoomDAO roomDAO = new RoomDAO();
-            roomDAO.GetRoomAvailable().ForEach( c => Console.WriteLine( c.Code ) );
+            GetRoomsFromServer();
         }
 
         private void JoinToRoomButtonClicked( object sender, RoutedEventArgs e ) {
+            Room selectedRoom = (Room) roomsListView.SelectedItem;
+            if ( selectedRoom != null ) {
+                try {
+                    Autentication.GetInstance().RoomServer.JoinRoom( Autentication.GetInstance().Player, selectedRoom );
+                    selectStackPanel.Visibility = Visibility.Hidden;
+                    Hide();
+                    autentication.RoomServiceCallBack.LobbyWindow = new LobbyWindow( selectedRoom );
+                    autentication.RoomServiceCallBack.AddPlayerToGUI( Autentication.GetInstance().Player );
+                    autentication.RoomServiceCallBack.AddPlayersConnectedToGUI( autentication.RoomServer.GetConnectedUsersFromRoom( selectedRoom ) );
+                    autentication.RoomServiceCallBack.LobbyWindow.ShowDialog();
+                    ShowDialog();
+                } catch ( FaultException eka ) {
+                    Console.WriteLine( eka.ToString() );
+                }
+                selectStackPanel.Visibility = Visibility.Hidden;
+                createRoomStackPanel.Visibility = Visibility.Hidden;
+            }
 
         }
 
         private void CreateConfiguredRoomButtonClicked( object sender, RoutedEventArgs e ) {
             Room room = new Room();
-            RoomConfiguration roomConfigurations = new RoomConfiguration();
-            roomConfigurations.PlayerLimit = (int) personLimitComboBox.SelectedItem;
-            roomConfigurations.RoomState = RoomState.PUBLIC;
-
-            room.RoomConfiguration = roomConfigurations;
-
-            RoomDAO roomDAO = new RoomDAO();
-            room.Code = roomDAO.CreateRoom( room );
-
-
-            InstanceContext context = new InstanceContext( new RoomServiceCallBack() );
-            Proxy.RoomServiceClient server = new Proxy.RoomServiceClient( context );
-
-
-            Player player = new Player();
-            player.Email = "angeladriancamalgarcia@hotmail.com";
-            player.Name = "angel adrian";
-            AccessAccount account = new AccessAccount();
-            account.Email = "angeladriancamalgarcia@hotmail.com";
-            account.Account_state = 0;
-            account.Player = player;
-            account.Username = "root";
-            player.AccessAccount = account;
-
-            server.CreateRoom( player, room );
-            
-            LobbyWindow lobbyWindow = new LobbyWindow();
-            lobbyWindow.ShowDialog();
-
-
-
-            // SALA PROPIA
+            room.RoomConfiguration = new RoomConfiguration();
+            room.RoomConfiguration.PlayerLimit = (int) personLimitComboBox.SelectedItem;
+            room.RoomConfiguration.RoomState = RoomState.PUBLIC;
+            try {
+                room.Code = Autentication.GetInstance().RoomServer.CreateRoom( Autentication.GetInstance().Player, room );
+                room.RoomConfiguration.Code = room.Code;
+            } catch ( FaultException ) {
+                Console.WriteLine( "Unable to create room" );
+            }
+            if ( room.Code != null ) {
+                selectStackPanel.Visibility = Visibility.Hidden;
+                createRoomStackPanel.Visibility = Visibility.Hidden;
+                Hide();
+                autentication.RoomServiceCallBack.LobbyWindow = new LobbyWindow( room );
+                autentication.RoomServiceCallBack.AddPlayerToGUI( Autentication.GetInstance().Player );
+                autentication.RoomServiceCallBack.LobbyWindow.ShowDialog();
+                ShowDialog();
+            }
         }
 
         private void CancelCreateRoomButtonClicked( object sender, RoutedEventArgs e ) {
@@ -92,10 +99,22 @@ namespace Basta.GUI.Login.Main {
         }
 
         private void exitButtonClicked( object sender, RoutedEventArgs e ) {
+            autentication.LoginServer.LogOut( Autentication.GetInstance().Player );
             Autentication.GetInstance().LogOut();
             Close();
         }
 
+        private void GetRoomsFromServer() {
+            roomsListView.Items.Clear();
+            try {
+                foreach ( var room in autentication.RoomServer.GetRooms() ) {
+                    Console.WriteLine( room.Code );
+                    roomsListView.Items.Add( room );
+                }
+            } catch ( FaultException e ) {
+                Console.WriteLine( e );
+            }
+        }
 
         private void GameLimitComboBoxLoaded( object sender, RoutedEventArgs e ) {
             List<double> data = new List<double>();
@@ -139,8 +158,12 @@ namespace Basta.GUI.Login.Main {
             combo.SelectedIndex = 0;
         }
 
-
-
+        private void MainClosed( object sender, EventArgs e ) {
+            if ( Autentication.GetInstance().Player != null ) {
+                autentication.LoginServer.LogOut( Autentication.GetInstance().Player );
+                Autentication.GetInstance().LogOut();
+            }
+        }
     }
 
 }

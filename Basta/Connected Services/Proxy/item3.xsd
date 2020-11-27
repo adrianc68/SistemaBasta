@@ -18,6 +18,12 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="LimitReachedFault" nillable="true" type="tns:LimitReachedFault" />
+  <xs:complexType name="AccountAlreadyLoggedFault">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="AccountAlreadyLoggedFault" nillable="true" type="tns:AccountAlreadyLoggedFault" />
   <xs:complexType name="EmailAlreadyRegisteredFault">
     <xs:sequence>
       <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />

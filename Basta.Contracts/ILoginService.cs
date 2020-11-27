@@ -9,6 +9,7 @@ namespace Basta.Contracts {
         [FaultContract( typeof( AccessAccountNotFoundFault ) )]
         [FaultContract( typeof( BannedAccountFault ) )]
         [FaultContract( typeof( LimitReachedFault ) )]
+        [FaultContract( typeof( AccountAlreadyLoggedFault ) )]
         Player Login( string macAddress, string email, string password );
 
         [OperationContract]
@@ -26,6 +27,9 @@ namespace Basta.Contracts {
         [OperationContract]
         [FaultContract( typeof( EmailSenderFault ) )]
         bool SendMessageByEmail( string email, string content );
+
+        [OperationContract]
+        void LogOut( Player player );
 
     }
 

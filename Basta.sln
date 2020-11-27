@@ -15,8 +15,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Basta.Contracts", "Basta.Co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Basta.Service", "Basta.Service\Basta.Service.csproj", "{B072BDF6-DCD0-438D-A801-0D9E6D658A65}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Basta.Client", "Basta.Client\Basta.Client.csproj", "{E5E264C9-5F0A-405D-A6D1-FCFF9D623778}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,10 +45,6 @@ Global
 		{B072BDF6-DCD0-438D-A801-0D9E6D658A65}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B072BDF6-DCD0-438D-A801-0D9E6D658A65}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B072BDF6-DCD0-438D-A801-0D9E6D658A65}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E5E264C9-5F0A-405D-A6D1-FCFF9D623778}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E5E264C9-5F0A-405D-A6D1-FCFF9D623778}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E5E264C9-5F0A-405D-A6D1-FCFF9D623778}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E5E264C9-5F0A-405D-A6D1-FCFF9D623778}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

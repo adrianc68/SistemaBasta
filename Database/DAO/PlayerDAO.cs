@@ -32,7 +32,7 @@ namespace Database.DAO {
                 accountDatabase.email = player.Email;
                 accountDatabase.account_state = AccountState.FREE;
                 accountDatabase.recovery_code = null;
-                accountDatabase.password = player.AccessAccount.Email;
+                accountDatabase.password = player.AccessAccount.Password;
                 accountDatabase.username = player.AccessAccount.Username;
                 accountDatabase.Player = playerDatabase;
                 playerDatabase.AccessAccount = accountDatabase;

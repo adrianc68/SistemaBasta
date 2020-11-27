@@ -7,64 +7,62 @@
         xmlns:languages="clr-namespace:Basta.Properties"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="687.412" Width="1033.621" WindowStartupLocation="CenterScreen" Closed="MainClosed">
     <Grid>
+        <Image HorizontalAlignment="Left" VerticalAlignment="Bottom" Source="background3.png" Stretch="UniformToFill" Margin="0" Height="656"/>
+        <Border Background="#BF000000" Margin="0" Padding="0" HorizontalAlignment="Right" Width="350"/>
 
-        <Border Background="#FFF9F9F9" Margin="0,33" Padding="0"></Border>
-
-        <StackPanel Margin="0,33" HorizontalAlignment="Center" VerticalAlignment="Center" >
+        <StackPanel Margin="25,33" HorizontalAlignment="Right" VerticalAlignment="Center" >
             <Button Height="42" Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="10" BorderThickness="2" BorderBrush="#D94448" Background="#D94448" Foreground="White" Content="{x:Static languages:Resource.Main_Button_Play}" Margin="0,25,0,0" Width="284" VerticalAlignment="Center" HorizontalAlignment="Center" Click="PlayButtonClicked"/>
             <Button Height="42" Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="10" BorderThickness="2" BorderBrush="#D94448" Background="#D94448" Foreground="White" Content="{x:Static languages:Resource.Main_Button_Configuration}" Margin="0,25,0,0" Width="284" VerticalAlignment="Center" HorizontalAlignment="Center" Click="SettingsButtonClicked"/>
             <Button Height="42" Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="10" BorderThickness="2" BorderBrush="#D94448" Background="#D94448" Foreground="White" Content="{x:Static languages:Resource.Main_Button_Exit}" Margin="0,25,0,0" Width="284" VerticalAlignment="Center" HorizontalAlignment="Center" Click="exitButtonClicked"/>
         </StackPanel>
 
 
-        <StackPanel Visibility="Hidden" x:Name="selectStackPanel" Background="#FFEEEEEE" Margin="0" VerticalAlignment="Center" Width="709" Height="289" HorizontalAlignment="Center" >
+
+        <StackPanel Visibility="Hidden" x:Name="selectStackPanel" Background="#FFEEEEEE" Margin="0" VerticalAlignment="Center" Width="709" HorizontalAlignment="Center" >
             <StackPanel.Effect>
                 <DropShadowEffect BlurRadius="15" Opacity="0.435" Direction="266"/>
             </StackPanel.Effect>
-            <Label Content="{x:Static languages:Resource.Main_Button_Selectroom}" Foreground="#DD000000" FontSize="24" HorizontalAlignment="Center" Margin="0,15" FontFamily="Segoe UI Light"/>
-            <ListView Height="133" Background="#FFA0A0A0" Foreground="#DDFFFFFF" Margin="27,0" HorizontalAlignment="Center" Width="655" Padding="25" RenderTransformOrigin="0.5,0.5">
-                <ListView.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform AngleX="0.39"/>
-                        <RotateTransform/>
-                        <TranslateTransform X="0.616"/>
-                    </TransformGroup>
-                </ListView.RenderTransform>
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn/>
-                    </GridView>
-                </ListView.View>
+            <Label Content="{x:Static languages:Resource.Main_Button_Selectroom}" Foreground="#DD000000" FontSize="36" HorizontalAlignment="Center" Margin="0,25,0,15" FontFamily="PriceDown" Background="{x:Null}"/>
+            <ListView x:Name="roomsListView" Height="186" Background="#FF4B4A4A" Foreground="#FF4D4C4C" Margin="27,0" HorizontalAlignment="Center" Width="655" Padding="25" RenderTransformOrigin="0.5,0.5" BorderBrush="Black">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text=" Selecciona esta sala para ingresar" />
+                            <TextBlock Text="   :   " />
+                            <TextBlock Text="{Binding Code}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
             </ListView>
-            <StackPanel Orientation="Horizontal" Height="53" Margin="0,15,0,0">
-                <TextBox x:Name="roomCodeTextField" Margin="25,0,15,0" materialDesign:HintAssist.Hint="{x:Static languages:Resource.Main_TextField_Code}" Foreground="Black" Width="250" BorderBrush="#FFB84A31" CaretBrush="#FFD94448" SelectionBrush="#FFD94448" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="1" />
-                <Button Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="10" BorderThickness="2" Foreground="White" Content="{x:Static languages:Resource.Main_Button_Joinroom}" Margin="0,0,15,0" VerticalAlignment="Center" HorizontalAlignment="Right" Click="JoinToRoomButtonClicked" Width="120" Background="#FFD94448" BorderBrush="#FFD94448"/>
+            <StackPanel Orientation="Horizontal" Height="53" Margin="0,15,0,28">
+                <TextBox x:Name="roomCodeTextField" Margin="25,0,15,0" materialDesign:HintAssist.Hint="{x:Static languages:Resource.Main_TextField_Code}" Foreground="#FF4D4C4C" Width="250" BorderBrush="Black" CaretBrush="#FFD94448" SelectionBrush="#FFD94448" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="0,0,0,1" FontFamily="Vice City Sans" FontSize="14" />
+                <Button Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="10" BorderThickness="2" Foreground="#FF4D4C4C" Content="{x:Static languages:Resource.Main_Button_Joinroom}" Margin="0,0,15,0" VerticalAlignment="Center" HorizontalAlignment="Right" Click="JoinToRoomButtonClicked" Width="120" Background="{x:Null}" BorderBrush="{x:Null}"/>
 
-                <Button Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="10" BorderThickness="2" Foreground="White" Content="{x:Static languages:Resource.Main_Button_Createroom}" Margin="0,10,15,11" VerticalAlignment="Center" HorizontalAlignment="Right" Width="120" Background="#FFD94448" BorderBrush="#FFD94448" Click="ConfigureRoomButtonClicked"/>
+                <Button Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="10" BorderThickness="2" Foreground="#FF4D4C4C" Content="{x:Static languages:Resource.Main_Button_Createroom}" Margin="0,10,15,11" VerticalAlignment="Center" HorizontalAlignment="Right" Width="120" Background="{x:Null}" BorderBrush="{x:Null}" Click="ConfigureRoomButtonClicked"/>
 
-                <Button Height="32" Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="10" BorderThickness="2" Content="{x:Static languages:Resource.Main_Button_Cancel}" Margin="0,10" Width="120" VerticalAlignment="Center" Click="CancelButtonClicked" HorizontalAlignment="Right" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#000000"/>
+                <Button Height="32" Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="10" BorderThickness="2" Content="{x:Static languages:Resource.Main_Button_Cancel}" Margin="0,10" Width="120" VerticalAlignment="Center" Click="CancelButtonClicked" HorizontalAlignment="Right" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF4D4C4C" FontFamily="Vice City Sans"/>
             </StackPanel>
         </StackPanel>
 
 
 
-        <StackPanel Visibility="Hidden" x:Name="settingsStackPanel" Background="#FFEEEEEE" Margin="0" VerticalAlignment="Center" Height="289" HorizontalAlignment="Center" Width="430" >
+        <StackPanel Visibility="Hidden" x:Name="settingsStackPanel" Background="#FFEEEEEE" Margin="183,79,146,104" VerticalAlignment="Center" HorizontalAlignment="Center" >
             <StackPanel.Effect>
                 <DropShadowEffect BlurRadius="15" Opacity="0.435" Direction="266"/>
             </StackPanel.Effect>
-            <Label Content="{x:Static languages:Resource.Main_Label_Settings}" Foreground="#DD000000" FontSize="24" HorizontalAlignment="Center" Margin="0,15" FontFamily="Segoe UI Light"/>
+            <Label Content="{x:Static languages:Resource.Main_Label_Settings}" Foreground="#DD000000" FontSize="24" HorizontalAlignment="Center" Margin="0,15" FontFamily="PriceDown"/>
             <StackPanel Margin="25,0" FlowDirection="RightToLeft">
-                <TextBlock x:Name="musicVolumeLabel" Margin="0,5,15,5" Foreground="Black" FontFamily="Segoe UI Light" Text="{x:Static languages:Resource.Main_Label_Volume}" FontSize="16" FlowDirection="LeftToRight"/>
-                <Slider VerticalAlignment="Center" Padding="0" Foreground="Red" Margin="17,0"/>
-                <TextBlock x:Name="languageLabel" Margin="0,5,15,5" Foreground="Black" FontFamily="Segoe UI Light" Text="{x:Static languages:Resource.Main_Label_Language}" FontSize="16" FlowDirection="LeftToRight"/>
-                <ComboBox x:Name="languageComboBox" Height="32" Margin="0" BorderBrush="#FFB84A31" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Padding="0,6,0,10" Loaded="LanguageComboBoxLoaded" Width="346"/>
+                <TextBlock x:Name="musicVolumeLabel" Margin="0,15,0,0" Foreground="#FF4D4C4C" FontFamily="Vice City Sans" Text="{x:Static languages:Resource.Main_Label_Volume}" FontSize="14" FlowDirection="LeftToRight"/>
+                <Slider VerticalAlignment="Center" Padding="0" Foreground="Red" Margin="0,15,0,0"/>
+                <TextBlock x:Name="languageLabel" Margin="0,15,0,0" Foreground="#FF4D4C4C" FontFamily="Vice City Sans" Text="{x:Static languages:Resource.Main_Label_Language}" FontSize="14" FlowDirection="LeftToRight"/>
+                <ComboBox x:Name="languageComboBox" Height="32" Margin="0,5,0,0" BorderBrush="#FFB84A31" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Padding="0" Loaded="LanguageComboBoxLoaded" Width="379" FontFamily="Vice City Sans" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="#FF4D4C4C"/>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" Height="53" Margin="0,25,0,0" FlowDirection="RightToLeft">
-                <Button Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="10" BorderThickness="2" Foreground="Black" Content="{x:Static languages:Resource.Main_Button_Cancel}" Margin="25,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Right" Width="120" Background="{x:Null}" BorderBrush="{x:Null}" Click="CancelSettingsButtonClicked"/>
-                <Button Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="10" BorderThickness="2" Foreground="White" Content="{x:Static languages:Resource.Main_Button_Saveconfiguration}" Margin="25,0" VerticalAlignment="Center" HorizontalAlignment="Right" Width="120" Background="#FFD94448" BorderBrush="#FFD94448" Click="SaveSettingsButtonCllicked"/>
+            <StackPanel Orientation="Horizontal" Height="53" Margin="0,25" FlowDirection="RightToLeft">
+                <Button Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="10" BorderThickness="2" Foreground="#FF4D4C4C" Content="{x:Static languages:Resource.Main_Button_Cancel}" Margin="31,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Right" Width="120" Background="{x:Null}" BorderBrush="{x:Null}" Click="CancelSettingsButtonClicked" FontFamily="Vice City SAns" Height="32"/>
+                <Button Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="10" BorderThickness="2" Foreground="White" Content="{x:Static languages:Resource.Main_Button_Saveconfiguration}" Margin="25,0" VerticalAlignment="Center" HorizontalAlignment="Right" Width="120" Background="#FFD94448" BorderBrush="#FFD94448" Click="SaveSettingsButtonCllicked" Height="32"/>
             </StackPanel>
         </StackPanel>
 
@@ -74,27 +72,27 @@
             <StackPanel.Effect>
                 <DropShadowEffect BlurRadius="15" Opacity="0.435" Direction="266"/>
             </StackPanel.Effect>
-            
-            <Label Content="{x:Static languages:Resource.Main_Label_Roomsettings}" Foreground="#DD000000" FontSize="24" HorizontalAlignment="Center" Margin="0,15" FontFamily="Segoe UI Light"/>
+
+            <Label Content="{x:Static languages:Resource.Main_Label_Roomsettings}" Foreground="#DD000000" FontSize="24" HorizontalAlignment="Center" Margin="0,15" FontFamily="PriceDown"/>
 
 
             <StackPanel Orientation="Horizontal" Margin="25,0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="381">
-                <TextBlock Foreground="#FF858585" TextAlignment="Left" Padding="0,0,0,5" UseLayoutRounding="False" FontFamily="Segoe UI Light" FontSize="16" TextDecorations="{x:Null}" HorizontalAlignment="Left" VerticalAlignment="Center" Height="24" Width="148"><Run Text="{x:Static languages:Resource.Main_Label_Roomtime}"/><LineBreak/><Run/></TextBlock>
-                <ComboBox x:Name="gameTimeComboBox" Margin="15,0,0,0" BorderBrush="#FFB84A31" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Padding="0,6,0,10" VerticalAlignment="Stretch" Width="218" Loaded="GameLimitComboBoxLoaded"/>
+                <TextBlock Foreground="#FF4D4C4C" TextAlignment="Left" Padding="0,0,0,5" UseLayoutRounding="False" FontFamily="Vice City Sans" FontSize="14" TextDecorations="{x:Null}" HorizontalAlignment="Left" VerticalAlignment="Center" Height="24" Width="148"><Run Text="{x:Static languages:Resource.Main_Label_Roomtime}"/><LineBreak/><Run/></TextBlock>
+                <ComboBox x:Name="gameTimeComboBox" Margin="15,0,0,0" BorderBrush="#FFB84A31" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Padding="0,6,0,10" VerticalAlignment="Stretch" Width="218" Loaded="GameLimitComboBoxLoaded" Foreground="#FF4D4C4C"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="0,15,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Height="32" Width="381">
-                <TextBlock Foreground="#FF858585" TextAlignment="Left" Padding="0,0,0,5" UseLayoutRounding="False" FontFamily="Segoe UI Light" FontSize="16" TextDecorations="{x:Null}" HorizontalAlignment="Left" VerticalAlignment="Center" Height="24" Margin="0" Text="{x:Static languages:Resource.Main_Label_Roommemberlimit}" Width="148"/>
-                <ComboBox x:Name="personLimitComboBox" Margin="15,0,0,0" BorderBrush="#FFB84A31" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Padding="0,6,0,10" VerticalAlignment="Stretch" Width="218" Loaded="PlayerLimitComboBoxLoaded"/>
+                <TextBlock Foreground="#FF4D4C4C" TextAlignment="Left" Padding="0,0,0,5" UseLayoutRounding="False" FontFamily="Vice City SAns" FontSize="14" TextDecorations="{x:Null}" HorizontalAlignment="Left" VerticalAlignment="Center" Height="24" Margin="0" Text="{x:Static languages:Resource.Main_Label_Roommemberlimit}" Width="148"/>
+                <ComboBox x:Name="personLimitComboBox" Margin="15,0,0,0" BorderBrush="#FFB84A31" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Padding="0,6,0,10" VerticalAlignment="Stretch" Width="218" Loaded="PlayerLimitComboBoxLoaded" Foreground="#FF4D4C4C"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="0,15,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Height="32" Width="381">
-                <TextBlock Foreground="#FF858585" TextAlignment="Left" Padding="0,0,0,5" UseLayoutRounding="False" FontFamily="Segoe UI Light" FontSize="16" TextDecorations="{x:Null}" HorizontalAlignment="Left" VerticalAlignment="Center" Height="24" Margin="0" Width="148"><Run Text="{x:Static languages:Resource.Main_Label_Roomroundlimit}"/><LineBreak/><Run/></TextBlock>
-                <ComboBox x:Name="roundLimitComboBox" Margin="15,0,0,0" BorderBrush="#FFB84A31" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Padding="0,6,0,10" VerticalAlignment="Stretch" Width="218" Loaded="RoundLimitComboBoxLoaded"/>
+                <TextBlock Foreground="#FF4D4C4C" TextAlignment="Left" Padding="0,0,0,5" UseLayoutRounding="False" FontFamily="Vice City Sans" FontSize="14" TextDecorations="{x:Null}" HorizontalAlignment="Left" VerticalAlignment="Center" Height="24" Margin="0" Width="148"><Run Text="{x:Static languages:Resource.Main_Label_Roomroundlimit}"/><LineBreak/><Run/></TextBlock>
+                <ComboBox x:Name="roundLimitComboBox" Margin="15,0,0,0" BorderBrush="#FFB84A31" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Padding="0,6,0,10" VerticalAlignment="Stretch" Width="218" Loaded="RoundLimitComboBoxLoaded" Foreground="#FF4D4C4C"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Height="53" Margin="0,25,0,0" FlowDirection="RightToLeft">
-                <Button Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="10" BorderThickness="2" Foreground="Black" Content="{x:Static languages:Resource.Main_Button_Cancel}" Margin="25,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Right" Width="120" Background="{x:Null}" BorderBrush="{x:Null}" Click="CancelCreateRoomButtonClicked"/>
+                <Button Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="10" BorderThickness="2" Foreground="#FF4D4C4C" Content="{x:Static languages:Resource.Main_Button_Cancel}" Margin="25,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Right" Width="120" Background="{x:Null}" BorderBrush="{x:Null}" Click="CancelCreateRoomButtonClicked" FontFamily="Vice City Sans"/>
                 <Button Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="10" BorderThickness="2" Foreground="White" Content="{x:Static languages:Resource.Main_Button_Createroom}" Margin="25,0" VerticalAlignment="Center" HorizontalAlignment="Right" Width="120" Background="#FFD94448" BorderBrush="#FFD94448" Click="CreateConfiguredRoomButtonClicked"/>
             </StackPanel>
 

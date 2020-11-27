@@ -723,6 +723,15 @@ namespace Basta.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a La cuenta ya ha iniciado sesión.
+        /// </summary>
+        public static string SystemLoginAccountAlreadyLogged {
+            get {
+                return ResourceManager.GetString("SystemLoginAccountAlreadyLogged", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a ¡Tu cuenta ha sido baneada!.
         /// </summary>
         public static string SystemLoginAccountBanned {
@@ -782,6 +791,15 @@ namespace Basta.Properties {
         public static string SystemPasswordNoMatch {
             get {
                 return ResourceManager.GetString("SystemPasswordNoMatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El servidor aún no ha iniciado..
+        /// </summary>
+        public static string SystemServerNotFound {
+            get {
+                return ResourceManager.GetString("SystemServerNotFound", resourceCulture);
             }
         }
         

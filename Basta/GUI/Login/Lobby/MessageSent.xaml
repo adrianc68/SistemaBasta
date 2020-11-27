@@ -1,0 +1,17 @@
+﻿<UserControl x:Class="Basta.GUI.Login.Lobby.MessageSent"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Basta.GUI.Login.Lobby" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" HorizontalContentAlignment="Right" Foreground="{x:Null}" Width="{Binding RelativeSource= {RelativeSource FindAncestor, AncestorType={x:Type WrapPanel}}, Path=ActualWidth}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,15,0,0">
+    <Border BorderBrush="Black" BorderThickness="1" CornerRadius="10" Background="White" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <StackPanel Orientation="Horizontal">
+            <TextBlock x:Name="messageTextBlock" TextWrapping="Wrap" Foreground="#FF6E6E6E" Padding="15" Margin="0" Width="215"/>
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">
+                <materialDesign:PackIcon HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="35" Height="35" Foreground="Black" Kind="AccountCircle"/>
+                <TextBlock x:Name="usernameLabel" TextWrapping="Wrap" Foreground="#FF6E6E6E" TextAlignment="Center" Text="Tú" FontSize="9" HorizontalAlignment="Center" Width="45" FontFamily="Vice City Sans"></TextBlock>
+            </StackPanel>
+        </StackPanel>
+    </Border>
+</UserControl>

@@ -7,6 +7,7 @@ using System.ServiceModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using Utils;
 
 namespace Basta.GUI.Login.SignUp {
     /// <summary>
@@ -38,24 +39,11 @@ namespace Basta.GUI.Login.SignUp {
             accessAccount.Account_state = AccountState.FREE;
             accessAccount.Username = signUpUsernameTextBox.Text.Trim();
             accessAccount.Email = signUpEmailTextBox.Text.Trim();
-            accessAccount.Password = passwordTextBox.Password.Trim();
+            accessAccount.Password = Cryptography.SHA256_Hash( passwordTextBox.Password.Trim() );
             accessAccount.Player = player;
             player.AccessAccount = accessAccount;
-
-            Console.WriteLine( "Player email: " + player.Email );
-            Console.WriteLine( "Player age: " + player.Age );
-            Console.WriteLine( "Player country: " + player.Country );
-            Console.WriteLine( "Player location: " + player.Location );
-            Console.WriteLine( "Player name: " + player.Name );
-            Console.WriteLine( "Player email: " + player.AccessAccount.Email );
-            Console.WriteLine( "Player account state: " + player.AccessAccount.Account_state );
-            Console.WriteLine( "Player password: " + player.AccessAccount.Password );
-            Console.WriteLine( "Player username: " + player.AccessAccount.Username );
-
-      
             try {
                 Proxy.LoginServiceClient server = new Proxy.LoginServiceClient();
-                
                 server.SignUp( player );
                 Close();
             } catch ( FaultException<EmailAlreadyRegisteredFault> ) {
@@ -66,7 +54,6 @@ namespace Basta.GUI.Login.SignUp {
                 systemLabel.Content = Properties.Resource.SystemFatalError;
                 Console.WriteLine( fa );
             }
-
 
         }
 

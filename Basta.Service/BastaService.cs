@@ -9,77 +9,130 @@ using System.ServiceModel;
 
 namespace Basta.Service {
     [ServiceBehavior( ConcurrencyMode = ConcurrencyMode.Reentrant, InstanceContextMode = InstanceContextMode.Single )]
-    public class BastaService: IChatService, ILoginService, IRoomService {
-
-
-        Dictionary<IChatClient, Player> usersChat = new Dictionary<IChatClient, Player>();
-
-        Dictionary<Room, Dictionary<IRoomClient, Player>> usersRoom = new Dictionary<Room, Dictionary<IRoomClient, Player>>();
-        //Dictionary<string, Dictionary<IRoomClient, Player>> usersRoom = new Dictionary<string, Dictionary<IRoomClient, Player>>;
-
-
+    public class BastaService: ILoginService, IRoomService {
+        Dictionary<Room, Dictionary<IRoomClient, Player>> usersRoom = new Dictionary<Room, Dictionary<IRoomClient, Player>>( new Room.EqualityComparer() );
+        HashSet<Player> playersConnected = new HashSet<Player>( new Player.EqualityComparer() );
+        
         /*
-        * IRoomService implement.
+        * 
+        * 
+        * 
+        * IRoomService implementation.
+        * 
+        * 
         */
-        public void CreateRoom( Player player, Room room ) {
-            var connection = OperationContext.Current.GetCallbackChannel<IRoomClient>();
-            Dictionary<IRoomClient, Player> users = new Dictionary<IRoomClient, Player>();
-            users[connection] = player;
-            usersRoom[room] = users;
-            Console.WriteLine( $"{room.Code} room created." );
-        }
-
-        public void JoinRoom( Player player, Room room ) {
-            var connection = OperationContext.Current.GetCallbackChannel<IRoomClient>();
-            usersRoom[room][connection] = player;
-        }
-
-        public void DeleteRoom() {
-            throw new NotImplementedException();
+        public List<Room> GetRooms() {
+            List<Room> rooms = null;
+            try {
+                rooms = new RoomDAO().GetRoomAvailable();
+            } catch ( FaultException ) {
+                throw;
+            }
+            return rooms;
         }
 
         public void SetUpRoom() {
             throw new NotImplementedException();
         }
 
-        public void ConnectToRoom( Player player ) {
-            throw new NotImplementedException();
+        public string CreateRoom( Player player, Room room ) {
+            string roomCode = null;
+            try {
+                roomCode = new RoomDAO().CreateRoom( room );
+                room.Code = roomCode;
+                room.RoomConfiguration.Code = room.Code;
+            } catch ( FaultException ) {
+                throw;
+            }
+            if ( roomCode != null ) {
+                var connection = OperationContext.Current.GetCallbackChannel<IRoomClient>();
+                Dictionary<IRoomClient, Player> users = new Dictionary<IRoomClient, Player>();
+                users[connection] = player;
+                usersRoom[room] = users;
+            }
+            return roomCode;
         }
 
-        public void SendMessageRoomChat( string message ) {
-            throw new NotImplementedException();
-        }
-
-        public List<Player> GetConnectedUsersFromRoom( string ccodeRoom ) {
-            throw new NotImplementedException();
-        }
-
-        /*
-         * IChatService implement.
-         */
-
-        public void Connect( Player player ) {
-            var connection = OperationContext.Current.GetCallbackChannel<IChatClient>();
-            usersChat[connection] = player;
-        }
-
-        public void SendMessage( string message ) {
-            var connection = OperationContext.Current.GetCallbackChannel<IChatClient>();
-            Player player;
-            if ( !usersChat.TryGetValue( connection, out player ) )
+        public void SendMessageRoomChat( Player player, Room room, string message ) {
+            var connection = OperationContext.Current.GetCallbackChannel<IRoomClient>();
+            if ( !usersRoom[room].TryGetValue( connection, out player ) )
                 return;
-            foreach ( var other in usersChat.Keys ) {
+            foreach ( var other in usersRoom[room].Keys ) {
                 if ( other == connection )
                     continue;
-                other.ReciveMessage( player, message );
+                other.ReciveMessageRoom( player, message );
+            }
+
+        }
+
+        public void UserDisconnectedFromRoom( Player player, Room room ) {
+            var connection = OperationContext.Current.GetCallbackChannel<IRoomClient>();
+            if ( !usersRoom[room].TryGetValue( connection, out player ) )
+                return;
+            foreach ( var other in usersRoom[room].Keys ) {
+                other.PlayerDisconnected( player );
+            }
+            usersRoom[room].Remove( connection );
+        }
+
+        public void DeleteRoom( Room room ) {
+
+            if ( usersRoom.ContainsKey( room ) ) {
+                if ( new RoomDAO().DeleteRoom( room ) ) {
+                    Console.WriteLine( "Room Eliminated: " + room.Code );
+
+                    foreach ( var other in usersRoom[room].Keys ) {
+                        other.RoomDelected( room );
+                    }
+                    Console.WriteLine( "Salas disponibles ahora" );
+                    foreach ( var rooms in usersRoom.Keys ) {
+                        Console.WriteLine( room.Code );
+                    }
+                    //BUG HERE 
+                    //usersRoom.Remove( room );
+                }
+            }
+
+
+        }
+
+        public void JoinRoom( Player player, Room room ) {
+            var connection = OperationContext.Current.GetCallbackChannel<IRoomClient>();
+            usersRoom[room][connection] = player;
+            if ( !usersRoom[room].TryGetValue( connection, out player ) )
+                return;
+            foreach ( var other in usersRoom[room].Keys ) {
+                if ( other == connection )
+                    continue;
+                other.PlayerConnected( player );
             }
         }
+
+        public List<Player> GetConnectedUsersFromRoom( Room room ) {
+            var connection = OperationContext.Current.GetCallbackChannel<IRoomClient>();
+            List<Player> usersConnectedToSpecifiedRoom = new List<Player>();
+            foreach ( var dictionary in usersRoom[room] ) {
+                if ( connection == dictionary.Key )
+                    continue;
+                usersConnectedToSpecifiedRoom.Add( dictionary.Value );
+            }
+            return usersConnectedToSpecifiedRoom;
+        }
+
 
         public List<Player> GetConnectedUsers() {
             throw new NotImplementedException();
         }
+
         /*
+         * 
+         * 
+         * 
          * ILoginService implement.
+         * 
+         * 
+         * 
+         * 
          */
 
         public bool SignUp( Player player ) {
@@ -87,13 +140,9 @@ namespace Basta.Service {
             PlayerDAO playerDAO = new PlayerDAO();
             AccessAccountDAO accessAccountDAO = new AccessAccountDAO();
             if ( accessAccountDAO.verifyExistingEmail( player.AccessAccount.Email ) ) {
-                EmailAlreadyRegisteredFault emailAlreadyRegisteredFault = new EmailAlreadyRegisteredFault();
-                emailAlreadyRegisteredFault.Message = "Email is already registered";
-                throw new FaultException<EmailAlreadyRegisteredFault>( emailAlreadyRegisteredFault, "email" );
+                throw new FaultException<EmailAlreadyRegisteredFault>( new EmailAlreadyRegisteredFault() { Message = "Email is already registered!" }, "email" );
             } else if ( accessAccountDAO.verifyExistingUsername( player.AccessAccount.Username ) ) {
-                UsernameRegisteredAlreadyFault usernameRegisteredAlreadyFault = new UsernameRegisteredAlreadyFault();
-                usernameRegisteredAlreadyFault.Message = "Username is already used!";
-                throw new FaultException<UsernameRegisteredAlreadyFault>( usernameRegisteredAlreadyFault, "USERNAME" );
+                throw new FaultException<UsernameRegisteredAlreadyFault>( new UsernameRegisteredAlreadyFault() { Message = "Username is already used!" }, "USERNAME" );
             } else {
                 playerDAO.AddPlayerAccount( player );
                 accountRegistered = true;
@@ -108,6 +157,7 @@ namespace Basta.Service {
             return isPasswordChanged;
         }
 
+
         Player ILoginService.Login( string macAddress, string email, string password ) {
             Player player = null;
             try {
@@ -115,6 +165,10 @@ namespace Basta.Service {
                 if ( autentication.LogIn( email, password, macAddress ) ) {
                     player = autentication.Player;
                 }
+                if ( playersConnected.Contains( player ) ) {
+                    throw new FaultException<AccountAlreadyLoggedFault>( new AccountAlreadyLoggedFault { Message = "Account already logged!" }, "Account logged" );
+                }
+                playersConnected.Add(player);
             } catch ( FaultException<AccessAccountNotFoundFault> aac ) {
                 throw aac;
             } catch ( FaultException<BannedAccountFault> bac ) {
@@ -127,15 +181,17 @@ namespace Basta.Service {
             return player;
         }
 
+        void ILoginService.LogOut(Player player) {
+            playersConnected.Remove( player );
+        }
+
         public string GenerateCode( string email ) {
             string code;
             AccessAccountDAO accessAccountDAO = new AccessAccountDAO();
             if ( accessAccountDAO.verifyExistingEmail( email ) ) {
                 code = accessAccountDAO.GenerateRecoveryCodeByEmail( email );
             } else {
-                EmailNotRegisteredYetFault emailNotRegisteredFault = new EmailNotRegisteredYetFault();
-                emailNotRegisteredFault.Message = "Username is already used!";
-                throw new FaultException<EmailNotRegisteredYetFault>( emailNotRegisteredFault, "Email no registered yet" );
+                throw new FaultException<EmailNotRegisteredYetFault>( new EmailNotRegisteredYetFault() { Message = "Username is already used!" }, "Email no registered yet" );
             }
             return code;
         }
@@ -146,9 +202,7 @@ namespace Basta.Service {
                 Email.SendMessage( email, content );
                 isMessageSent = true;
             } catch ( Exception ex ) {
-                EmailSenderFault emailFault = new EmailSenderFault();
-                emailFault.Message = "Email error";
-                throw new FaultException<EmailSenderFault>( emailFault, ex.Message );
+                throw new FaultException<EmailSenderFault>( new EmailSenderFault() { Message = "Email error!" }, ex.Message );
             }
             return isMessageSent;
         }

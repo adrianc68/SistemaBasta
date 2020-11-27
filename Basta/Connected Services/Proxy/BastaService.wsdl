@@ -125,6 +125,9 @@
   <wsdl:message name="ILoginService_Login_LimitReachedFaultFault_FaultMessage">
     <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/Basta.Contracts.Faults" name="detail" element="q3:LimitReachedFault" />
   </wsdl:message>
+  <wsdl:message name="ILoginService_Login_AccountAlreadyLoggedFaultFault_FaultMessage">
+    <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/Basta.Contracts.Faults" name="detail" element="q4:AccountAlreadyLoggedFault" />
+  </wsdl:message>
   <wsdl:message name="ILoginService_SignUp_InputMessage">
     <wsdl:part name="parameters" element="tns:SignUp" />
   </wsdl:message>
@@ -132,10 +135,10 @@
     <wsdl:part name="parameters" element="tns:SignUpResponse" />
   </wsdl:message>
   <wsdl:message name="ILoginService_SignUp_EmailAlreadyRegisteredFaultFault_FaultMessage">
-    <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/Basta.Contracts.Faults" name="detail" element="q4:EmailAlreadyRegisteredFault" />
+    <wsdl:part xmlns:q5="http://schemas.datacontract.org/2004/07/Basta.Contracts.Faults" name="detail" element="q5:EmailAlreadyRegisteredFault" />
   </wsdl:message>
   <wsdl:message name="ILoginService_SignUp_UsernameRegisteredAlreadyFaultFault_FaultMessage">
-    <wsdl:part xmlns:q5="http://schemas.datacontract.org/2004/07/Basta.Contracts.Faults" name="detail" element="q5:UsernameRegisteredAlreadyFault" />
+    <wsdl:part xmlns:q6="http://schemas.datacontract.org/2004/07/Basta.Contracts.Faults" name="detail" element="q6:UsernameRegisteredAlreadyFault" />
   </wsdl:message>
   <wsdl:message name="ILoginService_ChangePassword_InputMessage">
     <wsdl:part name="parameters" element="tns:ChangePassword" />
@@ -150,7 +153,7 @@
     <wsdl:part name="parameters" element="tns:GenerateCodeResponse" />
   </wsdl:message>
   <wsdl:message name="ILoginService_GenerateCode_EmailNotRegisteredYetFaultFault_FaultMessage">
-    <wsdl:part xmlns:q6="http://schemas.datacontract.org/2004/07/Basta.Contracts.Faults" name="detail" element="q6:EmailNotRegisteredYetFault" />
+    <wsdl:part xmlns:q7="http://schemas.datacontract.org/2004/07/Basta.Contracts.Faults" name="detail" element="q7:EmailNotRegisteredYetFault" />
   </wsdl:message>
   <wsdl:message name="ILoginService_SendMessageByEmail_InputMessage">
     <wsdl:part name="parameters" element="tns:SendMessageByEmail" />
@@ -159,7 +162,13 @@
     <wsdl:part name="parameters" element="tns:SendMessageByEmailResponse" />
   </wsdl:message>
   <wsdl:message name="ILoginService_SendMessageByEmail_EmailSenderFaultFault_FaultMessage">
-    <wsdl:part xmlns:q7="http://schemas.datacontract.org/2004/07/Basta.Contracts.Faults" name="detail" element="q7:EmailSenderFault" />
+    <wsdl:part xmlns:q8="http://schemas.datacontract.org/2004/07/Basta.Contracts.Faults" name="detail" element="q8:EmailSenderFault" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_LogOut_InputMessage">
+    <wsdl:part name="parameters" element="tns:LogOut" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_LogOut_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LogOutResponse" />
   </wsdl:message>
   <wsdl:message name="IRoomService_CreateRoom_InputMessage">
     <wsdl:part name="parameters" element="tns:CreateRoom" />
@@ -173,17 +182,11 @@
   <wsdl:message name="IRoomService_DeleteRoom_InputMessage">
     <wsdl:part name="parameters" element="tns:DeleteRoom" />
   </wsdl:message>
-  <wsdl:message name="IRoomService_DeleteRoom_OutputMessage">
-    <wsdl:part name="parameters" element="tns:DeleteRoomResponse" />
-  </wsdl:message>
   <wsdl:message name="IRoomService_SetUpRoom_InputMessage">
     <wsdl:part name="parameters" element="tns:SetUpRoom" />
   </wsdl:message>
   <wsdl:message name="IRoomService_SetUpRoom_OutputMessage">
     <wsdl:part name="parameters" element="tns:SetUpRoomResponse" />
-  </wsdl:message>
-  <wsdl:message name="IRoomService_ConnectToRoom_InputMessage">
-    <wsdl:part name="parameters" element="tns:ConnectToRoom" />
   </wsdl:message>
   <wsdl:message name="IRoomService_SendMessageRoomChat_InputMessage">
     <wsdl:part name="parameters" element="tns:SendMessageRoomChat" />
@@ -194,8 +197,26 @@
   <wsdl:message name="IRoomService_GetConnectedUsersFromRoom_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetConnectedUsersFromRoomResponse" />
   </wsdl:message>
+  <wsdl:message name="IRoomService_GetRooms_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRooms" />
+  </wsdl:message>
+  <wsdl:message name="IRoomService_GetRooms_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRoomsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRoomService_UserDisconnectedFromRoom_InputMessage">
+    <wsdl:part name="parameters" element="tns:UserDisconnectedFromRoom" />
+  </wsdl:message>
   <wsdl:message name="IRoomService_ReciveMessageRoom_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:ReciveMessageRoom" />
+  </wsdl:message>
+  <wsdl:message name="IRoomService_PlayerConnected_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:PlayerConnected" />
+  </wsdl:message>
+  <wsdl:message name="IRoomService_PlayerDisconnected_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:PlayerDisconnected" />
+  </wsdl:message>
+  <wsdl:message name="IRoomService_RoomDelected_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:RoomDelected" />
   </wsdl:message>
   <wsdl:portType name="IChatService">
     <wsdl:operation name="Connect">
@@ -219,6 +240,7 @@
       <wsdl:fault wsaw:Action="http://tempuri.org/ILoginService/LoginAccessAccountNotFoundFaultFault" name="AccessAccountNotFoundFaultFault" message="tns:ILoginService_Login_AccessAccountNotFoundFaultFault_FaultMessage" />
       <wsdl:fault wsaw:Action="http://tempuri.org/ILoginService/LoginBannedAccountFaultFault" name="BannedAccountFaultFault" message="tns:ILoginService_Login_BannedAccountFaultFault_FaultMessage" />
       <wsdl:fault wsaw:Action="http://tempuri.org/ILoginService/LoginLimitReachedFaultFault" name="LimitReachedFaultFault" message="tns:ILoginService_Login_LimitReachedFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ILoginService/LoginAccountAlreadyLoggedFaultFault" name="AccountAlreadyLoggedFaultFault" message="tns:ILoginService_Login_AccountAlreadyLoggedFaultFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="SignUp">
       <wsdl:input wsaw:Action="http://tempuri.org/ILoginService/SignUp" message="tns:ILoginService_SignUp_InputMessage" />
@@ -240,6 +262,10 @@
       <wsdl:output wsaw:Action="http://tempuri.org/ILoginService/SendMessageByEmailResponse" message="tns:ILoginService_SendMessageByEmail_OutputMessage" />
       <wsdl:fault wsaw:Action="http://tempuri.org/ILoginService/SendMessageByEmailEmailSenderFaultFault" name="EmailSenderFaultFault" message="tns:ILoginService_SendMessageByEmail_EmailSenderFaultFault_FaultMessage" />
     </wsdl:operation>
+    <wsdl:operation name="LogOut">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILoginService/LogOut" message="tns:ILoginService_LogOut_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILoginService/LogOutResponse" message="tns:ILoginService_LogOut_OutputMessage" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IRoomService">
     <wsdl:operation name="CreateRoom">
@@ -251,14 +277,10 @@
     </wsdl:operation>
     <wsdl:operation name="DeleteRoom">
       <wsdl:input wsaw:Action="http://tempuri.org/IRoomService/DeleteRoom" message="tns:IRoomService_DeleteRoom_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IRoomService/DeleteRoomResponse" message="tns:IRoomService_DeleteRoom_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="SetUpRoom">
       <wsdl:input wsaw:Action="http://tempuri.org/IRoomService/SetUpRoom" message="tns:IRoomService_SetUpRoom_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IRoomService/SetUpRoomResponse" message="tns:IRoomService_SetUpRoom_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="ConnectToRoom">
-      <wsdl:input wsaw:Action="http://tempuri.org/IRoomService/ConnectToRoom" message="tns:IRoomService_ConnectToRoom_InputMessage" />
     </wsdl:operation>
     <wsdl:operation name="SendMessageRoomChat">
       <wsdl:input wsaw:Action="http://tempuri.org/IRoomService/SendMessageRoomChat" message="tns:IRoomService_SendMessageRoomChat_InputMessage" />
@@ -267,8 +289,24 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IRoomService/GetConnectedUsersFromRoom" message="tns:IRoomService_GetConnectedUsersFromRoom_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IRoomService/GetConnectedUsersFromRoomResponse" message="tns:IRoomService_GetConnectedUsersFromRoom_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="GetRooms">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRoomService/GetRooms" message="tns:IRoomService_GetRooms_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRoomService/GetRoomsResponse" message="tns:IRoomService_GetRooms_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UserDisconnectedFromRoom">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRoomService/UserDisconnectedFromRoom" message="tns:IRoomService_UserDisconnectedFromRoom_InputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="ReciveMessageRoom">
       <wsdl:output wsaw:Action="http://tempuri.org/IRoomService/ReciveMessageRoom" message="tns:IRoomService_ReciveMessageRoom_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PlayerConnected">
+      <wsdl:output wsaw:Action="http://tempuri.org/IRoomService/PlayerConnected" message="tns:IRoomService_PlayerConnected_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PlayerDisconnected">
+      <wsdl:output wsaw:Action="http://tempuri.org/IRoomService/PlayerDisconnected" message="tns:IRoomService_PlayerDisconnected_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RoomDelected">
+      <wsdl:output wsaw:Action="http://tempuri.org/IRoomService/RoomDelected" message="tns:IRoomService_RoomDelected_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IChatService" type="tns:IChatService">
@@ -322,6 +360,9 @@
       <wsdl:fault name="LimitReachedFaultFault">
         <soap12:fault use="literal" name="LimitReachedFaultFault" namespace="" />
       </wsdl:fault>
+      <wsdl:fault name="AccountAlreadyLoggedFaultFault">
+        <soap12:fault use="literal" name="AccountAlreadyLoggedFaultFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="SignUp">
       <soap12:operation soapAction="http://tempuri.org/ILoginService/SignUp" style="document" />
@@ -371,6 +412,15 @@
         <soap12:fault use="literal" name="EmailSenderFaultFault" namespace="" />
       </wsdl:fault>
     </wsdl:operation>
+    <wsdl:operation name="LogOut">
+      <soap12:operation soapAction="http://tempuri.org/ILoginService/LogOut" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="NetTcpBinding_IRoomService" type="tns:IRoomService">
     <wsp:PolicyReference URI="#NetTcpBinding_IRoomService_policy" />
@@ -395,9 +445,6 @@
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="SetUpRoom">
       <soap12:operation soapAction="http://tempuri.org/IRoomService/SetUpRoom" style="document" />
@@ -407,12 +454,6 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="ConnectToRoom">
-      <soap12:operation soapAction="http://tempuri.org/IRoomService/ConnectToRoom" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
     </wsdl:operation>
     <wsdl:operation name="SendMessageRoomChat">
       <soap12:operation soapAction="http://tempuri.org/IRoomService/SendMessageRoomChat" style="document" />
@@ -429,8 +470,41 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetRooms">
+      <soap12:operation soapAction="http://tempuri.org/IRoomService/GetRooms" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserDisconnectedFromRoom">
+      <soap12:operation soapAction="http://tempuri.org/IRoomService/UserDisconnectedFromRoom" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
     <wsdl:operation name="ReciveMessageRoom">
       <soap12:operation soapAction="http://tempuri.org/IRoomService/ReciveMessageRoom" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PlayerConnected">
+      <soap12:operation soapAction="http://tempuri.org/IRoomService/PlayerConnected" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PlayerDisconnected">
+      <soap12:operation soapAction="http://tempuri.org/IRoomService/PlayerDisconnected" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RoomDelected">
+      <soap12:operation soapAction="http://tempuri.org/IRoomService/RoomDelected" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>

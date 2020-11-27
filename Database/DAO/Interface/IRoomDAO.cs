@@ -5,13 +5,13 @@ namespace Database.DAO.Interface {
     public interface IRoomDAO {
 
         List<Room> GetRoomAvailable();
-        string CreateRoom(Room room);
+        string CreateRoom( Room room );
 
-        bool DeleteRoom(string code);
+        bool DeleteRoom( Room room );
 
-        bool ConfigureRoom(RoomConfiguration roomConfiguration, string code);
+        bool ConfigureRoom( RoomConfiguration roomConfiguration, string code );
 
-        bool VerifyExistingRoom(string code);
+        bool VerifyExistingRoom( string code );
 
     }
 }

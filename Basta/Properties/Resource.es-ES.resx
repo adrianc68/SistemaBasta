@@ -346,6 +346,9 @@
   <data name="SystemInvalidData" xml:space="preserve">
     <value>¡Los datos son erroneos!</value>
   </data>
+  <data name="SystemLoginAccountAlreadyLogged" xml:space="preserve">
+    <value>La cuenta ya ha iniciado sesión</value>
+  </data>
   <data name="SystemLoginAccountBanned" xml:space="preserve">
     <value>¡Tu cuenta ha sido baneada!</value>
   </data>
@@ -366,6 +369,9 @@
   </data>
   <data name="SystemPasswordNoMatch" xml:space="preserve">
     <value>¡Las contraseñas no coinciden!</value>
+  </data>
+  <data name="SystemServerNotFound" xml:space="preserve">
+    <value>El servidor aún no ha iniciado.</value>
   </data>
   <data name="Tooltip_SignUp_Country" xml:space="preserve">
     <value>No debe contener carácteres extraños como ¡?=)(/&amp;%$#"!!¨*¨[] ni números</value>

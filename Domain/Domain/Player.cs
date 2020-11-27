@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace Domain.Domain {
     [DataContract]
@@ -20,6 +21,19 @@ namespace Domain.Domain {
         [DataMember]
 
         public AccessAccount AccessAccount { get; set; }
+
+        public class EqualityComparer: IEqualityComparer<Player> {
+
+            public bool Equals( Player x, Player y ) {
+                return x.Email == y.Email;
+            }
+
+            public int GetHashCode( Player obj ) {
+                string combined = obj.Email;
+                return combined.GetHashCode();
+            }
+        }
+
 
     }
 

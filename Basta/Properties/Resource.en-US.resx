@@ -346,6 +346,9 @@
   <data name="SystemInvalidData" xml:space="preserve">
     <value>The data is wrong!</value>
   </data>
+  <data name="SystemLoginAccountAlreadyLogged" xml:space="preserve">
+    <value>The account is already logged in</value>
+  </data>
   <data name="SystemLoginAccountBanned" xml:space="preserve">
     <value>Your account has been banned!</value>
   </data>
@@ -366,6 +369,9 @@
   </data>
   <data name="SystemPasswordNoMatch" xml:space="preserve">
     <value>Passwords don't match!</value>
+  </data>
+  <data name="SystemServerNotFound" xml:space="preserve">
+    <value>Server has not started</value>
   </data>
   <data name="Tooltip_SignUp_Country" xml:space="preserve">
     <value>It should not contain strange characters such as ¡? =) (/ &amp;% $ # "!! ¨ * ¨ [] or numbers</value>

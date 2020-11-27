@@ -9,10 +9,12 @@ using System.Threading.Tasks;
 namespace Domain.Domain {
     [DataContract]
     public class RoomConfiguration {
+        [DataMember]
         public int PlayerLimit { get; set; }
+        [DataMember]
         public RoomState RoomState { get; set; }
+        [DataMember]
         public string Code { get; set; }
-
         public Room Room { get; set; }
 
     }

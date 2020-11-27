@@ -8,6 +8,12 @@ namespace Basta {
     public class Autentication {
         private static Autentication instance;
 
+        public Proxy.LoginServiceClient LoginServer { get; set; }
+
+        public Proxy.RoomServiceClient RoomServer { get; set; }
+
+        public RoomServiceCallBack RoomServiceCallBack { get; set; }
+
         public Player Player { get; set; }
 
         public static Autentication GetInstance() {
@@ -24,8 +30,8 @@ namespace Basta {
         public bool LogIn( string email, string password ) {
             bool isLogged = false;
             try {
-                Proxy.LoginServiceClient server = new Proxy.LoginServiceClient();
-                Player = server.Login( Cryptography.SHA256_Hash( NetworkAddress.GetMacAddress() ), email, Cryptography.SHA256_Hash( password ) );
+                LoginServer = new Proxy.LoginServiceClient();
+                Player = LoginServer.Login( Cryptography.SHA256_Hash( NetworkAddress.GetMacAddress() ), email, Cryptography.SHA256_Hash( password ) );
                 isLogged = true;
             } catch ( FaultException<AccessAccountNotFoundFault> aac ) {
                 throw aac;
@@ -33,7 +39,11 @@ namespace Basta {
                 throw bac;
             } catch ( FaultException<LimitReachedFault> lre ) {
                 throw lre;
+            } catch ( FaultException<AccountAlreadyLoggedFault> acg ) {
+                throw acg;
             } catch ( FaultException ) {
+                throw;
+            } catch ( EndpointNotFoundException ) {
                 throw;
             }
             return isLogged;

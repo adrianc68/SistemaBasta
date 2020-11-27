@@ -43,7 +43,31 @@
   </xs:complexType>
   <xs:element name="ArrayOfPlayer" nillable="true" type="tns:ArrayOfPlayer" />
   <xs:complexType name="Room">
-    <xs:sequence />
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Code" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RoomConfiguration" nillable="true" type="tns:RoomConfiguration" />
+    </xs:sequence>
   </xs:complexType>
   <xs:element name="Room" nillable="true" type="tns:Room" />
+  <xs:complexType name="RoomConfiguration">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Code" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PlayerLimit" type="xs:int" />
+      <xs:element minOccurs="0" name="RoomState" type="tns:RoomState" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="RoomConfiguration" nillable="true" type="tns:RoomConfiguration" />
+  <xs:simpleType name="RoomState">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="PUBLIC" />
+      <xs:enumeration value="PRIVATE" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="RoomState" nillable="true" type="tns:RoomState" />
+  <xs:complexType name="ArrayOfRoom">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Room" nillable="true" type="tns:Room" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfRoom" nillable="true" type="tns:ArrayOfRoom" />
 </xs:schema>
