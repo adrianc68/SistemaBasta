@@ -135,6 +135,15 @@
   <data name="ChangePassword_Label_Toptitle" xml:space="preserve">
     <value>Change password</value>
   </data>
+  <data name="ChatTypePlayer" xml:space="preserve">
+    <value>Player</value>
+  </data>
+  <data name="Chat_GlobalChat" xml:space="preserve">
+    <value>Actual room chat</value>
+  </data>
+  <data name="Chat_UsersConnected" xml:space="preserve">
+    <value>Users connected</value>
+  </data>
   <data name="Lobby_Button_Configureroom" xml:space="preserve">
     <value>Room settings</value>
   </data>

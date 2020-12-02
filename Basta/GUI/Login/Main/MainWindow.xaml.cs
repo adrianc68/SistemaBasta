@@ -38,8 +38,8 @@ namespace Basta.GUI.Login.Main {
                     selectStackPanel.Visibility = Visibility.Hidden;
                     Hide();
                     autentication.RoomServiceCallBack.LobbyWindow = new LobbyWindow( selectedRoom );
-                    autentication.RoomServiceCallBack.AddPlayerToGUI( Autentication.GetInstance().Player );
-                    autentication.RoomServiceCallBack.AddPlayersConnectedToGUI( autentication.RoomServer.GetConnectedUsersFromRoom( selectedRoom ) );
+                    autentication.RoomServiceCallBack.LobbyWindow.AddPlayerToGUI( Autentication.GetInstance().Player );
+                    autentication.RoomServiceCallBack.LobbyWindow.AddPlayersConnectedToGUI( autentication.RoomServer.GetConnectedUsersFromRoom( selectedRoom ) );
                     autentication.RoomServiceCallBack.LobbyWindow.ShowDialog();
                     ShowDialog();
                 } catch ( FaultException eka ) {
@@ -67,7 +67,7 @@ namespace Basta.GUI.Login.Main {
                 createRoomStackPanel.Visibility = Visibility.Hidden;
                 Hide();
                 autentication.RoomServiceCallBack.LobbyWindow = new LobbyWindow( room );
-                autentication.RoomServiceCallBack.AddPlayerToGUI( Autentication.GetInstance().Player );
+                autentication.RoomServiceCallBack.LobbyWindow.AddPlayerToGUI( Autentication.GetInstance().Player );
                 autentication.RoomServiceCallBack.LobbyWindow.ShowDialog();
                 ShowDialog();
             }
@@ -108,7 +108,6 @@ namespace Basta.GUI.Login.Main {
             roomsListView.Items.Clear();
             try {
                 foreach ( var room in autentication.RoomServer.GetRooms() ) {
-                    Console.WriteLine( room.Code );
                     roomsListView.Items.Add( room );
                 }
             } catch ( FaultException e ) {

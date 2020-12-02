@@ -12,7 +12,7 @@ namespace Basta.Service {
     public class BastaService: ILoginService, IRoomService {
         Dictionary<Room, Dictionary<IRoomClient, Player>> usersRoom = new Dictionary<Room, Dictionary<IRoomClient, Player>>( new Room.EqualityComparer() );
         HashSet<Player> playersConnected = new HashSet<Player>( new Player.EqualityComparer() );
-        
+
         /*
         * 
         * 
@@ -62,7 +62,6 @@ namespace Basta.Service {
                     continue;
                 other.ReciveMessageRoom( player, message );
             }
-
         }
 
         public void UserDisconnectedFromRoom( Player player, Room room ) {
@@ -119,6 +118,19 @@ namespace Basta.Service {
             return usersConnectedToSpecifiedRoom;
         }
 
+        public void SendMessageRoomChatToPlayer( Player player, Room room, string message, Player toPlayer ) {
+            var connection = OperationContext.Current.GetCallbackChannel<IRoomClient>();
+            if ( !usersRoom[room].TryGetValue( connection, out player ) ) {
+                return;
+            }
+            foreach ( var other in usersRoom[room] ) {
+                if ( other.Value.Email == toPlayer.Email && player.Email != toPlayer.Email ) {
+                    other.Key.ReciveMessageFromPlayer( player, message );
+                    break;
+                }
+            }
+        }
+
 
         public List<Player> GetConnectedUsers() {
             throw new NotImplementedException();
@@ -168,7 +180,7 @@ namespace Basta.Service {
                 if ( playersConnected.Contains( player ) ) {
                     throw new FaultException<AccountAlreadyLoggedFault>( new AccountAlreadyLoggedFault { Message = "Account already logged!" }, "Account logged" );
                 }
-                playersConnected.Add(player);
+                playersConnected.Add( player );
             } catch ( FaultException<AccessAccountNotFoundFault> aac ) {
                 throw aac;
             } catch ( FaultException<BannedAccountFault> bac ) {
@@ -181,7 +193,7 @@ namespace Basta.Service {
             return player;
         }
 
-        void ILoginService.LogOut(Player player) {
+        void ILoginService.LogOut( Player player ) {
             playersConnected.Remove( player );
         }
 

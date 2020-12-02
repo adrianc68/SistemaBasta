@@ -16,17 +16,23 @@ using System.Windows.Shapes;
 
 namespace Basta.GUI.Login.Lobby {
     /// <summary>
-    /// Lógica de interacción para UserChat.xaml
+    /// Lógica de interacción para ChatWith.xaml
     /// </summary>
-    public partial class UserChat: UserControl {
+    public partial class ChatWith: UserControl {
+
         public Player Player { get; set; }
 
-        public UserChat() {
+        public ChatWith() {
             InitializeComponent();
         }
 
-        private void UserChatButtonPressed( object sender, MouseButtonEventArgs e ) {
-            
+        public void setInfoPlayer() {
+            ageInfoLabel.Text = Player.Age.ToString();
+            anotherPlayerNameLabel.Content = Player.Name;
+            anotherPlayerNameSubLabel.Text = Player.Name;
+            countryInfoLabel.Text = Player.Country;
+            emailInfoLabel.Text = Player.Email;
         }
+
     }
 }

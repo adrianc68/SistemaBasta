@@ -20,6 +20,9 @@ namespace Basta.Contracts {
         [OperationContract( IsOneWay = true )]
         void SendMessageRoomChat( Player player, Room room, string message );
 
+        [OperationContract( IsOneWay = true )]
+        void SendMessageRoomChatToPlayer( Player player, Room room, string message, Player toPlayer );
+
         [OperationContract( IsOneWay = false )]
         List<Player> GetConnectedUsersFromRoom( Room room );
 
@@ -33,6 +36,9 @@ namespace Basta.Contracts {
 
     [ServiceContract]
     public interface IRoomClient {
+        [OperationContract( IsOneWay = true )]
+        void ReciveMessageFromPlayer( Player player, string message);
+
         [OperationContract( IsOneWay = true )]
         void ReciveMessageRoom( Player player, string message );
 

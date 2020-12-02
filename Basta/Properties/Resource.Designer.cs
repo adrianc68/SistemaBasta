@@ -115,6 +115,33 @@ namespace Basta.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Chat de la sala actual.
+        /// </summary>
+        public static string Chat_GlobalChat {
+            get {
+                return ResourceManager.GetString("Chat_GlobalChat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Usuarios conectados.
+        /// </summary>
+        public static string Chat_UsersConnected {
+            get {
+                return ResourceManager.GetString("Chat_UsersConnected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Jugador.
+        /// </summary>
+        public static string ChatTypePlayer {
+            get {
+                return ResourceManager.GetString("ChatTypePlayer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Configurar sala.
         /// </summary>
         public static string Lobby_Button_Configureroom {

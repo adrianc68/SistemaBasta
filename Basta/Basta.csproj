@@ -82,6 +82,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="GUI\Login\Lobby\ChatWith.xaml.cs">
+      <DependentUpon>ChatWith.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GUI\Login\Lobby\MessageReceived.xaml.cs">
       <DependentUpon>MessageReceived.xaml</DependentUpon>
     </Compile>
@@ -96,6 +99,10 @@
     </Compile>
     <Compile Include="RoomServiceCallBack.cs" />
     <Page Include="GUI\Login\ChangePassword\ChangePasswordWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\Login\Lobby\ChatWith.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

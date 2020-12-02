@@ -12,89 +12,6 @@ namespace Basta.Proxy {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="Proxy.IChatService", CallbackContract=typeof(Basta.Proxy.IChatServiceCallback))]
-    public interface IChatService {
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/Connect")]
-        void Connect(Domain.Domain.Player player);
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/Connect")]
-        System.Threading.Tasks.Task ConnectAsync(Domain.Domain.Player player);
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/SendMessage")]
-        void SendMessage(string message);
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/SendMessage")]
-        System.Threading.Tasks.Task SendMessageAsync(string message);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChatService/GetConnectedUsers", ReplyAction="http://tempuri.org/IChatService/GetConnectedUsersResponse")]
-        Domain.Domain.Player[] GetConnectedUsers();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChatService/GetConnectedUsers", ReplyAction="http://tempuri.org/IChatService/GetConnectedUsersResponse")]
-        System.Threading.Tasks.Task<Domain.Domain.Player[]> GetConnectedUsersAsync();
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IChatServiceCallback {
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/ReciveMessage")]
-        void ReciveMessage(Domain.Domain.Player player, string message);
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IChatServiceChannel : Basta.Proxy.IChatService, System.ServiceModel.IClientChannel {
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class ChatServiceClient : System.ServiceModel.DuplexClientBase<Basta.Proxy.IChatService>, Basta.Proxy.IChatService {
-        
-        public ChatServiceClient(System.ServiceModel.InstanceContext callbackInstance) : 
-                base(callbackInstance) {
-        }
-        
-        public ChatServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName) : 
-                base(callbackInstance, endpointConfigurationName) {
-        }
-        
-        public ChatServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, string remoteAddress) : 
-                base(callbackInstance, endpointConfigurationName, remoteAddress) {
-        }
-        
-        public ChatServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(callbackInstance, endpointConfigurationName, remoteAddress) {
-        }
-        
-        public ChatServiceClient(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(callbackInstance, binding, remoteAddress) {
-        }
-        
-        public void Connect(Domain.Domain.Player player) {
-            base.Channel.Connect(player);
-        }
-        
-        public System.Threading.Tasks.Task ConnectAsync(Domain.Domain.Player player) {
-            return base.Channel.ConnectAsync(player);
-        }
-        
-        public void SendMessage(string message) {
-            base.Channel.SendMessage(message);
-        }
-        
-        public System.Threading.Tasks.Task SendMessageAsync(string message) {
-            return base.Channel.SendMessageAsync(message);
-        }
-        
-        public Domain.Domain.Player[] GetConnectedUsers() {
-            return base.Channel.GetConnectedUsers();
-        }
-        
-        public System.Threading.Tasks.Task<Domain.Domain.Player[]> GetConnectedUsersAsync() {
-            return base.Channel.GetConnectedUsersAsync();
-        }
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="Proxy.ILoginService")]
     public interface ILoginService {
         
@@ -253,6 +170,12 @@ namespace Basta.Proxy {
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRoomService/SendMessageRoomChat")]
         System.Threading.Tasks.Task SendMessageRoomChatAsync(Domain.Domain.Player player, Domain.Domain.Room room, string message);
         
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRoomService/SendMessageRoomChatToPlayer")]
+        void SendMessageRoomChatToPlayer(Domain.Domain.Player player, Domain.Domain.Room room, string message, Domain.Domain.Player toPlayer);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRoomService/SendMessageRoomChatToPlayer")]
+        System.Threading.Tasks.Task SendMessageRoomChatToPlayerAsync(Domain.Domain.Player player, Domain.Domain.Room room, string message, Domain.Domain.Player toPlayer);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRoomService/GetConnectedUsersFromRoom", ReplyAction="http://tempuri.org/IRoomService/GetConnectedUsersFromRoomResponse")]
         Domain.Domain.Player[] GetConnectedUsersFromRoom(Domain.Domain.Room room);
         
@@ -274,6 +197,9 @@ namespace Basta.Proxy {
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface IRoomServiceCallback {
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRoomService/ReciveMessageFromPlayer")]
+        void ReciveMessageFromPlayer(Domain.Domain.Player player, string message);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRoomService/ReciveMessageRoom")]
         void ReciveMessageRoom(Domain.Domain.Player player, string message);
@@ -354,6 +280,14 @@ namespace Basta.Proxy {
         
         public System.Threading.Tasks.Task SendMessageRoomChatAsync(Domain.Domain.Player player, Domain.Domain.Room room, string message) {
             return base.Channel.SendMessageRoomChatAsync(player, room, message);
+        }
+        
+        public void SendMessageRoomChatToPlayer(Domain.Domain.Player player, Domain.Domain.Room room, string message, Domain.Domain.Player toPlayer) {
+            base.Channel.SendMessageRoomChatToPlayer(player, room, message, toPlayer);
+        }
+        
+        public System.Threading.Tasks.Task SendMessageRoomChatToPlayerAsync(Domain.Domain.Player player, Domain.Domain.Room room, string message, Domain.Domain.Player toPlayer) {
+            return base.Channel.SendMessageRoomChatToPlayerAsync(player, room, message, toPlayer);
         }
         
         public Domain.Domain.Player[] GetConnectedUsersFromRoom(Domain.Domain.Room room) {
