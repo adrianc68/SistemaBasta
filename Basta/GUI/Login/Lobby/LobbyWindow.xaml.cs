@@ -101,11 +101,7 @@ namespace Basta.GUI.Login.Lobby {
             messageReceived.usernameLabel.Text = player.Name;
             messageReceived.messageTextBlock.Text = message;
             chatsGUI[player.Email].messagesWrapPanel.Children.Add( messageReceived );
-            playerLobbyChatGUI[player.Name].borderBackground.Background = new SolidColorBrush( Color.FromRgb( 98, 98, 98 ) );
-
-            //if ( !( (ChatWith) chatWithWrapPanel.Children[0] ).Player.Email.Equals(player.Email) ) {
-            
-            //}
+            playerLobbyChatGUI[player.Email].borderBackground.Background = new SolidColorBrush( Color.FromRgb( 98, 98, 98 ) );
         }
 
 
@@ -124,10 +120,10 @@ namespace Basta.GUI.Login.Lobby {
         }
 
         public void RemovePlayerFromGUI( Player player ) {
-            if ( playersLobbyGUI.ContainsKey( player ) && playerLobbyChatGUI.ContainsKey( player.Name ) ) {
+            if ( playersLobbyGUI.ContainsKey( player ) && playerLobbyChatGUI.ContainsKey( player.Email ) ) {
                 playersWrapPanel.Children.Remove( playersLobbyGUI[player] );
-                playersChatWrapPanel.Children.Remove( playerLobbyChatGUI[player.Name] );
-                playerLobbyChatGUI.Remove( player.Name );
+                playersChatWrapPanel.Children.Remove( playerLobbyChatGUI[player.Email] );
+                playerLobbyChatGUI.Remove( player.Email );
                 playersLobbyGUI.Remove( player );
             }
         }
@@ -157,30 +153,30 @@ namespace Basta.GUI.Login.Lobby {
             userChat.Player = player;
             userChat.Background = new SolidColorBrush( Color.FromArgb( 100, 44, 44, 44 ) );
             userChat.messageTextBlock.Text = player.Name;
-            playerLobbyChatGUI.Add( player.Name, userChat );
-            playersChatWrapPanel.Children.Add( playerLobbyChatGUI[player.Name] );
-            AddChatWithUserControl( player, userChat );
+            playerLobbyChatGUI.Add( player.Email, userChat );
+            playersChatWrapPanel.Children.Add( playerLobbyChatGUI[player.Email] );
+            AddChatWithUserControl( player );
         }
 
-        private void AddChatWithUserControl( Player player, UserChat userChat ) {
+        private void AddChatWithUserControl( Player player) {
             ChatWith chatWith = new ChatWith();
             chatWith.Player = player;
             chatWith.setInfoPlayer();
             if ( !chatsGUI.ContainsKey( player.Email ) ) {
                 chatsGUI.Add( player.Email, chatWith );
-                configureChatEventByPlayer( userChat, player, chatWith );
+                configureChatEventByPlayer(player, chatWith );
             }
         }
 
-        private void configureChatEventByPlayer( UserChat userChat, Player player, ChatWith chatWith ) {
+        private void configureChatEventByPlayer(Player player, ChatWith chatWith ) {
             chatsGUI[player.Email].messageTextBox.KeyDown += new KeyEventHandler( ( a, b ) => {
                 if ( b.Key == Key.Enter ) {
                     SendMessageToSpecifiedPlayer( player, chatsGUI[player.Email].messageTextBox.Text.Trim() );
                 }
             } );
 
-            userChat.MouseLeftButtonDown += new MouseButtonEventHandler( ( sender, e ) => {
-                playerLobbyChatGUI[player.Name].borderBackground.Background = new SolidColorBrush( Color.FromArgb( 100, 44, 44, 44 ) );
+            playerLobbyChatGUI[ player.Email].MouseLeftButtonDown += new MouseButtonEventHandler( ( sender, e ) => {
+                playerLobbyChatGUI[player.Email].borderBackground.Background = new SolidColorBrush( Color.FromArgb( 100, 44, 44, 44 ) );
                 chatWithDockPanel.Visibility = Visibility.Visible;
                 chatWithWrapPanel.Children.Clear();
                 chatWithWrapPanel.Children.Add( chatWith );
