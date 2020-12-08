@@ -19,7 +19,6 @@ namespace Basta.GUI.Login.Lobby {
     /// Lógica de interacción para UserConnectedLobby.xaml
     /// </summary>
     public partial class UserConnectedLobby: UserControl {
-        public Player Player { get; set; }
 
         public UserConnectedLobby() {
             InitializeComponent();

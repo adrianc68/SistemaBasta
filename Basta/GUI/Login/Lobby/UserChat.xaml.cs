@@ -19,7 +19,6 @@ namespace Basta.GUI.Login.Lobby {
     /// Lógica de interacción para UserChat.xaml
     /// </summary>
     public partial class UserChat: UserControl {
-        public Player Player { get; set; }
 
         public UserChat() {
             InitializeComponent();

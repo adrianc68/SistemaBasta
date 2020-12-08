@@ -141,8 +141,14 @@
   <data name="Chat_GlobalChat" xml:space="preserve">
     <value>Actual room chat</value>
   </data>
+  <data name="Chat_TextBox_SendMessage" xml:space="preserve">
+    <value>Type something to send...</value>
+  </data>
   <data name="Chat_UsersConnected" xml:space="preserve">
     <value>Users connected</value>
+  </data>
+  <data name="Lobby_Button_Chat" xml:space="preserve">
+    <value>Chat</value>
   </data>
   <data name="Lobby_Button_Configureroom" xml:space="preserve">
     <value>Room settings</value>
@@ -173,6 +179,15 @@
   </data>
   <data name="Lobby_Label_Waitingfor" xml:space="preserve">
     <value>Waiting players...</value>
+  </data>
+  <data name="Lobby_UserConnectedLobby_Kickplayer" xml:space="preserve">
+    <value>Kick player</value>
+  </data>
+  <data name="Lobby_UserConnectedLobby_Reportplayer" xml:space="preserve">
+    <value>Report player</value>
+  </data>
+  <data name="Lobby_UserConnectedLobby_Sendmessage" xml:space="preserve">
+    <value>Send message</value>
   </data>
   <data name="login_Button_signUp" xml:space="preserve">
     <value>Sign Up</value>
@@ -349,6 +364,9 @@
   <data name="SystemFatalError" xml:space="preserve">
     <value>An error has occurred and has been logged to a file!</value>
   </data>
+  <data name="SystemGameFull" xml:space="preserve">
+    <value>The room is full!</value>
+  </data>
   <data name="SystemInvalidCode" xml:space="preserve">
     <value>The code doesn't match, check it!</value>
   </data>
@@ -369,6 +387,9 @@
   </data>
   <data name="SystemLostConnection" xml:space="preserve">
     <value>A problem was registered with the database!</value>
+  </data>
+  <data name="SystemMessageTitle" xml:space="preserve">
+    <value>Attention!</value>
   </data>
   <data name="SystemNoExistingEmail" xml:space="preserve">
     <value>The email is not registered!</value>

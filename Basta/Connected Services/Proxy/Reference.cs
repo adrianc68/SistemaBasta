@@ -58,6 +58,12 @@ namespace Basta.Proxy {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILoginService/LogOut", ReplyAction="http://tempuri.org/ILoginService/LogOutResponse")]
         System.Threading.Tasks.Task LogOutAsync(Domain.Domain.Player player);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILoginService/BanPlayer", ReplyAction="http://tempuri.org/ILoginService/BanPlayerResponse")]
+        bool BanPlayer(Domain.Domain.Player player);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILoginService/BanPlayer", ReplyAction="http://tempuri.org/ILoginService/BanPlayerResponse")]
+        System.Threading.Tasks.Task<bool> BanPlayerAsync(Domain.Domain.Player player);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -134,6 +140,14 @@ namespace Basta.Proxy {
         public System.Threading.Tasks.Task LogOutAsync(Domain.Domain.Player player) {
             return base.Channel.LogOutAsync(player);
         }
+        
+        public bool BanPlayer(Domain.Domain.Player player) {
+            return base.Channel.BanPlayer(player);
+        }
+        
+        public System.Threading.Tasks.Task<bool> BanPlayerAsync(Domain.Domain.Player player) {
+            return base.Channel.BanPlayerAsync(player);
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -165,38 +179,41 @@ namespace Basta.Proxy {
         System.Threading.Tasks.Task SetUpRoomAsync();
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRoomService/SendMessageRoomChat")]
-        void SendMessageRoomChat(Domain.Domain.Player player, Domain.Domain.Room room, string message);
+        void SendMessageRoomChat(Domain.Domain.Room room, string message);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRoomService/SendMessageRoomChat")]
-        System.Threading.Tasks.Task SendMessageRoomChatAsync(Domain.Domain.Player player, Domain.Domain.Room room, string message);
+        System.Threading.Tasks.Task SendMessageRoomChatAsync(Domain.Domain.Room room, string message);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRoomService/SendMessageRoomChatToPlayer")]
-        void SendMessageRoomChatToPlayer(Domain.Domain.Player player, Domain.Domain.Room room, string message, Domain.Domain.Player toPlayer);
+        void SendMessageRoomChatToPlayer(Domain.Domain.Room room, string message, Domain.Domain.Player toPlayer);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRoomService/SendMessageRoomChatToPlayer")]
-        System.Threading.Tasks.Task SendMessageRoomChatToPlayerAsync(Domain.Domain.Player player, Domain.Domain.Room room, string message, Domain.Domain.Player toPlayer);
+        System.Threading.Tasks.Task SendMessageRoomChatToPlayerAsync(Domain.Domain.Room room, string message, Domain.Domain.Player toPlayer);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRoomService/GetConnectedUsersFromRoom", ReplyAction="http://tempuri.org/IRoomService/GetConnectedUsersFromRoomResponse")]
-        Domain.Domain.Player[] GetConnectedUsersFromRoom(Domain.Domain.Room room);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRoomService/GetRooms")]
+        void GetRooms();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRoomService/GetConnectedUsersFromRoom", ReplyAction="http://tempuri.org/IRoomService/GetConnectedUsersFromRoomResponse")]
-        System.Threading.Tasks.Task<Domain.Domain.Player[]> GetConnectedUsersFromRoomAsync(Domain.Domain.Room room);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRoomService/GetRooms", ReplyAction="http://tempuri.org/IRoomService/GetRoomsResponse")]
-        Domain.Domain.Room[] GetRooms();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRoomService/GetRooms", ReplyAction="http://tempuri.org/IRoomService/GetRoomsResponse")]
-        System.Threading.Tasks.Task<Domain.Domain.Room[]> GetRoomsAsync();
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRoomService/GetRooms")]
+        System.Threading.Tasks.Task GetRoomsAsync();
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRoomService/UserDisconnectedFromRoom")]
         void UserDisconnectedFromRoom(Domain.Domain.Player player, Domain.Domain.Room room);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRoomService/UserDisconnectedFromRoom")]
         System.Threading.Tasks.Task UserDisconnectedFromRoomAsync(Domain.Domain.Player player, Domain.Domain.Room room);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRoomService/KickPlayer")]
+        void KickPlayer(Domain.Domain.Player player, Domain.Domain.Room room);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRoomService/KickPlayer")]
+        System.Threading.Tasks.Task KickPlayerAsync(Domain.Domain.Player player, Domain.Domain.Room room);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface IRoomServiceCallback {
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRoomService/ReciveRoomsAvailable")]
+        void ReciveRoomsAvailable(Domain.Domain.Room[] rooms);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRoomService/ReciveMessageFromPlayer")]
         void ReciveMessageFromPlayer(Domain.Domain.Player player, string message);
@@ -212,6 +229,18 @@ namespace Basta.Proxy {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRoomService/RoomDelected")]
         void RoomDelected(Domain.Domain.Room room);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRoomService/PlayerKicked")]
+        void PlayerKicked();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRoomService/GameIsFull")]
+        void GameIsFull();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRoomService/PlayersIsKicked")]
+        void PlayersIsKicked();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRoomService/PlayerHasJoinToRoom")]
+        void PlayerHasJoinToRoom(Domain.Domain.Player[] players, Domain.Domain.Room room);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -274,35 +303,27 @@ namespace Basta.Proxy {
             return base.Channel.SetUpRoomAsync();
         }
         
-        public void SendMessageRoomChat(Domain.Domain.Player player, Domain.Domain.Room room, string message) {
-            base.Channel.SendMessageRoomChat(player, room, message);
+        public void SendMessageRoomChat(Domain.Domain.Room room, string message) {
+            base.Channel.SendMessageRoomChat(room, message);
         }
         
-        public System.Threading.Tasks.Task SendMessageRoomChatAsync(Domain.Domain.Player player, Domain.Domain.Room room, string message) {
-            return base.Channel.SendMessageRoomChatAsync(player, room, message);
+        public System.Threading.Tasks.Task SendMessageRoomChatAsync(Domain.Domain.Room room, string message) {
+            return base.Channel.SendMessageRoomChatAsync(room, message);
         }
         
-        public void SendMessageRoomChatToPlayer(Domain.Domain.Player player, Domain.Domain.Room room, string message, Domain.Domain.Player toPlayer) {
-            base.Channel.SendMessageRoomChatToPlayer(player, room, message, toPlayer);
+        public void SendMessageRoomChatToPlayer(Domain.Domain.Room room, string message, Domain.Domain.Player toPlayer) {
+            base.Channel.SendMessageRoomChatToPlayer(room, message, toPlayer);
         }
         
-        public System.Threading.Tasks.Task SendMessageRoomChatToPlayerAsync(Domain.Domain.Player player, Domain.Domain.Room room, string message, Domain.Domain.Player toPlayer) {
-            return base.Channel.SendMessageRoomChatToPlayerAsync(player, room, message, toPlayer);
+        public System.Threading.Tasks.Task SendMessageRoomChatToPlayerAsync(Domain.Domain.Room room, string message, Domain.Domain.Player toPlayer) {
+            return base.Channel.SendMessageRoomChatToPlayerAsync(room, message, toPlayer);
         }
         
-        public Domain.Domain.Player[] GetConnectedUsersFromRoom(Domain.Domain.Room room) {
-            return base.Channel.GetConnectedUsersFromRoom(room);
+        public void GetRooms() {
+            base.Channel.GetRooms();
         }
         
-        public System.Threading.Tasks.Task<Domain.Domain.Player[]> GetConnectedUsersFromRoomAsync(Domain.Domain.Room room) {
-            return base.Channel.GetConnectedUsersFromRoomAsync(room);
-        }
-        
-        public Domain.Domain.Room[] GetRooms() {
-            return base.Channel.GetRooms();
-        }
-        
-        public System.Threading.Tasks.Task<Domain.Domain.Room[]> GetRoomsAsync() {
+        public System.Threading.Tasks.Task GetRoomsAsync() {
             return base.Channel.GetRoomsAsync();
         }
         
@@ -312,6 +333,14 @@ namespace Basta.Proxy {
         
         public System.Threading.Tasks.Task UserDisconnectedFromRoomAsync(Domain.Domain.Player player, Domain.Domain.Room room) {
             return base.Channel.UserDisconnectedFromRoomAsync(player, room);
+        }
+        
+        public void KickPlayer(Domain.Domain.Player player, Domain.Domain.Room room) {
+            base.Channel.KickPlayer(player, room);
+        }
+        
+        public System.Threading.Tasks.Task KickPlayerAsync(Domain.Domain.Player player, Domain.Domain.Room room) {
+            return base.Channel.KickPlayerAsync(player, room);
         }
     }
 }

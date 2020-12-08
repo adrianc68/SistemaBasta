@@ -52,6 +52,7 @@
     <Compile Include="Faults\EmailSenderFault.cs" />
     <Compile Include="Faults\ErrorFault.cs" />
     <Compile Include="Faults\LimitReachedFault.cs" />
+    <Compile Include="Faults\UserKickedFromRoomFault.cs" />
     <Compile Include="Faults\UsernameRegisteredAlreadyFault.cs" />
     <Compile Include="ILoginService.cs" />
     <Compile Include="IRoomService.cs" />

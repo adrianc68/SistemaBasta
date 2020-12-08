@@ -141,8 +141,14 @@
   <data name="Chat_GlobalChat" xml:space="preserve">
     <value>Chat de la sala actual</value>
   </data>
+  <data name="Chat_TextBox_SendMessage" xml:space="preserve">
+    <value>Escribe algo para enviar...</value>
+  </data>
   <data name="Chat_UsersConnected" xml:space="preserve">
     <value>Usuarios conectados</value>
+  </data>
+  <data name="Lobby_Button_Chat" xml:space="preserve">
+    <value>Chatear</value>
   </data>
   <data name="Lobby_Button_Configureroom" xml:space="preserve">
     <value>Configurar sala</value>
@@ -173,6 +179,15 @@
   </data>
   <data name="Lobby_Label_Waitingfor" xml:space="preserve">
     <value>Esperando jugadores...</value>
+  </data>
+  <data name="Lobby_UserConnectedLobby_Kickplayer" xml:space="preserve">
+    <value>Expulsar jugador</value>
+  </data>
+  <data name="Lobby_UserConnectedLobby_Reportplayer" xml:space="preserve">
+    <value>Reportar jugador</value>
+  </data>
+  <data name="Lobby_UserConnectedLobby_Sendmessage" xml:space="preserve">
+    <value>Enviar mensaje</value>
   </data>
   <data name="login_Button_signUp" xml:space="preserve">
     <value>Registrarse</value>
@@ -349,6 +364,9 @@
   <data name="SystemFatalError" xml:space="preserve">
     <value>¡Ha ocurrido un error y se ha registrado en un archivo!</value>
   </data>
+  <data name="SystemGameFull" xml:space="preserve">
+    <value>¡La sala está llena!</value>
+  </data>
   <data name="SystemInvalidCode" xml:space="preserve">
     <value>¡El código no coincide, revisalo!</value>
   </data>
@@ -370,6 +388,9 @@
   <data name="SystemLostConnection" xml:space="preserve">
     <value>¡Se registró un problema con la base de datos!</value>
   </data>
+  <data name="SystemMessageTitle" xml:space="preserve">
+    <value>¡Atención!</value>
+  </data>
   <data name="SystemNoExistingEmail" xml:space="preserve">
     <value>¡El correo electrónico no está registrado!</value>
   </data>
@@ -378,6 +399,9 @@
   </data>
   <data name="SystemPasswordNoMatch" xml:space="preserve">
     <value>¡Las contraseñas no coinciden!</value>
+  </data>
+  <data name="SystemPlayerKicked" xml:space="preserve">
+    <value>Has sido expulsado de la sala.</value>
   </data>
   <data name="SystemServerNotFound" xml:space="preserve">
     <value>El servidor aún no ha iniciado.</value>

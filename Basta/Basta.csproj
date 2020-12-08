@@ -91,6 +91,7 @@
     <Compile Include="GUI\Login\Lobby\MessageSent.xaml.cs">
       <DependentUpon>MessageSent.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GUI\Login\Lobby\PlayerLobbyElementsGUI.cs" />
     <Compile Include="GUI\Login\Lobby\UserChat.xaml.cs">
       <DependentUpon>UserChat.xaml</DependentUpon>
     </Compile>

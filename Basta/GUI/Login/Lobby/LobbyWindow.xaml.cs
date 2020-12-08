@@ -1,17 +1,9 @@
 ﻿using Domain.Domain;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Basta.GUI.Login.Lobby {
     /// <summary>
@@ -20,12 +12,162 @@ namespace Basta.GUI.Login.Lobby {
     public partial class LobbyWindow: Window {
         private Room room;
         private Autentication autentication;
+        private Dictionary<Player, PlayerLobbyElementsGUI> playersConnected;
+
         public LobbyWindow( Room room ) {
             InitializeComponent();
             this.room = room;
             autentication = Autentication.GetInstance();
+            playersConnected = new Dictionary<Player, PlayerLobbyElementsGUI>( new Player.EqualityComparer() ); ;
             ShowPlayerLabelElements();
         }
+
+        public void RecivedMessageFromGlobalChat( Player player, string message ) {
+            MessageReceived messageReceived = new MessageReceived();
+            messageReceived.usernameLabel.Text = player.Name;
+            messageReceived.messageTextBlock.Text = message;
+            messagesWrapPanel.Children.Add( messageReceived );
+            Console.WriteLine( message );
+        }
+
+        public void RecivedMessageFromPlayer( Player player, string message ) {
+            MessageReceived messageReceived = new MessageReceived();
+            messageReceived.usernameLabel.Text = player.Name;
+            messageReceived.messageTextBlock.Text = message;
+            playersConnected[player].ChatWith.messagesWrapPanel.Children.Add( messageReceived );
+            playersConnected[player].UserChat.borderBackground.Background = new SolidColorBrush( Color.FromArgb( 98, 98, 98, 98 ) );
+        }
+
+        public void RoomDelected( Room room ) {
+            ClearPlayerConnectedToGUI();
+            Close();
+        }
+
+        public void YourPlayerWasKicked() {
+            RoomDelected( room );
+            MessageBoxResult kickedMessage = MessageBox.Show( Properties.Resource.SystemPlayerKicked, Properties.Resource.SystemMessageTitle, MessageBoxButton.OK, MessageBoxImage.Error );
+        }
+
+        public void RemovePlayerFromGUI( Player player ) {
+            if ( playersConnected.ContainsKey( player ) ) {
+                userConnectedLobbyWrapPanel.Children.Remove( playersConnected[player].UserConnectedLobby );
+                playersChatWrapPanel.Children.Remove( playersConnected[player].UserChat );
+                chatWithWrapPanel.Children.Remove( playersConnected[player].ChatWith );
+                playersConnected.Remove( player );
+            }
+        }
+
+        public void AddPlayersConnectedToGUI( Player[] players ) {
+            if ( players != null ) {
+                foreach ( var player in players ) {
+                    PlayerConnected( player );
+                }
+            }
+        }
+
+        public void PlayerConnected( Player player ) {
+            if ( !playersConnected.ContainsKey( player ) ) {
+                PlayerLobbyElementsGUI playerConnected = new PlayerLobbyElementsGUI();
+
+                UserChat userChatGUI = new UserChat();
+                userChatGUI.messageTextBlock.Text = player.Name;
+                playerConnected.UserChat = userChatGUI;
+
+                UserConnectedLobby userConnectedLobbyGUI = new UserConnectedLobby();
+                userConnectedLobbyGUI.usernameLabel.Text = player.Name;
+                playerConnected.UserConnectedLobby = userConnectedLobbyGUI;
+
+                ChatWith chatWithGUI = new ChatWith();
+                chatWithGUI.setInfoPlayer( player );
+                playerConnected.ChatWith = chatWithGUI;
+
+                userConnectedLobbyWrapPanel.Children.Add( userConnectedLobbyGUI );
+                playersChatWrapPanel.Children.Add( userChatGUI );
+                chatWithWrapPanel.Children.Add( chatWithGUI );
+
+                playersConnected.Add( player, playerConnected );
+
+                ConfigureUserConnectedLobbyKickButton( player );
+                ConfigureUserconnectedLobbySendMessageButton( player );
+                ConfigureChatEventByPlayer( player );
+            }
+        }
+
+        private void ConfigureUserConnectedLobbyKickButton( Player player ) {
+            playersConnected[player].UserConnectedLobby.kickPlayerButton.MouseDoubleClick += new MouseButtonEventHandler( ( a, b ) => {
+                Autentication.GetInstance().RoomServer.KickPlayer( player, room );
+            } );
+        }
+
+        private void ConfigureUserconnectedLobbySendMessageButton( Player player ) {
+            playersConnected[player].UserConnectedLobby.sendMessageToPlayerButton.MouseDoubleClick += new MouseButtonEventHandler( ( a, b ) => {
+                chatGrid.Visibility = Visibility.Visible;
+                chatWithDockPanel.Visibility = Visibility.Visible;
+                chatWithWrapPanel.Children.Clear();
+                chatWithWrapPanel.Children.Add( playersConnected[player].ChatWith );
+            } );
+        }
+
+        private void ConfigureChatEventByPlayer( Player player ) {
+            playersConnected[player].ChatWith.messageTextBox.KeyDown += new KeyEventHandler( ( a, b ) => {
+                if ( b.Key == Key.Enter ) {
+                    SendMessageToSpecifiedPlayer( player, playersConnected[player].ChatWith.messageTextBox.Text.Trim() );
+                }
+            } );
+
+            playersConnected[player].UserChat.MouseLeftButtonDown += new MouseButtonEventHandler( ( sender, e ) => {
+                playersConnected[player].UserChat.borderBackground.Background = new SolidColorBrush( Color.FromArgb( 100, 44, 44, 44 ) );
+                chatWithDockPanel.Visibility = Visibility.Visible;
+                chatWithWrapPanel.Children.Clear();
+                chatWithWrapPanel.Children.Add( playersConnected[player].ChatWith );
+            } );
+        }
+
+        public void ClearPlayerConnectedToGUI() {
+            userConnectedLobbyWrapPanel.Children.Clear();
+            playersChatWrapPanel.Children.Clear();
+            chatWithWrapPanel.Children.Clear();
+            messagesWrapPanel.Children.Clear();
+            playersConnected.Clear();
+        }
+
+        private void SendMessageToSpecifiedPlayer( Player toPlayer, string message ) {
+            if ( message.Length > 0 ) {
+                MessageSent messageUserControl = new MessageSent();
+                messageUserControl.messageTextBlock.Text = message;
+                Player actualPlayer = Autentication.GetInstance().Player;
+                playersConnected[toPlayer].ChatWith.messagesWrapPanel.Children.Add( messageUserControl );
+                autentication.RoomServer.SendMessageRoomChatToPlayer( room, message, toPlayer );
+                playersConnected[toPlayer].ChatWith.messageTextBox.Text = null;
+                playersConnected[toPlayer].ChatWith.messageScrollViewer.ScrollToEnd();
+            }
+        }
+
+        private void SendMessageToGlobalChat() {
+            string messageText = messageTextBox.Text.Trim();
+            if ( messageTextBox.Text.Length > 0 ) {
+                MessageSent message = new MessageSent();
+                message.messageTextBlock.Text = messageTextBox.Text.Trim();
+                messagesWrapPanel.Children.Add( message );
+                autentication.RoomServer.SendMessageRoomChat( room, messageText );
+                messageTextBox.Text = null;
+                messageScrollViewer.ScrollToEnd();
+            }
+
+            Console.WriteLine( messageText );
+
+        }
+
+        private void MessageKeyPressed( object sender, KeyEventArgs e ) {
+            if ( e.Key == Key.Enter ) {
+                SendMessageToGlobalChat();
+            }
+        }
+
+        private void SendMessageButtonClicked( object sender, MouseButtonEventArgs e ) {
+            SendMessageToGlobalChat();
+        }
+
 
         private void ShowPlayerLabelElements() {
             playersLimitLabel.Text = room.RoomConfiguration.PlayerLimit.ToString();
@@ -35,7 +177,7 @@ namespace Basta.GUI.Login.Lobby {
         }
 
         private void ExitButtonClicked( object sender, RoutedEventArgs e ) {
-            ClearPlayerListGUI();
+            ClearPlayerConnectedToGUI();
             Close();
         }
 
@@ -55,153 +197,9 @@ namespace Basta.GUI.Login.Lobby {
             chatGrid.Visibility = Visibility.Hidden;
         }
 
-        private void MessageKeyPressed( object sender, KeyEventArgs e ) {
-            if ( e.Key == Key.Enter ) {
-                SendMessage();
-            }
-        }
-
-        private void SendMessageButtonClicked( object sender, MouseButtonEventArgs e ) {
-            SendMessage();
-        }
-
-        private void SendMessage() {
-            string messageText = messageTextBox.Text.Trim();
-            if ( messageTextBox.Text.Length > 0 ) {
-                MessageSent message = new MessageSent();
-                message.messageTextBlock.Text = messageTextBox.Text.Trim();
-                messagesWrapPanel.Children.Add( message );
-                autentication.RoomServer.SendMessageRoomChat( Autentication.GetInstance().Player, room, messageTextBox.Text.Trim() );
-                messageTextBox.Text = null;
-                messageScrollViewer.ScrollToEnd();
-            }
-        }
-
         private void GlobalChatButtonPressed( object sender, MouseButtonEventArgs e ) {
             chatWithDockPanel.Visibility = Visibility.Hidden;
         }
-
-
-
-        Dictionary<Player, UserConnectedLobby> playersLobbyGUI = new Dictionary<Player, UserConnectedLobby>( new Player.EqualityComparer() );
-        Dictionary<string, UserChat> playerLobbyChatGUI = new Dictionary<string, UserChat>();
-        Dictionary<string, ChatWith> chatsGUI = new Dictionary<string, ChatWith>();
-
-
-
-        public void RecivedMessageFromGlobalRoom( Player player, string message ) {
-            MessageReceived messageReceived = new MessageReceived();
-            messageReceived.usernameLabel.Text = player.Name;
-            messageReceived.messageTextBlock.Text = message;
-            messagesWrapPanel.Children.Add( messageReceived );
-        }
-
-        public void RecivedMessageFromPlayer( Player player, string message ) {
-            MessageReceived messageReceived = new MessageReceived();
-            messageReceived.usernameLabel.Text = player.Name;
-            messageReceived.messageTextBlock.Text = message;
-            chatsGUI[player.Email].messagesWrapPanel.Children.Add( messageReceived );
-            playerLobbyChatGUI[player.Email].borderBackground.Background = new SolidColorBrush( Color.FromRgb( 98, 98, 98 ) );
-        }
-
-
-        public void RoomDelected( Room room ) {
-            playersLobbyGUI.Clear();
-            playerLobbyChatGUI.Clear();
-            chatsGUI.Clear();
-            Close();
-        }
-
-        public void AddPlayerToGUI( Player player ) {
-            if ( !playersLobbyGUI.ContainsKey( player ) ) {
-                AddUserConnectedControl( player );
-                AddUserChatControl( player );
-            }
-        }
-
-        public void RemovePlayerFromGUI( Player player ) {
-            if ( playersLobbyGUI.ContainsKey( player ) && playerLobbyChatGUI.ContainsKey( player.Email ) ) {
-                playersWrapPanel.Children.Remove( playersLobbyGUI[player] );
-                playersChatWrapPanel.Children.Remove( playerLobbyChatGUI[player.Email] );
-                playerLobbyChatGUI.Remove( player.Email );
-                playersLobbyGUI.Remove( player );
-            }
-        }
-
-        public void ClearPlayerListGUI() {
-            playersLobbyGUI.Clear();
-            playerLobbyChatGUI.Clear();
-        }
-
-        public void AddPlayersConnectedToGUI( Player[] players ) {
-            foreach ( var player in players ) {
-                AddPlayerToGUI( player );
-            }
-        }
-
-        private void AddUserConnectedControl( Player player ) {
-            UserConnectedLobby userConnectedLobby = new UserConnectedLobby();
-            userConnectedLobby.Player = player;
-            userConnectedLobby.usernameLabel.Text = player.Name;
-            playersLobbyGUI.Add( player, userConnectedLobby );
-            playersWrapPanel.Children.Add( playersLobbyGUI[player] );
-
-        }
-
-        private void AddUserChatControl( Player player ) {
-            UserChat userChat = new UserChat();
-            userChat.Player = player;
-            userChat.Background = new SolidColorBrush( Color.FromArgb( 100, 44, 44, 44 ) );
-            userChat.messageTextBlock.Text = player.Name;
-            playerLobbyChatGUI.Add( player.Email, userChat );
-            playersChatWrapPanel.Children.Add( playerLobbyChatGUI[player.Email] );
-            AddChatWithUserControl( player );
-        }
-
-        private void AddChatWithUserControl( Player player) {
-            ChatWith chatWith = new ChatWith();
-            chatWith.Player = player;
-            chatWith.setInfoPlayer();
-            if ( !chatsGUI.ContainsKey( player.Email ) ) {
-                chatsGUI.Add( player.Email, chatWith );
-                configureChatEventByPlayer(player, chatWith );
-            }
-        }
-
-        private void configureChatEventByPlayer(Player player, ChatWith chatWith ) {
-            chatsGUI[player.Email].messageTextBox.KeyDown += new KeyEventHandler( ( a, b ) => {
-                if ( b.Key == Key.Enter ) {
-                    SendMessageToSpecifiedPlayer( player, chatsGUI[player.Email].messageTextBox.Text.Trim() );
-                }
-            } );
-
-            playerLobbyChatGUI[ player.Email].MouseLeftButtonDown += new MouseButtonEventHandler( ( sender, e ) => {
-                playerLobbyChatGUI[player.Email].borderBackground.Background = new SolidColorBrush( Color.FromArgb( 100, 44, 44, 44 ) );
-                chatWithDockPanel.Visibility = Visibility.Visible;
-                chatWithWrapPanel.Children.Clear();
-                chatWithWrapPanel.Children.Add( chatWith );
-            } );
-        }
-
-        private void SendMessageToSpecifiedPlayer( Player toPlayer, string message ) {
-            if ( message.Length > 0 ) {
-                MessageSent messageUserControl = new MessageSent();
-                messageUserControl.messageTextBlock.Text = message;
-                Player actualPlayer = Autentication.GetInstance().Player;
-                chatsGUI[toPlayer.Email].messagesWrapPanel.Children.Add( messageUserControl );
-                autentication.RoomServer.SendMessageRoomChatToPlayer( actualPlayer, room, message, toPlayer );
-                chatsGUI[toPlayer.Email].messageTextBox.Text = null;
-                chatsGUI[toPlayer.Email].messageScrollViewer.ScrollToEnd();
-            }
-        }
-
-
-
-
-
-
-
-
 
     }
 }

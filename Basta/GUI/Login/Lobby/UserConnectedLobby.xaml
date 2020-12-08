@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Basta.GUI.Login.Lobby"
+    xmlns:languages="clr-namespace:Basta.Properties"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="Basta.GUI.Login.Lobby.UserConnectedLobby"
              mc:Ignorable="d" Width="163.333" Height="243">
     <Border BorderBrush="Black" BorderThickness="1" Background="#FFFBFBFB" Padding="0" Margin="15,0" CornerRadius="10">
@@ -18,11 +19,11 @@
             </DockPanel>
 
             <DockPanel Grid.Row="1" Margin="0" LastChildFill="False">
-                <Button Content="Enviar mensaje" Height="32" Padding="0" FontSize="12" BorderBrush="{x:Null}" Foreground="White" Background="#FF303030" Margin="0" VerticalAlignment="Top" DockPanel.Dock="Top" HorizontalAlignment="Center" Width="110"/>
+                <Button x:Name="sendMessageToPlayerButton" Content="{x:Static languages:Resource.Lobby_UserConnectedLobby_Sendmessage}" Height="32" Padding="0" FontSize="12" BorderBrush="{x:Null}" Foreground="White" Background="#FF303030" Margin="0" VerticalAlignment="Top" DockPanel.Dock="Top" HorizontalAlignment="Center" Width="110"/>
 
-                <Button Content="Expulsar jugador" Height="32" Padding="0" FontSize="12" BorderBrush="{x:Null}" Foreground="White" Background="#FF303030" Margin="0,10,0,0" VerticalAlignment="Center" DockPanel.Dock="Top" HorizontalAlignment="Center" Width="110"/>
+                <Button x:Name="kickPlayerButton" Content="{x:Static languages:Resource.Lobby_UserConnectedLobby_Kickplayer}" Height="32" Padding="0" FontSize="12" BorderBrush="{x:Null}" Foreground="White" Background="#FF303030" Margin="0,10,0,0" VerticalAlignment="Center" DockPanel.Dock="Top" HorizontalAlignment="Center" Width="110"/>
 
-                <Button Content="Reportar" Height="32" Padding="0" FontSize="12" BorderBrush="{x:Null}" Foreground="White" Background="#FF303030" Margin="0,10,0,0" VerticalAlignment="Center" DockPanel.Dock="Top" HorizontalAlignment="Center" Width="110"/>
+                <Button x:Name="reportPlayerButton" Content="{x:Static languages:Resource.Lobby_UserConnectedLobby_Reportplayer}" Height="32" Padding="0" FontSize="12" BorderBrush="{x:Null}" Foreground="White" Background="#FF303030" Margin="0,10,0,0" VerticalAlignment="Center" DockPanel.Dock="Top" HorizontalAlignment="Center" Width="110"/>
 
 
             </DockPanel>

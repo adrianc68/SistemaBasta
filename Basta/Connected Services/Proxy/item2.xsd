@@ -58,16 +58,16 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="RoomState" nillable="true" type="tns:RoomState" />
-  <xs:complexType name="ArrayOfPlayer">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="Player" nillable="true" type="tns:Player" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfPlayer" nillable="true" type="tns:ArrayOfPlayer" />
   <xs:complexType name="ArrayOfRoom">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="Room" nillable="true" type="tns:Room" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfRoom" nillable="true" type="tns:ArrayOfRoom" />
+  <xs:complexType name="ArrayOfPlayer">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Player" nillable="true" type="tns:Player" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPlayer" nillable="true" type="tns:ArrayOfPlayer" />
 </xs:schema>

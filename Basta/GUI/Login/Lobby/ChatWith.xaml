@@ -25,7 +25,7 @@
             </Grid.ColumnDefinitions>
             <Border BorderBrush="#FFBDBDBD" BorderThickness="0" Grid.ColumnSpan="2"/>
 
-            <TextBox x:Name="messageTextBox" materialDesign:HintAssist.Hint="Type something to send..."  materialDesign:HintAssist.IsFloating="True" FontFamily="Vice City Sans" HorizontalContentAlignment="Left" BorderThickness="0" Margin="25,0,0,0" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="0" SelectionBrush="#FF8D8D8D" CaretBrush="#FF57BF5C" Foreground="#FF8D8D8D" Grid.ColumnSpan="1" Height="64" FontSize="13"/>
+            <TextBox x:Name="messageTextBox" materialDesign:HintAssist.Hint="{x:Static languages:Resource.Chat_TextBox_SendMessage}"  materialDesign:HintAssist.IsFloating="True" FontFamily="Vice City Sans" HorizontalContentAlignment="Left" BorderThickness="0" Margin="25,0,0,0" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="0" SelectionBrush="#FF8D8D8D" CaretBrush="#FF57BF5C" Foreground="#FF8D8D8D" Grid.ColumnSpan="1" Height="64" FontSize="13"/>
 
 
             <materialDesign:PackIcon x:Name="sendMessageButton" Height="35" VerticalAlignment="Center" Width="35" HorizontalAlignment="Center" Kind="Send" Margin="0" Grid.Column="1" Foreground="Black">

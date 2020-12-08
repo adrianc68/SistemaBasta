@@ -124,6 +124,15 @@ namespace Basta.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Escribe algo para enviar....
+        /// </summary>
+        public static string Chat_TextBox_SendMessage {
+            get {
+                return ResourceManager.GetString("Chat_TextBox_SendMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Usuarios conectados.
         /// </summary>
         public static string Chat_UsersConnected {
@@ -138,6 +147,15 @@ namespace Basta.Properties {
         public static string ChatTypePlayer {
             get {
                 return ResourceManager.GetString("ChatTypePlayer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Chatear.
+        /// </summary>
+        public static string Lobby_Button_Chat {
+            get {
+                return ResourceManager.GetString("Lobby_Button_Chat", resourceCulture);
             }
         }
         
@@ -228,6 +246,33 @@ namespace Basta.Properties {
         public static string Lobby_Label_Waitingfor {
             get {
                 return ResourceManager.GetString("Lobby_Label_Waitingfor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Expulsar jugador.
+        /// </summary>
+        public static string Lobby_UserConnectedLobby_Kickplayer {
+            get {
+                return ResourceManager.GetString("Lobby_UserConnectedLobby_Kickplayer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Reportar jugador.
+        /// </summary>
+        public static string Lobby_UserConnectedLobby_Reportplayer {
+            get {
+                return ResourceManager.GetString("Lobby_UserConnectedLobby_Reportplayer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Enviar mensaje.
+        /// </summary>
+        public static string Lobby_UserConnectedLobby_Sendmessage {
+            get {
+                return ResourceManager.GetString("Lobby_UserConnectedLobby_Sendmessage", resourceCulture);
             }
         }
         
@@ -732,6 +777,15 @@ namespace Basta.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a ¡La sala está llena!.
+        /// </summary>
+        public static string SystemGameFull {
+            get {
+                return ResourceManager.GetString("SystemGameFull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a ¡El código no coincide, revisalo!.
         /// </summary>
         public static string SystemInvalidCode {
@@ -795,6 +849,15 @@ namespace Basta.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a ¡Atención!.
+        /// </summary>
+        public static string SystemMessageTitle {
+            get {
+                return ResourceManager.GetString("SystemMessageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a ¡El correo electrónico no está registrado!.
         /// </summary>
         public static string SystemNoExistingEmail {
@@ -818,6 +881,15 @@ namespace Basta.Properties {
         public static string SystemPasswordNoMatch {
             get {
                 return ResourceManager.GetString("SystemPasswordNoMatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Has sido expulsado de la sala..
+        /// </summary>
+        public static string SystemPlayerKicked {
+            get {
+                return ResourceManager.GetString("SystemPlayerKicked", resourceCulture);
             }
         }
         

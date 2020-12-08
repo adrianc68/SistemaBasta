@@ -26,7 +26,7 @@
                 <StackPanel DockPanel.Dock="Top" Height="95" Background="#FF211E1E" Orientation="Horizontal" d:IsHidden="True"/>
                 <DockPanel Margin="0" VerticalAlignment="Bottom" Background="#FF211E1E">
                     <Label x:Name="countLabel" Content="{x:Static languages:Resource.Lobby_Label_Waitingfor}" Foreground="#DDFFFFFF" FontSize="36" Margin="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="96" Width="645"/>
-                    <Button Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="10" BorderThickness="2" Foreground="White" Content="Chatear" Width="220" Background="#FF2B2727" BorderBrush="#FF272626" Height="42" Click="ChatButtonClicked" Margin="0,27,25,27" DockPanel.Dock="Right" HorizontalAlignment="Right" VerticalAlignment="Center">
+                    <Button Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="10" BorderThickness="2" Foreground="White" Content="{x:Static languages:Resource.Lobby_Button_Chat}" Width="220" Background="#FF2B2727" BorderBrush="#FF272626" Height="42" Click="ChatButtonClicked" Margin="0,27,25,27" DockPanel.Dock="Right" HorizontalAlignment="Right" VerticalAlignment="Center">
                         <Button.Effect>
                             <DropShadowEffect/>
                         </Button.Effect>
@@ -47,7 +47,7 @@
                             </ImageBrush.RelativeTransform>
                         </ImageBrush>
                     </DockPanel.Background>
-                    <WrapPanel x:Name="playersWrapPanel" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="2,0,0,0">
+                    <WrapPanel x:Name="userConnectedLobbyWrapPanel" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="2,0,0,0">
                     </WrapPanel>
                 </DockPanel>
             </Grid>
@@ -220,7 +220,7 @@
                 </Grid.ColumnDefinitions>
                 <Border BorderBrush="#FFBDBDBD" BorderThickness="0" Grid.ColumnSpan="2" MinHeight="2"/>
 
-                <TextBox x:Name="messageTextBox" materialDesign:HintAssist.Hint="Type something to send..."  materialDesign:HintAssist.IsFloating="True" FontFamily="Vice City Sans" HorizontalContentAlignment="Left" BorderThickness="0" Margin="25,0,0,0" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="0" SelectionBrush="#FF8D8D8D" CaretBrush="#FF57BF5C" Foreground="#FF8D8D8D" Grid.ColumnSpan="1" Height="64" FontSize="13" KeyDown="MessageKeyPressed"/>
+                <TextBox x:Name="messageTextBox" materialDesign:HintAssist.Hint="{x:Static languages:Resource.Chat_TextBox_SendMessage}"  materialDesign:HintAssist.IsFloating="True" FontFamily="Vice City Sans" HorizontalContentAlignment="Left" BorderThickness="0" Margin="25,0,0,0" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="0" SelectionBrush="#FF8D8D8D" CaretBrush="#FF57BF5C" Foreground="#FF8D8D8D" Grid.ColumnSpan="1" Height="64" FontSize="13" KeyDown="MessageKeyPressed"/>
 
 
                 <materialDesign:PackIcon Height="35" VerticalAlignment="Center" Width="35" HorizontalAlignment="Center" Kind="Send" MouseLeftButtonDown="SendMessageButtonClicked" Margin="0" Grid.Column="1">

@@ -126,6 +126,12 @@
   <wsdl:message name="ILoginService_LogOut_OutputMessage">
     <wsdl:part name="parameters" element="tns:LogOutResponse" />
   </wsdl:message>
+  <wsdl:message name="ILoginService_BanPlayer_InputMessage">
+    <wsdl:part name="parameters" element="tns:BanPlayer" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_BanPlayer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:BanPlayerResponse" />
+  </wsdl:message>
   <wsdl:message name="IRoomService_CreateRoom_InputMessage">
     <wsdl:part name="parameters" element="tns:CreateRoom" />
   </wsdl:message>
@@ -150,20 +156,17 @@
   <wsdl:message name="IRoomService_SendMessageRoomChatToPlayer_InputMessage">
     <wsdl:part name="parameters" element="tns:SendMessageRoomChatToPlayer" />
   </wsdl:message>
-  <wsdl:message name="IRoomService_GetConnectedUsersFromRoom_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetConnectedUsersFromRoom" />
-  </wsdl:message>
-  <wsdl:message name="IRoomService_GetConnectedUsersFromRoom_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetConnectedUsersFromRoomResponse" />
-  </wsdl:message>
   <wsdl:message name="IRoomService_GetRooms_InputMessage">
     <wsdl:part name="parameters" element="tns:GetRooms" />
   </wsdl:message>
-  <wsdl:message name="IRoomService_GetRooms_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetRoomsResponse" />
-  </wsdl:message>
   <wsdl:message name="IRoomService_UserDisconnectedFromRoom_InputMessage">
     <wsdl:part name="parameters" element="tns:UserDisconnectedFromRoom" />
+  </wsdl:message>
+  <wsdl:message name="IRoomService_KickPlayer_InputMessage">
+    <wsdl:part name="parameters" element="tns:KickPlayer" />
+  </wsdl:message>
+  <wsdl:message name="IRoomService_ReciveRoomsAvailable_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:ReciveRoomsAvailable" />
   </wsdl:message>
   <wsdl:message name="IRoomService_ReciveMessageFromPlayer_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:ReciveMessageFromPlayer" />
@@ -179,6 +182,18 @@
   </wsdl:message>
   <wsdl:message name="IRoomService_RoomDelected_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:RoomDelected" />
+  </wsdl:message>
+  <wsdl:message name="IRoomService_PlayerKicked_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:PlayerKicked" />
+  </wsdl:message>
+  <wsdl:message name="IRoomService_GameIsFull_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:GameIsFull" />
+  </wsdl:message>
+  <wsdl:message name="IRoomService_PlayersIsKicked_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:PlayersIsKicked" />
+  </wsdl:message>
+  <wsdl:message name="IRoomService_PlayerHasJoinToRoom_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:PlayerHasJoinToRoom" />
   </wsdl:message>
   <wsdl:portType name="ILoginService">
     <wsdl:operation name="Login">
@@ -213,6 +228,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/ILoginService/LogOut" message="tns:ILoginService_LogOut_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ILoginService/LogOutResponse" message="tns:ILoginService_LogOut_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="BanPlayer">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILoginService/BanPlayer" message="tns:ILoginService_BanPlayer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILoginService/BanPlayerResponse" message="tns:ILoginService_BanPlayer_OutputMessage" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IRoomService">
     <wsdl:operation name="CreateRoom">
@@ -235,16 +254,17 @@
     <wsdl:operation name="SendMessageRoomChatToPlayer">
       <wsdl:input wsaw:Action="http://tempuri.org/IRoomService/SendMessageRoomChatToPlayer" message="tns:IRoomService_SendMessageRoomChatToPlayer_InputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetConnectedUsersFromRoom">
-      <wsdl:input wsaw:Action="http://tempuri.org/IRoomService/GetConnectedUsersFromRoom" message="tns:IRoomService_GetConnectedUsersFromRoom_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IRoomService/GetConnectedUsersFromRoomResponse" message="tns:IRoomService_GetConnectedUsersFromRoom_OutputMessage" />
-    </wsdl:operation>
     <wsdl:operation name="GetRooms">
       <wsdl:input wsaw:Action="http://tempuri.org/IRoomService/GetRooms" message="tns:IRoomService_GetRooms_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IRoomService/GetRoomsResponse" message="tns:IRoomService_GetRooms_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="UserDisconnectedFromRoom">
       <wsdl:input wsaw:Action="http://tempuri.org/IRoomService/UserDisconnectedFromRoom" message="tns:IRoomService_UserDisconnectedFromRoom_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="KickPlayer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRoomService/KickPlayer" message="tns:IRoomService_KickPlayer_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ReciveRoomsAvailable">
+      <wsdl:output wsaw:Action="http://tempuri.org/IRoomService/ReciveRoomsAvailable" message="tns:IRoomService_ReciveRoomsAvailable_OutputCallbackMessage" />
     </wsdl:operation>
     <wsdl:operation name="ReciveMessageFromPlayer">
       <wsdl:output wsaw:Action="http://tempuri.org/IRoomService/ReciveMessageFromPlayer" message="tns:IRoomService_ReciveMessageFromPlayer_OutputCallbackMessage" />
@@ -260,6 +280,18 @@
     </wsdl:operation>
     <wsdl:operation name="RoomDelected">
       <wsdl:output wsaw:Action="http://tempuri.org/IRoomService/RoomDelected" message="tns:IRoomService_RoomDelected_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PlayerKicked">
+      <wsdl:output wsaw:Action="http://tempuri.org/IRoomService/PlayerKicked" message="tns:IRoomService_PlayerKicked_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GameIsFull">
+      <wsdl:output wsaw:Action="http://tempuri.org/IRoomService/GameIsFull" message="tns:IRoomService_GameIsFull_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PlayersIsKicked">
+      <wsdl:output wsaw:Action="http://tempuri.org/IRoomService/PlayersIsKicked" message="tns:IRoomService_PlayersIsKicked_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PlayerHasJoinToRoom">
+      <wsdl:output wsaw:Action="http://tempuri.org/IRoomService/PlayerHasJoinToRoom" message="tns:IRoomService_PlayerHasJoinToRoom_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_ILoginService" type="tns:ILoginService">
@@ -343,6 +375,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="BanPlayer">
+      <soap12:operation soapAction="http://tempuri.org/ILoginService/BanPlayer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="NetTcpBinding_IRoomService" type="tns:IRoomService">
     <wsp:PolicyReference URI="#NetTcpBinding_IRoomService_policy" />
@@ -389,29 +430,29 @@
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
-    <wsdl:operation name="GetConnectedUsersFromRoom">
-      <soap12:operation soapAction="http://tempuri.org/IRoomService/GetConnectedUsersFromRoom" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="GetRooms">
       <soap12:operation soapAction="http://tempuri.org/IRoomService/GetRooms" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="UserDisconnectedFromRoom">
       <soap12:operation soapAction="http://tempuri.org/IRoomService/UserDisconnectedFromRoom" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="KickPlayer">
+      <soap12:operation soapAction="http://tempuri.org/IRoomService/KickPlayer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="ReciveRoomsAvailable">
+      <soap12:operation soapAction="http://tempuri.org/IRoomService/ReciveRoomsAvailable" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="ReciveMessageFromPlayer">
       <soap12:operation soapAction="http://tempuri.org/IRoomService/ReciveMessageFromPlayer" style="document" />
@@ -439,6 +480,30 @@
     </wsdl:operation>
     <wsdl:operation name="RoomDelected">
       <soap12:operation soapAction="http://tempuri.org/IRoomService/RoomDelected" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PlayerKicked">
+      <soap12:operation soapAction="http://tempuri.org/IRoomService/PlayerKicked" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GameIsFull">
+      <soap12:operation soapAction="http://tempuri.org/IRoomService/GameIsFull" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PlayersIsKicked">
+      <soap12:operation soapAction="http://tempuri.org/IRoomService/PlayersIsKicked" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PlayerHasJoinToRoom">
+      <soap12:operation soapAction="http://tempuri.org/IRoomService/PlayerHasJoinToRoom" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>

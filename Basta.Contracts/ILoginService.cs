@@ -31,6 +31,10 @@ namespace Basta.Contracts {
         [OperationContract]
         void LogOut( Player player );
 
+        [OperationContract]
+        bool BanPlayer(Player player);
+
+
     }
 
 }
