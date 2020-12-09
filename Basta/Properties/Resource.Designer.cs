@@ -507,7 +507,7 @@ namespace Basta.Properties {
         ///&lt;div style=\border-style:solid;border-color:#323232;border-width:1px 1px 1px 1px;text-align:justify;background-color:#f8f8f8;width:80% !important;height:80% !important;padding:3% 3% 3% 3%;\&gt;
         ///      &lt;h1 style=\color:#8a8a8a;font-family:sans-serif;text-align:left;\&gt; Recuperación de contraseña &lt;/h1&gt;
         ///      &lt;p style=\font-family:sans-serif;\&gt; Recibimos una solicitud para restablecer tu contraseña del &lt;b&gt;Sistema Basta&lt;/b&gt;&lt;/p&gt;
-        ///      &lt;p style=\font-family:sans-serif;\&gt; Ingresa el siguiente código  [resto de la cadena truncado]&quot;;.
+        ///      &lt;p style=\font-family:sans-serif;\&gt; Ingresa el siguiente código en el [resto de la cadena truncado]&quot;;.
         /// </summary>
         public static string recoveryPassword_Message_Contenthtml {
             get {
@@ -795,6 +795,15 @@ namespace Basta.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a ¡Alerta!.
+        /// </summary>
+        public static string SystemMessageTitle {
+            get {
+                return ResourceManager.GetString("SystemMessageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a ¡El correo electrónico no está registrado!.
         /// </summary>
         public static string SystemNoExistingEmail {
@@ -818,6 +827,15 @@ namespace Basta.Properties {
         public static string SystemPasswordNoMatch {
             get {
                 return ResourceManager.GetString("SystemPasswordNoMatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a ¡Has sido expulsado de la sala!.
+        /// </summary>
+        public static string SystemPlayerKicked {
+            get {
+                return ResourceManager.GetString("SystemPlayerKicked", resourceCulture);
             }
         }
         

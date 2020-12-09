@@ -370,6 +370,9 @@
   <data name="SystemLostConnection" xml:space="preserve">
     <value>A problem was registered with the database!</value>
   </data>
+  <data name="SystemMessageTitle" xml:space="preserve">
+    <value>Warning!</value>
+  </data>
   <data name="SystemNoExistingEmail" xml:space="preserve">
     <value>The email is not registered!</value>
   </data>
@@ -378,6 +381,9 @@
   </data>
   <data name="SystemPasswordNoMatch" xml:space="preserve">
     <value>Passwords don't match!</value>
+  </data>
+  <data name="SystemPlayerKicked" xml:space="preserve">
+    <value>You have been kicked.</value>
   </data>
   <data name="SystemServerNotFound" xml:space="preserve">
     <value>Server has not started</value>

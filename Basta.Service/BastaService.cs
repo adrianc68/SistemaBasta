@@ -132,9 +132,29 @@ namespace Basta.Service {
         }
 
 
-        public List<Player> GetConnectedUsers() {
-            throw new NotImplementedException();
+        Dictionary<string, List<string>> userKickedFromRoom = new Dictionary<string, List<string>>();
+
+
+        public void KickPlayer( Player player, Room room ) {
+            foreach ( var other in usersRoom[room] ) {
+                if ( other.Value.Email == player.Email ) {
+                    other.Key.PlayerKicked();
+                    if ( !userKickedFromRoom.ContainsKey( room.Code ) ) {
+                        userKickedFromRoom.Add( room.Code, new List<String>() );
+                    }
+                    userKickedFromRoom[room.Code].Add( player.Email );
+                } else {
+                    other.Key.PlayerDisconnected( player );
+                }
+            }
+            foreach ( var other in usersRoom[room] ) {
+                if ( other.Value.Email == player.Email ) {
+                    usersRoom[room].Remove( other.Key );
+                    break;
+                }
+            }
         }
+
 
         /*
          * 

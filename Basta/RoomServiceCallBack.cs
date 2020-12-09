@@ -29,7 +29,11 @@ namespace Basta {
         }
 
         public void RoomDelected( Room room ) {
-            LobbyWindow.RoomDelected( room );
+            LobbyWindow.RoomDelected();
+        }
+
+        public void PlayerKicked() {
+            LobbyWindow.PlayerWasKicked();
         }
 
     }

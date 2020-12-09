@@ -1,4 +1,5 @@
 ﻿
+using Database.DAO;
 using System;
 using System.ServiceModel;
 using System.ServiceModel.Description;
@@ -12,9 +13,18 @@ namespace Basta.Service {
                 Console.WriteLine( $"{host.Description.Name} is up and listening on the URI given below. Press <enter> to exit." );
                 PrintServiceInfo( host.Description );
                 Console.ReadLine();
+                DeleteRooms();
                 host.Close();
             }
         }
+
+        private static void DeleteRooms() {
+            RoomDAO roomDAO = new RoomDAO();
+            foreach ( var room in roomDAO.GetRooms() ) {
+                roomDAO.DeleteRoom( room );
+            }
+        }
+
 
         private static void PrintServiceInfo( ServiceDescription desc ) {
             foreach ( ServiceEndpoint nextEndpoint in desc.Endpoints ) {

@@ -96,5 +96,25 @@ namespace Database.DAO {
             }
             return roomsAvailable;
         }
+
+        public List<Domain.Domain.Room> GetRooms() {
+            List<Domain.Domain.Room> rooms = null;
+            using ( BastaEntityModelContainer database = new BastaEntityModelContainer() ) {
+                var room = database.Rooms.ToList();
+                rooms = new List<Domain.Domain.Room>();
+                foreach ( var roomDatabase in room ) {
+                    Domain.Domain.Room roomDomain = new Domain.Domain.Room();
+                    roomDomain.Code = roomDatabase.code;
+                    roomDomain.RoomConfiguration = new Domain.Domain.RoomConfiguration();
+                    roomDomain.RoomConfiguration.Code = roomDatabase.code;
+                    roomDomain.RoomConfiguration.PlayerLimit = roomDatabase.RoomConfiguration.playerLimit;
+                    roomDomain.RoomConfiguration.RoomState = (Domain.Domain.RoomState) roomDatabase.RoomConfiguration.roomState;
+                    roomDomain.RoomConfiguration.Room = roomDomain;
+                    rooms.Add( roomDomain );
+                }
+            }
+            return rooms;
+        }
+
     }
 }

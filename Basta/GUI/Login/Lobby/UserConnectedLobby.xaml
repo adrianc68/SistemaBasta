@@ -18,9 +18,9 @@
             </DockPanel>
 
             <DockPanel Grid.Row="1" Margin="0" LastChildFill="False">
-                <Button Content="Enviar mensaje" Height="32" Padding="0" FontSize="12" BorderBrush="{x:Null}" Foreground="White" Background="#FF303030" Margin="0" VerticalAlignment="Top" DockPanel.Dock="Top" HorizontalAlignment="Center" Width="110"/>
+                <Button x:Name="sendMessageToPlayerButton" Content="Enviar mensaje" Height="32" Padding="0" FontSize="12" BorderBrush="{x:Null}" Foreground="White" Background="#FF303030" Margin="0" VerticalAlignment="Top" DockPanel.Dock="Top" HorizontalAlignment="Center" Width="110"/>
 
-                <Button Content="Expulsar jugador" Height="32" Padding="0" FontSize="12" BorderBrush="{x:Null}" Foreground="White" Background="#FF303030" Margin="0,10,0,0" VerticalAlignment="Center" DockPanel.Dock="Top" HorizontalAlignment="Center" Width="110"/>
+                <Button x:Name="kickPlayerButton" Content="Expulsar jugador" Height="32" Padding="0" FontSize="12" BorderBrush="{x:Null}" Foreground="White" Background="#FF303030" Margin="0,10,0,0" VerticalAlignment="Center" DockPanel.Dock="Top" HorizontalAlignment="Center" Width="110"/>
 
                 <Button Content="Reportar" Height="32" Padding="0" FontSize="12" BorderBrush="{x:Null}" Foreground="White" Background="#FF303030" Margin="0,10,0,0" VerticalAlignment="Center" DockPanel.Dock="Top" HorizontalAlignment="Center" Width="110"/>
 

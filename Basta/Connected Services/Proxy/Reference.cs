@@ -193,6 +193,12 @@ namespace Basta.Proxy {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRoomService/UserDisconnectedFromRoom")]
         System.Threading.Tasks.Task UserDisconnectedFromRoomAsync(Domain.Domain.Player player, Domain.Domain.Room room);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRoomService/KickPlayer")]
+        void KickPlayer(Domain.Domain.Player player, Domain.Domain.Room room);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRoomService/KickPlayer")]
+        System.Threading.Tasks.Task KickPlayerAsync(Domain.Domain.Player player, Domain.Domain.Room room);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -212,6 +218,9 @@ namespace Basta.Proxy {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRoomService/RoomDelected")]
         void RoomDelected(Domain.Domain.Room room);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRoomService/PlayerKicked")]
+        void PlayerKicked();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -312,6 +321,14 @@ namespace Basta.Proxy {
         
         public System.Threading.Tasks.Task UserDisconnectedFromRoomAsync(Domain.Domain.Player player, Domain.Domain.Room room) {
             return base.Channel.UserDisconnectedFromRoomAsync(player, room);
+        }
+        
+        public void KickPlayer(Domain.Domain.Player player, Domain.Domain.Room room) {
+            base.Channel.KickPlayer(player, room);
+        }
+        
+        public System.Threading.Tasks.Task KickPlayerAsync(Domain.Domain.Player player, Domain.Domain.Room room) {
+            return base.Channel.KickPlayerAsync(player, room);
         }
     }
 }

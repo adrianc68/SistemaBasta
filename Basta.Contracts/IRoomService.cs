@@ -32,6 +32,9 @@ namespace Basta.Contracts {
         [OperationContract( IsOneWay = true )]
         void UserDisconnectedFromRoom( Player player, Room room );
 
+        [OperationContract( IsOneWay = true )]
+        void KickPlayer( Player player, Room room );
+
     }
 
     [ServiceContract]
@@ -50,6 +53,9 @@ namespace Basta.Contracts {
 
         [OperationContract( IsOneWay = true )]
         void RoomDelected(Room room);
+
+        [OperationContract( IsOneWay = true )]
+        void PlayerKicked();
 
     }
 
