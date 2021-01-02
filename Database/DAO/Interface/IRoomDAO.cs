@@ -15,5 +15,7 @@ namespace Database.DAO.Interface {
         bool VerifyExistingRoom( string code );
 
         List<Domain.Domain.Room> GetRooms();
+
+        Domain.Domain.Room GetRoomByCode( string code );
     }
 }

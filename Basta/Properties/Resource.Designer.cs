@@ -732,6 +732,15 @@ namespace Basta.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a ¡La sala está llena!.
+        /// </summary>
+        public static string SystemGameFull {
+            get {
+                return ResourceManager.GetString("SystemGameFull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a ¡El código no coincide, revisalo!.
         /// </summary>
         public static string SystemInvalidCode {
@@ -836,6 +845,15 @@ namespace Basta.Properties {
         public static string SystemPlayerKicked {
             get {
                 return ResourceManager.GetString("SystemPlayerKicked", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a ¡No se encontró la sala!.
+        /// </summary>
+        public static string SystemRoomNotFound {
+            get {
+                return ResourceManager.GetString("SystemRoomNotFound", resourceCulture);
             }
         }
         

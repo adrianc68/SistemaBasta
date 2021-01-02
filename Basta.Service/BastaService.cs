@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ServiceModel;
 
 namespace Basta.Service {
-    [ServiceBehavior( ConcurrencyMode = ConcurrencyMode.Reentrant, InstanceContextMode = InstanceContextMode.Single )]
+    [ServiceBehavior( ConcurrencyMode = ConcurrencyMode.Multiple, InstanceContextMode = InstanceContextMode.Single, UseSynchronizationContext = false )]
     public class BastaService: ILoginService, IRoomService {
         Dictionary<Room, Dictionary<IRoomClient, Player>> usersRoom = new Dictionary<Room, Dictionary<IRoomClient, Player>>( new Room.EqualityComparer() );
         HashSet<Player> playersConnected = new HashSet<Player>( new Player.EqualityComparer() );
@@ -29,6 +29,16 @@ namespace Basta.Service {
                 throw;
             }
             return rooms;
+        }
+
+        public Room GetRoomByCode( string code ) {
+            Room room = null;
+            try {
+                room = new RoomDAO().GetRoomByCode( code );
+            } catch ( FaultException ) {
+                throw;
+            }
+            return room;
         }
 
         public void SetUpRoom() {
@@ -64,16 +74,6 @@ namespace Basta.Service {
             }
         }
 
-        public void UserDisconnectedFromRoom( Player player, Room room ) {
-            var connection = OperationContext.Current.GetCallbackChannel<IRoomClient>();
-            if ( !usersRoom[room].TryGetValue( connection, out player ) )
-                return;
-            foreach ( var other in usersRoom[room].Keys ) {
-                other.PlayerDisconnected( player );
-            }
-            usersRoom[room].Remove( connection );
-        }
-
         public void DeleteRoom( Room room ) {
 
             if ( usersRoom.ContainsKey( room ) ) {
@@ -97,15 +97,47 @@ namespace Basta.Service {
 
         public void JoinRoom( Player player, Room room ) {
             var connection = OperationContext.Current.GetCallbackChannel<IRoomClient>();
-            usersRoom[room][connection] = player;
+            if ( !isPlayerKickedFromRoom( player, room ) ) {
+                if ( usersRoom[room].Count != room.RoomConfiguration.PlayerLimit ) {
+                    usersRoom[room][connection] = player;
+                    foreach ( var other in usersRoom[room].Keys ) {
+                        if ( other == connection )
+                            connection.Join();
+                        other.PlayerConnected( player );
+                    }
+                } else {
+                    connection.GameIsFull();
+                }
+            } else {
+                connection.PlayerKicked();
+            }
+        }
+
+        private bool isPlayerKickedFromRoom( Player player, Room room ) {
+            bool isKicked = false;
+            if ( userKickedFromRoom.ContainsKey( room.Code ) ) {
+                foreach ( var playerInList in userKickedFromRoom[room.Code] ) {
+                    if ( playerInList.Equals( player.Email ) ) {
+                        isKicked = true;
+                        break;
+                    }
+                }
+            }
+            return isKicked;
+        }
+
+        public void UserDisconnectedFromRoom( Player player, Room room ) {
+            var connection = OperationContext.Current.GetCallbackChannel<IRoomClient>();
             if ( !usersRoom[room].TryGetValue( connection, out player ) )
                 return;
             foreach ( var other in usersRoom[room].Keys ) {
-                if ( other == connection )
-                    continue;
-                other.PlayerConnected( player );
+                if ( connection == other )
+                    connection.YouHaveDisconnected();
+                other.PlayerDisconnected( player );
             }
+            usersRoom[room].Remove( connection );
         }
+
 
         public List<Player> GetConnectedUsersFromRoom( Room room ) {
             var connection = OperationContext.Current.GetCallbackChannel<IRoomClient>();
@@ -238,6 +270,7 @@ namespace Basta.Service {
             }
             return isMessageSent;
         }
+
 
     }
 

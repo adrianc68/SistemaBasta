@@ -1,4 +1,5 @@
 ﻿using Basta.GUI.Login.Lobby;
+using Basta.GUI.Login.Main;
 using Domain.Domain;
 using System;
 using System.Collections.Generic;
@@ -8,9 +9,11 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
 
+
 namespace Basta {
     public class RoomServiceCallBack: Proxy.IRoomServiceCallback {
         public LobbyWindow LobbyWindow { get; set; }
+        public MainWindow MainWindow { get; set; }
 
         public void PlayerConnected( Player player ) {
             LobbyWindow.AddPlayerToGUI( player );
@@ -36,5 +39,20 @@ namespace Basta {
             LobbyWindow.PlayerWasKicked();
         }
 
+        public void Join() {
+            MainWindow.Join();
+        }
+
+        public void YouHaveDisconnected() {
+            LobbyWindow.RoomDelected();
+        }
+
+        public void GameIsFull() {
+            MainWindow.GameIsFull();
+        }
+
+        public void PlayerAlreadyKicked() {
+            MainWindow.PlayerKicked();
+        }
     }
 }

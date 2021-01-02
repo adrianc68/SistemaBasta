@@ -15,7 +15,8 @@ namespace Basta.GUI.Login.Main {
     /// </summary>
     public partial class MainWindow: Window {
 
-        Autentication autentication;
+        private Autentication autentication;
+        private Player[] playersInRoom;
 
         public MainWindow() {
             InitializeComponent();
@@ -23,32 +24,44 @@ namespace Basta.GUI.Login.Main {
             autentication.RoomServiceCallBack = new RoomServiceCallBack();
             InstanceContext context = new InstanceContext( Autentication.GetInstance().RoomServiceCallBack );
             autentication.RoomServer = new Proxy.RoomServiceClient( context );
+            autentication.RoomServiceCallBack.MainWindow = this;
         }
 
-        private void PlayButtonClicked( object sender, RoutedEventArgs e ) {
-            selectStackPanel.Visibility = Visibility.Visible;
-            GetRoomsFromServer();
+        public void GameIsFull() {
+            MessageBoxResult kickedMessage = MessageBox.Show( Properties.Resource.SystemGameFull, Properties.Resource.SystemGameFull, MessageBoxButton.OK, MessageBoxImage.Error );
+        }
+
+        public void PlayerKicked() {
+            MessageBoxResult kickedMessage = MessageBox.Show( Properties.Resource.SystemPlayerKicked, Properties.Resource.SystemPlayerKicked, MessageBoxButton.OK, MessageBoxImage.Error );
         }
 
         private void JoinToRoomButtonClicked( object sender, RoutedEventArgs e ) {
             Room selectedRoom = (Room) roomsListView.SelectedItem;
             if ( selectedRoom != null ) {
-                try {
-                    Autentication.GetInstance().RoomServer.JoinRoom( Autentication.GetInstance().Player, selectedRoom );
-                    selectStackPanel.Visibility = Visibility.Hidden;
-                    Hide();
-                    autentication.RoomServiceCallBack.LobbyWindow = new LobbyWindow( selectedRoom );
-                    autentication.RoomServiceCallBack.LobbyWindow.AddPlayerToGUI( Autentication.GetInstance().Player );
-                    autentication.RoomServiceCallBack.LobbyWindow.AddPlayersConnectedToGUI( autentication.RoomServer.GetConnectedUsersFromRoom( selectedRoom ) );
-                    autentication.RoomServiceCallBack.LobbyWindow.ShowDialog();
-                    ShowDialog();
-                } catch ( FaultException eka ) {
-                    Console.WriteLine( eka.ToString() );
+                ExecuteJoinRoomMethodServer( selectedRoom );
+            } else if ( roomCodeTextField.Text.Length > 0 ) {
+                selectedRoom = Autentication.GetInstance().RoomServer.GetRoomByCode( roomCodeTextField.Text );
+                if ( selectedRoom != null ) {
+                    ExecuteJoinRoomMethodServer( selectedRoom );
+                } else {
+                    MessageBoxResult kickedMessage = MessageBox.Show( Properties.Resource.SystemRoomNotFound, Properties.Resource.SystemMessageTitle, MessageBoxButton.OK, MessageBoxImage.Error );
                 }
-                selectStackPanel.Visibility = Visibility.Hidden;
-                createRoomStackPanel.Visibility = Visibility.Hidden;
             }
+        }
 
+        private void ExecuteJoinRoomMethodServer( Room selectedRoom ) {
+            playersInRoom = autentication.RoomServer.GetConnectedUsersFromRoom( selectedRoom );
+            Autentication.GetInstance().RoomServer.JoinRoom( Autentication.GetInstance().Player, selectedRoom );
+            selectStackPanel.Visibility = Visibility.Hidden;
+            createRoomStackPanel.Visibility = Visibility.Hidden;
+        }
+
+        public void Join() {
+            Room selectedRoom = (Room) roomsListView.SelectedItem;
+            autentication.RoomServiceCallBack.LobbyWindow = new LobbyWindow( selectedRoom );
+            autentication.RoomServiceCallBack.LobbyWindow.AddPlayerToGUI( Autentication.GetInstance().Player );
+            autentication.RoomServiceCallBack.LobbyWindow.AddPlayersConnectedToGUI( playersInRoom );
+            autentication.RoomServiceCallBack.LobbyWindow.Show();
         }
 
         private void CreateConfiguredRoomButtonClicked( object sender, RoutedEventArgs e ) {
@@ -56,21 +69,36 @@ namespace Basta.GUI.Login.Main {
             room.RoomConfiguration = new RoomConfiguration();
             room.RoomConfiguration.PlayerLimit = (int) personLimitComboBox.SelectedItem;
             room.RoomConfiguration.RoomState = RoomState.PUBLIC;
-            try {
-                room.Code = Autentication.GetInstance().RoomServer.CreateRoom( Autentication.GetInstance().Player, room );
-                room.RoomConfiguration.Code = room.Code;
-            } catch ( FaultException ) {
-                Console.WriteLine( "Unable to create room" );
-            }
+            room.Code = Autentication.GetInstance().RoomServer.CreateRoom( Autentication.GetInstance().Player, room );
+            room.RoomConfiguration.Code = room.Code;
             if ( room.Code != null ) {
+                Hide();
                 selectStackPanel.Visibility = Visibility.Hidden;
                 createRoomStackPanel.Visibility = Visibility.Hidden;
-                Hide();
                 autentication.RoomServiceCallBack.LobbyWindow = new LobbyWindow( room );
                 autentication.RoomServiceCallBack.LobbyWindow.AddPlayerToGUI( Autentication.GetInstance().Player );
                 autentication.RoomServiceCallBack.LobbyWindow.ShowDialog();
                 ShowDialog();
             }
+        }
+
+        private void GetRoomsFromServer() {
+            roomsListView.Items.Clear();
+            foreach ( var room in autentication.RoomServer.GetRooms() ) {
+                roomsListView.Items.Add( room );
+            }
+        }
+
+        private void MainClosed( object sender, EventArgs e ) {
+            if ( Autentication.GetInstance().Player != null ) {
+                autentication.LoginServer.LogOut( Autentication.GetInstance().Player );
+                Autentication.GetInstance().LogOut();
+            }
+        }
+
+        private void PlayButtonClicked( object sender, RoutedEventArgs e ) {
+            selectStackPanel.Visibility = Visibility.Visible;
+            GetRoomsFromServer();
         }
 
         private void CancelCreateRoomButtonClicked( object sender, RoutedEventArgs e ) {
@@ -102,17 +130,6 @@ namespace Basta.GUI.Login.Main {
             autentication.LoginServer.LogOut( Autentication.GetInstance().Player );
             Autentication.GetInstance().LogOut();
             Close();
-        }
-
-        private void GetRoomsFromServer() {
-            roomsListView.Items.Clear();
-            try {
-                foreach ( var room in autentication.RoomServer.GetRooms() ) {
-                    roomsListView.Items.Add( room );
-                }
-            } catch ( FaultException e ) {
-                Console.WriteLine( e );
-            }
         }
 
         private void GameLimitComboBoxLoaded( object sender, RoutedEventArgs e ) {
@@ -157,12 +174,6 @@ namespace Basta.GUI.Login.Main {
             combo.SelectedIndex = 0;
         }
 
-        private void MainClosed( object sender, EventArgs e ) {
-            if ( Autentication.GetInstance().Player != null ) {
-                autentication.LoginServer.LogOut( Autentication.GetInstance().Player );
-                Autentication.GetInstance().LogOut();
-            }
-        }
     }
 
 }

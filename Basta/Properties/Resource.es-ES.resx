@@ -349,6 +349,9 @@
   <data name="SystemFatalError" xml:space="preserve">
     <value>¡Ha ocurrido un error y se ha registrado en un archivo!</value>
   </data>
+  <data name="SystemGameFull" xml:space="preserve">
+    <value>¡La sala está llena!</value>
+  </data>
   <data name="SystemInvalidCode" xml:space="preserve">
     <value>¡El código no coincide, revisalo!</value>
   </data>
@@ -384,6 +387,9 @@
   </data>
   <data name="SystemPlayerKicked" xml:space="preserve">
     <value>¡Has sido expulsado de la sala!</value>
+  </data>
+  <data name="SystemRoomNotFound" xml:space="preserve">
+    <value>¡No se encontró la sala!</value>
   </data>
   <data name="SystemServerNotFound" xml:space="preserve">
     <value>El servidor aún no ha iniciado.</value>

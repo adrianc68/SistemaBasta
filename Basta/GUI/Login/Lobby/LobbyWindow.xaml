@@ -7,10 +7,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="LobbyWindow" Height="639" Width="956.4" WindowStartupLocation="CenterScreen" Closed="OnCloseWindow">
-    <Grid>
-        <Grid.Background>
-            <ImageBrush ImageSource="/Basta;component/GUI/Images/recoveryPassword.png" Stretch="Uniform"/>
-        </Grid.Background>
+    <Grid Background="Black">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition Width="0*"/>
@@ -24,28 +21,21 @@
 
             <Grid Margin="0">
                 <StackPanel DockPanel.Dock="Top" Height="95" Background="#FF211E1E" Orientation="Horizontal" d:IsHidden="True"/>
-                <DockPanel Margin="0" VerticalAlignment="Bottom" Background="#FF211E1E">
-                    <Label x:Name="countLabel" Content="{x:Static languages:Resource.Lobby_Label_Waitingfor}" Foreground="#DDFFFFFF" FontSize="36" Margin="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="96" Width="645"/>
-                    <Button Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="10" BorderThickness="2" Foreground="White" Content="Chatear" Width="220" Background="#FF2B2727" BorderBrush="#FF272626" Height="42" Click="ChatButtonClicked" Margin="0,27,25,27" DockPanel.Dock="Right" HorizontalAlignment="Right" VerticalAlignment="Center">
+                <DockPanel Margin="0" VerticalAlignment="Bottom" Background="#FFEEEEEE">
+                    <Label x:Name="countLabel" Content="{x:Static languages:Resource.Lobby_Label_Waitingfor}" Foreground="#DD535353" FontSize="32" Margin="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="96" Width="645" Background="{x:Null}" FontFamily="Vice City Sans"/>
+                    <Button Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="10" BorderThickness="1" Foreground="#FFA0A0A0" BorderBrush="#FF895151" Height="Auto" Click="ChatButtonClicked" Margin="0,0,25,0" DockPanel.Dock="Right" HorizontalAlignment="Right" VerticalAlignment="Center" Background="{x:Null}" FontFamily="Vice City Sans" FontWeight="Normal" ToolTip="Chatear">
                         <Button.Effect>
-                            <DropShadowEffect/>
+                            <DropShadowEffect Color="#FFF1DBDB"/>
                         </Button.Effect>
+                        <materialDesign:PackIcon Kind="ChatTyping" Width="45" Height="45" BorderThickness="0" Foreground="#FF56B248"/>
+
                     </Button>
                 </DockPanel>
             </Grid>
             <Grid Margin="0" RenderTransformOrigin="0.5,0.5" Grid.Row="1">
                 <DockPanel>
                     <DockPanel.Background>
-                        <ImageBrush ImageSource="/Basta;component/GUI/Images/palmera.png" TileMode="Tile" Stretch="Uniform">
-                            <ImageBrush.RelativeTransform>
-                                <TransformGroup>
-                                    <ScaleTransform CenterY="0.5" CenterX="0.5"/>
-                                    <SkewTransform CenterY="0.5" CenterX="0.5"/>
-                                    <RotateTransform CenterY="0.5" CenterX="0.5"/>
-                                    <TranslateTransform/>
-                                </TransformGroup>
-                            </ImageBrush.RelativeTransform>
-                        </ImageBrush>
+                        <ImageBrush/>
                     </DockPanel.Background>
                     <WrapPanel x:Name="playersWrapPanel" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="2,0,0,0">
                     </WrapPanel>
@@ -54,7 +44,7 @@
 
 
             <Grid Grid.Row="3">
-                <StackPanel DockPanel.Dock="Top" Height="232" Background="#FF211E1E" Margin="0">
+                <StackPanel DockPanel.Dock="Top" Height="232" Background="#FFEEEEEE" Margin="0">
                     <Grid Margin="0,25,0,0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -63,25 +53,25 @@
                         </Grid.ColumnDefinitions>
                         <Grid Grid.Column="0">
                             <StackPanel Margin="25,0,15,0" VerticalAlignment="Center">
-                                <Label Content="{x:Static languages:Resource.Lobby_Label_Roomsettings}" Foreground="#DDF0EDED" Margin="0,0,0,-5" Background="#FF363636"/>
-                                <Border BorderThickness="2,0,2,2" BorderBrush="#FF363636" Padding="15" Margin="0,-5,0,0">
+                                <Label Content="{x:Static languages:Resource.Lobby_Label_Roomsettings}" Foreground="#FFAEAEAE" Margin="0,0,0,-5" Background="Black" FontSize="15" FontFamily="Vice City Sans"/>
+                                <Border BorderThickness="1,0,1,1" Padding="15" Margin="0,-5,0,0" BorderBrush="#FFB2AAAA">
                                     <StackPanel>
                                         <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
-                                            <TextBlock Foreground="#FF858585" TextAlignment="Left" Padding="0,0,0,5" UseLayoutRounding="False" FontFamily="Segoe UI Light" Height="25" Text="{x:Static languages:Resource.Lobby_Label_Playerslimit}" FontSize="16" TextDecorations="{x:Null}"/>
-                                            <TextBlock x:Name="playersLimitLabel" Foreground="#FF858585" TextAlignment="Left" Padding="0,0,0,5" UseLayoutRounding="False" FontFamily="Segoe UI Light" Height="25" Text="5 ejemplo" FontSize="16" TextDecorations="{x:Null}"/>
+                                            <TextBlock Foreground="#FF858585" TextAlignment="Left" Padding="0,0,0,5" UseLayoutRounding="False" FontFamily="Vice City Sans" Height="25" Text="{x:Static languages:Resource.Lobby_Label_Playerslimit}" FontSize="14" TextDecorations="{x:Null}"/>
+                                            <TextBlock x:Name="playersLimitLabel" Foreground="#FF858585" TextAlignment="Left" Padding="0,0,0,5" UseLayoutRounding="False" FontFamily="Vice City Sans" Height="25" Text="5 ejemplo" FontSize="14" TextDecorations="{x:Null}"/>
                                         </StackPanel>
 
                                         <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
-                                            <TextBlock Foreground="#FF858585" TextAlignment="Left" Padding="0,0,0,5" UseLayoutRounding="False" FontFamily="Segoe UI Light" Height="25" Text="{x:Static languages:Resource.Lobby_Label_Roundslimit}" FontSize="16" TextDecorations="{x:Null}"/>
-                                            <TextBlock x:Name="roundsLimitLabel" Foreground="#FF858585" TextAlignment="Left" Padding="0,0,0,5" UseLayoutRounding="False" FontFamily="Segoe UI Light" Height="25" Text="5 ejemplo" FontSize="16" TextDecorations="{x:Null}"/>
+                                            <TextBlock Foreground="#FF858585" TextAlignment="Left" Padding="0,0,0,5" UseLayoutRounding="False" FontFamily="Vice City Sans" Height="25" Text="{x:Static languages:Resource.Lobby_Label_Roundslimit}" FontSize="14" TextDecorations="{x:Null}"/>
+                                            <TextBlock x:Name="roundsLimitLabel" Foreground="#FF858585" TextAlignment="Left" Padding="0,0,0,5" UseLayoutRounding="False" FontFamily="Vice City Sans" Height="25" Text="5 ejemplo" FontSize="14" TextDecorations="{x:Null}"/>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
-                                            <TextBlock Foreground="#FF858585" TextAlignment="Left" Padding="0,0,0,5" UseLayoutRounding="False" FontFamily="Segoe UI Light" Height="25" Text="{x:Static languages:Resource.Lobby_Label_Roundstempo}" FontSize="16" TextDecorations="{x:Null}"/>
-                                            <TextBlock x:Name="roundTimeLabel" Foreground="#FF858585" TextAlignment="Left" Padding="0,0,0,5" UseLayoutRounding="False" FontFamily="Segoe UI Light" Height="25" Text="5 ejemplo" FontSize="16" TextDecorations="{x:Null}"/>
+                                            <TextBlock Foreground="#FF858585" TextAlignment="Left" Padding="0,0,0,5" UseLayoutRounding="False" FontFamily="Vice City Sans" Height="25" Text="{x:Static languages:Resource.Lobby_Label_Roundstempo}" FontSize="14" TextDecorations="{x:Null}"/>
+                                            <TextBlock x:Name="roundTimeLabel" Foreground="#FF858585" TextAlignment="Left" Padding="0,0,0,5" UseLayoutRounding="False" FontFamily="Vice City Sans" Height="25" Text="5 ejemplo" FontSize="14" TextDecorations="{x:Null}"/>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
-                                            <TextBlock Foreground="#FFFF0606" TextAlignment="Left" Padding="0,0,0,5" UseLayoutRounding="False" FontFamily="Segoe UI Light" Height="25" Text="{x:Static languages:Resource.Lobby_Label_Roomcode}" FontSize="16" TextDecorations="{x:Null}"/>
-                                            <TextBlock x:Name="roomCodeLabel" Foreground="#FF858585" TextAlignment="Left" Padding="0,0,0,5" UseLayoutRounding="False" FontFamily="Segoe UI Light" Height="25" Text="5 ejemplo" FontSize="16" TextDecorations="{x:Null}"/>
+                                            <TextBlock Foreground="#FFFF0606" TextAlignment="Left" Padding="0,0,0,5" UseLayoutRounding="False" FontFamily="Vice City Sans" Height="25" Text="{x:Static languages:Resource.Lobby_Label_Roomcode}" FontSize="14" TextDecorations="{x:Null}"/>
+                                            <TextBlock x:Name="roomCodeLabel" Foreground="#FF858585" TextAlignment="Left" Padding="0,0,0,5" UseLayoutRounding="False" FontFamily="Vice City Sans" Height="25" Text="5 ejemplo" FontSize="14" TextDecorations="{x:Null}"/>
                                         </StackPanel>
                                     </StackPanel>
                                 </Border>
@@ -91,16 +81,16 @@
 
                         <Grid Grid.Column="1">
 
-                            <Button Content="{x:Static languages:Resource.Lobby_Button_Play}" Height="200" Padding="0" FontSize="30" BorderBrush="Black" Foreground="#FFE2E2E2" Background="Black" Width="200" Margin="0,-55,0,0" VerticalAlignment="Top">
+                            <Button Content="{x:Static languages:Resource.Lobby_Button_Play}" Height="200" Padding="0" FontSize="30" BorderBrush="Black" Foreground="#FF151515" Background="Black" Width="200" Margin="0,-55,0,0" VerticalAlignment="Top" FontFamily="Vice City Sans">
                                 <Button.Effect>
-                                    <DropShadowEffect Direction="278" ShadowDepth="3" BlurRadius="0"/>
+                                    <DropShadowEffect Direction="278" ShadowDepth="3" BlurRadius="0" Color="#FF9C9C9C"/>
                                 </Button.Effect>
                                 <Button.Template>
 
                                     <ControlTemplate TargetType="{x:Type Button}">
                                         <Grid>
 
-                                            <Ellipse Stroke="#FF211E1E" StrokeThickness="3">
+                                            <Ellipse Stroke="#FF6E6E6E" StrokeThickness="3">
 
                                                 <Ellipse.Style>
                                                     <Style TargetType="{x:Type Ellipse}">
@@ -108,12 +98,12 @@
 
 
                                                             <Trigger Property="IsMouseOver" Value="False">
-                                                                <Setter Property="Fill" Value="#FF211E1E">
+                                                                <Setter Property="Fill" Value="#FFEEEEEE">
                                                                 </Setter>
                                                             </Trigger>
 
                                                             <Trigger Property="IsMouseOver" Value="True">
-                                                                <Setter Property="Fill" Value="#FF493F3F">
+                                                                <Setter Property="Fill" Value="#FFB9C5FF">
                                                                 </Setter>
                                                             </Trigger>
                                                         </Style.Triggers>
@@ -136,23 +126,30 @@
 
                         <Grid  Grid.Column="2">
 
-                            <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,25,0">
-                                <Button Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="10" BorderThickness="2" Foreground="White" Content="{x:Static languages:Resource.Lobby_Button_Configureroom}" VerticalAlignment="Center" HorizontalAlignment="Center" Width="220" Background="#FF2B2727" BorderBrush="#FF272626" Height="42" Margin="0,0,0,15">
-                                    <Button.Effect>
-                                        <DropShadowEffect/>
-                                    </Button.Effect>
-                                </Button>
+                            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0">
+                                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                                    <Button Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="10" BorderThickness="1" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" Background="{x:Null}" BorderBrush="#FF553B3B" Height="Auto" Margin="0,0,5,0" ToolTip="Configurar sala">
+                                        <Button.Effect>
+                                            <DropShadowEffect Color="#FFF1DBDB"/>
+                                        </Button.Effect>
+                                        <materialDesign:PackIcon Kind="Settings" Width="45" Height="45" Foreground="#FF3C3C3C"/>
+                                    </Button>
 
-                                <Button Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="10" BorderThickness="2" Foreground="White" Content="{x:Static languages:Resource.Lobby_Button_Destroyroom}" VerticalAlignment="Center" HorizontalAlignment="Center" Width="220" Background="#FF2B2727" BorderBrush="#FF272626" Height="42" Margin="0,0,0,15" Click="DeleteRoomButtonClicked">
-                                    <Button.Effect>
-                                        <DropShadowEffect/>
-                                    </Button.Effect>
-                                </Button>
+                                    <Button Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="10" BorderThickness="1" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" Background="{x:Null}" BorderBrush="Black" Height="Auto" Margin="5,0,0,0" Click="DeleteRoomButtonClicked" ToolTip="Eliminar sala">
+                                        <Button.Effect>
+                                            <DropShadowEffect Color="#FFF1DBDB"/>
+                                        </Button.Effect>
+                                        <materialDesign:PackIcon Width="45" Height="45" Kind="BankRemove" Foreground="#FF873535"/>
+                                    </Button>
 
-                                <Button Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="10" BorderThickness="2" Foreground="White" Content="{x:Static languages:Resource.Lobby_Button_Exit}" VerticalAlignment="Center" HorizontalAlignment="Center" Width="220" Background="#FF2B2727" BorderBrush="#FF272626" Height="42" Click="ExitButtonClicked">
+                                </StackPanel>
+
+
+                                <Button Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="10" BorderThickness="1" Foreground="White" VerticalAlignment="Center" Background="{x:Null}" BorderBrush="Black" Height="Auto" Click="ExitButtonClicked" ToolTip="Salir de sala">
                                     <Button.Effect>
-                                        <DropShadowEffect/>
+                                        <DropShadowEffect Color="#FFF1DBDB"/>
                                     </Button.Effect>
+                                    <materialDesign:PackIcon Width="45" Height="45" Kind="ExitRun" Foreground="#FFDE1D1D"/>
                                 </Button>
                             </StackPanel>
                         </Grid>
@@ -162,7 +159,7 @@
         </Grid>
 
 
-        <Grid x:Name="chatGrid" Visibility="Hidden" Background="#FF262E38" Margin="75">
+        <Grid x:Name="chatGrid" Visibility="Hidden" Background="#FF545B64" Margin="75">
             <Grid.RowDefinitions>
                 <RowDefinition Height="197*"/>
                 <RowDefinition Height="32*"/>
@@ -218,7 +215,7 @@
                     <ColumnDefinition Width="85*"/>
                     <ColumnDefinition Width="18*"/>
                 </Grid.ColumnDefinitions>
-                <Border BorderBrush="#FFBDBDBD" BorderThickness="0" Grid.ColumnSpan="2" MinHeight="2"/>
+                <Border BorderBrush="#FFBDBDBD" BorderThickness="0,0,2,2" Grid.ColumnSpan="2" MinHeight="2"/>
 
                 <TextBox x:Name="messageTextBox" materialDesign:HintAssist.Hint="Type something to send..."  materialDesign:HintAssist.IsFloating="True" FontFamily="Vice City Sans" HorizontalContentAlignment="Left" BorderThickness="0" Margin="25,0,0,0" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="0" SelectionBrush="#FF8D8D8D" CaretBrush="#FF57BF5C" Foreground="#FF8D8D8D" Grid.ColumnSpan="1" Height="64" FontSize="13" KeyDown="MessageKeyPressed"/>
 
@@ -240,13 +237,13 @@
                 </materialDesign:PackIcon>
             </Grid>
             <DockPanel Grid.Column="2" Background="#F8F2F7F7" Grid.ColumnSpan="2">
-                <Border BorderBrush="#FFBDBDBD" BorderThickness="0,0,0,1" VerticalAlignment="Top" Height="92" DockPanel.Dock="Top">
+                <Border BorderBrush="#FFBDBDBD" BorderThickness="0,2,2,1" VerticalAlignment="Top" Height="92" DockPanel.Dock="Top">
                     <StackPanel VerticalAlignment="Center" Orientation="Horizontal" Margin="0" HorizontalAlignment="Center">
                         <Label Content="{x:Static languages:Resource.Chat_GlobalChat}" Margin="-2,0,0,0" FontFamily="Vice City Sans" FontSize="20"/>
                     </StackPanel>
                 </Border>
                 <Border x:Name="borderChat" BorderBrush="#FFBDBDBD" BorderThickness="0,0,0,1" DockPanel.Dock="Top">
-                    <ScrollViewer x:Name="messageScrollViewer" Margin="0" Padding="15,0,15,15" HorizontalContentAlignment="Right">
+                    <ScrollViewer x:Name="messageScrollViewer" Margin="0" Padding="15,0,15,15" HorizontalContentAlignment="Right" BorderThickness="0,0,2,0">
                         <WrapPanel x:Name="messagesWrapPanel"></WrapPanel>
                     </ScrollViewer>
                 </Border>

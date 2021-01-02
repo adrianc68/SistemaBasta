@@ -162,6 +162,12 @@
   <wsdl:message name="IRoomService_GetRooms_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetRoomsResponse" />
   </wsdl:message>
+  <wsdl:message name="IRoomService_GetRoomByCode_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRoomByCode" />
+  </wsdl:message>
+  <wsdl:message name="IRoomService_GetRoomByCode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRoomByCodeResponse" />
+  </wsdl:message>
   <wsdl:message name="IRoomService_UserDisconnectedFromRoom_InputMessage">
     <wsdl:part name="parameters" element="tns:UserDisconnectedFromRoom" />
   </wsdl:message>
@@ -185,6 +191,15 @@
   </wsdl:message>
   <wsdl:message name="IRoomService_PlayerKicked_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:PlayerKicked" />
+  </wsdl:message>
+  <wsdl:message name="IRoomService_GameIsFull_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:GameIsFull" />
+  </wsdl:message>
+  <wsdl:message name="IRoomService_Join_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:Join" />
+  </wsdl:message>
+  <wsdl:message name="IRoomService_YouHaveDisconnected_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:YouHaveDisconnected" />
   </wsdl:message>
   <wsdl:portType name="ILoginService">
     <wsdl:operation name="Login">
@@ -249,6 +264,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IRoomService/GetRooms" message="tns:IRoomService_GetRooms_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IRoomService/GetRoomsResponse" message="tns:IRoomService_GetRooms_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="GetRoomByCode">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRoomService/GetRoomByCode" message="tns:IRoomService_GetRoomByCode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRoomService/GetRoomByCodeResponse" message="tns:IRoomService_GetRoomByCode_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="UserDisconnectedFromRoom">
       <wsdl:input wsaw:Action="http://tempuri.org/IRoomService/UserDisconnectedFromRoom" message="tns:IRoomService_UserDisconnectedFromRoom_InputMessage" />
     </wsdl:operation>
@@ -272,6 +291,15 @@
     </wsdl:operation>
     <wsdl:operation name="PlayerKicked">
       <wsdl:output wsaw:Action="http://tempuri.org/IRoomService/PlayerKicked" message="tns:IRoomService_PlayerKicked_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GameIsFull">
+      <wsdl:output wsaw:Action="http://tempuri.org/IRoomService/GameIsFull" message="tns:IRoomService_GameIsFull_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Join">
+      <wsdl:output wsaw:Action="http://tempuri.org/IRoomService/Join" message="tns:IRoomService_Join_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="YouHaveDisconnected">
+      <wsdl:output wsaw:Action="http://tempuri.org/IRoomService/YouHaveDisconnected" message="tns:IRoomService_YouHaveDisconnected_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_ILoginService" type="tns:ILoginService">
@@ -419,6 +447,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetRoomByCode">
+      <soap12:operation soapAction="http://tempuri.org/IRoomService/GetRoomByCode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="UserDisconnectedFromRoom">
       <soap12:operation soapAction="http://tempuri.org/IRoomService/UserDisconnectedFromRoom" style="document" />
       <wsdl:input>
@@ -463,6 +500,24 @@
     </wsdl:operation>
     <wsdl:operation name="PlayerKicked">
       <soap12:operation soapAction="http://tempuri.org/IRoomService/PlayerKicked" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GameIsFull">
+      <soap12:operation soapAction="http://tempuri.org/IRoomService/GameIsFull" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Join">
+      <soap12:operation soapAction="http://tempuri.org/IRoomService/Join" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="YouHaveDisconnected">
+      <soap12:operation soapAction="http://tempuri.org/IRoomService/YouHaveDisconnected" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Utils;
+using Room = Domain.Domain.Room;
 
 namespace Database.DAO {
     public class RoomDAO: IRoomDAO {
@@ -31,8 +32,8 @@ namespace Database.DAO {
             using ( BastaEntityModelContainer database = new BastaEntityModelContainer() ) {
                 var roomDatabase = database.Rooms
                     .Where( b => b.code == room.Code ).FirstOrDefault();
-                database.RomConfigurations.Remove(roomDatabase.RoomConfiguration);
-                database.Rooms.Remove(roomDatabase);
+                database.RomConfigurations.Remove( roomDatabase.RoomConfiguration );
+                database.Rooms.Remove( roomDatabase );
                 database.SaveChanges();
                 isDeleted = true;
             }
@@ -96,6 +97,23 @@ namespace Database.DAO {
             }
             return roomsAvailable;
         }
+
+        public Domain.Domain.Room GetRoomByCode( string code ) {
+            Room room = null;
+            using ( BastaEntityModelContainer database = new BastaEntityModelContainer() ) {
+                var roomDatabase = database.Rooms.Where( b => b.code == code ).FirstOrDefault();
+                if ( roomDatabase != null ) {
+                    room = new Domain.Domain.Room();
+                    room.Code = roomDatabase.code;
+                    room.RoomConfiguration = new Domain.Domain.RoomConfiguration();
+                    room.RoomConfiguration.Code = roomDatabase.code;
+                    room.RoomConfiguration.PlayerLimit = roomDatabase.RoomConfiguration.playerLimit;
+                    room.RoomConfiguration.RoomState = (Domain.Domain.RoomState) roomDatabase.RoomConfiguration.roomState;
+                }
+            }
+            return room;
+        }
+
 
         public List<Domain.Domain.Room> GetRooms() {
             List<Domain.Domain.Room> rooms = null;

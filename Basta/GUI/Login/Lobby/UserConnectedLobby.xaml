@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Basta.GUI.Login.Lobby"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="Basta.GUI.Login.Lobby.UserConnectedLobby"
              mc:Ignorable="d" Width="163.333" Height="243">
-    <Border BorderBrush="Black" BorderThickness="1" Background="#FFFBFBFB" Padding="0" Margin="15,0" CornerRadius="10">
+    <Border BorderBrush="Black" BorderThickness="1" Background="#FFEEEEEE" Padding="0" Margin="15,0" CornerRadius="10">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="107*"/>

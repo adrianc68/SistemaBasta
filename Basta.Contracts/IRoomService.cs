@@ -12,7 +12,7 @@ namespace Basta.Contracts {
         void JoinRoom( Player player, Room room );
 
         [OperationContract( IsOneWay = true )]
-        void DeleteRoom(Room room);
+        void DeleteRoom( Room room );
 
         [OperationContract( IsOneWay = false )]
         void SetUpRoom();
@@ -29,6 +29,9 @@ namespace Basta.Contracts {
         [OperationContract( IsOneWay = false )]
         List<Room> GetRooms();
 
+        [OperationContract( IsOneWay = false )]
+        Room GetRoomByCode( string code );
+
         [OperationContract( IsOneWay = true )]
         void UserDisconnectedFromRoom( Player player, Room room );
 
@@ -40,7 +43,7 @@ namespace Basta.Contracts {
     [ServiceContract]
     public interface IRoomClient {
         [OperationContract( IsOneWay = true )]
-        void ReciveMessageFromPlayer( Player player, string message);
+        void ReciveMessageFromPlayer( Player player, string message );
 
         [OperationContract( IsOneWay = true )]
         void ReciveMessageRoom( Player player, string message );
@@ -52,10 +55,19 @@ namespace Basta.Contracts {
         void PlayerDisconnected( Player player );
 
         [OperationContract( IsOneWay = true )]
-        void RoomDelected(Room room);
+        void RoomDelected( Room room );
 
         [OperationContract( IsOneWay = true )]
         void PlayerKicked();
+
+        [OperationContract( IsOneWay = true )]
+        void GameIsFull();
+
+        [OperationContract( IsOneWay = true )]
+        void Join();
+
+        [OperationContract( IsOneWay = true )]
+        void YouHaveDisconnected();
 
     }
 

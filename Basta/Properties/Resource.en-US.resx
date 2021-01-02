@@ -349,6 +349,9 @@
   <data name="SystemFatalError" xml:space="preserve">
     <value>An error has occurred and has been logged to a file!</value>
   </data>
+  <data name="SystemGameFull" xml:space="preserve">
+    <value>The room is full!</value>
+  </data>
   <data name="SystemInvalidCode" xml:space="preserve">
     <value>The code doesn't match, check it!</value>
   </data>
@@ -384,6 +387,9 @@
   </data>
   <data name="SystemPlayerKicked" xml:space="preserve">
     <value>You have been kicked.</value>
+  </data>
+  <data name="SystemRoomNotFound" xml:space="preserve">
+    <value>The room was not found!</value>
   </data>
   <data name="SystemServerNotFound" xml:space="preserve">
     <value>Server has not started</value>

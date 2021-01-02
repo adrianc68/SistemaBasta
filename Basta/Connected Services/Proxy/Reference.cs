@@ -188,6 +188,12 @@ namespace Basta.Proxy {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRoomService/GetRooms", ReplyAction="http://tempuri.org/IRoomService/GetRoomsResponse")]
         System.Threading.Tasks.Task<Domain.Domain.Room[]> GetRoomsAsync();
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRoomService/GetRoomByCode", ReplyAction="http://tempuri.org/IRoomService/GetRoomByCodeResponse")]
+        Domain.Domain.Room GetRoomByCode(string code);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRoomService/GetRoomByCode", ReplyAction="http://tempuri.org/IRoomService/GetRoomByCodeResponse")]
+        System.Threading.Tasks.Task<Domain.Domain.Room> GetRoomByCodeAsync(string code);
+        
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRoomService/UserDisconnectedFromRoom")]
         void UserDisconnectedFromRoom(Domain.Domain.Player player, Domain.Domain.Room room);
         
@@ -221,6 +227,15 @@ namespace Basta.Proxy {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRoomService/PlayerKicked")]
         void PlayerKicked();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRoomService/GameIsFull")]
+        void GameIsFull();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRoomService/Join")]
+        void Join();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRoomService/YouHaveDisconnected")]
+        void YouHaveDisconnected();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -313,6 +328,14 @@ namespace Basta.Proxy {
         
         public System.Threading.Tasks.Task<Domain.Domain.Room[]> GetRoomsAsync() {
             return base.Channel.GetRoomsAsync();
+        }
+        
+        public Domain.Domain.Room GetRoomByCode(string code) {
+            return base.Channel.GetRoomByCode(code);
+        }
+        
+        public System.Threading.Tasks.Task<Domain.Domain.Room> GetRoomByCodeAsync(string code) {
+            return base.Channel.GetRoomByCodeAsync(code);
         }
         
         public void UserDisconnectedFromRoom(Domain.Domain.Player player, Domain.Domain.Room room) {
