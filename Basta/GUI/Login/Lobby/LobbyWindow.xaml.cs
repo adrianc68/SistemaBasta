@@ -20,16 +20,16 @@ namespace Basta.GUI.Login.Lobby {
     public partial class LobbyWindow: Window {
         private Room room;
         private Autentication autentication;
+        Dictionary<Player, PlayerGUIElement> playersConnected = new Dictionary<Player, PlayerGUIElement>( new Player.EqualityComparer() );
+
         public LobbyWindow( Room room ) {
             InitializeComponent();
             this.room = room;
             autentication = Autentication.GetInstance();
             ShowPlayerLabelElements();
+            playerlimitTopLabel.Content = room.RoomConfiguration.PlayerLimit.ToString();
+            playersConnectedTopLabel.Content = 0;
         }
-
-
-        Dictionary<Player, PlayerGUIElement> playersConnected = new Dictionary<Player, PlayerGUIElement>( new Player.EqualityComparer() );
-
 
         public void RecivedMessageFromGlobalRoom( Player player, string message ) {
             MessageReceived messageReceived = new MessageReceived();
@@ -44,7 +44,6 @@ namespace Basta.GUI.Login.Lobby {
             messageReceived.messageTextBlock.Text = message;
             playersConnected[player].ChatWith.messagesWrapPanel.Children.Add( messageReceived );
             playersConnected[player].UserChat.borderBackground.Background = new SolidColorBrush( Color.FromArgb( 98, 98, 98, 98 ) );
-
         }
 
         public void PlayerWasKicked() {
@@ -63,6 +62,7 @@ namespace Basta.GUI.Login.Lobby {
                 playersChatWrapPanel.Children.Remove( playersConnected[player].UserChat );
                 chatWithWrapPanel.Children.Remove( playersConnected[player].ChatWith );
                 playersConnected.Remove( player );
+                RemovePlayerToTopLabel();
             }
         }
 
@@ -107,7 +107,25 @@ namespace Basta.GUI.Login.Lobby {
                 ConfigureUserconnectedLobbySendMessageButton( player );
                 ConfigureChatEventByPlayer( player );
 
+                AddPlayerToTopLabel();
+
+                if ( player.Email.Equals( Autentication.GetInstance().Player.Email ) ) {
+                    userConnectedLobbyGUI.usernameLabel.Text = "Tú";
+                    userChatGUI.messageTextBlock.Text = "Tú";
+                }
             }
+        }
+
+        private void AddPlayerToTopLabel() {
+            int playersConnected = Int32.Parse( playersConnectedTopLabel.Content.ToString() );
+            playersConnected++;
+            playersConnectedTopLabel.Content = playersConnected;
+        }
+
+        private void RemovePlayerToTopLabel() {
+            int playersConnected = Int32.Parse( playersConnectedTopLabel.Content.ToString() );
+            playersConnected--;
+            playersConnectedTopLabel.Content = playersConnected;
         }
 
         private void ConfigureUserConnectedLobbyKickButton( Player player ) {
@@ -155,6 +173,7 @@ namespace Basta.GUI.Login.Lobby {
 
         private void OnCloseWindow( object sender, EventArgs e ) {
             autentication.RoomServer.UserDisconnectedFromRoom( Autentication.GetInstance().Player, room );
+            autentication.RoomServiceCallBack.MainWindow.Show();
         }
 
         private void DeleteRoomButtonClicked( object sender, RoutedEventArgs e ) {
@@ -197,7 +216,6 @@ namespace Basta.GUI.Login.Lobby {
                 MessageSent messageUserControl = new MessageSent();
                 messageUserControl.messageTextBlock.Text = message;
                 Player actualPlayer = Autentication.GetInstance().Player;
-
                 playersConnected[toPlayer].ChatWith.messagesWrapPanel.Children.Add( messageUserControl );
                 autentication.RoomServer.SendMessageRoomChatToPlayer( actualPlayer, room, message, toPlayer );
                 playersConnected[toPlayer].ChatWith.messageTextBox.Text = null;
@@ -205,9 +223,6 @@ namespace Basta.GUI.Login.Lobby {
 
             }
         }
-
-
-
 
         private void GlobalChatButtonPressed( object sender, MouseButtonEventArgs e ) {
             chatWithDockPanel.Visibility = Visibility.Hidden;

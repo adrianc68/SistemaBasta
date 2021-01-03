@@ -6,7 +6,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         xmlns:languages="clr-namespace:Basta.Properties"
-        Title="{x:Static languages:Resource.signUp_Label_signUp}" Height="686.15" Width="926.95" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        Title="{x:Static languages:Resource.signUp_Label_signUp}" Height="686.15" Width="926.95" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Closed="SignUpClosed">
     <Grid>
 
         <Grid.Background>

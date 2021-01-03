@@ -232,6 +232,33 @@ namespace Basta.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Tabla de clasificaciones.
+        /// </summary>
+        public static string Lobby_TextBlock_Clasification {
+            get {
+                return ResourceManager.GetString("Lobby_TextBlock_Clasification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a  puntos ganados.
+        /// </summary>
+        public static string Lobby_TextBlock_PointsWon {
+            get {
+                return ResourceManager.GetString("Lobby_TextBlock_PointsWon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a ¡Comienza a jugar ahora!.
+        /// </summary>
+        public static string LobbyWindow_TextBox_StartGame {
+            get {
+                return ResourceManager.GetString("LobbyWindow_TextBox_StartGame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Registrarse.
         /// </summary>
         public static string login_Button_signUp {

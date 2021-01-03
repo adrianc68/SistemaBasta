@@ -11,6 +11,7 @@ namespace Basta.GUI.Login.RecoveryPassword {
     /// </summary>
     public partial class RecoveryPasswordWindow: Window {
         private string code;
+
         public RecoveryPasswordWindow() {
             InitializeComponent();
         }
@@ -51,5 +52,8 @@ namespace Basta.GUI.Login.RecoveryPassword {
             }
         }
 
+        private void RecoveryClosed( object sender, EventArgs e ) {
+            Autentication.GetInstance().RoomServiceCallBack.LoginWindow.Show();
+        }
     }
 }

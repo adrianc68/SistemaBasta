@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="Basta.GUI.Login.Main.TopPlayerUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:languages="clr-namespace:Basta.Properties"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" Foreground="{x:Null}" Margin="0,5,0,0" HorizontalContentAlignment="Left" VerticalContentAlignment="Center">
+
+
+
+    <Border BorderThickness="1" CornerRadius="10" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <StackPanel Orientation="Horizontal">
+
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">
+                <TextBlock x:Name="positionNumber" TextWrapping="Wrap" Foreground="White" TextAlignment="Center" Text="15." FontSize="15" HorizontalAlignment="Center" Width="45" FontFamily="Vice City Sans"></TextBlock>
+            </StackPanel>
+
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">
+                <materialDesign:PackIcon HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="35" Height="35" Foreground="White" Kind="AccountCircle"/>
+                <TextBlock x:Name="usernameLabel" TextWrapping="Wrap" Foreground="#FF6E6E6E" TextAlignment="Center" Text="hola" FontSize="9" HorizontalAlignment="Center" Width="45" FontFamily="Vice City Sans"></TextBlock>
+            </StackPanel>
+            <TextBlock x:Name="pointsGotIt" TextWrapping="Wrap" Foreground="#FFF9F9F9" Padding="15,15,0,15" Margin="0" Text="1500" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock TextWrapping="Wrap" Foreground="#FFF9F9F9" Padding="0,15,15,15" Margin="0" Width="215" Text="{x:Static languages:Resource.Lobby_TextBlock_PointsWon}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </StackPanel>
+    </Border>
+</UserControl>

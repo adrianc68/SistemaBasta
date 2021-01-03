@@ -12,6 +12,7 @@ namespace Basta.Service {
     public class BastaService: ILoginService, IRoomService {
         Dictionary<Room, Dictionary<IRoomClient, Player>> usersRoom = new Dictionary<Room, Dictionary<IRoomClient, Player>>( new Room.EqualityComparer() );
         HashSet<Player> playersConnected = new HashSet<Player>( new Player.EqualityComparer() );
+        Dictionary<string, List<string>> userKickedFromRoom = new Dictionary<string, List<string>>();
 
         /*
         * 
@@ -41,8 +42,22 @@ namespace Basta.Service {
             return room;
         }
 
-        public void SetUpRoom() {
-            throw new NotImplementedException();
+        public void JoinRoom( Player player, Room room ) {
+            var connection = OperationContext.Current.GetCallbackChannel<IRoomClient>();
+            if ( !isPlayerKickedFromRoom( player, room ) ) {
+                if ( usersRoom[room].Count != room.RoomConfiguration.PlayerLimit ) {
+                    usersRoom[room][connection] = player;
+                    foreach ( var other in usersRoom[room].Keys ) {
+                        if ( other == connection )
+                            connection.Join();
+                        other.PlayerConnected( player );
+                    }
+                } else {
+                    connection.GameIsFull();
+                }
+            } else {
+                connection.PlayerKicked();
+            }
         }
 
         public string CreateRoom( Player player, Room room ) {
@@ -74,12 +89,14 @@ namespace Basta.Service {
             }
         }
 
-        public void DeleteRoom( Room room ) {
+        public void SetUpRoom() {
+            throw new NotImplementedException();
+        }
 
+        public void DeleteRoom( Room room ) {
             if ( usersRoom.ContainsKey( room ) ) {
                 if ( new RoomDAO().DeleteRoom( room ) ) {
                     Console.WriteLine( "Room Eliminated: " + room.Code );
-
                     foreach ( var other in usersRoom[room].Keys ) {
                         other.RoomDelected( room );
                     }
@@ -91,39 +108,6 @@ namespace Basta.Service {
                     //usersRoom.Remove( room );
                 }
             }
-
-
-        }
-
-        public void JoinRoom( Player player, Room room ) {
-            var connection = OperationContext.Current.GetCallbackChannel<IRoomClient>();
-            if ( !isPlayerKickedFromRoom( player, room ) ) {
-                if ( usersRoom[room].Count != room.RoomConfiguration.PlayerLimit ) {
-                    usersRoom[room][connection] = player;
-                    foreach ( var other in usersRoom[room].Keys ) {
-                        if ( other == connection )
-                            connection.Join();
-                        other.PlayerConnected( player );
-                    }
-                } else {
-                    connection.GameIsFull();
-                }
-            } else {
-                connection.PlayerKicked();
-            }
-        }
-
-        private bool isPlayerKickedFromRoom( Player player, Room room ) {
-            bool isKicked = false;
-            if ( userKickedFromRoom.ContainsKey( room.Code ) ) {
-                foreach ( var playerInList in userKickedFromRoom[room.Code] ) {
-                    if ( playerInList.Equals( player.Email ) ) {
-                        isKicked = true;
-                        break;
-                    }
-                }
-            }
-            return isKicked;
         }
 
         public void UserDisconnectedFromRoom( Player player, Room room ) {
@@ -137,7 +121,6 @@ namespace Basta.Service {
             }
             usersRoom[room].Remove( connection );
         }
-
 
         public List<Player> GetConnectedUsersFromRoom( Room room ) {
             var connection = OperationContext.Current.GetCallbackChannel<IRoomClient>();
@@ -163,10 +146,6 @@ namespace Basta.Service {
             }
         }
 
-
-        Dictionary<string, List<string>> userKickedFromRoom = new Dictionary<string, List<string>>();
-
-
         public void KickPlayer( Player player, Room room ) {
             foreach ( var other in usersRoom[room] ) {
                 if ( other.Value.Email == player.Email ) {
@@ -186,7 +165,6 @@ namespace Basta.Service {
                 }
             }
         }
-
 
         /*
          * 
@@ -220,7 +198,6 @@ namespace Basta.Service {
             isPasswordChanged = accessAccountDAO.ChangePasswordByEmail( email, password );
             return isPasswordChanged;
         }
-
 
         Player ILoginService.Login( string macAddress, string email, string password ) {
             Player player = null;
@@ -271,10 +248,18 @@ namespace Basta.Service {
             return isMessageSent;
         }
 
-
+        private bool isPlayerKickedFromRoom( Player player, Room room ) {
+            bool isKicked = false;
+            if ( userKickedFromRoom.ContainsKey( room.Code ) ) {
+                foreach ( var playerInList in userKickedFromRoom[room.Code] ) {
+                    if ( playerInList.Equals( player.Email ) ) {
+                        isKicked = true;
+                        break;
+                    }
+                }
+            }
+            return isKicked;
+        }
     }
-
-
-
 
 }

@@ -15,6 +15,7 @@ namespace Basta.GUI.Login.SignUp {
     /// </summary>
     public partial class SignUp: Window {
         Dictionary<Control, bool> elementsValid;
+
         public SignUp() {
             InitializeComponent();
             InitializeValidator();
@@ -160,5 +161,8 @@ namespace Basta.GUI.Login.SignUp {
             return isAllElementsValid;
         }
 
+        private void SignUpClosed( object sender, EventArgs e ) {
+            Autentication.GetInstance().RoomServiceCallBack.LoginWindow.Show();
+        }
     }
 }

@@ -98,6 +98,9 @@
     <Compile Include="GUI\Login\Lobby\UserConnectedLobby.xaml.cs">
       <DependentUpon>UserConnectedLobby.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GUI\Login\Main\TopPlayerUserControl.xaml.cs">
+      <DependentUpon>TopPlayerUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RoomServiceCallBack.cs" />
     <Page Include="GUI\Login\ChangePassword\ChangePasswordWindow.xaml">
       <SubType>Designer</SubType>
@@ -157,6 +160,10 @@
     <Compile Include="GUI\Login\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="GUI\Login\Main\TopPlayerUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="GUI\Login\RecoveryPassword\RecoveryPasswordWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -321,7 +328,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="GUI\Login\Main\background3.png" />
+    <Resource Include="GUI\Login\Main\background.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="GUI\Login\Lobby\background5.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.3.2.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.3.2.0\build\MaterialDesignThemes.targets')" />

@@ -144,6 +144,9 @@
   <data name="Chat_UsersConnected" xml:space="preserve">
     <value>Users connected</value>
   </data>
+  <data name="LobbyWindow_TextBox_StartGame" xml:space="preserve">
+    <value>Start playing now!</value>
+  </data>
   <data name="Lobby_Button_Configureroom" xml:space="preserve">
     <value>Room settings</value>
   </data>
@@ -173,6 +176,12 @@
   </data>
   <data name="Lobby_Label_Waitingfor" xml:space="preserve">
     <value>Waiting players...</value>
+  </data>
+  <data name="Lobby_TextBlock_Clasification" xml:space="preserve">
+    <value>Top</value>
+  </data>
+  <data name="Lobby_TextBlock_PointsWon" xml:space="preserve">
+    <value> points won</value>
   </data>
   <data name="login_Button_signUp" xml:space="preserve">
     <value>Sign Up</value>

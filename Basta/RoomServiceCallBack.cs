@@ -1,5 +1,6 @@
 ﻿using Basta.GUI.Login.Lobby;
 using Basta.GUI.Login.Main;
+using Basta.GUI.Login;
 using Domain.Domain;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ using System.Windows.Input;
 
 namespace Basta {
     public class RoomServiceCallBack: Proxy.IRoomServiceCallback {
+        public Login LoginWindow { get; set; }
         public LobbyWindow LobbyWindow { get; set; }
         public MainWindow MainWindow { get; set; }
 
@@ -28,7 +30,7 @@ namespace Basta {
         }
 
         public void ReciveMessageFromPlayer( Player player, string message ) {
-            LobbyWindow.RecivedMessageFromPlayer(player, message);
+            LobbyWindow.RecivedMessageFromPlayer( player, message );
         }
 
         public void RoomDelected( Room room ) {

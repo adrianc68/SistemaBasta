@@ -10,16 +10,18 @@ namespace Basta.GUI.Login {
     /// </summary>
     public partial class Login: Window {
         private bool language = false;
+
         public Login() {
             System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo( "es-ES" );
             InitializeComponent();
+            Autentication.GetInstance().RoomServiceCallBack = new RoomServiceCallBack();
+            Autentication.GetInstance().RoomServiceCallBack.LoginWindow = this;
         }
 
         private void SignUpButtonClicked( object sender, RoutedEventArgs e ) {
             Hide();
             GUI.Login.SignUp.SignUp signUp = new SignUp.SignUp();
             signUp.ShowDialog();
-            Show();
         }
 
         private void LoginButtonClicked( object sender, RoutedEventArgs e ) {
@@ -44,7 +46,6 @@ namespace Basta.GUI.Login {
                 Hide();
                 MainWindow mainWindow = new MainWindow();
                 mainWindow.ShowDialog();
-                Show();
             }
         }
 
@@ -52,7 +53,6 @@ namespace Basta.GUI.Login {
             Hide();
             RecoveryPasswordWindow recoveryPasswordWindow = new RecoveryPasswordWindow();
             recoveryPasswordWindow.ShowDialog();
-            Show();
         }
 
         private void ChangeLanguageButtonClicked( object sender, RoutedEventArgs e ) {

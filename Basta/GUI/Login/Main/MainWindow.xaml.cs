@@ -14,14 +14,13 @@ namespace Basta.GUI.Login.Main {
     /// Lógica de interacción para MainWindow.xaml
     /// </summary>
     public partial class MainWindow: Window {
-
         private Autentication autentication;
         private Player[] playersInRoom;
+        private Room selectedRoom;
 
         public MainWindow() {
             InitializeComponent();
             autentication = Autentication.GetInstance();
-            autentication.RoomServiceCallBack = new RoomServiceCallBack();
             InstanceContext context = new InstanceContext( Autentication.GetInstance().RoomServiceCallBack );
             autentication.RoomServer = new Proxy.RoomServiceClient( context );
             autentication.RoomServiceCallBack.MainWindow = this;
@@ -35,8 +34,16 @@ namespace Basta.GUI.Login.Main {
             MessageBoxResult kickedMessage = MessageBox.Show( Properties.Resource.SystemPlayerKicked, Properties.Resource.SystemPlayerKicked, MessageBoxButton.OK, MessageBoxImage.Error );
         }
 
+        public void Join() {
+            Hide();
+            autentication.RoomServiceCallBack.LobbyWindow = new LobbyWindow( selectedRoom );
+            autentication.RoomServiceCallBack.LobbyWindow.AddPlayerToGUI( Autentication.GetInstance().Player );
+            autentication.RoomServiceCallBack.LobbyWindow.AddPlayersConnectedToGUI( playersInRoom );
+            autentication.RoomServiceCallBack.LobbyWindow.Show();
+        }
+
         private void JoinToRoomButtonClicked( object sender, RoutedEventArgs e ) {
-            Room selectedRoom = (Room) roomsListView.SelectedItem;
+            selectedRoom = (Room) roomsListView.SelectedItem;
             if ( selectedRoom != null ) {
                 ExecuteJoinRoomMethodServer( selectedRoom );
             } else if ( roomCodeTextField.Text.Length > 0 ) {
@@ -46,6 +53,7 @@ namespace Basta.GUI.Login.Main {
                 } else {
                     MessageBoxResult kickedMessage = MessageBox.Show( Properties.Resource.SystemRoomNotFound, Properties.Resource.SystemMessageTitle, MessageBoxButton.OK, MessageBoxImage.Error );
                 }
+                roomCodeTextField.Clear();
             }
         }
 
@@ -54,14 +62,6 @@ namespace Basta.GUI.Login.Main {
             Autentication.GetInstance().RoomServer.JoinRoom( Autentication.GetInstance().Player, selectedRoom );
             selectStackPanel.Visibility = Visibility.Hidden;
             createRoomStackPanel.Visibility = Visibility.Hidden;
-        }
-
-        public void Join() {
-            Room selectedRoom = (Room) roomsListView.SelectedItem;
-            autentication.RoomServiceCallBack.LobbyWindow = new LobbyWindow( selectedRoom );
-            autentication.RoomServiceCallBack.LobbyWindow.AddPlayerToGUI( Autentication.GetInstance().Player );
-            autentication.RoomServiceCallBack.LobbyWindow.AddPlayersConnectedToGUI( playersInRoom );
-            autentication.RoomServiceCallBack.LobbyWindow.Show();
         }
 
         private void CreateConfiguredRoomButtonClicked( object sender, RoutedEventArgs e ) {
@@ -78,7 +78,6 @@ namespace Basta.GUI.Login.Main {
                 autentication.RoomServiceCallBack.LobbyWindow = new LobbyWindow( room );
                 autentication.RoomServiceCallBack.LobbyWindow.AddPlayerToGUI( Autentication.GetInstance().Player );
                 autentication.RoomServiceCallBack.LobbyWindow.ShowDialog();
-                ShowDialog();
             }
         }
 
@@ -94,6 +93,7 @@ namespace Basta.GUI.Login.Main {
                 autentication.LoginServer.LogOut( Autentication.GetInstance().Player );
                 Autentication.GetInstance().LogOut();
             }
+            Autentication.GetInstance().RoomServiceCallBack.LoginWindow.ShowDialog();
         }
 
         private void PlayButtonClicked( object sender, RoutedEventArgs e ) {

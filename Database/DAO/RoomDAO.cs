@@ -10,6 +10,14 @@ using Room = Domain.Domain.Room;
 namespace Database.DAO {
     public class RoomDAO: IRoomDAO {
 
+        // Create a Lobby or room
+        /// <summary>
+        /// It creates a new lobby in database, this lobby will be shown 
+        /// in a list
+        /// </summary>
+        /// <returns>
+        /// returns strings representing the room's code
+        /// </returns>
         public string CreateRoom( Domain.Domain.Room room ) {
             string roomCode = null;
             using ( BastaEntityModelContainer database = new BastaEntityModelContainer() ) {
@@ -27,6 +35,14 @@ namespace Database.DAO {
             return roomCode;
         }
 
+
+        // Delete a room
+        /// <summary>
+        /// a Player deletes a room from database
+        /// </summary>
+        /// <returns>
+        /// returns true if it was deleted otherwise false
+        /// </returns>
         public bool DeleteRoom( Domain.Domain.Room room ) {
             bool isDeleted = false;
             using ( BastaEntityModelContainer database = new BastaEntityModelContainer() ) {
@@ -40,13 +56,19 @@ namespace Database.DAO {
             return isDeleted;
         }
 
+        // Set a new configuration to room
+        /// <summary>
+        /// It sets a new Configuration to a room created
+        /// </summary>
+        /// <returns>
+        /// returns true if it was configured otherwise false
+        /// </returns>
         public bool ConfigureRoom( Domain.Domain.RoomConfiguration roomConfiguration, string code ) {
             bool isUpdated = false;
             using ( BastaEntityModelContainer database = new BastaEntityModelContainer() ) {
                 var room = database.Rooms
                     .Where( b => b.code == code )
                     .FirstOrDefault();
-
                 Database.Entity.RoomConfiguration roomConfigurationDatabase = new Database.Entity.RoomConfiguration();
                 roomConfigurationDatabase.roomState = (Entity.RoomState) roomConfiguration.RoomState;
                 roomConfigurationDatabase.code = roomConfiguration.Code;
@@ -59,6 +81,13 @@ namespace Database.DAO {
             return isUpdated;
         }
 
+        // Check existing room
+        /// <summary>
+        /// It checks in database if a room was created
+        /// </summary>
+        /// <returns>
+        /// returns true if it exists in databaes otherwise false
+        /// </returns>
         public bool VerifyExistingRoom( string code ) {
             bool isCodeUsed = false;
             using ( BastaEntityModelContainer database = new BastaEntityModelContainer() ) {
@@ -70,15 +99,13 @@ namespace Database.DAO {
             return isCodeUsed;
         }
 
-        private string GenerateRoomCode() {
-            string code = null;
-            code = Cryptography.RandomString().Substring( 0, 6 );
-            while ( VerifyExistingRoom( code ) ) {
-                code = Cryptography.RandomString().Substring( 0, 6 );
-            }
-            return code;
-        }
-
+        // Get all rooms available
+        /// <summary>
+        /// It returns all rooms with PUBLIC state from database
+        /// </summary>
+        /// <returns>
+        /// returns List representing the rooms
+        /// </returns>
         public List<Domain.Domain.Room> GetRoomAvailable() {
             List<Domain.Domain.Room> roomsAvailable = null;
             using ( BastaEntityModelContainer database = new BastaEntityModelContainer() ) {
@@ -98,6 +125,13 @@ namespace Database.DAO {
             return roomsAvailable;
         }
 
+        // Get a room by code
+        /// <summary>
+        /// It returns a room by a specified code if it exist in database
+        /// </summary>
+        /// <returns>
+        /// returns Room by room's code
+        /// </returns>
         public Domain.Domain.Room GetRoomByCode( string code ) {
             Room room = null;
             using ( BastaEntityModelContainer database = new BastaEntityModelContainer() ) {
@@ -114,7 +148,13 @@ namespace Database.DAO {
             return room;
         }
 
-
+        // Get all rooms from database
+        /// <summary>
+        /// It returns a list with all rooms from database
+        /// </summary>
+        /// <returns>
+        /// returns List representing the rooms
+        /// </returns>
         public List<Domain.Domain.Room> GetRooms() {
             List<Domain.Domain.Room> rooms = null;
             using ( BastaEntityModelContainer database = new BastaEntityModelContainer() ) {
@@ -133,6 +173,16 @@ namespace Database.DAO {
             }
             return rooms;
         }
+
+        private string GenerateRoomCode() {
+            string code = null;
+            code = Cryptography.RandomString().Substring( 0, 6 );
+            while ( VerifyExistingRoom( code ) ) {
+                code = Cryptography.RandomString().Substring( 0, 6 );
+            }
+            return code;
+        }
+
 
     }
 }
