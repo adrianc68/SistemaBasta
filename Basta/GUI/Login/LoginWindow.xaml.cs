@@ -2,7 +2,6 @@
 using Basta.GUI.Login.Main;
 using Basta.GUI.Login.RecoveryPassword;
 using System.ServiceModel;
-using System.Threading;
 using System.Windows;
 
 namespace Basta.GUI.Login {

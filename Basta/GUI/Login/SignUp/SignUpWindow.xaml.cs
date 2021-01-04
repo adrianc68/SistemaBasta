@@ -45,17 +45,23 @@ namespace Basta.GUI.Login.SignUp {
             player.AccessAccount = accessAccount;
             try {
                 Proxy.LoginServiceClient server = new Proxy.LoginServiceClient();
-                server.SignUp( player );
+                try {
+                    server.SignUp( player );
+                } catch ( Exception ex ) {
+                    if ( ex is EndpointNotFoundException || ex is CommunicationException ) {
+                        DropConnectionAlert.ShowDropConnectionAlert();
+                    }
+                }
                 Close();
             } catch ( FaultException<EmailAlreadyRegisteredFault> ) {
                 systemLabel.Content = Properties.Resource.SystemExistingEmail;
             } catch ( FaultException<UsernameRegisteredAlreadyFault> ) {
                 systemLabel.Content = Properties.Resource.SystemExistingUsername;
-            } catch ( FaultException fa ) {
+            } catch ( FaultException ) {
                 systemLabel.Content = Properties.Resource.SystemFatalError;
-                Console.WriteLine( fa );
+                // LOGGGGG MEEEEEE PLS
+                Console.WriteLine( "LOG MEEEE" );
             }
-
         }
 
         private void SignUpComboBoxLoaded( object sender, RoutedEventArgs e ) {

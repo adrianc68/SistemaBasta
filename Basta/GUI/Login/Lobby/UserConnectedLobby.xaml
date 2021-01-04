@@ -6,24 +6,26 @@
              xmlns:local="clr-namespace:Basta.GUI.Login.Lobby"
              xmlns:languages="clr-namespace:Basta.Properties"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="Basta.GUI.Login.Lobby.UserConnectedLobby"
-             mc:Ignorable="d" Width="163.333" Height="243">
-    <Border BorderBrush="Black" BorderThickness="1" Background="#FFEEEEEE" Padding="0" Margin="15,0" CornerRadius="10">
+             mc:Ignorable="d" Width="163.333" >
+    <Border BorderThickness="1" Padding="0" Margin="15,0" CornerRadius="10" Height="273">
+        <Border.Background>
+            <ImageBrush ImageSource="hitman.png" Stretch="UniformToFill"/>
+        </Border.Background>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="107*"/>
                 <RowDefinition Height="152*"/>
             </Grid.RowDefinitions>
-            <DockPanel LastChildFill="False">
-                <materialDesign:PackIcon Height="75" VerticalAlignment="Center" Width="75" Kind="UserCircle" HorizontalAlignment="Center" DockPanel.Dock="Top" Margin="1,0,0,0" Foreground="#FF272727"/>
-                <TextBlock x:Name="usernameLabel" TextWrapping="Wrap" Text="UsernameLabel" FontFamily="Vice City Sans" FontSize="14" DockPanel.Dock="Top" TextAlignment="Center" Height="16" Width="131"/>
+            <DockPanel>
+                <TextBlock x:Name="usernameLabel" TextWrapping="Wrap" Text="UsernameLabel" FontFamily="Vice City Sans" FontSize="14" DockPanel.Dock="Top" TextAlignment="Center" Foreground="White" Background="#BF000000" Padding="5" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </DockPanel>
 
             <DockPanel Grid.Row="1" Margin="0" LastChildFill="False">
-                <Button x:Name="sendMessageToPlayerButton" Content="{x:Static languages:Resource.UserConnectedLobby_Button_SendMessage}" Height="32" Padding="0" FontSize="12" BorderBrush="{x:Null}" Foreground="White" Background="#FF303030" Margin="0" VerticalAlignment="Top" DockPanel.Dock="Top" HorizontalAlignment="Center" Width="110"/>
+                <Button x:Name="sendMessageToPlayerButton" Content="{x:Static languages:Resource.UserConnectedLobby_Button_SendMessage}" Height="32" Padding="0" FontSize="12" BorderBrush="{x:Null}" Foreground="White" Background="#FF610B0B" Margin="0" VerticalAlignment="Top" DockPanel.Dock="Top" HorizontalAlignment="Center" Width="110"/>
 
-                <Button x:Name="kickPlayerButton" Content="{x:Static languages:Resource.UserConnectedLobby_Button_KickPlayer}" Height="32" Padding="0" FontSize="12" BorderBrush="{x:Null}" Foreground="White" Background="#FF303030" Margin="0,10,0,0" VerticalAlignment="Center" DockPanel.Dock="Top" HorizontalAlignment="Center" Width="110"/>
+                <Button x:Name="kickPlayerButton" Content="{x:Static languages:Resource.UserConnectedLobby_Button_KickPlayer}" Height="32" Padding="0" FontSize="12" BorderBrush="{x:Null}" Foreground="White" Background="#FF610B0B" Margin="0,10,0,0" VerticalAlignment="Center" DockPanel.Dock="Top" HorizontalAlignment="Center" Width="110"/>
 
-                <Button Content="{x:Static languages:Resource.UserConnectedLobby_Button_ReportPlayer}" Height="32" Padding="0" FontSize="12" BorderBrush="{x:Null}" Foreground="White" Background="#FF303030" Margin="0,10,0,0" VerticalAlignment="Center" DockPanel.Dock="Top" HorizontalAlignment="Center" Width="110"/>
+                <Button Content="{x:Static languages:Resource.UserConnectedLobby_Button_ReportPlayer}" Height="32" Padding="0" FontSize="12" BorderBrush="{x:Null}" Foreground="White" Background="#FF610B0B" Margin="0,10,0,0" VerticalAlignment="Center" DockPanel.Dock="Top" HorizontalAlignment="Center" Width="110"/>
 
 
             </DockPanel>

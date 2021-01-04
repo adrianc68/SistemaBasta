@@ -159,6 +159,9 @@
   <data name="Lobby_Button_Play" xml:space="preserve">
     <value>Start!</value>
   </data>
+  <data name="Lobby_Chat_You" xml:space="preserve">
+    <value>You</value>
+  </data>
   <data name="Lobby_Label_Playerslimit" xml:space="preserve">
     <value>Players limit: </value>
   </data>
@@ -407,7 +410,7 @@
     <value>The room was not found!</value>
   </data>
   <data name="SystemServerNotFound" xml:space="preserve">
-    <value>Server has not started</value>
+    <value>The server is having problems!</value>
   </data>
   <data name="Tooltip_SignUp_Country" xml:space="preserve">
     <value>It should not contain strange characters such as ¡? =) (/ &amp;% $ # "!! ¨ * ¨ [] or numbers</value>
@@ -428,10 +431,10 @@
     <value>It should not contain strange characters such as ¡? =) (/ &amp;% $ # "!! ¨ * ¨ []</value>
   </data>
   <data name="UserConnectedLobby_Button_KickPlayer" xml:space="preserve">
-    <value>Kick player</value>
+    <value>Kick</value>
   </data>
   <data name="UserConnectedLobby_Button_ReportPlayer" xml:space="preserve">
-    <value>Report player</value>
+    <value>Report</value>
   </data>
   <data name="UserConnectedLobby_Button_SendMessage" xml:space="preserve">
     <value>Send message</value>

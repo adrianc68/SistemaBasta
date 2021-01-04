@@ -50,7 +50,15 @@ namespace Basta.GUI.Login.Main {
             if ( selectedRoom != null ) {
                 ExecuteJoinRoomMethodServer( selectedRoom );
             } else if ( roomCodeTextField.Text.Length > 0 ) {
-                selectedRoom = Autentication.GetInstance().RoomServer.GetRoomByCode( roomCodeTextField.Text );
+                try {
+                    selectedRoom = Autentication.GetInstance().RoomServer.GetRoomByCode( roomCodeTextField.Text );
+                } catch ( Exception ex ) {
+                    if ( ex is EndpointNotFoundException || ex is CommunicationException ) {
+                        DropConnectionAlert.ShowDropConnectionAlert();
+                        autentication.LogOut();
+                        Close();
+                    }
+                }
                 if ( selectedRoom != null ) {
                     ExecuteJoinRoomMethodServer( selectedRoom );
                 } else {
@@ -61,10 +69,18 @@ namespace Basta.GUI.Login.Main {
         }
 
         private void ExecuteJoinRoomMethodServer( Room selectedRoom ) {
-            playersInRoom = autentication.RoomServer.GetConnectedUsersFromRoom( selectedRoom );
-            Autentication.GetInstance().RoomServer.JoinRoom( Autentication.GetInstance().Player, selectedRoom );
-            selectStackPanel.Visibility = Visibility.Hidden;
-            createRoomStackPanel.Visibility = Visibility.Hidden;
+            try {
+                playersInRoom = autentication.RoomServer.GetConnectedUsersFromRoom( selectedRoom );
+                Autentication.GetInstance().RoomServer.JoinRoom( Autentication.GetInstance().Player, selectedRoom );
+                selectStackPanel.Visibility = Visibility.Hidden;
+                createRoomStackPanel.Visibility = Visibility.Hidden;
+            } catch ( Exception ex ) {
+                if ( ex is EndpointNotFoundException || ex is CommunicationException ) {
+                    DropConnectionAlert.ShowDropConnectionAlert();
+                    autentication.LogOut();
+                    Close();
+                }
+            }
         }
 
         private void CreateConfiguredRoomButtonClicked( object sender, RoutedEventArgs e ) {
@@ -72,7 +88,15 @@ namespace Basta.GUI.Login.Main {
             room.RoomConfiguration = new RoomConfiguration();
             room.RoomConfiguration.PlayerLimit = (int) personLimitComboBox.SelectedItem;
             room.RoomConfiguration.RoomState = RoomState.PUBLIC;
-            room.Code = Autentication.GetInstance().RoomServer.CreateRoom( Autentication.GetInstance().Player, room );
+            try {
+                room.Code = Autentication.GetInstance().RoomServer.CreateRoom( Autentication.GetInstance().Player, room );
+            } catch ( Exception ex ) {
+                if ( ex is EndpointNotFoundException || ex is CommunicationException ) {
+                    DropConnectionAlert.ShowDropConnectionAlert();
+                    autentication.LogOut();
+                    Close();
+                }
+            }
             room.RoomConfiguration.Code = room.Code;
             if ( room.Code != null ) {
                 Hide();
@@ -86,18 +110,43 @@ namespace Basta.GUI.Login.Main {
 
         private void GetRoomsFromServer() {
             roomsListView.Items.Clear();
-            foreach ( var room in autentication.RoomServer.GetRooms() ) {
-                roomsListView.Items.Add( room );
+            try {
+                foreach ( var room in autentication.RoomServer.GetRooms() ) {
+                    roomsListView.Items.Add( room );
+                }
+            } catch ( Exception ex) {
+                if ( ex is EndpointNotFoundException || ex is CommunicationException ) {
+                    DropConnectionAlert.ShowDropConnectionAlert();
+                    autentication.LogOut();
+                    Close();
+                }
+
             }
         }
 
         private void MainClosed( object sender, EventArgs e ) {
             if ( Autentication.GetInstance().Player != null ) {
-                autentication.LoginServer.LogOut( Autentication.GetInstance().Player );
+                try {
+                    autentication.LoginServer.LogOut( Autentication.GetInstance().Player );
+                } catch ( Exception ex ) {
+                    // LOG ME PLSSSSSSS
+                    Console.WriteLine( ex );
+                }
                 Autentication.GetInstance().LogOut();
             }
             Sound.GetInstance().StopMusic();
             Autentication.GetInstance().RoomServiceCallBack.LoginWindow.ShowDialog();
+        }
+
+        private void exitButtonClicked( object sender, RoutedEventArgs e ) {
+            try {
+                autentication.LoginServer.LogOut( Autentication.GetInstance().Player );
+            } catch ( Exception ex ) {
+                // LOG ME PLSSSSSSS
+                Console.WriteLine( ex );
+            }
+            Autentication.GetInstance().LogOut();
+            Close();
         }
 
         private void PlayButtonClicked( object sender, RoutedEventArgs e ) {
@@ -128,12 +177,6 @@ namespace Basta.GUI.Login.Main {
 
         private void CancelSettingsButtonClicked( object sender, RoutedEventArgs e ) {
             settingsStackPanel.Visibility = Visibility.Hidden;
-        }
-
-        private void exitButtonClicked( object sender, RoutedEventArgs e ) {
-            autentication.LoginServer.LogOut( Autentication.GetInstance().Player );
-            Autentication.GetInstance().LogOut();
-            Close();
         }
 
         private void GameLimitComboBoxLoaded( object sender, RoutedEventArgs e ) {
@@ -187,7 +230,6 @@ namespace Basta.GUI.Login.Main {
             } else if ( e.Key == System.Windows.Input.Key.Escape ) {
                 sound.StopMusic();
             }
-            videoControl.Play();
 
         }
 

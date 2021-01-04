@@ -9,12 +9,10 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="687.412" Width="1033.621" WindowStartupLocation="CenterScreen" Closed="MainClosed" KeyDown="EnterButtonPressed" Background="{x:Null}">
     <Grid Background="Black">
-        
+
         <Image Source="background.jpeg" Stretch="None"/>
 
-        <MediaElement x:Name="videoControl" Source="Walking.wmv" Volume="0" Stretch="UniformToFill" LoadedBehavior="Manual"></MediaElement>
-        
-        <Border Background="#C1000000" Margin="30,25,341,25" Padding="0" HorizontalAlignment="Center" Width="655" BorderBrush="White" BorderThickness="1" CornerRadius="25" Grid.RowSpan="2">
+        <Border Background="#C1000000" Margin="30,25,341,25" Padding="0" Width="655" BorderBrush="White" BorderThickness="1" CornerRadius="25" Grid.RowSpan="2">
             <StackPanel Margin="25">
                 <TextBox TextWrapping="Wrap" Text="{x:Static languages:Resource.Lobby_TextBlock_Clasification}" Foreground="#FFE4E4E4" FontFamily="PriceDown" FontSize="45" TextAlignment="Center"/>
                 <ListView HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0,25" BorderBrush="{x:Null}" Background="{x:Null}" Height="465" Foreground="#DD474F99">
@@ -58,13 +56,13 @@
                 <Button Height="52" Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="10" BorderThickness="2" BorderBrush="#FF4F4545" Content="{x:Static languages:Resource.Main_Button_Play}" Margin="0,25,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Click="PlayButtonClicked" Padding="75,4" FontSize="20" Foreground="White">
                     <Button.Background>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                            <GradientStop Color="Black" Offset="0"/>
+                            <GradientStop Color="Black"/>
                             <GradientStop Color="#FF550A0A" Offset="1"/>
                         </LinearGradientBrush>
                     </Button.Background>
                 </Button>
 
-                <TextBlock TextWrapping="Wrap" Text="Basta v1.0" Foreground="#FFE4E4E4" FontFamily="Vice City Sans" TextAlignment="Center" Margin="0,55,0,0" FontSize="20"/>
+                <TextBlock TextWrapping="Wrap" Text="Basta v1.0" Foreground="#FFE4E4E4" FontFamily="Vice City Sans" TextAlignment="Center" Margin="0,55,0,0" FontSize="15"/>
 
             </StackPanel>
 

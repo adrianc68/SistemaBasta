@@ -1,6 +1,7 @@
 ﻿using Domain.Domain;
 using System;
 using System.Collections.Generic;
+using System.ServiceModel;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -104,8 +105,8 @@ namespace Basta.GUI.Login.Lobby {
                 AddPlayerToTopLabel();
 
                 if ( player.Email.Equals( Autentication.GetInstance().Player.Email ) ) {
-                    userConnectedLobbyGUI.usernameLabel.Text = "Tú";
-                    userChatGUI.messageTextBlock.Text = "Tú";
+                    userConnectedLobbyGUI.usernameLabel.Text = Properties.Resource.Lobby_Chat_You;
+                    userChatGUI.messageTextBlock.Text = Properties.Resource.Lobby_Chat_You;
                 }
             }
         }
@@ -114,6 +115,9 @@ namespace Basta.GUI.Login.Lobby {
             int playersConnected = Int32.Parse( playersConnectedTopLabel.Content.ToString() );
             playersConnected++;
             playersConnectedTopLabel.Content = playersConnected;
+            if( playersConnected == room.RoomConfiguration.PlayerLimit ) {
+                countTopLabel.Content = Basta.Properties.Resource.SystemGameFull;
+            }
         }
 
         private void RemovePlayerToTopLabel() {
@@ -124,7 +128,14 @@ namespace Basta.GUI.Login.Lobby {
 
         private void ConfigureUserConnectedLobbyKickButton( Player player ) {
             playersConnected[player].UserConnectedLobby.kickPlayerButton.MouseDoubleClick += new MouseButtonEventHandler( ( a, b ) => {
-                Autentication.GetInstance().RoomServer.KickPlayer( player, room );
+                try {
+                    Autentication.GetInstance().RoomServer.KickPlayer( player, room );
+                } catch ( Exception ex ) {
+                    if ( ex is EndpointNotFoundException || ex is CommunicationException ) {
+                        DropConnectionAlert.ShowDropConnectionAlert();
+                        Close();
+                    }
+                }
             } );
         }
 
@@ -166,12 +177,25 @@ namespace Basta.GUI.Login.Lobby {
         }
 
         private void OnCloseWindow( object sender, EventArgs e ) {
-            autentication.RoomServer.UserDisconnectedFromRoom( Autentication.GetInstance().Player, room );
-            autentication.RoomServiceCallBack.MainWindow.Show();
+            try {
+                autentication.RoomServer.UserDisconnectedFromRoom( Autentication.GetInstance().Player, room );
+                autentication.RoomServiceCallBack.MainWindow.Show();
+            } catch ( Exception ex ) {
+                if ( ex is EndpointNotFoundException || ex is CommunicationException ) {
+                    autentication.RoomServiceCallBack.MainWindow.Close();
+                }
+            }
         }
 
         private void DeleteRoomButtonClicked( object sender, RoutedEventArgs e ) {
-            autentication.RoomServer.DeleteRoom( room );
+            try {
+                autentication.RoomServer.DeleteRoom( room );
+            } catch ( Exception ex ) {
+                if ( ex is EndpointNotFoundException || ex is CommunicationException ) {
+                    DropConnectionAlert.ShowDropConnectionAlert();
+                    Close();
+                }
+            }
         }
 
         private void ChatButtonClicked( object sender, RoutedEventArgs e ) {
@@ -198,8 +222,14 @@ namespace Basta.GUI.Login.Lobby {
                 MessageSent message = new MessageSent();
                 message.messageTextBlock.Text = messageTextBox.Text.Trim();
                 messagesWrapPanel.Children.Add( message );
-                autentication.RoomServer.
-                    SendMessageRoomChat( Autentication.GetInstance().Player, room, messageTextBox.Text.Trim() );
+                try {
+                    autentication.RoomServer.SendMessageRoomChat( Autentication.GetInstance().Player, room, messageTextBox.Text.Trim() );
+                } catch ( Exception ex ) {
+                    if ( ex is EndpointNotFoundException || ex is CommunicationException ) {
+                        DropConnectionAlert.ShowDropConnectionAlert();
+                        Close();
+                    }
+                }
                 messageTextBox.Text = null;
                 messageScrollViewer.ScrollToEnd();
                 PlayChatSound();
@@ -212,7 +242,14 @@ namespace Basta.GUI.Login.Lobby {
                 messageUserControl.messageTextBlock.Text = message;
                 Player actualPlayer = Autentication.GetInstance().Player;
                 playersConnected[toPlayer].ChatWith.messagesWrapPanel.Children.Add( messageUserControl );
-                autentication.RoomServer.SendMessageRoomChatToPlayer( actualPlayer, room, message, toPlayer );
+                try {
+                    autentication.RoomServer.SendMessageRoomChatToPlayer( actualPlayer, room, message, toPlayer );
+                } catch ( Exception ex ) {
+                    if ( ex is EndpointNotFoundException || ex is CommunicationException ) {
+                        DropConnectionAlert.ShowDropConnectionAlert();
+                        Close();
+                    }
+                }
                 playersConnected[toPlayer].ChatWith.messageTextBox.Text = null;
                 playersConnected[toPlayer].ChatWith.messageScrollViewer.ScrollToEnd();
                 PlayChatSound();

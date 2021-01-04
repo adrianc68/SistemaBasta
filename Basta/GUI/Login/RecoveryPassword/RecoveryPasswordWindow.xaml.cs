@@ -34,6 +34,13 @@ namespace Basta.GUI.Login.RecoveryPassword {
                 systemLabel.Content = Resource.SystemNoExistingEmail;
             } catch ( FaultException<EmailSenderFault> ) {
                 systemLabel.Content = Resource.SystemErrorSendMessage;
+            } catch ( FaultException en ) {
+                Console.WriteLine( "LOG MEEEEE" );
+            } catch ( Exception ex ) {
+                if ( ex is EndpointNotFoundException || ex is CommunicationException ) {
+                    DropConnectionAlert.ShowDropConnectionAlert();
+                    Console.WriteLine("LOG ME" + ex.ToString() );
+                }
             }
         }
 

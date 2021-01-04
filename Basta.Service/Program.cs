@@ -9,6 +9,7 @@ namespace Basta.Service {
         static void Main( string[] args ) {
 
             using (ServiceHost host = new ServiceHost(typeof(BastaService) ) ) {
+                DeleteRooms();
                 host.Open();
                 Console.WriteLine( $"{host.Description.Name} is up and listening on the URI given below. Press <enter> to exit." );
                 PrintServiceInfo( host.Description );

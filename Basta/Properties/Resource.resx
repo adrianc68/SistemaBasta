@@ -159,6 +159,9 @@
   <data name="Lobby_Button_Play" xml:space="preserve">
     <value>¡Comenzar!</value>
   </data>
+  <data name="Lobby_Chat_You" xml:space="preserve">
+    <value>Tú</value>
+  </data>
   <data name="Lobby_Label_Playerslimit" xml:space="preserve">
     <value>Límite de jugadores: </value>
   </data>
@@ -407,7 +410,7 @@
     <value>¡No se encontró la sala!</value>
   </data>
   <data name="SystemServerNotFound" xml:space="preserve">
-    <value>El servidor aún no ha iniciado.</value>
+    <value>El servidor está presentando problemas.</value>
   </data>
   <data name="Tooltip_SignUp_Country" xml:space="preserve">
     <value>No debe contener carácteres extraños como ¡?=)(/&amp;%$#"!!¨*¨[] ni números</value>
@@ -428,10 +431,10 @@
     <value>No debe contener carácteres extraños como ¡?=)(/&amp;%$#"!!¨*¨[]</value>
   </data>
   <data name="UserConnectedLobby_Button_KickPlayer" xml:space="preserve">
-    <value>Expulsar jugador</value>
+    <value>Expulsar</value>
   </data>
   <data name="UserConnectedLobby_Button_ReportPlayer" xml:space="preserve">
-    <value>Reportar jugador</value>
+    <value>Reportar</value>
   </data>
   <data name="UserConnectedLobby_Button_SendMessage" xml:space="preserve">
     <value>Enviar mensaje</value>

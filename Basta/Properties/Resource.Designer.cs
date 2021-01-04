@@ -178,6 +178,15 @@ namespace Basta.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Tú.
+        /// </summary>
+        public static string Lobby_Chat_You {
+            get {
+                return ResourceManager.GetString("Lobby_Chat_You", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Límite de jugadores: .
         /// </summary>
         public static string Lobby_Label_Playerslimit {
@@ -903,7 +912,7 @@ namespace Basta.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a El servidor aún no ha iniciado..
+        ///   Busca una cadena traducida similar a El servidor está presentando problemas..
         /// </summary>
         public static string SystemServerNotFound {
             get {
@@ -966,7 +975,7 @@ namespace Basta.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Expulsar jugador.
+        ///   Busca una cadena traducida similar a Expulsar.
         /// </summary>
         public static string UserConnectedLobby_Button_KickPlayer {
             get {
@@ -975,7 +984,7 @@ namespace Basta.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Reportar jugador.
+        ///   Busca una cadena traducida similar a Reportar.
         /// </summary>
         public static string UserConnectedLobby_Button_ReportPlayer {
             get {
