@@ -7,7 +7,10 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="LobbyWindow" Height="639" Width="956.4" WindowStartupLocation="CenterScreen" Closed="OnCloseWindow">
-    <Grid Background="Black">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="background5.jpg" Stretch="None"/>
+        </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition Width="0*"/>
@@ -20,15 +23,18 @@
             </Grid.RowDefinitions>
 
             <Grid Margin="0">
-                <StackPanel DockPanel.Dock="Top" Height="95" Background="#FF211E1E" Orientation="Horizontal" d:IsHidden="True"/>
-                <DockPanel Margin="0" VerticalAlignment="Bottom" Background="Black">
+
+                <Border BorderBrush="White" BorderThickness="0,0,0,1" Background="#C1000000"/>
+
+                <StackPanel DockPanel.Dock="Top" Height="95" Orientation="Horizontal" d:IsHidden="True"/>
+                <DockPanel Margin="0" VerticalAlignment="Bottom">
                     <Label x:Name="countTopLabel" Content="{x:Static languages:Resource.Lobby_Label_Waitingfor}" Foreground="White" FontSize="25" Margin="150,0,0,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="96" Background="{x:Null}" FontFamily="Vice City Sans" Width="275"/>
                     <Label x:Name="playersConnectedTopLabel" Content="2" Foreground="White" FontSize="25" Margin="0" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Background="{x:Null}" FontFamily="Vice City Sans" Padding="0,4"/>
                     <Label Content="/" Foreground="White" FontSize="25" Margin="0" VerticalContentAlignment="Center" Background="{x:Null}" FontFamily="Vice City Sans" Padding="0,4"/>
                     <Label x:Name="playerlimitTopLabel" Content="2" Foreground="White" FontSize="25" Margin="0" VerticalContentAlignment="Center" Background="{x:Null}" FontFamily="Vice City Sans" Padding="0,4"/>
                     <Button Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="10" BorderThickness="1" Foreground="{x:Null}" BorderBrush="#FF666666" Height="Auto" Click="ChatButtonClicked" Margin="0,0,25,0" DockPanel.Dock="Right" HorizontalAlignment="Right" VerticalAlignment="Center" Background="{x:Null}" FontFamily="Vice City Sans" FontWeight="Normal" ToolTip="Chatear">
 
-                        <materialDesign:PackIcon Kind="ChatTyping" Width="45" Height="45" BorderThickness="0" Foreground="#FF56B248"/>
+                        <materialDesign:PackIcon Kind="ChatTyping" Width="45" Height="45" BorderThickness="0" Foreground="#FF107A00"/>
 
                     </Button>
                 </DockPanel>
@@ -45,7 +51,9 @@
 
 
             <Grid Grid.Row="3">
-                <StackPanel DockPanel.Dock="Top" Height="232" Background="#D8000000" Margin="0">
+                <Border BorderBrush="White" BorderThickness="0,1,0,0" Background="#C1000000"/>
+
+                <StackPanel DockPanel.Dock="Top" Height="232" Margin="0">
                     <Grid Margin="0,25,0,0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -54,25 +62,25 @@
                         </Grid.ColumnDefinitions>
                         <Grid Grid.Column="0">
                             <StackPanel Margin="25,0,15,0" VerticalAlignment="Center">
-                                <Label Content="{x:Static languages:Resource.Lobby_Label_Roomsettings}" Foreground="#FFA0A0A0" Margin="0,0,0,-5" Background="#FF3A3A3A" FontSize="15" FontFamily="Vice City Sans"/>
-                                <Border BorderThickness="1,0,1,1" Padding="15" Margin="0,-5,0,0" BorderBrush="#FF3A3A3A">
+                                <Label Content="{x:Static languages:Resource.Lobby_Label_Roomsettings}" Foreground="#FFE6E6E6" Margin="0,0,0,-5" Background="#FF1F4949" FontSize="15" FontFamily="Vice City Sans"/>
+                                <Border BorderThickness="1,0,1,1" Padding="15" Margin="0,-5,0,0" BorderBrush="#FF1F4949">
                                     <StackPanel>
                                         <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
                                             <TextBlock Foreground="#FFCDCDCD" TextAlignment="Left" Padding="0,0,0,5" UseLayoutRounding="False" FontFamily="Vice City Sans" Height="25" Text="{x:Static languages:Resource.Lobby_Label_Playerslimit}" FontSize="14" TextDecorations="{x:Null}"/>
-                                            <TextBlock x:Name="playersLimitLabel" Foreground="#FF858585" TextAlignment="Left" Padding="0,0,0,5" UseLayoutRounding="False" FontFamily="Vice City Sans" Height="25" Text="5 ejemplo" FontSize="14" TextDecorations="{x:Null}"/>
+                                            <TextBlock x:Name="playersLimitLabel" Foreground="#FF7E1717" TextAlignment="Left" Padding="0,0,0,5" UseLayoutRounding="False" FontFamily="Vice City Sans" Height="25" Text="5 ejemplo" FontSize="14" TextDecorations="{x:Null}"/>
                                         </StackPanel>
 
                                         <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
                                             <TextBlock Foreground="#FFCDCDCD" TextAlignment="Left" Padding="0,0,0,5" UseLayoutRounding="False" FontFamily="Vice City Sans" Height="25" Text="{x:Static languages:Resource.Lobby_Label_Roundslimit}" FontSize="14" TextDecorations="{x:Null}"/>
-                                            <TextBlock x:Name="roundsLimitLabel" Foreground="#FF858585" TextAlignment="Left" Padding="0,0,0,5" UseLayoutRounding="False" FontFamily="Vice City Sans" Height="25" Text="5 ejemplo" FontSize="14" TextDecorations="{x:Null}"/>
+                                            <TextBlock x:Name="roundsLimitLabel" Foreground="#FF7E1717" TextAlignment="Left" Padding="0,0,0,5" UseLayoutRounding="False" FontFamily="Vice City Sans" Height="25" Text="5 ejemplo" FontSize="14" TextDecorations="{x:Null}"/>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
                                             <TextBlock Foreground="#FFCDCDCD" TextAlignment="Left" Padding="0,0,0,5" UseLayoutRounding="False" FontFamily="Vice City Sans" Height="25" Text="{x:Static languages:Resource.Lobby_Label_Roundstempo}" FontSize="14" TextDecorations="{x:Null}"/>
-                                            <TextBlock x:Name="roundTimeLabel" Foreground="#FF858585" TextAlignment="Left" Padding="0,0,0,5" UseLayoutRounding="False" FontFamily="Vice City Sans" Height="25" Text="5 ejemplo" FontSize="14" TextDecorations="{x:Null}"/>
+                                            <TextBlock x:Name="roundTimeLabel" Foreground="#FF7E1717" TextAlignment="Left" Padding="0,0,0,5" UseLayoutRounding="False" FontFamily="Vice City Sans" Height="25" Text="5 ejemplo" FontSize="14" TextDecorations="{x:Null}"/>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
-                                            <TextBlock Foreground="#FFFF0606" TextAlignment="Left" Padding="0,0,0,5" UseLayoutRounding="False" FontFamily="Vice City Sans" Height="25" Text="{x:Static languages:Resource.Lobby_Label_Roomcode}" FontSize="14" TextDecorations="{x:Null}"/>
-                                            <TextBlock x:Name="roomCodeLabel" Foreground="#FF858585" TextAlignment="Left" Padding="0,0,0,5" UseLayoutRounding="False" FontFamily="Vice City Sans" Height="25" Text="5 ejemplo" FontSize="14" TextDecorations="{x:Null}"/>
+                                            <TextBlock Foreground="Red" TextAlignment="Left" Padding="0,0,0,5" UseLayoutRounding="False" FontFamily="Vice City Sans" Height="25" Text="{x:Static languages:Resource.Lobby_Label_Roomcode}" FontSize="14" TextDecorations="{x:Null}"/>
+                                            <TextBlock x:Name="roomCodeLabel" Foreground="#FF7E1717" TextAlignment="Left" Padding="0,0,0,5" UseLayoutRounding="False" FontFamily="Vice City Sans" Height="25" Text="5 ejemplo" FontSize="14" TextDecorations="{x:Null}"/>
                                         </StackPanel>
                                     </StackPanel>
                                 </Border>
@@ -82,16 +90,16 @@
 
                         <Grid Grid.Column="1">
 
-                            <Button Content="{x:Static languages:Resource.Lobby_Button_Play}" Height="200" Padding="0" FontSize="30" BorderBrush="{x:Null}" Foreground="#FFFFB6B6" Background="{x:Null}" Width="200" Margin="0,-55,0,0" VerticalAlignment="Top" FontFamily="Vice City Sans">
+                            <Button Content="{x:Static languages:Resource.Lobby_Button_Play}" Height="200" Padding="0" FontSize="30" BorderBrush="{x:Null}" Foreground="#FFE6E6E6" Background="{x:Null}" Width="200" Margin="0,-55,0,0" VerticalAlignment="Top" FontFamily="Vice City Sans">
                                 <Button.Effect>
-                                    <DropShadowEffect Direction="278" ShadowDepth="3" BlurRadius="0" Color="#FF9C9C9C"/>
+                                    <DropShadowEffect Direction="278" ShadowDepth="3" BlurRadius="0" Color="#FF6C6B6B"/>
                                 </Button.Effect>
                                 <Button.Template>
 
                                     <ControlTemplate TargetType="{x:Type Button}">
                                         <Grid>
 
-                                            <Ellipse Stroke="Black" StrokeThickness="3">
+                                            <Ellipse Stroke="#FF232323" StrokeThickness="3">
 
                                                 <Ellipse.Style>
                                                     <Style TargetType="{x:Type Ellipse}">
@@ -99,7 +107,13 @@
 
 
                                                             <Trigger Property="IsMouseOver" Value="False">
-                                                                <Setter Property="Fill" Value="#FF1D1919">
+                                                                <Setter Property="Fill">
+                                                                    <Setter.Value>
+                                                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                                            <GradientStop Color="Black" Offset="0.297"/>
+                                                                            <GradientStop Color="#FF2F084F" Offset="0"/>
+                                                                        </LinearGradientBrush>
+                                                                    </Setter.Value>
                                                                 </Setter>
                                                             </Trigger>
 
@@ -131,7 +145,7 @@
                                 <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                                     <Button Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="10" BorderThickness="1" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" Background="{x:Null}" BorderBrush="#FF666666" Height="Auto" Margin="0,0,5,0">
                                         <StackPanel Orientation="Horizontal">
-                                            <materialDesign:PackIcon Kind="Settings" Width="45" Height="45" Foreground="#FF314421"/>
+                                            <materialDesign:PackIcon Kind="Settings" Width="45" Height="45" Foreground="#FFCDCDCD"/>
                                             <TextBlock Text="{x:Static languages:Resource.Lobby_Button_Configureroom}" TextAlignment="Center" TextWrapping="Wrap" Width="51" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10"></TextBlock>
 
                                         </StackPanel>
@@ -139,7 +153,7 @@
 
                                     <Button Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="10" BorderThickness="1" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" Background="{x:Null}" BorderBrush="#FF666666" Height="Auto" Margin="5,0,0,0" Click="DeleteRoomButtonClicked">
                                         <StackPanel Orientation="Horizontal">
-                                            <materialDesign:PackIcon Width="45" Height="45" Kind="BankRemove" Foreground="#FFFF2525"/>
+                                            <materialDesign:PackIcon Width="45" Height="45" Kind="BankRemove" Foreground="#FFA60000"/>
                                             <TextBlock Text="{x:Static languages:Resource.Lobby_Button_Destroyroom}" TextAlignment="Center" TextWrapping="Wrap" Width="43" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10"></TextBlock>
                                         </StackPanel>
                                     </Button>
@@ -147,7 +161,7 @@
 
                                 <Button Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="10" BorderThickness="1" Foreground="White" VerticalAlignment="Center" Background="{x:Null}" BorderBrush="#FF666666" Height="Auto" Click="ExitButtonClicked" ToolTip="Salir de sala">
                                     <StackPanel Orientation="Horizontal">
-                                        <materialDesign:PackIcon Width="45" Height="45" Kind="ExitRun" Foreground="#FF366A18"/>
+                                        <materialDesign:PackIcon Width="45" Height="45" Kind="ExitRun" Foreground="#FFCDCDCD"/>
                                         <TextBlock Text="{x:Static languages:Resource.Lobby_Button_Exit}" TextAlignment="Center" Width="76" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10"/>
                                     </StackPanel>
                                 </Button>
@@ -159,69 +173,70 @@
         </Grid>
 
 
-        <Grid x:Name="chatGrid" Visibility="Hidden" Background="#FF545B64" Margin="75">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="197*"/>
-                <RowDefinition Height="32*"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="57*"/>
-                <ColumnDefinition Width="152*"/>
-                <ColumnDefinition Width="429*"/>
-                <ColumnDefinition Width="160*"/>
-            </Grid.ColumnDefinitions>
+        <Border Visibility="Hidden" x:Name="chatGrid" Margin="75" Padding="0" CornerRadius="25" BorderThickness="0" Background="#FFF2F7F7">
 
-
-            <DockPanel Grid.Column="1" Grid.RowSpan="2" Margin="0" Background="#FF363E47">
-                <WrapPanel x:Name="playersChatWrapPanel" Margin="0">
-                    <TextBlock Text="{x:Static languages:Resource.Chat_UsersConnected}" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type WrapPanel}}}" TextWrapping="Wrap" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" Padding="5,15" FontFamily="Vice City SAns" FontSize="15"/>
-                </WrapPanel>
-            </DockPanel>
-            <StackPanel Grid.RowSpan="2" Background="#FF262E38">
-
-
-                <materialDesign:PackIcon HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="35" Height="35" Kind="Earth" Margin="0,25,0,0" MouseLeftButtonDown="GlobalChatButtonPressed">
-                    <!--
-                    <materialDesign:PackIcon.Style>
-                        <Style TargetType="{x:Type materialDesign:PackIcon}">
-                            <Setter Property="Foreground" Value="#FFC9C9C9"/>
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Foreground" Value="#FF31B268"/>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </materialDesign:PackIcon.Style>
-                    -->
-                </materialDesign:PackIcon>
-                <materialDesign:PackIcon HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="35" Height="35" Kind="CloseBoxOutline" Margin="0,25,0,0" MouseLeftButtonDown="CloseChatButtonClicked">
-                    <!--
-                    <materialDesign:PackIcon.Style>
-                        <Style TargetType="{x:Type materialDesign:PackIcon}">
-                            <Setter Property="Foreground" Value="#FFC9C9C9"/>
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Foreground" Value="#FF31B268"/>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </materialDesign:PackIcon.Style>
-                    -->
-                </materialDesign:PackIcon>
-
-            </StackPanel>
-            <Grid Grid.Column="2" Grid.Row="1" Background="White" Grid.ColumnSpan="2" >
+            <Grid Margin="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="197*"/>
+                    <RowDefinition Height="32*"/>
+                </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="85*"/>
-                    <ColumnDefinition Width="18*"/>
+                    <ColumnDefinition Width="57*"/>
+                    <ColumnDefinition Width="152*"/>
+                    <ColumnDefinition Width="429*"/>
+                    <ColumnDefinition Width="160*"/>
                 </Grid.ColumnDefinitions>
-                <Border BorderBrush="#FFBDBDBD" BorderThickness="0,0,2,2" Grid.ColumnSpan="2" MinHeight="2"/>
 
-                <TextBox x:Name="messageTextBox" materialDesign:HintAssist.Hint="Type something to send..."  materialDesign:HintAssist.IsFloating="True" FontFamily="Vice City Sans" HorizontalContentAlignment="Left" BorderThickness="0" Margin="25,0,0,0" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="0" SelectionBrush="#FF8D8D8D" CaretBrush="#FF57BF5C" Foreground="#FF8D8D8D" Grid.ColumnSpan="1" Height="64" FontSize="13" KeyDown="MessageKeyPressed"/>
+                <DockPanel Grid.Column="1" Grid.RowSpan="2" Margin="0" Background="#FF2E3032">
+                    <WrapPanel x:Name="playersChatWrapPanel" Margin="0">
+                        <TextBlock Text="{x:Static languages:Resource.Chat_UsersConnected}" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type WrapPanel}}}" TextWrapping="Wrap" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" Padding="5,15" FontFamily="Vice City SAns" FontSize="15"/>
+                    </WrapPanel>
+                </DockPanel>
+                <StackPanel Grid.RowSpan="2" Background="#FF0E1621">
 
 
-                <materialDesign:PackIcon Height="35" VerticalAlignment="Center" Width="35" HorizontalAlignment="Center" Kind="Send" MouseLeftButtonDown="SendMessageButtonClicked" Margin="0" Grid.Column="1">
-                    <!--
+                    <materialDesign:PackIcon HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="35" Height="35" Kind="Earth" Margin="0,25,0,0" MouseLeftButtonDown="GlobalChatButtonPressed" Foreground="White">
+                        <!--
+                    <materialDesign:PackIcon.Style>
+                        <Style TargetType="{x:Type materialDesign:PackIcon}">
+                            <Setter Property="Foreground" Value="#FFC9C9C9"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Foreground" Value="#FF31B268"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </materialDesign:PackIcon.Style>
+                    -->
+                    </materialDesign:PackIcon>
+                    <materialDesign:PackIcon HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="35" Height="35" Kind="CloseBoxOutline" Margin="0,25,0,0" MouseLeftButtonDown="CloseChatButtonClicked" Foreground="White">
+                        <!--
+                    <materialDesign:PackIcon.Style>
+                        <Style TargetType="{x:Type materialDesign:PackIcon}">
+                            <Setter Property="Foreground" Value="#FFC9C9C9"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Foreground" Value="#FF31B268"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </materialDesign:PackIcon.Style>
+                    -->
+                    </materialDesign:PackIcon>
+
+                </StackPanel>
+                <Grid Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="2" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="85*"/>
+                        <ColumnDefinition Width="18*"/>
+                    </Grid.ColumnDefinitions>
+                    <Border BorderBrush="#FFBDBDBD" BorderThickness="0" Grid.ColumnSpan="2" MinHeight="2" CornerRadius="25" Background="White"/>
+
+                    <TextBox x:Name="messageTextBox" materialDesign:HintAssist.Hint="{x:Static languages:Resource.MainLobby_TextField_Chat}"  materialDesign:HintAssist.IsFloating="True" FontFamily="Vice City Sans" HorizontalContentAlignment="Left" BorderThickness="0" Margin="25,0,0,0" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="0" SelectionBrush="#FF8D8D8D" CaretBrush="#FF57BF5C" Foreground="#FF8D8D8D" Grid.ColumnSpan="1" Height="64" FontSize="13" KeyDown="MessageKeyPressed"/>
+
+
+                    <materialDesign:PackIcon Height="35" VerticalAlignment="Center" Width="35" HorizontalAlignment="Center" Kind="Send" MouseLeftButtonDown="SendMessageButtonClicked" Margin="0" Grid.Column="1">
+                        <!--
                     <materialDesign:PackIcon.Style>
                         <Style TargetType="{x:Type materialDesign:PackIcon}">
                             <Setter Property="Foreground" Value="#FF55D48B"/>
@@ -234,27 +249,27 @@
                     </materialDesign:PackIcon.Style>
             -->
 
-                </materialDesign:PackIcon>
+                    </materialDesign:PackIcon>
+                </Grid>
+                <DockPanel Grid.Column="2" Grid.ColumnSpan="2">
+                    <Border BorderBrush="#FFBDBDBD" BorderThickness="0" VerticalAlignment="Top" Height="92" DockPanel.Dock="Top">
+                        <StackPanel VerticalAlignment="Center" Orientation="Horizontal" Margin="0" HorizontalAlignment="Center">
+                            <Label Content="{x:Static languages:Resource.Chat_GlobalChat}" Margin="-2,0,0,0" FontFamily="Vice City Sans" FontSize="20"/>
+                        </StackPanel>
+                    </Border>
+                    <Border x:Name="borderChat" BorderBrush="#FFBDBDBD" BorderThickness="0,1" DockPanel.Dock="Top">
+                        <ScrollViewer x:Name="messageScrollViewer" Margin="0" Padding="15,0,15,15" HorizontalContentAlignment="Right" BorderThickness="0,0,2,0">
+                            <WrapPanel x:Name="messagesWrapPanel"></WrapPanel>
+                        </ScrollViewer>
+                    </Border>
+                </DockPanel>
+                <DockPanel x:Name="chatWithDockPanel" Visibility="Hidden" Grid.Column="2" Grid.ColumnSpan="2" Grid.RowSpan="2">
+                    <WrapPanel x:Name="chatWithWrapPanel" Background="Black">
+                    </WrapPanel>
+                </DockPanel>
+
             </Grid>
-            <DockPanel Grid.Column="2" Background="#F8F2F7F7" Grid.ColumnSpan="2">
-                <Border BorderBrush="#FFBDBDBD" BorderThickness="0,2,2,1" VerticalAlignment="Top" Height="92" DockPanel.Dock="Top">
-                    <StackPanel VerticalAlignment="Center" Orientation="Horizontal" Margin="0" HorizontalAlignment="Center">
-                        <Label Content="{x:Static languages:Resource.Chat_GlobalChat}" Margin="-2,0,0,0" FontFamily="Vice City Sans" FontSize="20"/>
-                    </StackPanel>
-                </Border>
-                <Border x:Name="borderChat" BorderBrush="#FFBDBDBD" BorderThickness="0,0,0,1" DockPanel.Dock="Top">
-                    <ScrollViewer x:Name="messageScrollViewer" Margin="0" Padding="15,0,15,15" HorizontalContentAlignment="Right" BorderThickness="0,0,2,0">
-                        <WrapPanel x:Name="messagesWrapPanel"></WrapPanel>
-                    </ScrollViewer>
-                </Border>
-            </DockPanel>
-            <DockPanel x:Name="chatWithDockPanel" Visibility="Hidden" Grid.Column="2" Grid.ColumnSpan="2" Grid.RowSpan="2">
-                <WrapPanel x:Name="chatWithWrapPanel" Background="Black">
-                </WrapPanel>
-            </DockPanel>
-
-        </Grid>
-
+        </Border>
 
 
     </Grid>

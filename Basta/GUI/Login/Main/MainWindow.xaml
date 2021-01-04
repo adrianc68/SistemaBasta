@@ -7,11 +7,13 @@
         xmlns:languages="clr-namespace:Basta.Properties"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="MainWindow" Height="687.412" Width="1033.621" WindowStartupLocation="CenterScreen" Closed="MainClosed">
-    <Grid>
+        Title="MainWindow" Height="687.412" Width="1033.621" WindowStartupLocation="CenterScreen" Closed="MainClosed" KeyDown="EnterButtonPressed" Background="{x:Null}">
+    <Grid Background="Black">
+        
+        <Image Source="background.jpeg" Stretch="None"/>
 
-        <Image HorizontalAlignment="Left" VerticalAlignment="Bottom" Source="background.jpeg" Height="656" Width="1026" Stretch="None"/>
-
+        <MediaElement x:Name="videoControl" Source="Walking.wmv" Volume="0" Stretch="UniformToFill" LoadedBehavior="Manual"></MediaElement>
+        
         <Border Background="#C1000000" Margin="30,25,341,25" Padding="0" HorizontalAlignment="Center" Width="655" BorderBrush="White" BorderThickness="1" CornerRadius="25" Grid.RowSpan="2">
             <StackPanel Margin="25">
                 <TextBox TextWrapping="Wrap" Text="{x:Static languages:Resource.Lobby_TextBlock_Clasification}" Foreground="#FFE4E4E4" FontFamily="PriceDown" FontSize="45" TextAlignment="Center"/>
@@ -37,7 +39,8 @@
 
         <Border Background="#BF000000" Margin="0,25,25,0" Padding="0" HorizontalAlignment="Right" Width="280" BorderBrush="White" BorderThickness="1" Height="290" VerticalAlignment="Top" CornerRadius="25">
             <StackPanel Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" >
-                <Button Height="65" Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="10" BorderThickness="2" BorderBrush="#FF4F4545" Foreground="White" Content="{x:Static languages:Resource.Main_Button_Configuration}" Margin="0,25,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Click="SettingsButtonClicked" FontSize="25" Padding="25,4">
+                <TextBlock x:Name="usernameLabel" Text="Username" Foreground="#FFFFFBFB" FontSize="25" FontFamily="Vice City Sans" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap"></TextBlock>
+                <Button Height="52" Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="10" BorderThickness="2" BorderBrush="#FF4F4545" Foreground="White" Content="{x:Static languages:Resource.Main_Button_Configuration}" Margin="0,25,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Click="SettingsButtonClicked" FontSize="20" Padding="25,4">
                     <Button.Background>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                             <GradientStop Color="Black" Offset="0"/>
@@ -45,14 +48,14 @@
                         </LinearGradientBrush>
                     </Button.Background>
                 </Button>
-                <Button Height="42" Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="10" BorderThickness="2" BorderBrush="{x:Null}" Background="{x:Null}" Foreground="White" Content="{x:Static languages:Resource.Main_Button_Exit}" Margin="0,25,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Click="exitButtonClicked" FontSize="25"/>
+                <Button Height="42" Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="10" BorderThickness="2" BorderBrush="{x:Null}" Background="{x:Null}" Foreground="White" Content="{x:Static languages:Resource.Main_Button_Exit}" Margin="0,25,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Click="exitButtonClicked" FontSize="20" FontFamily="Vice City Sans"/>
             </StackPanel>
         </Border>
 
         <Border Background="#BF000000" Margin="0,0,25,25" Padding="0" HorizontalAlignment="Right" Width="280" BorderBrush="White" BorderThickness="1" Height="290" VerticalAlignment="Bottom" CornerRadius="25" Grid.RowSpan="2">
-            <StackPanel Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" >
+            <StackPanel Margin="0,35,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" >
                 <TextBlock TextWrapping="Wrap" Text="{x:Static languages:Resource.LobbyWindow_TextBox_StartGame}" Foreground="#FFE4E4E4" FontFamily="PriceDown" FontSize="30" TextAlignment="Center"/>
-                <Button Height="65" Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="10" BorderThickness="2" BorderBrush="#FF4F4545" Content="{x:Static languages:Resource.Main_Button_Play}" Margin="0,25,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Click="PlayButtonClicked" Padding="75,4" FontSize="25" Foreground="White">
+                <Button Height="52" Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="10" BorderThickness="2" BorderBrush="#FF4F4545" Content="{x:Static languages:Resource.Main_Button_Play}" Margin="0,25,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Click="PlayButtonClicked" Padding="75,4" FontSize="20" Foreground="White">
                     <Button.Background>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                             <GradientStop Color="Black" Offset="0"/>
@@ -60,6 +63,9 @@
                         </LinearGradientBrush>
                     </Button.Background>
                 </Button>
+
+                <TextBlock TextWrapping="Wrap" Text="Basta v1.0" Foreground="#FFE4E4E4" FontFamily="Vice City Sans" TextAlignment="Center" Margin="0,55,0,0" FontSize="20"/>
+
             </StackPanel>
 
         </Border>
@@ -73,7 +79,7 @@
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text=" Selecciona esta sala para ingresar" />
+                                    <TextBlock Text="{x:Static languages:Resource.Lobby_ListView_Select}" />
                                     <TextBlock Text="   :   " />
                                     <TextBlock Text="{Binding Code}" />
                                 </StackPanel>
@@ -94,14 +100,14 @@
         </StackPanel>
 
 
-        <StackPanel Visibility="Hidden"  x:Name="settingsStackPanel" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.RowSpan="2" >
+        <StackPanel Visibility="Hidden" x:Name="settingsStackPanel" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.RowSpan="2" >
             <Border Background="#D8000000" BorderBrush="White" CornerRadius="25" BorderThickness="1">
                 <StackPanel>
 
                     <Label Content="{x:Static languages:Resource.Main_Label_Settings}" Foreground="#FFE4E4E4" FontSize="24" HorizontalAlignment="Center" Margin="0,15" FontFamily="PriceDown"/>
                     <StackPanel Margin="25,0" FlowDirection="RightToLeft">
                         <TextBlock x:Name="musicVolumeLabel" Margin="0,15,0,0" Foreground="#FFE4E4E4" FontFamily="Vice City Sans" Text="{x:Static languages:Resource.Main_Label_Volume}" FontSize="14" FlowDirection="LeftToRight"/>
-                        <Slider VerticalAlignment="Center" Padding="0" Foreground="White" Margin="0,15,0,0" BorderBrush="{x:Null}" Background="#FF252020"/>
+                        <Slider x:Name="volumeSettingsSlider" VerticalAlignment="Center" Padding="0" Foreground="White" Margin="0,15,0,0" BorderBrush="{x:Null}" Background="#FF252020" ValueChanged="VolumeChanged"/>
                         <TextBlock x:Name="languageLabel" Margin="0,15,0,0" Foreground="#FFE4E4E4" FontFamily="Vice City Sans" Text="{x:Static languages:Resource.Main_Label_Language}" FontSize="14" FlowDirection="LeftToRight"/>
                         <ComboBox x:Name="languageComboBox" Height="32" Margin="0,5,0,0" BorderBrush="White" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Padding="0" Loaded="LanguageComboBoxLoaded" Width="379" FontFamily="Vice City Sans" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="Gray"/>
                     </StackPanel>
@@ -144,15 +150,40 @@
                     </StackPanel>
                 </StackPanel>
             </Border>
-   
+
 
         </StackPanel>
 
-        <Grid.Background>
-            <LinearGradientBrush StartPoint="0.1,0" EndPoint="0.9,1">
-                <GradientStop Color="#FFF01461" Offset="1" />
-                <GradientStop Color="#FF0023C3" Offset="0" />
-            </LinearGradientBrush>
-        </Grid.Background>
+
+        <!--<Border x:Name="introTheme" Background="Black">
+            <TextBlock Text="Sistema Basta" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="PriceDown" FontSize="125" Margin="0" TextAlignment="Center" Width="538" TextWrapping="WrapWithOverflow" FontWeight="SemiBold"/>
+
+        </Border>-->
+
+
+        <Grid x:Name="introTheme" Background="Black" d:IsHidden="True">
+            <Grid.Triggers>
+                <EventTrigger RoutedEvent="Grid.Loaded">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation 
+                            From="100" To="2" 
+                            Duration="00:00:04" 
+                            Storyboard.TargetName="blurEffect" 
+                            Storyboard.TargetProperty="Radius"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Grid.Triggers>
+
+            <TextBlock Text="Sistema Basta" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="PriceDown" FontSize="125" Margin="0" TextAlignment="Center" Width="538" TextWrapping="WrapWithOverflow" FontWeight="SemiBold">
+                <TextBlock.Effect>
+                    <BlurEffect Radius="60" x:Name="blurEffect"/>
+                </TextBlock.Effect>
+            </TextBlock>
+
+        </Grid>
     </Grid>
+
+
 </Window>

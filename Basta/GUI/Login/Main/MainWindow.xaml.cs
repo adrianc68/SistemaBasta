@@ -24,6 +24,9 @@ namespace Basta.GUI.Login.Main {
             InstanceContext context = new InstanceContext( Autentication.GetInstance().RoomServiceCallBack );
             autentication.RoomServer = new Proxy.RoomServiceClient( context );
             autentication.RoomServiceCallBack.MainWindow = this;
+            ConfigureVolumeSlider();
+            usernameLabel.Text = autentication.Player.Name;
+
         }
 
         public void GameIsFull() {
@@ -93,6 +96,7 @@ namespace Basta.GUI.Login.Main {
                 autentication.LoginServer.LogOut( Autentication.GetInstance().Player );
                 Autentication.GetInstance().LogOut();
             }
+            Sound.GetInstance().StopMusic();
             Autentication.GetInstance().RoomServiceCallBack.LoginWindow.ShowDialog();
         }
 
@@ -173,6 +177,33 @@ namespace Basta.GUI.Login.Main {
             combo.ItemsSource = data;
             combo.SelectedIndex = 0;
         }
+
+        private void EnterButtonPressed( object sender, System.Windows.Input.KeyEventArgs e ) {
+            Sound sound = Sound.GetInstance();
+            if ( e.Key == System.Windows.Input.Key.Enter ) {
+                sound.StopMusic();
+                sound.RandomizePlayListIntroMusic();
+                introTheme.Visibility = Visibility.Hidden;
+            } else if ( e.Key == System.Windows.Input.Key.Escape ) {
+                sound.StopMusic();
+            }
+            videoControl.Play();
+
+        }
+
+        private void VolumeChanged( object sender, RoutedPropertyChangedEventArgs<double> e ) {
+            if ( e.NewValue < e.OldValue ) {
+                Sound.GetInstance().VolumenUp( 1 );
+            } else {
+                Sound.GetInstance().VolumenDown( 1 );
+            }
+        }
+
+        private void ConfigureVolumeSlider() {
+            volumeSettingsSlider.Maximum = 100;
+            volumeSettingsSlider.Minimum = 0;
+        }
+
 
     }
 

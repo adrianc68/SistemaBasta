@@ -232,6 +232,15 @@ namespace Basta.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Selecciona una sala para ingresar.
+        /// </summary>
+        public static string Lobby_ListView_Select {
+            get {
+                return ResourceManager.GetString("Lobby_ListView_Select", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Tabla de clasificaciones.
         /// </summary>
         public static string Lobby_TextBlock_Clasification {
@@ -471,6 +480,15 @@ namespace Basta.Properties {
         public static string Main_TextField_Code {
             get {
                 return ResourceManager.GetString("Main_TextField_Code", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Escribe algo para enviar....
+        /// </summary>
+        public static string MainLobby_TextField_Chat {
+            get {
+                return ResourceManager.GetString("MainLobby_TextField_Chat", resourceCulture);
             }
         }
         
@@ -944,6 +962,33 @@ namespace Basta.Properties {
         public static string Tooltip_SignUp_Username {
             get {
                 return ResourceManager.GetString("Tooltip_SignUp_Username", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Expulsar jugador.
+        /// </summary>
+        public static string UserConnectedLobby_Button_KickPlayer {
+            get {
+                return ResourceManager.GetString("UserConnectedLobby_Button_KickPlayer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Reportar jugador.
+        /// </summary>
+        public static string UserConnectedLobby_Button_ReportPlayer {
+            get {
+                return ResourceManager.GetString("UserConnectedLobby_Button_ReportPlayer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Enviar mensaje.
+        /// </summary>
+        public static string UserConnectedLobby_Button_SendMessage {
+            get {
+                return ResourceManager.GetString("UserConnectedLobby_Button_SendMessage", resourceCulture);
             }
         }
     }

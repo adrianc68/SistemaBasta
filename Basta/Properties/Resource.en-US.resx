@@ -177,6 +177,9 @@
   <data name="Lobby_Label_Waitingfor" xml:space="preserve">
     <value>Waiting players...</value>
   </data>
+  <data name="Lobby_ListView_Select" xml:space="preserve">
+    <value>Select a room to join it</value>
+  </data>
   <data name="Lobby_TextBlock_Clasification" xml:space="preserve">
     <value>Top</value>
   </data>
@@ -197,6 +200,9 @@
   </data>
   <data name="login_TextField_userOrEmail" xml:space="preserve">
     <value>Enter your username or email</value>
+  </data>
+  <data name="MainLobby_TextField_Chat" xml:space="preserve">
+    <value>Type something to send...</value>
   </data>
   <data name="Main_Button_Cancel" xml:space="preserve">
     <value>Cancel</value>
@@ -420,5 +426,14 @@
   </data>
   <data name="Tooltip_SignUp_Username" xml:space="preserve">
     <value>It should not contain strange characters such as ¡? =) (/ &amp;% $ # "!! ¨ * ¨ []</value>
+  </data>
+  <data name="UserConnectedLobby_Button_KickPlayer" xml:space="preserve">
+    <value>Kick player</value>
+  </data>
+  <data name="UserConnectedLobby_Button_ReportPlayer" xml:space="preserve">
+    <value>Report player</value>
+  </data>
+  <data name="UserConnectedLobby_Button_SendMessage" xml:space="preserve">
+    <value>Send message</value>
   </data>
 </root>

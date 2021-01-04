@@ -2,6 +2,7 @@
 using Basta.GUI.Login.Main;
 using Basta.GUI.Login.RecoveryPassword;
 using System.ServiceModel;
+using System.Threading;
 using System.Windows;
 
 namespace Basta.GUI.Login {
@@ -43,6 +44,8 @@ namespace Basta.GUI.Login {
             }
 
             if ( autentication.Player != null ) {
+                Sound sound = Sound.GetInstance();
+                sound.PlayLoginMusic();
                 Hide();
                 MainWindow mainWindow = new MainWindow();
                 mainWindow.ShowDialog();

@@ -7,9 +7,9 @@
              xmlns:languages="clr-namespace:Basta.Properties"
              xmlns:local="clr-namespace:Basta.GUI.Login.Lobby"
              mc:Ignorable="d" 
-             Height="{Binding ActualHeight, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type WrapPanel}}}" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type WrapPanel}}}" Foreground="{x:Null}" Background="#FF5034CD">
+             Height="{Binding ActualHeight, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type WrapPanel}}}" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type WrapPanel}}}" Foreground="{x:Null}">
 
-    <Grid x:Name="chatGrid"  Background="#FF262E38" Margin="0" Width="589">
+    <Grid x:Name="chatGrid" Margin="0">
         <Grid.RowDefinitions>
             <RowDefinition Height="399*"/>
             <RowDefinition Height="64*"/>
@@ -25,7 +25,7 @@
             </Grid.ColumnDefinitions>
             <Border BorderBrush="#FFBDBDBD" BorderThickness="0" Grid.ColumnSpan="2"/>
 
-            <TextBox x:Name="messageTextBox" materialDesign:HintAssist.Hint="Type something to send..."  materialDesign:HintAssist.IsFloating="True" FontFamily="Vice City Sans" HorizontalContentAlignment="Left" BorderThickness="0" Margin="25,0,0,0" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="0" SelectionBrush="#FF8D8D8D" CaretBrush="#FF57BF5C" Foreground="#FF8D8D8D" Grid.ColumnSpan="1" Height="64" FontSize="13"/>
+            <TextBox x:Name="messageTextBox" materialDesign:HintAssist.Hint="{x:Static languages:Resource.MainLobby_TextField_Chat}"  materialDesign:HintAssist.IsFloating="True" FontFamily="Vice City Sans" HorizontalContentAlignment="Left" BorderThickness="0" Margin="25,0,0,0" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="0" SelectionBrush="#FF8D8D8D" CaretBrush="#FF57BF5C" Foreground="#FF8D8D8D" Grid.ColumnSpan="1" Height="64" FontSize="13"/>
 
 
             <materialDesign:PackIcon x:Name="sendMessageButton" Height="35" VerticalAlignment="Center" Width="35" HorizontalAlignment="Center" Kind="Send" Margin="0" Grid.Column="1" Foreground="Black">
@@ -56,19 +56,15 @@
                 </ScrollViewer>
             </Border>
         </DockPanel>
-        <DockPanel Grid.Column="1" Grid.RowSpan="2" Background="#FFFBE7E7">
-            <Border BorderBrush="#FFBDBDBD" BorderThickness="1,0,0,0" DockPanel.Dock="Top" Padding="15" Margin="0">
-                <StackPanel VerticalAlignment="Top">
-                    <Border BorderThickness="1" CornerRadius="350" BorderBrush="#FFD1D1D1" Height="150">
-                        <Border.Background>
-                            <ImageBrush ImageSource="/Basta;component/GUI/Login/ChangePassword/free.png" Stretch="UniformToFill"/>
-                        </Border.Background>
-                    </Border>
+        <DockPanel Grid.Column="1" Grid.RowSpan="2">
+            <Border Background="#FFFBE7E7" BorderBrush="#FFBDBDBD" BorderThickness="1,0,0,0" DockPanel.Dock="Top" Padding="15" Margin="0" CornerRadius="0,25,25,0">
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                   
                     <TextBlock x:Name="anotherPlayerNameSubLabel" TextWrapping="Wrap" FontFamily="Vice City Sans" FontSize="15" Foreground="#DF000000" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,15,0,0" Text="AnotherPlayerNameLabel"/>
-                    <Label Content="{x:Static languages:Resource.ChatTypePlayer}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,15,0,0" FontFamily="Vice City Sans" FontSize="15" Padding="0" Background="{x:Null}" Foreground="#FFB0B0B0"/>
-                    <TextBlock x:Name="countryInfoLabel" TextWrapping="Wrap" FontFamily="Vice City Sans" FontSize="14" Foreground="#FFB0B0B0" Margin="0,10,0,0" Text="Country" HorizontalAlignment="Center"/>
-                    <TextBlock x:Name="emailInfoLabel" TextWrapping="Wrap" FontFamily="Vice City Sans" FontSize="14" Foreground="#FFB0B0B0" Margin="0,10,0,0" Text="Email" HorizontalAlignment="Center"/>
-                    <TextBlock x:Name="ageInfoLabel" TextWrapping="Wrap" FontFamily="Vice City Sans" FontSize="14" Foreground="#FFB0B0B0" Margin="0,10,0,0" Text="Edad" HorizontalAlignment="Center"/>
+                    <Label Content="{x:Static languages:Resource.ChatTypePlayer}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,15,0,0" FontFamily="Vice City Sans" FontSize="15" Padding="0" Background="{x:Null}" Foreground="#FF6C5C5C"/>
+                    <TextBlock x:Name="countryInfoLabel" TextWrapping="Wrap" FontFamily="Vice City Sans" FontSize="14" Foreground="#FF6C5C5C" Margin="0,10,0,0" Text="Country" HorizontalAlignment="Center"/>
+                    <TextBlock x:Name="emailInfoLabel" TextWrapping="Wrap" FontFamily="Vice City Sans" FontSize="14" Foreground="#FF6C5C5C" Margin="0,10,0,0" Text="Email" HorizontalAlignment="Center"/>
+                    <TextBlock x:Name="ageInfoLabel" TextWrapping="Wrap" FontFamily="Vice City Sans" FontSize="14" Foreground="#FF6C5C5C" Margin="0,10,0,0" Text="Edad" HorizontalAlignment="Center"/>
                 </StackPanel>
             </Border>
         </DockPanel>

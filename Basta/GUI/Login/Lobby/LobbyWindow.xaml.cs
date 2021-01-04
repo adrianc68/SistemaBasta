@@ -1,17 +1,9 @@
 ﻿using Domain.Domain;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Basta.GUI.Login.Lobby {
     /// <summary>
@@ -36,6 +28,7 @@ namespace Basta.GUI.Login.Lobby {
             messageReceived.usernameLabel.Text = player.Name;
             messageReceived.messageTextBlock.Text = message;
             messagesWrapPanel.Children.Add( messageReceived );
+            PlayChatSound();
         }
 
         public void RecivedMessageFromPlayer( Player player, string message ) {
@@ -44,6 +37,7 @@ namespace Basta.GUI.Login.Lobby {
             messageReceived.messageTextBlock.Text = message;
             playersConnected[player].ChatWith.messagesWrapPanel.Children.Add( messageReceived );
             playersConnected[player].UserChat.borderBackground.Background = new SolidColorBrush( Color.FromArgb( 98, 98, 98, 98 ) );
+            PlayChatSound();
         }
 
         public void PlayerWasKicked() {
@@ -208,6 +202,7 @@ namespace Basta.GUI.Login.Lobby {
                     SendMessageRoomChat( Autentication.GetInstance().Player, room, messageTextBox.Text.Trim() );
                 messageTextBox.Text = null;
                 messageScrollViewer.ScrollToEnd();
+                PlayChatSound();
             }
         }
 
@@ -220,12 +215,17 @@ namespace Basta.GUI.Login.Lobby {
                 autentication.RoomServer.SendMessageRoomChatToPlayer( actualPlayer, room, message, toPlayer );
                 playersConnected[toPlayer].ChatWith.messageTextBox.Text = null;
                 playersConnected[toPlayer].ChatWith.messageScrollViewer.ScrollToEnd();
-
+                PlayChatSound();
             }
         }
 
         private void GlobalChatButtonPressed( object sender, MouseButtonEventArgs e ) {
             chatWithDockPanel.Visibility = Visibility.Hidden;
+        }
+
+        private void PlayChatSound() {
+            Sound sound = Sound.GetInstance();
+            sound.PlayChatSound();
         }
 
     }
