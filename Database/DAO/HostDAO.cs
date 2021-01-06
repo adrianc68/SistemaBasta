@@ -48,6 +48,7 @@ namespace Database.DAO {
                     .FirstOrDefault();
                 if ( macAddress != null ) {
                     macAddress.attempts = 0;
+                    isAttemptsReset = true;
                 }
                 database.SaveChanges();
             }

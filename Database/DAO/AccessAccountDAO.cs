@@ -57,10 +57,12 @@ namespace Database.DAO {
             bool isPasswordChanged = false;
             using ( BastaEntityModelContainer database = new BastaEntityModelContainer() ) {
                 var account = database.AccessAccounts
-                    .Where( s => s.email == email ).First();
-                account.password = password;
-                database.SaveChanges();
-                isPasswordChanged = true;
+                    .Where( s => s.email == email ).FirstOrDefault();
+                if( account != null ) {
+                    account.password = password;
+                    database.SaveChanges();
+                    isPasswordChanged = true;
+                }
             }
             return isPasswordChanged;
         }
@@ -77,10 +79,12 @@ namespace Database.DAO {
             string recoveryCode = null;
             using ( BastaEntityModelContainer database = new BastaEntityModelContainer() ) {
                 var account = database.AccessAccounts
-                    .Where( s => s.email == email ).First();
-                account.recovery_code = Cryptography.RandomString().Substring( 0, 8 );
-                database.SaveChanges();
-                recoveryCode = account.recovery_code;
+                    .Where( s => s.email == email ).FirstOrDefault();
+                if( account != null ) {
+                    account.recovery_code = Cryptography.RandomString().Substring( 0, 8 );
+                    database.SaveChanges();
+                    recoveryCode = account.recovery_code;
+                }
             }
             return recoveryCode;
         }

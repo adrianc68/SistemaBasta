@@ -37,7 +37,7 @@
 
         <Border Background="#BF000000" Margin="0,25,25,0" Padding="0" HorizontalAlignment="Right" Width="280" BorderBrush="White" BorderThickness="1" Height="290" VerticalAlignment="Top" CornerRadius="25">
             <StackPanel Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" >
-                <TextBlock x:Name="usernameLabel" Text="Username" Foreground="#FFFFFBFB" FontSize="25" FontFamily="Vice City Sans" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap"></TextBlock>
+                <TextBlock x:Name="usernameLabel" Text="Username" Foreground="#FFFFFBFB" FontSize="25" FontFamily="Vice City Sans" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center"></TextBlock>
                 <Button Height="52" Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="10" BorderThickness="2" BorderBrush="#FF4F4545" Foreground="White" Content="{x:Static languages:Resource.Main_Button_Configuration}" Margin="0,25,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Click="SettingsButtonClicked" FontSize="20" Padding="25,4">
                     <Button.Background>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">

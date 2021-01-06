@@ -219,7 +219,6 @@
     <None Include="Connected Services\Proxy\item3.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="GUI\Login\Main\crowd of people walking on city street sidewalk.f4v" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\Basta.Contracts.Jugador.datasource" />
     <None Include="Properties\DataSources\Database.Entity.Player.datasource" />
@@ -369,7 +368,6 @@
   <ItemGroup>
     <Resource Include="GUI\Login\Lobby\hitman.png" />
     <Resource Include="GUI\Login\Main\background3.jpg" />
-    <Content Include="GUI\Login\Main\Walking.wmv" />
     <Content Include="SoundsEFX\LoginEntered.mp3">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

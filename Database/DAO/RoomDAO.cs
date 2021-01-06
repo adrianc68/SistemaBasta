@@ -97,7 +97,7 @@ namespace Database.DAO {
                 isCodeUsed = room != null;
             }
             return isCodeUsed;
-        }
+         }
 
         // Get all rooms available
         /// <summary>

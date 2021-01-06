@@ -171,7 +171,6 @@ namespace Basta.GUI.Login.Main {
         }
 
         private void SaveSettingsButtonCllicked( object sender, RoutedEventArgs e ) {
-            // Fix this
             //Thread.CurrentThread.CurrentUICulture = new CultureInfo( "en-US" );
         }
 

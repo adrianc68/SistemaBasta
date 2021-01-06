@@ -2,13 +2,13 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 11/17/2020 23:41:12
--- Generated from EDMX file: C:\Users\adrian\Desktop\Basta\Database\Entity\BastaEntityModel.edmx
+-- Date Created: 01/05/2021 17:15:27
+-- Generated from EDMX file: C:\Users\adrian\Desktop\SistemaBasta-main\Database\Entity\BastaEntityModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
 GO
-USE [Basta];
+USE [BastaTest];
 GO
 IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
 GO
