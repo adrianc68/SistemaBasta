@@ -9,10 +9,9 @@ namespace Basta.GUI.Login {
     /// Lógica de interacción para Login.xaml
     /// </summary>
     public partial class Login: Window {
-        private bool language = false;
+        private bool language = true;
 
         public Login() {
-            System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo( "es-ES" );
             InitializeComponent();
             Autentication.GetInstance().RoomServiceCallBack = new RoomServiceCallBack();
             Autentication.GetInstance().RoomServiceCallBack.LoginWindow = this;
@@ -47,7 +46,8 @@ namespace Basta.GUI.Login {
                 sound.PlayLoginMusic();
                 Hide();
                 MainWindow mainWindow = new MainWindow();
-                mainWindow.ShowDialog();
+                //mainWindow.ShowDialog();
+                mainWindow.Show();
             }
         }
 
@@ -57,13 +57,23 @@ namespace Basta.GUI.Login {
             recoveryPasswordWindow.ShowDialog();
         }
 
+        public void ChangeLanguage( bool value ) {
+            language = value;
+        }
+
         private void ChangeLanguageButtonClicked( object sender, RoutedEventArgs e ) {
             if ( language ) {
                 System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo( "en-US" );
-                language = false;
+                Login loginWindow = new Login();
+                Close();
+                loginWindow.ChangeLanguage(false);
+                loginWindow.Show();
             } else {
                 System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo( "es-ES" );
-                language = true;
+                Login loginWindow = new Login();
+                Close();
+                loginWindow.ChangeLanguage( true );
+                loginWindow.Show();
             }
             Properties.Settings.Default.Save();
             DataContext = this;

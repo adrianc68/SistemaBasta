@@ -26,7 +26,6 @@ namespace Basta.GUI.Login.Main {
             autentication.RoomServiceCallBack.MainWindow = this;
             ConfigureVolumeSlider();
             usernameLabel.Text = autentication.Player.Name;
-
         }
 
         public void GameIsFull() {
@@ -114,7 +113,7 @@ namespace Basta.GUI.Login.Main {
                 foreach ( var room in autentication.RoomServer.GetRooms() ) {
                     roomsListView.Items.Add( room );
                 }
-            } catch ( Exception ex) {
+            } catch ( Exception ex ) {
                 if ( ex is EndpointNotFoundException || ex is CommunicationException ) {
                     DropConnectionAlert.ShowDropConnectionAlert();
                     autentication.LogOut();
@@ -122,20 +121,6 @@ namespace Basta.GUI.Login.Main {
                 }
 
             }
-        }
-
-        private void MainClosed( object sender, EventArgs e ) {
-            if ( Autentication.GetInstance().Player != null ) {
-                try {
-                    autentication.LoginServer.LogOut( Autentication.GetInstance().Player );
-                } catch ( Exception ex ) {
-                    // LOG ME PLSSSSSSS
-                    Console.WriteLine( ex );
-                }
-                Autentication.GetInstance().LogOut();
-            }
-            Sound.GetInstance().StopMusic();
-            Autentication.GetInstance().RoomServiceCallBack.LoginWindow.ShowDialog();
         }
 
         private void exitButtonClicked( object sender, RoutedEventArgs e ) {
@@ -170,8 +155,34 @@ namespace Basta.GUI.Login.Main {
             settingsStackPanel.Visibility = Visibility.Visible;
         }
 
+        private void MainClosed( object sender, EventArgs e ) {
+            if ( Autentication.GetInstance().Player != null ) {
+                try {
+                    autentication.LoginServer.LogOut( Autentication.GetInstance().Player );
+                } catch ( Exception ex ) {
+                    // LOG ME PLSSSSSSS
+                    Console.WriteLine( ex );
+                }
+                Autentication.GetInstance().LogOut();
+            }
+            Sound.GetInstance().StopMusic();
+            Autentication.GetInstance().RoomServiceCallBack.LoginWindow.Show();
+        }
+
         private void SaveSettingsButtonCllicked( object sender, RoutedEventArgs e ) {
-            //Thread.CurrentThread.CurrentUICulture = new CultureInfo( "en-US" );
+            if ( languageComboBox.SelectedIndex == 0 ) {
+                System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo( "en-US" );
+                Login loginWindow = new Login();
+                loginWindow.ChangeLanguage( false );
+                autentication.RoomServiceCallBack.LoginWindow = loginWindow;
+                Close();
+            } else {
+                System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo( "es-ES" );
+                Login loginWindow = new Login();
+                loginWindow.ChangeLanguage( true );
+                autentication.RoomServiceCallBack.LoginWindow = loginWindow;
+                Close();
+            }
         }
 
         private void CancelSettingsButtonClicked( object sender, RoutedEventArgs e ) {

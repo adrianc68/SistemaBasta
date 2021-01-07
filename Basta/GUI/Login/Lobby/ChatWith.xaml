@@ -1,0 +1,74 @@
+﻿<UserControl x:Class="Basta.GUI.Login.Lobby.ChatWith"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:languages="clr-namespace:Basta.Properties"
+             xmlns:local="clr-namespace:Basta.GUI.Login.Lobby"
+             mc:Ignorable="d" 
+             Height="{Binding ActualHeight, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type WrapPanel}}}" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type WrapPanel}}}" Foreground="{x:Null}">
+
+    <Grid x:Name="chatGrid" Margin="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="399*"/>
+            <RowDefinition Height="64*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="362*"/>
+            <ColumnDefinition Width="185*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Row="1" Background="White" Margin="0" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="85*"/>
+                <ColumnDefinition Width="18*"/>
+            </Grid.ColumnDefinitions>
+            <Border BorderBrush="#FFBDBDBD" BorderThickness="0" Grid.ColumnSpan="2"/>
+
+            <TextBox x:Name="messageTextBox" materialDesign:HintAssist.Hint="{x:Static languages:Resource.MainLobby_TextField_Chat}"  materialDesign:HintAssist.IsFloating="True" FontFamily="Vice City Sans" HorizontalContentAlignment="Left" BorderThickness="0" Margin="25,0,0,0" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="0" SelectionBrush="#FF8D8D8D" CaretBrush="#FF57BF5C" Foreground="#FF8D8D8D" Grid.ColumnSpan="1" Height="64" FontSize="13"/>
+
+
+            <materialDesign:PackIcon x:Name="sendMessageButton" Height="35" VerticalAlignment="Center" Width="35" HorizontalAlignment="Center" Kind="Send" Margin="0" Grid.Column="1" Foreground="Black">
+                <!--
+                    <materialDesign:PackIcon.Style>
+                        <Style TargetType="{x:Type materialDesign:PackIcon}">
+                            <Setter Property="Foreground" Value="#FF55D48B"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Foreground" Value="#FF31B268"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </materialDesign:PackIcon.Style>
+            -->
+
+            </materialDesign:PackIcon>
+        </Grid>
+        <DockPanel Background="#F8F2F7F7">
+            <Border BorderBrush="#FFBDBDBD" BorderThickness="0,0,0,1" VerticalAlignment="Top" Height="92" DockPanel.Dock="Top">
+                <StackPanel VerticalAlignment="Center" Orientation="Horizontal" Margin="0">
+                    <Label x:Name="anotherPlayerNameLabel"  Content="AnotherPlayerNameLabel" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="15,0,0,0" FontFamily="Vice City Sans" FontSize="20"/>
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="#FFBDBDBD" BorderThickness="0,0,0,1" DockPanel.Dock="Top">
+                <ScrollViewer x:Name="messageScrollViewer" Margin="0" Padding="15,0,15,15" HorizontalContentAlignment="Right" Height="306">
+                    <WrapPanel x:Name="messagesWrapPanel"></WrapPanel>
+                </ScrollViewer>
+            </Border>
+        </DockPanel>
+        <DockPanel Grid.Column="1" Grid.RowSpan="2">
+            <Border Background="#FFFBE7E7" BorderBrush="#FFBDBDBD" BorderThickness="1,0,0,0" DockPanel.Dock="Top" Padding="15" Margin="0" CornerRadius="0,25,25,0">
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                   
+                    <TextBlock x:Name="anotherPlayerNameSubLabel" TextWrapping="Wrap" FontFamily="Vice City Sans" FontSize="15" Foreground="#DF000000" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,15,0,0" Text="AnotherPlayerNameLabel" TextAlignment="Center"/>
+                    <Label Content="{x:Static languages:Resource.ChatTypePlayer}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,15,0,0" FontFamily="Vice City Sans" FontSize="15" Padding="0" Background="{x:Null}" Foreground="#FF6C5C5C"/>
+                    <TextBlock x:Name="countryInfoLabel" TextWrapping="Wrap" FontFamily="Vice City Sans" FontSize="14" Foreground="#FF6C5C5C" Margin="0,10,0,0" Text="Country" HorizontalAlignment="Center" TextAlignment="Center"/>
+                    <TextBlock x:Name="emailInfoLabel" TextWrapping="Wrap" FontFamily="Vice City Sans" FontSize="14" Foreground="#FF6C5C5C" Margin="0,10,0,0" Text="Email" HorizontalAlignment="Center" TextAlignment="Center"/>
+                    <TextBlock x:Name="ageInfoLabel" TextWrapping="Wrap" FontFamily="Vice City Sans" FontSize="14" Foreground="#FF6C5C5C" Margin="0,10,0,0" Text="Edad" HorizontalAlignment="Center" TextAlignment="Center"/>
+                </StackPanel>
+            </Border>
+        </DockPanel>
+
+    </Grid>
+
+</UserControl>
