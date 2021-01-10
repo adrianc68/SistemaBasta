@@ -34,7 +34,7 @@
                     <Label x:Name="playerlimitTopLabel" Content="2" Foreground="White" FontSize="25" Margin="0" VerticalContentAlignment="Center" Background="{x:Null}" FontFamily="Vice City Sans" Padding="0,4"/>
                     <Button Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="10" BorderThickness="1" Foreground="{x:Null}" BorderBrush="#FF666666" Height="Auto" Click="ChatButtonClicked" Margin="0,0,25,0" DockPanel.Dock="Right" HorizontalAlignment="Right" VerticalAlignment="Center" Background="{x:Null}" FontFamily="Vice City Sans" FontWeight="Normal" ToolTip="Chatear">
 
-                        <materialDesign:PackIcon Kind="ChatTyping" Width="45" Height="45" BorderThickness="0" Foreground="#FF107A00"/>
+                        <materialDesign:PackIcon Kind="ChatTyping" Width="45" Height="45" BorderThickness="0" Foreground="#FFDEDEDE"/>
 
                     </Button>
                 </DockPanel>
@@ -69,24 +69,21 @@
                         </Grid.ColumnDefinitions>
                         <Grid Grid.Column="0">
                             <StackPanel Margin="25,0,15,0" VerticalAlignment="Center">
-                                <Label Content="{x:Static languages:Resource.Lobby_Label_Roomsettings}" Foreground="#FF0A0404" Margin="0,0,0,-5" Background="#FFA40000" FontSize="15" FontFamily="Vice City Sans"/>
+                                <Label Content="{x:Static languages:Resource.Lobby_Label_Roomsettings}" Foreground="Black" Margin="0,0,0,-5" Background="#FFA40000" FontSize="15" FontFamily="Vice City Sans"/>
                                 <Border BorderThickness="1,0,1,1" Padding="15" Margin="0,-5,0,0" BorderBrush="#FFA40000">
                                     <StackPanel>
-                                        <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                                        <StackPanel Orientation="Horizontal" Margin="0">
                                             <TextBlock Foreground="#FF9C9C9C" TextAlignment="Left" Padding="0,0,0,5" UseLayoutRounding="False" FontFamily="Vice City Sans" Height="25" Text="{x:Static languages:Resource.Lobby_Label_Playerslimit}" FontSize="14" TextDecorations="{x:Null}"/>
-                                            <TextBlock x:Name="playersLimitLabel" Foreground="#FF3A5F6A" TextAlignment="Left" Padding="0,0,0,5" UseLayoutRounding="False" FontFamily="Vice City Sans" Height="25" Text="5 ejemplo" FontSize="14" TextDecorations="{x:Null}"/>
+                                            <TextBlock x:Name="playersLimitLabel" Foreground="#FF575757" TextAlignment="Left" Padding="0,0,0,5" UseLayoutRounding="False" FontFamily="Vice City Sans" Height="25" Text="5 ejemplo" FontSize="14" TextDecorations="{x:Null}"/>
                                         </StackPanel>
 
-                                        <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
-                                            <TextBlock Foreground="#FF9C9C9C" TextAlignment="Left" Padding="0,0,0,5" UseLayoutRounding="False" FontFamily="Vice City Sans" Height="25" Text="{x:Static languages:Resource.Lobby_Label_Roundslimit}" FontSize="14" TextDecorations="{x:Null}"/>
-                                            <TextBlock x:Name="roundsLimitLabel" Foreground="#FF3A5F6A" TextAlignment="Left" Padding="0,0,0,5" UseLayoutRounding="False" FontFamily="Vice City Sans" Height="25" Text="5 ejemplo" FontSize="14" TextDecorations="{x:Null}"/>
+                                        <StackPanel Orientation="Horizontal" Margin="0">
+                                            <TextBlock Foreground="#FF9C9C9C" TextAlignment="Left" Padding="0,0,0,5" UseLayoutRounding="False" FontFamily="Vice City Sans" Height="25" Text="{x:Static languages:Resource.Lobby_Label_Roomstate}" FontSize="14" TextDecorations="{x:Null}"/>
+                                            <TextBlock x:Name="roomPrivacyLabel" Foreground="#FF575757" TextAlignment="Left" Padding="0,0,0,5" UseLayoutRounding="False" FontFamily="Vice City Sans" Height="25" Text="5 ejemplo" FontSize="14" TextDecorations="{x:Null}"/>
                                         </StackPanel>
-                                        <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
-                                            <TextBlock Foreground="#FF9C9C9C" TextAlignment="Left" Padding="0,0,0,5" UseLayoutRounding="False" FontFamily="Vice City Sans" Height="25" Text="{x:Static languages:Resource.Lobby_Label_Roundstempo}" FontSize="14" TextDecorations="{x:Null}"/>
-                                            <TextBlock x:Name="roundTimeLabel" Foreground="#FF3A5F6A" TextAlignment="Left" Padding="0,0,0,5" UseLayoutRounding="False" FontFamily="Vice City Sans" Height="25" Text="5 ejemplo" FontSize="14" TextDecorations="{x:Null}"/>
-                                        </StackPanel>
-                                        <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
-                                            <TextBlock Foreground="White" TextAlignment="Left" Padding="0,0,0,5" UseLayoutRounding="False" FontFamily="Vice City Sans" Height="25" Text="{x:Static languages:Resource.Lobby_Label_Roomcode}" FontSize="14" TextDecorations="{x:Null}"/>
+                                        
+                                        <StackPanel Orientation="Horizontal" Margin="0">
+                                            <TextBlock Foreground="#FF9C9C9C" TextAlignment="Left" Padding="0,0,0,5" UseLayoutRounding="False" FontFamily="Vice City Sans" Height="25" Text="{x:Static languages:Resource.Lobby_Label_Roomcode}" FontSize="14" TextDecorations="{x:Null}"/>
                                             <TextBlock x:Name="roomCodeLabel" Foreground="#FF7E1717" TextAlignment="Left" Padding="0,0,0,5" UseLayoutRounding="False" FontFamily="Vice City Sans" Height="25" Text="5 ejemplo" FontSize="14" TextDecorations="{x:Null}"/>
                                         </StackPanel>
                                     </StackPanel>
@@ -97,7 +94,7 @@
 
                         <Grid Grid.Column="1">
 
-                            <Button Content="{x:Static languages:Resource.Lobby_Button_Play}" Height="200" Padding="0" FontSize="30" BorderBrush="{x:Null}" Foreground="#FFE6E6E6" Background="{x:Null}" Width="200" Margin="0,-55,0,0" VerticalAlignment="Top" FontFamily="Vice City Sans">
+                            <Button Content="{x:Static languages:Resource.Lobby_Button_Play}" Height="200" Padding="0" FontSize="30" BorderBrush="{x:Null}" Foreground="#FFE6E6E6" Background="{x:Null}" Width="200" Margin="0,-55,0,0" VerticalAlignment="Top" FontFamily="Vice City Sans" Click="StartButtonClicked">
                                 <Button.Effect>
                                     <DropShadowEffect Direction="278" ShadowDepth="3" BlurRadius="0" Color="#FF6C6B6B"/>
                                 </Button.Effect>
@@ -150,9 +147,9 @@
 
                             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0">
                                 <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                                    <Button Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="10" BorderThickness="1" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" Background="{x:Null}" BorderBrush="#FF666666" Height="Auto" Margin="0,0,5,0">
+                                    <Button Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="10" BorderThickness="1" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" Background="{x:Null}" BorderBrush="#FF666666" Height="Auto" Margin="0,0,5,0" Click="SetUpRoomButtonClicked">
                                         <StackPanel Orientation="Horizontal">
-                                            <materialDesign:PackIcon Kind="Settings" Width="45" Height="45" Foreground="#FFB09EA5"/>
+                                            <materialDesign:PackIcon Kind="Settings" Width="45" Height="45" Foreground="#FFDEDEDE"/>
                                             <TextBlock Text="{x:Static languages:Resource.Lobby_Button_Configureroom}" TextAlignment="Center" TextWrapping="Wrap" Width="51" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10"></TextBlock>
 
                                         </StackPanel>
@@ -160,7 +157,7 @@
 
                                     <Button Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="10" BorderThickness="1" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" Background="{x:Null}" BorderBrush="#FF666666" Height="Auto" Margin="5,0,0,0" Click="DeleteRoomButtonClicked">
                                         <StackPanel Orientation="Horizontal">
-                                            <materialDesign:PackIcon Width="45" Height="45" Kind="BankRemove" Foreground="#FFB09EA5"/>
+                                            <materialDesign:PackIcon Width="45" Height="45" Kind="BankRemove" Foreground="#FFDEDEDE"/>
                                             <TextBlock Text="{x:Static languages:Resource.Lobby_Button_Destroyroom}" TextAlignment="Center" TextWrapping="Wrap" Width="43" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10"></TextBlock>
                                         </StackPanel>
                                     </Button>
@@ -168,7 +165,7 @@
 
                                 <Button Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="10" BorderThickness="1" Foreground="White" VerticalAlignment="Center" Background="{x:Null}" BorderBrush="#FF666666" Height="Auto" Click="ExitButtonClicked" ToolTip="Salir de sala">
                                     <StackPanel Orientation="Horizontal">
-                                        <materialDesign:PackIcon Width="45" Height="45" Kind="ExitRun" Foreground="#FFB09EA5"/>
+                                        <materialDesign:PackIcon Width="45" Height="45" Kind="ExitRun" Foreground="#FFDEDEDE"/>
                                         <TextBlock Text="{x:Static languages:Resource.Lobby_Button_Exit}" TextAlignment="Center" Width="76" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10"/>
                                     </StackPanel>
                                 </Button>
@@ -203,32 +200,10 @@
 
 
                     <materialDesign:PackIcon HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="35" Height="35" Kind="Earth" Margin="0,25,0,0" MouseLeftButtonDown="GlobalChatButtonPressed" Foreground="White">
-                        <!--
-                    <materialDesign:PackIcon.Style>
-                        <Style TargetType="{x:Type materialDesign:PackIcon}">
-                            <Setter Property="Foreground" Value="#FFC9C9C9"/>
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Foreground" Value="#FF31B268"/>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </materialDesign:PackIcon.Style>
-                    -->
+                      
                     </materialDesign:PackIcon>
                     <materialDesign:PackIcon HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="35" Height="35" Kind="CloseBoxOutline" Margin="0,25,0,0" MouseLeftButtonDown="CloseChatButtonClicked" Foreground="White">
-                        <!--
-                    <materialDesign:PackIcon.Style>
-                        <Style TargetType="{x:Type materialDesign:PackIcon}">
-                            <Setter Property="Foreground" Value="#FFC9C9C9"/>
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Foreground" Value="#FF31B268"/>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </materialDesign:PackIcon.Style>
-                    -->
+                    
                     </materialDesign:PackIcon>
 
                 </StackPanel>
@@ -243,19 +218,7 @@
 
 
                     <materialDesign:PackIcon Height="35" VerticalAlignment="Center" Width="35" HorizontalAlignment="Center" Kind="Send" MouseLeftButtonDown="SendMessageButtonClicked" Margin="0" Grid.Column="1">
-                        <!--
-                    <materialDesign:PackIcon.Style>
-                        <Style TargetType="{x:Type materialDesign:PackIcon}">
-                            <Setter Property="Foreground" Value="#FF55D48B"/>
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Foreground" Value="#FF31B268"/>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </materialDesign:PackIcon.Style>
-            -->
-
+                      
                     </materialDesign:PackIcon>
                 </Grid>
                 <DockPanel Grid.Column="2" Grid.ColumnSpan="2">
@@ -278,6 +241,74 @@
             </Grid>
         </Border>
 
+        <StackPanel Visibility="Hidden" x:Name="gameConfigurationStackPanel" Margin="0" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" >
+            <Border Background="#D8000000" CornerRadius="25" BorderThickness="1" BorderBrush="#FFC3BDBD" Margin="0" Padding="25,0">
+                <StackPanel>
+                    <Label Content="{x:Static languages:Resource.Lobby_Label_Configuregame}" Foreground="#FFE4E4E4" FontSize="24" HorizontalAlignment="Center" Margin="0,15" FontFamily="PriceDown"/>
+
+
+                    <StackPanel Width="381">
+
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0">
+                            <TextBlock Foreground="#FFE4E4E4" TextAlignment="Justify" Padding="0,0,0,5" UseLayoutRounding="False" FontFamily="Vice City Sans" Text="{x:Static languages:Resource.Lobby_Label_Gamecategory}" FontSize="14" TextDecorations="{x:Null}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="148" Height="35"/>
+                            <StackPanel Orientation="Horizontal" Margin="15,0,0,0" Background="#FF383838">
+                                <StackPanel Margin="15,5">
+                                    <CheckBox x:Name="countryCheckBox" Content="{x:Static languages:Resource.Game_Category_Country}" Foreground="#FFFDFDFD" Background="#FFAEAEAE" Click="CountryCheckBoxClick" />
+                                    <CheckBox x:Name="objectCheckBox" Content="{x:Static languages:Resource.Game_Category_Object}" Foreground="White" Background="#FFAEAEAE" Click="ObjectCheckBoxClick" />
+                                    <CheckBox x:Name="nameCheckBox" Content="{x:Static languages:Resource.Game_Category_Name}" Foreground="White" Background="#FFAEAEAE" Click="NameCheckBoxClick" />
+                                    <CheckBox x:Name="lastnameCheckBox" Content="{x:Static languages:Resource.Game_Category_Lastname}" Foreground="White" Background="#FFAEAEAE" Click="LastNameCheckBoxClick" />
+                                </StackPanel>
+                                <StackPanel Margin="0,5,15,5">
+                                    <CheckBox x:Name="colorCheckBox" Content="{x:Static languages:Resource.Game_Category_Color}" Foreground="White" Background="#FFAEAEAE" Click="ColorCheckBoxClick" />
+                                    <CheckBox x:Name="cityCheckBox" Content="{x:Static languages:Resource.Game_Category_City}" Foreground="White" Background="#FFAEAEAE" Click="CityCheckBoxClick" />
+                                    <CheckBox x:Name="fruitVegetableCheckBox" Content="{x:Static languages:Resource.Game_Category_Fruitvegetable}" Foreground="White" Background="#FFAEAEAE" Click="FruitVegetableCheckBoxClick" />
+                                    <CheckBox x:Name="animalCheckBox" Content="{x:Static languages:Resource.Game_Category_Animal}" Foreground="White" Background="#FFAEAEAE" Click="AnimalCheckBoxClick" />
+                                </StackPanel>
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,15,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Height="32" Width="381">
+                        <TextBlock Foreground="#FFE4E4E4" TextAlignment="Left" Padding="0,0,0,5" UseLayoutRounding="False" FontFamily="Vice City SAns" FontSize="14" TextDecorations="{x:Null}" HorizontalAlignment="Left" VerticalAlignment="Center" Height="24" Margin="0" Text="{x:Static languages:Resource.Lobby_Label_Roundstempo}" Width="148"/>
+                        <ComboBox x:Name="roundTimeComboBox" Margin="15,0,0,0" BorderBrush="White" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Padding="0,6,0,10" VerticalAlignment="Stretch" Width="218" Foreground="#FFA6A6A6" Background="{x:Null}" Loaded="RoundTimeComboBoxLoaded"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,15,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Height="32" Width="381">
+                        <TextBlock Foreground="#FFE4E4E4" TextAlignment="Left" Padding="0,0,0,5" UseLayoutRounding="False" FontFamily="Vice City Sans" FontSize="14" TextDecorations="{x:Null}" HorizontalAlignment="Left" VerticalAlignment="Center" Height="24" Margin="0" Width="148"><Run Text="{x:Static languages:Resource.Lobby_Label_Roundslimit}"/><LineBreak/><Run/></TextBlock>
+                        <ComboBox x:Name="roundLimitComboBox" Margin="15,0,0,0" BorderBrush="White" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Padding="0,6,0,10" VerticalAlignment="Stretch" Width="218" Foreground="#FFA6A6A6" Loaded="LimitRoundComboBoxLoaded"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Height="53" Margin="0,25,0,0" FlowDirection="RightToLeft">
+                        <Button Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="10" BorderThickness="2" Foreground="#FFE4E4E4" Content="{x:Static languages:Resource.Main_Button_Cancel}" Margin="25,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Right" Width="120" Background="{x:Null}" BorderBrush="{x:Null}" FontFamily="Vice City Sans" Click="CancelGameConfigurationButtonClicked"/>
+                        <Button Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="10" BorderThickness="2" Foreground="White" Content="{x:Static languages:Resource.Lobby_Button_Configuregame}" Margin="25,0" VerticalAlignment="Center" HorizontalAlignment="Right" Width="120" Background="#FF510B0D" BorderBrush="#FFD94448" Click="SetUpGameButtonClicked"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+
+        </StackPanel>
+
+
+        <StackPanel x:Name="roomConfigurationStackPanel" Visibility="Hidden" Margin="0" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" >
+            <Border Background="#D8000000" CornerRadius="25" BorderThickness="1" BorderBrush="#FFC3BDBD" Margin="0" Padding="25,0">
+                <StackPanel>
+                    <Label Content="{x:Static languages:Resource.Lobby_Label_Roomsettings}" Foreground="#FFE4E4E4" FontSize="24" HorizontalAlignment="Center" Margin="0,15" FontFamily="PriceDown"/>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,15,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Height="32" Width="381">
+                        <TextBlock Foreground="#FFE4E4E4" TextAlignment="Left" Padding="0,0,0,5" UseLayoutRounding="False" FontFamily="Vice City Sans" FontSize="14" TextDecorations="{x:Null}" HorizontalAlignment="Left" VerticalAlignment="Center" Height="24" Margin="0" Text="{x:Static languages:Resource.Lobby_Label_Roomstate}" Width="148"/>
+                        <ComboBox x:Name="roomStateComboBox" Margin="15,0,0,0" BorderBrush="White" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Padding="0,6,0,10" VerticalAlignment="Stretch" Width="218" Foreground="#FFA6A6A6" Background="{x:Null}" Loaded="RoomStateComboBoxLoaded"/>
+                    </StackPanel>
+
+
+                    <StackPanel Orientation="Horizontal" Height="53" Margin="0,25,0,0" FlowDirection="RightToLeft">
+                        <Button Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="10" BorderThickness="2" Foreground="#FFE4E4E4" Content="{x:Static languages:Resource.Main_Button_Cancel}" Margin="25,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Right" Width="120" Background="{x:Null}" BorderBrush="{x:Null}" FontFamily="Vice City Sans" Click="CancelRoomConfigurationButtonClicked"/>
+                        <Button Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="10" BorderThickness="2" Foreground="White" Content="{x:Static languages:Resource.Lobby_Button_Configuregame}" Margin="25,0" VerticalAlignment="Center" HorizontalAlignment="Right" Width="120" Background="#FF510B0D" BorderBrush="#FFD94448" Click="SetUpRoomConfigurationButtonClicked"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+
+        </StackPanel>
 
     </Grid>
 </Window>

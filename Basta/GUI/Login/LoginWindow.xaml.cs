@@ -46,7 +46,6 @@ namespace Basta.GUI.Login {
                 sound.PlayLoginMusic();
                 Hide();
                 MainWindow mainWindow = new MainWindow();
-                //mainWindow.ShowDialog();
                 mainWindow.Show();
             }
         }

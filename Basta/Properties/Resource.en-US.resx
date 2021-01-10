@@ -144,8 +144,83 @@
   <data name="Chat_UsersConnected" xml:space="preserve">
     <value>Users connected</value>
   </data>
+  <data name="Game_Button_Next" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="Game_Button_Stop" xml:space="preserve">
+    <value>Stop!</value>
+  </data>
+  <data name="Game_Button_Stoppressed" xml:space="preserve">
+    <value>You have pressed the Stop button, all players will be notified and their time will be reduced to 15 seconds.</value>
+  </data>
+  <data name="Game_Category_Animal" xml:space="preserve">
+    <value>Animal</value>
+  </data>
+  <data name="Game_Category_City" xml:space="preserve">
+    <value>City</value>
+  </data>
+  <data name="Game_Category_Color" xml:space="preserve">
+    <value>Color</value>
+  </data>
+  <data name="Game_Category_Country" xml:space="preserve">
+    <value>Country</value>
+  </data>
+  <data name="Game_Category_Fruitvegetable" xml:space="preserve">
+    <value>Fruit or vegetable</value>
+  </data>
+  <data name="Game_Category_Lastname" xml:space="preserve">
+    <value>Last name</value>
+  </data>
+  <data name="Game_Category_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Game_Category_Object" xml:space="preserve">
+    <value>Object</value>
+  </data>
+  <data name="Game_Label_Absolutwinner" xml:space="preserve">
+    <value>(absolute winner)</value>
+  </data>
+  <data name="Game_Label_Counter" xml:space="preserve">
+    <value>Time remaining:</value>
+  </data>
+  <data name="Game_Label_Enterword" xml:space="preserve">
+    <value>Enter a word that is within the scope of:</value>
+  </data>
+  <data name="Game_Label_Info" xml:space="preserve">
+    <value>If you enter a word that has not been entered by another player then you will receive 150 points. If you enter a word that has been entered by another player then you will receive 100 points. And finally, if you enter a word that is not valid then you will receive 0 points. Avoid entering insults because you can receive sanctions.</value>
+  </data>
+  <data name="Game_Label_LetterAssigned" xml:space="preserve">
+    <value>The initial letter of the words:</value>
+  </data>
+  <data name="Game_Label_Lettertoplabel" xml:space="preserve">
+    <value>Selected letter:</value>
+  </data>
+  <data name="Game_Label_Roundinitialize" xml:space="preserve">
+    <value>Round</value>
+  </data>
+  <data name="Game_Label_Rounds" xml:space="preserve">
+    <value>Rounds:</value>
+  </data>
+  <data name="Game_Label_ScoreWon" xml:space="preserve">
+    <value>Score won:</value>
+  </data>
+  <data name="Game_Label_Seconds" xml:space="preserve">
+    <value> seconds</value>
+  </data>
+  <data name="Game_Label_Starting" xml:space="preserve">
+    <value>Starting...</value>
+  </data>
+  <data name="Game_Label_Winnerroundtext" xml:space="preserve">
+    <value>(round winner)</value>
+  </data>
+  <data name="Game_TextInput_Insert" xml:space="preserve">
+    <value>Enter a word that matches the scope</value>
+  </data>
   <data name="LobbyWindow_TextBox_StartGame" xml:space="preserve">
     <value>Start playing now!</value>
+  </data>
+  <data name="Lobby_Button_Configuregame" xml:space="preserve">
+    <value>Configure</value>
   </data>
   <data name="Lobby_Button_Configureroom" xml:space="preserve">
     <value>Room settings</value>
@@ -162,6 +237,12 @@
   <data name="Lobby_Chat_You" xml:space="preserve">
     <value>You</value>
   </data>
+  <data name="Lobby_Label_Configuregame" xml:space="preserve">
+    <value>Set up game</value>
+  </data>
+  <data name="Lobby_Label_Gamecategory" xml:space="preserve">
+    <value>Word categories</value>
+  </data>
   <data name="Lobby_Label_Playerslimit" xml:space="preserve">
     <value>Players limit: </value>
   </data>
@@ -171,17 +252,26 @@
   <data name="Lobby_Label_Roomsettings" xml:space="preserve">
     <value>Room settings</value>
   </data>
+  <data name="Lobby_Label_Roomstate" xml:space="preserve">
+    <value>Room's privacy: </value>
+  </data>
   <data name="Lobby_Label_Roundslimit" xml:space="preserve">
     <value>Rounds limit: </value>
   </data>
   <data name="Lobby_Label_Roundstempo" xml:space="preserve">
     <value>Round time: </value>
   </data>
+  <data name="Lobby_Label_Timetoendround" xml:space="preserve">
+    <value>Time to end round</value>
+  </data>
   <data name="Lobby_Label_Waitingfor" xml:space="preserve">
     <value>Waiting players...</value>
   </data>
   <data name="Lobby_ListView_Select" xml:space="preserve">
     <value>Select a room to join it</value>
+  </data>
+  <data name="Lobby_Message_Playersnotenought" xml:space="preserve">
+    <value>Not the enought players!</value>
   </data>
   <data name="Lobby_TextBlock_Clasification" xml:space="preserve">
     <value>Top</value>
@@ -240,6 +330,12 @@
   <data name="Main_Label_Language" xml:space="preserve">
     <value>Language</value>
   </data>
+  <data name="Main_Label_Private" xml:space="preserve">
+    <value>Private</value>
+  </data>
+  <data name="Main_Label_Public" xml:space="preserve">
+    <value>Public</value>
+  </data>
   <data name="Main_Label_Roommemberlimit" xml:space="preserve">
     <value>Players limit</value>
   </data>
@@ -248,6 +344,9 @@
   </data>
   <data name="Main_Label_Roomsettings" xml:space="preserve">
     <value>Room settings</value>
+  </data>
+  <data name="Main_Label_Roomstate" xml:space="preserve">
+    <value>Room's privacy</value>
   </data>
   <data name="Main_Label_Roomtime" xml:space="preserve">
     <value>Game time</value>

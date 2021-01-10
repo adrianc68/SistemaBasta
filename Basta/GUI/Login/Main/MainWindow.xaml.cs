@@ -86,7 +86,8 @@ namespace Basta.GUI.Login.Main {
             Room room = new Room();
             room.RoomConfiguration = new RoomConfiguration();
             room.RoomConfiguration.PlayerLimit = (int) personLimitComboBox.SelectedItem;
-            room.RoomConfiguration.RoomState = RoomState.PUBLIC;
+            // Ternary operator here !
+            room.RoomConfiguration.RoomState = ( roomPrivacyComboBox.SelectedIndex == 0 ) ? RoomState.PUBLIC : RoomState.PRIVATE; 
             try {
                 room.Code = Autentication.GetInstance().RoomServer.CreateRoom( Autentication.GetInstance().Player, room );
             } catch ( Exception ex ) {
@@ -190,10 +191,9 @@ namespace Basta.GUI.Login.Main {
         }
 
         private void GameLimitComboBoxLoaded( object sender, RoutedEventArgs e ) {
-            List<double> data = new List<double>();
-            data.Add( 30 );
-            data.Add( 45 );
-            data.Add( 60 );
+            List<string> data = new List<string>();
+            data.Add( Resource.Main_Label_Public );
+            data.Add( Resource.Main_Label_Private );
             var combo = sender as ComboBox;
             combo.ItemsSource = data;
             combo.SelectedIndex = 0;

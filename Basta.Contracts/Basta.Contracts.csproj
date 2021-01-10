@@ -53,6 +53,7 @@
     <Compile Include="Faults\ErrorFault.cs" />
     <Compile Include="Faults\LimitReachedFault.cs" />
     <Compile Include="Faults\UsernameRegisteredAlreadyFault.cs" />
+    <Compile Include="IGameService.cs" />
     <Compile Include="ILoginService.cs" />
     <Compile Include="IRoomService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

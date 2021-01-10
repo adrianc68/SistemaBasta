@@ -12,7 +12,11 @@ namespace Basta {
 
         public Proxy.RoomServiceClient RoomServer { get; set; }
 
+        public Proxy.GameServiceClient GameServer { get; set; }
+
         public RoomServiceCallBack RoomServiceCallBack { get; set; }
+
+        public GameServiceCallBack GameServiceCallBack { get; set; }
 
         public Player Player { get; set; }
 

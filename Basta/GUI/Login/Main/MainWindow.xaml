@@ -128,8 +128,8 @@
 
 
                     <StackPanel Orientation="Horizontal" Margin="25,0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="381">
-                        <TextBlock Foreground="#FFE4E4E4" TextAlignment="Left" Padding="0,0,0,5" UseLayoutRounding="False" FontFamily="Vice City Sans" FontSize="14" TextDecorations="{x:Null}" HorizontalAlignment="Left" VerticalAlignment="Center" Height="24" Width="148"><Run Text="{x:Static languages:Resource.Main_Label_Roomtime}"/><LineBreak/><Run/></TextBlock>
-                        <ComboBox x:Name="gameTimeComboBox" Margin="15,0,0,0" BorderBrush="White" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Padding="0,6,0,10" VerticalAlignment="Stretch" Width="218" Loaded="GameLimitComboBoxLoaded" Foreground="#FF9E9E9E"/>
+                        <TextBlock Foreground="#FFE4E4E4" TextAlignment="Left" Padding="0,0,0,5" UseLayoutRounding="False" FontFamily="Vice City Sans" FontSize="14" TextDecorations="{x:Null}" HorizontalAlignment="Left" VerticalAlignment="Center" Height="24" Width="148"><Run Text="{x:Static languages:Resource.Main_Label_Roomstate}"/><LineBreak/><Run/></TextBlock>
+                        <ComboBox x:Name="roomPrivacyComboBox" Margin="15,0,0,0" BorderBrush="White" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Padding="0,6,0,10" VerticalAlignment="Stretch" Width="218" Loaded="GameLimitComboBoxLoaded" Foreground="#FF9E9E9E"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" Margin="0,15,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Height="32" Width="381">

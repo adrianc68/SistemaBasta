@@ -205,6 +205,12 @@ namespace Basta.Proxy {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRoomService/KickPlayer")]
         System.Threading.Tasks.Task KickPlayerAsync(Domain.Domain.Player player, Domain.Domain.Room room);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRoomService/StartGamePressed")]
+        void StartGamePressed(Domain.Domain.Room room, Domain.Domain.GameConfiguration gameConfiguration);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRoomService/StartGamePressed")]
+        System.Threading.Tasks.Task StartGamePressedAsync(Domain.Domain.Room room, Domain.Domain.GameConfiguration gameConfiguration);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -236,6 +242,9 @@ namespace Basta.Proxy {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRoomService/YouHaveDisconnected")]
         void YouHaveDisconnected();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRoomService/OpenGameWindow")]
+        void OpenGameWindow(Domain.Domain.GameConfiguration gameConfiguration);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -352,6 +361,100 @@ namespace Basta.Proxy {
         
         public System.Threading.Tasks.Task KickPlayerAsync(Domain.Domain.Player player, Domain.Domain.Room room) {
             return base.Channel.KickPlayerAsync(player, room);
+        }
+        
+        public void StartGamePressed(Domain.Domain.Room room, Domain.Domain.GameConfiguration gameConfiguration) {
+            base.Channel.StartGamePressed(room, gameConfiguration);
+        }
+        
+        public System.Threading.Tasks.Task StartGamePressedAsync(Domain.Domain.Room room, Domain.Domain.GameConfiguration gameConfiguration) {
+            return base.Channel.StartGamePressedAsync(room, gameConfiguration);
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="Proxy.IGameService", CallbackContract=typeof(Basta.Proxy.IGameServiceCallback))]
+    public interface IGameService {
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameService/StopButtonPressed")]
+        void StopButtonPressed(Domain.Domain.Room room, Domain.Domain.Player player);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameService/StopButtonPressed")]
+        System.Threading.Tasks.Task StopButtonPressedAsync(Domain.Domain.Room room, Domain.Domain.Player player);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameService/OpenChannel")]
+        void OpenChannel(Domain.Domain.Room room, Domain.Domain.Player player);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameService/OpenChannel")]
+        System.Threading.Tasks.Task OpenChannelAsync(Domain.Domain.Room room, Domain.Domain.Player player);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameService/RemoveChannel")]
+        void RemoveChannel(Domain.Domain.Room room, Domain.Domain.Player player);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameService/RemoveChannel")]
+        System.Threading.Tasks.Task RemoveChannelAsync(Domain.Domain.Room room, Domain.Domain.Player player);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IGameServiceCallback {
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameService/PlayerHasPressedStopButton")]
+        void PlayerHasPressedStopButton(Domain.Domain.Player player);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameService/GameHasStarted")]
+        void GameHasStarted();
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IGameServiceChannel : Basta.Proxy.IGameService, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class GameServiceClient : System.ServiceModel.DuplexClientBase<Basta.Proxy.IGameService>, Basta.Proxy.IGameService {
+        
+        public GameServiceClient(System.ServiceModel.InstanceContext callbackInstance) : 
+                base(callbackInstance) {
+        }
+        
+        public GameServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName) : 
+                base(callbackInstance, endpointConfigurationName) {
+        }
+        
+        public GameServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, string remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        }
+        
+        public GameServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        }
+        
+        public GameServiceClient(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, binding, remoteAddress) {
+        }
+        
+        public void StopButtonPressed(Domain.Domain.Room room, Domain.Domain.Player player) {
+            base.Channel.StopButtonPressed(room, player);
+        }
+        
+        public System.Threading.Tasks.Task StopButtonPressedAsync(Domain.Domain.Room room, Domain.Domain.Player player) {
+            return base.Channel.StopButtonPressedAsync(room, player);
+        }
+        
+        public void OpenChannel(Domain.Domain.Room room, Domain.Domain.Player player) {
+            base.Channel.OpenChannel(room, player);
+        }
+        
+        public System.Threading.Tasks.Task OpenChannelAsync(Domain.Domain.Room room, Domain.Domain.Player player) {
+            return base.Channel.OpenChannelAsync(room, player);
+        }
+        
+        public void RemoveChannel(Domain.Domain.Room room, Domain.Domain.Player player) {
+            base.Channel.RemoveChannel(room, player);
+        }
+        
+        public System.Threading.Tasks.Task RemoveChannelAsync(Domain.Domain.Room room, Domain.Domain.Player player) {
+            return base.Channel.RemoveChannelAsync(room, player);
         }
     }
 }

@@ -56,6 +56,8 @@
   <ItemGroup>
     <Compile Include="Domain\AccessAccount.cs" />
     <Compile Include="Domain\AccountState.cs" />
+    <Compile Include="Domain\GameCategory.cs" />
+    <Compile Include="Domain\GameConfiguration.cs" />
     <Compile Include="Domain\Location.cs" />
     <Compile Include="Domain\Player.cs" />
     <Compile Include="Domain\Room.cs" />

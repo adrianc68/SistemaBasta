@@ -68,10 +68,13 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Autentication.cs" />
     <Compile Include="BastaService.cs" />
+    <Compile Include="GameProperties.cs" />
+    <Compile Include="PlayerChannels.cs" />
     <Compile Include="Properties\Configuration\Resource.Designer.cs">
       <DependentUpon>Resource.resx</DependentUpon>
       <AutoGen>True</AutoGen>

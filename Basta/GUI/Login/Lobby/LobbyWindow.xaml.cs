@@ -1,8 +1,10 @@
-﻿using Domain.Domain;
+﻿using Basta.GUI.Login.Game;
+using Domain.Domain;
 using System;
 using System.Collections.Generic;
 using System.ServiceModel;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 
@@ -13,7 +15,12 @@ namespace Basta.GUI.Login.Lobby {
     public partial class LobbyWindow: Window {
         private Room room;
         private Autentication autentication;
-        Dictionary<Player, PlayerGUIElement> playersConnected = new Dictionary<Player, PlayerGUIElement>( new Player.EqualityComparer() );
+        private Dictionary<Player, PlayerGUIElement> playersConnected = new Dictionary<Player, PlayerGUIElement>( new Player.EqualityComparer() );
+        private HashSet<GameCategory> categoriesSelected;
+        private int MIN_CATEGORIES_SELECTED = 5;
+        private int MIN_PLAYERS_TO_START = 0; // change to 2
+
+        public GameConfiguration GameConfiguration { get; set; }
 
         public LobbyWindow( Room room ) {
             InitializeComponent();
@@ -24,9 +31,19 @@ namespace Basta.GUI.Login.Lobby {
             playersConnectedTopLabel.Content = 0;
         }
 
+        public void OpenGameWindow() {
+            Hide();
+            GameWindow gameWindow = new GameWindow(GameConfiguration, room);
+            foreach ( var player in playersConnected ) {
+                gameWindow.AddPlayerLateralUserControl( player.Key.AccessAccount.Username );
+            }
+            gameWindow.Show();
+
+        }
+
         public void RecivedMessageFromGlobalRoom( Player player, string message ) {
             MessageReceived messageReceived = new MessageReceived();
-            messageReceived.usernameLabel.Text = player.Name;
+            messageReceived.usernameLabel.Text = player.AccessAccount.Username;
             messageReceived.messageTextBlock.Text = message;
             messagesWrapPanel.Children.Add( messageReceived );
             PlayChatSound();
@@ -34,7 +51,7 @@ namespace Basta.GUI.Login.Lobby {
 
         public void RecivedMessageFromPlayer( Player player, string message ) {
             MessageReceived messageReceived = new MessageReceived();
-            messageReceived.usernameLabel.Text = player.Name;
+            messageReceived.usernameLabel.Text = player.AccessAccount.Username;
             messageReceived.messageTextBlock.Text = message;
             playersConnected[player].ChatWith.messagesWrapPanel.Children.Add( messageReceived );
             playersConnected[player].UserChat.borderBackground.Background = new SolidColorBrush( Color.FromArgb( 98, 98, 98, 98 ) );
@@ -81,11 +98,11 @@ namespace Basta.GUI.Login.Lobby {
                 PlayerGUIElement playerConnected = new PlayerGUIElement();
 
                 UserChat userChatGUI = new UserChat();
-                userChatGUI.messageTextBlock.Text = player.Name;
+                userChatGUI.messageTextBlock.Text = player.AccessAccount.Username;
                 playerConnected.UserChat = userChatGUI;
 
                 UserConnectedLobby userConnectedLobbyGUI = new UserConnectedLobby();
-                userConnectedLobbyGUI.usernameLabel.Text = player.Name;
+                userConnectedLobbyGUI.usernameLabel.Text = player.AccessAccount.Username;
                 playerConnected.UserConnectedLobby = userConnectedLobbyGUI;
 
                 ChatWith chatWithGUI = new ChatWith();
@@ -115,7 +132,7 @@ namespace Basta.GUI.Login.Lobby {
             int playersConnected = Int32.Parse( playersConnectedTopLabel.Content.ToString() );
             playersConnected++;
             playersConnectedTopLabel.Content = playersConnected;
-            if( playersConnected == room.RoomConfiguration.PlayerLimit ) {
+            if ( playersConnected == room.RoomConfiguration.PlayerLimit ) {
                 countTopLabel.Content = Basta.Properties.Resource.SystemGameFull;
             }
         }
@@ -138,7 +155,6 @@ namespace Basta.GUI.Login.Lobby {
                 }
             } );
         }
-
 
         private void ConfigureUserconnectedLobbySendMessageButton( Player player ) {
             playersConnected[player].UserConnectedLobby.sendMessageToPlayerButton.MouseDoubleClick += new MouseButtonEventHandler( ( a, b ) => {
@@ -167,8 +183,7 @@ namespace Basta.GUI.Login.Lobby {
         private void ShowPlayerLabelElements() {
             playersLimitLabel.Text = room.RoomConfiguration.PlayerLimit.ToString();
             roomCodeLabel.Text = room.Code;
-            roundsLimitLabel.Text = "";
-            roundTimeLabel.Text = "";
+            roomPrivacyLabel.Text = ( room.RoomConfiguration.RoomState == RoomState.PUBLIC ) ? Properties.Resource.Main_Label_Public : Properties.Resource.Main_Label_Private;
         }
 
         private void ExitButtonClicked( object sender, RoutedEventArgs e ) {
@@ -265,5 +280,147 @@ namespace Basta.GUI.Login.Lobby {
             sound.PlayChatSound();
         }
 
+        private void StartButtonClicked( object sender, RoutedEventArgs e ) {
+            if ( playersConnected.Count > MIN_PLAYERS_TO_START ) {
+                categoriesSelected = new HashSet<GameCategory>( MIN_CATEGORIES_SELECTED );
+                UncheckCheckBox();
+                gameConfigurationStackPanel.Visibility = Visibility.Visible;
+            } else {
+                PlayersNotEnoughtAlert();
+            }
+        }
+
+        private void PlayersNotEnoughtAlert() {
+            MessageBoxResult kickedMessage = MessageBox.Show( Properties.Resource.Lobby_Message_Playersnotenought, Properties.Resource.SystemMessageTitle, MessageBoxButton.OK, MessageBoxImage.Error );
+
+        }
+
+        private void SetUpRoomButtonClicked( object sender, RoutedEventArgs e ) {
+            roomConfigurationStackPanel.Visibility = Visibility.Visible;
+        }
+
+        private void SetUpGameButtonClicked( object sender, RoutedEventArgs e ) {
+            GameConfiguration gameConfiguration = new GameConfiguration();
+            gameConfiguration.RoundsLimit = (double) roundLimitComboBox.SelectedItem;
+            gameConfiguration.TimeToEndRound = (double) roundTimeComboBox.SelectedItem;
+            gameConfiguration.TimeToStart = 15;
+            gameConfiguration.TimeToShowResults = 15;
+            gameConfiguration.TimeToStopGameOnButtonStopPressed = 15;
+            gameConfiguration.GameCategories = new Queue<GameCategory>();
+            foreach ( var category in categoriesSelected ) {
+                gameConfiguration.GameCategories.Enqueue( category );
+            }
+            try {
+                Autentication.GetInstance().RoomServer.StartGamePressed( room, gameConfiguration );
+            } catch ( Exception ex ) {
+                if ( ex is EndpointNotFoundException || ex is CommunicationException ) {
+                    DropConnectionAlert.ShowDropConnectionAlert();
+                    Close();
+                }
+            }
+            gameConfigurationStackPanel.Visibility = Visibility.Hidden;
+        }
+
+        private void UncheckCheckBox() {
+            animalCheckBox.IsChecked = false;
+            cityCheckBox.IsChecked = false;
+            objectCheckBox.IsChecked = false;
+            colorCheckBox.IsChecked = false;
+            countryCheckBox.IsChecked = false;
+            fruitVegetableCheckBox.IsChecked = false;
+            lastnameCheckBox.IsChecked = false;
+            nameCheckBox.IsChecked = false;
+
+        }
+
+        private void CancelGameConfigurationButtonClicked( object sender, RoutedEventArgs e ) {
+            gameConfigurationStackPanel.Visibility = Visibility.Hidden;
+        }
+
+        private void CountryCheckBoxClick( object sender, RoutedEventArgs e ) {
+            AddCategoryToList( GameCategory.COUNTRY, countryCheckBox );
+        }
+
+
+        private void AddCategoryToList( GameCategory category, CheckBox checkBox ) {
+            if ( (bool) checkBox.IsChecked ) {
+                if ( categoriesSelected.Count < MIN_CATEGORIES_SELECTED ) {
+                    categoriesSelected.Add( category );
+                } else {
+                    checkBox.IsChecked = false;
+                }
+            } else {
+                categoriesSelected.Remove( category );
+            }
+        }
+
+        private void ObjectCheckBoxClick( object sender, RoutedEventArgs e ) {
+            AddCategoryToList( GameCategory.OBJECT, objectCheckBox );
+        }
+
+        private void NameCheckBoxClick( object sender, RoutedEventArgs e ) {
+            AddCategoryToList( GameCategory.NAME, nameCheckBox );
+        }
+
+        private void LastNameCheckBoxClick( object sender, RoutedEventArgs e ) {
+            AddCategoryToList( GameCategory.LAST_NAME, lastnameCheckBox );
+        }
+
+        private void ColorCheckBoxClick( object sender, RoutedEventArgs e ) {
+            AddCategoryToList( GameCategory.COLOR, colorCheckBox );
+        }
+
+        private void CityCheckBoxClick( object sender, RoutedEventArgs e ) {
+            AddCategoryToList( GameCategory.CITY, cityCheckBox );
+        }
+
+        private void FruitVegetableCheckBoxClick( object sender, RoutedEventArgs e ) {
+            AddCategoryToList( GameCategory.FRUIT_VEGETABLE, fruitVegetableCheckBox );
+        }
+
+        private void AnimalCheckBoxClick( object sender, RoutedEventArgs e ) {
+            AddCategoryToList( GameCategory.ANIMAL, animalCheckBox );
+        }
+
+        private void LimitRoundComboBoxLoaded( object sender, RoutedEventArgs e ) {
+            List<double> data = new List<double>();
+            data.Add( 5 );
+            data.Add( 8 );
+            data.Add( 15 );
+            var combo = sender as ComboBox;
+            combo.ItemsSource = data;
+            combo.SelectedIndex = 0;
+        }
+
+        private void RoundTimeComboBoxLoaded( object sender, RoutedEventArgs e ) {
+            List<double> data = new List<double>();
+            data.Add( 30 );
+            data.Add( 45 );
+            data.Add( 60 );
+            var combo = sender as ComboBox;
+            combo.ItemsSource = data;
+            combo.SelectedIndex = 0;
+        }
+
+        private void CancelRoomConfigurationButtonClicked( object sender, RoutedEventArgs e ) {
+            roomConfigurationStackPanel.Visibility = Visibility.Hidden;
+        }
+
+        private void SetUpRoomConfigurationButtonClicked( object sender, RoutedEventArgs e ) {
+            room.RoomConfiguration.RoomState = ( roomStateComboBox.SelectedIndex == 0 ) ? RoomState.PUBLIC : RoomState.PRIVATE;
+            // DAO CHANGES
+            // CALL SERVICE AND METHOD SETUP
+            // THEN USE A CALLBACK TO CHANGE CONFIGURATION
+        }
+
+        private void RoomStateComboBoxLoaded( object sender, RoutedEventArgs e ) {
+            List<string> data = new List<string>();
+            data.Add( Properties.Resource.Main_Label_Public );
+            data.Add( Properties.Resource.Main_Label_Private );
+            var combo = sender as ComboBox;
+            combo.ItemsSource = data;
+            // Ternary operator here
+            combo.SelectedIndex = ( room.RoomConfiguration.RoomState == RoomState.PUBLIC ) ? combo.SelectedIndex = 0 : combo.SelectedIndex = 1;
+        }
     }
 }

@@ -6,13 +6,15 @@ using EmailSender;
 using System;
 using System.Collections.Generic;
 using System.ServiceModel;
+using System.Windows.Threading;
 
 namespace Basta.Service {
     [ServiceBehavior( ConcurrencyMode = ConcurrencyMode.Multiple, InstanceContextMode = InstanceContextMode.Single, UseSynchronizationContext = false )]
-    public class BastaService: ILoginService, IRoomService {
-        Dictionary<Room, Dictionary<IRoomClient, Player>> usersRoom = new Dictionary<Room, Dictionary<IRoomClient, Player>>( new Room.EqualityComparer() );
+    public class BastaService: ILoginService, IRoomService, IGameService {
+        Dictionary<Room, Dictionary<Player, PlayerChannels>> usersRoom = new Dictionary<Room, Dictionary<Player, PlayerChannels>>( new Room.EqualityComparer() );
         HashSet<Player> playersConnected = new HashSet<Player>( new Player.EqualityComparer() );
         Dictionary<string, List<string>> userKickedFromRoom = new Dictionary<string, List<string>>();
+        Dictionary<Room, GameProperties> roomsInGame = new Dictionary<Room, GameProperties>( new Room.EqualityComparer() );
 
         /*
         * 
@@ -22,6 +24,7 @@ namespace Basta.Service {
         * 
         * 
         */
+
         public List<Room> GetRooms() {
             List<Room> rooms = null;
             try {
@@ -43,14 +46,17 @@ namespace Basta.Service {
         }
 
         public void JoinRoom( Player player, Room room ) {
-            var connection = OperationContext.Current.GetCallbackChannel<IRoomClient>();
+            PlayerChannels playerChannels = new PlayerChannels();
+            playerChannels.IRoomClient = OperationContext.Current.GetCallbackChannel<IRoomClient>();
+            var connection = playerChannels.IRoomClient;
+
             if ( !isPlayerKickedFromRoom( player, room ) ) {
                 if ( usersRoom[room].Count != room.RoomConfiguration.PlayerLimit ) {
-                    usersRoom[room][connection] = player;
-                    foreach ( var other in usersRoom[room].Keys ) {
-                        if ( other == connection )
+                    usersRoom[room][player] = playerChannels;
+                    foreach ( var other in usersRoom[room].Values ) {
+                        if ( other.IRoomClient == connection )
                             connection.Join();
-                        other.PlayerConnected( player );
+                        other.IRoomClient.PlayerConnected( player );
                     }
                 } else {
                     connection.GameIsFull();
@@ -70,9 +76,10 @@ namespace Basta.Service {
                 throw;
             }
             if ( roomCode != null ) {
-                var connection = OperationContext.Current.GetCallbackChannel<IRoomClient>();
-                Dictionary<IRoomClient, Player> users = new Dictionary<IRoomClient, Player>();
-                users[connection] = player;
+                Dictionary<Player, PlayerChannels> users = new Dictionary<Player, PlayerChannels>( new Player.EqualityComparer() );
+                PlayerChannels playerChannels = new PlayerChannels();
+                playerChannels.IRoomClient = OperationContext.Current.GetCallbackChannel<IRoomClient>();
+                users[player] = playerChannels;
                 usersRoom[room] = users;
             }
             return roomCode;
@@ -80,12 +87,10 @@ namespace Basta.Service {
 
         public void SendMessageRoomChat( Player player, Room room, string message ) {
             var connection = OperationContext.Current.GetCallbackChannel<IRoomClient>();
-            if ( !usersRoom[room].TryGetValue( connection, out player ) )
-                return;
-            foreach ( var other in usersRoom[room].Keys ) {
-                if ( other == connection )
+            foreach ( var other in usersRoom[room].Values ) {
+                if ( other.IRoomClient == connection )
                     continue;
-                other.ReciveMessageRoom( player, message );
+                other.IRoomClient.ReciveMessageRoom( player, message );
             }
         }
 
@@ -97,12 +102,8 @@ namespace Basta.Service {
             if ( usersRoom.ContainsKey( room ) ) {
                 if ( new RoomDAO().DeleteRoom( room ) ) {
                     Console.WriteLine( "Room Eliminated: " + room.Code );
-                    foreach ( var other in usersRoom[room].Keys ) {
-                        other.RoomDelected( room );
-                    }
-                    Console.WriteLine( "Salas disponibles ahora" );
-                    foreach ( var rooms in usersRoom.Keys ) {
-                        Console.WriteLine( room.Code );
+                    foreach ( var other in usersRoom[room].Values ) {
+                        other.IRoomClient.RoomDelected( room );
                     }
                     //BUG HERE 
                     //usersRoom.Remove( room );
@@ -112,35 +113,39 @@ namespace Basta.Service {
 
         public void UserDisconnectedFromRoom( Player player, Room room ) {
             var connection = OperationContext.Current.GetCallbackChannel<IRoomClient>();
-            if ( !usersRoom[room].TryGetValue( connection, out player ) )
-                return;
-            foreach ( var other in usersRoom[room].Keys ) {
-                if ( connection == other )
+            foreach ( var other in usersRoom[room].Values ) {
+                if ( connection == other.IRoomClient )
                     connection.YouHaveDisconnected();
-                other.PlayerDisconnected( player );
+                other.IRoomClient.PlayerDisconnected( player );
             }
-            usersRoom[room].Remove( connection );
+
+            usersRoom[room].Remove( player );
+
+
+            //foreach ( var playern in usersRoom[room].Keys ) {
+            //    if ( playern.Email == player.Email ) {
+            //        usersRoom[room].Remove( playern );
+            //        break;
+            //    }
+            //}
+
         }
 
         public List<Player> GetConnectedUsersFromRoom( Room room ) {
             var connection = OperationContext.Current.GetCallbackChannel<IRoomClient>();
             List<Player> usersConnectedToSpecifiedRoom = new List<Player>();
             foreach ( var dictionary in usersRoom[room] ) {
-                if ( connection == dictionary.Key )
+                if ( connection == dictionary.Value.IRoomClient )
                     continue;
-                usersConnectedToSpecifiedRoom.Add( dictionary.Value );
+                usersConnectedToSpecifiedRoom.Add( dictionary.Key );
             }
             return usersConnectedToSpecifiedRoom;
         }
 
         public void SendMessageRoomChatToPlayer( Player player, Room room, string message, Player toPlayer ) {
-            var connection = OperationContext.Current.GetCallbackChannel<IRoomClient>();
-            if ( !usersRoom[room].TryGetValue( connection, out player ) ) {
-                return;
-            }
             foreach ( var other in usersRoom[room] ) {
-                if ( other.Value.Email == toPlayer.Email && player.Email != toPlayer.Email ) {
-                    other.Key.ReciveMessageFromPlayer( player, message );
+                if ( other.Key.Email == toPlayer.Email && player.Email != toPlayer.Email ) {
+                    other.Value.IRoomClient.ReciveMessageFromPlayer( player, message );
                     break;
                 }
             }
@@ -148,22 +153,41 @@ namespace Basta.Service {
 
         public void KickPlayer( Player player, Room room ) {
             foreach ( var other in usersRoom[room] ) {
-                if ( other.Value.Email == player.Email ) {
-                    other.Key.PlayerKicked();
+                if ( other.Key.Email == player.Email ) {
+                    other.Value.IRoomClient.PlayerKicked();
                     if ( !userKickedFromRoom.ContainsKey( room.Code ) ) {
                         userKickedFromRoom.Add( room.Code, new List<String>() );
                     }
                     userKickedFromRoom[room.Code].Add( player.Email );
                 } else {
-                    other.Key.PlayerDisconnected( player );
+                    other.Value.IRoomClient.PlayerDisconnected( player );
                 }
             }
             foreach ( var other in usersRoom[room] ) {
-                if ( other.Value.Email == player.Email ) {
+                if ( other.Key.Email == player.Email ) {
                     usersRoom[room].Remove( other.Key );
                     break;
                 }
             }
+        }
+
+        public void StartGamePressed( Room room, GameConfiguration gameConfiguration ) {
+            gameConfiguration.ActualLetter = AssignRandomLetterToGameConfiguration();
+            GameProperties gameProperties = new GameProperties();
+            gameProperties.GameConfiguration = gameConfiguration;
+            roomsInGame.Add( room, gameProperties );
+            foreach ( var other in usersRoom[room].Values ) {
+                other.IRoomClient.OpenGameWindow( gameConfiguration );
+            }
+        }
+
+        private char AssignRandomLetterToGameConfiguration() {
+            char randomLetter;
+            char[] letters = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'W', 'X', 'Y', 'Z' };
+            Random random = new Random();
+            int randomIndex = random.Next( 0, letters.Length );
+            randomLetter = letters[randomIndex];
+            return randomLetter;
         }
 
         /*
@@ -260,6 +284,57 @@ namespace Basta.Service {
             }
             return isKicked;
         }
+
+        /*
+        * 
+        * 
+        * 
+        * IGameService implementation.
+        * 
+        * 
+        */
+        public void StopButtonPressed( Room room, Player player ) {
+            foreach ( var other in usersRoom[room].Values ) {
+                other.IGameClient.PlayerHasPressedStopButton( player );
+            }
+        }
+
+        public void OpenChannel( Room room, Player player ) {
+            var connection = OperationContext.Current.GetCallbackChannel<IGameClient>();
+            Console.WriteLine( "Hello" );
+
+            usersRoom[room][player].IGameClient = connection;
+
+            //Console.WriteLine( "Hola de nuevo " );
+            ////Console.WriteLine( "Existe usuario: " + usersRoom[room][player].IGameClient != null );
+            connection.GameHasStarted();
+            //roomsInGame[room].StartRound(connection);
+        }
+
+        public void RemoveChannel( Room room, Player player ) {
+            throw new NotImplementedException();
+        }
+
+        //private DispatcherTimer gameTimer;
+        //private TimeSpan gameTime;
+
+        //private static TimeSpan time;
+        //private static DispatcherTimer timer;
+
+        //private void StartRoundRoom(Room room) {
+
+        //}
+
+        //private void ShowWinnerRoom() {
+
+        //}
+
+        //private void ShowResultsRoom() {
+
+        //}
+
+
+
     }
 
 }

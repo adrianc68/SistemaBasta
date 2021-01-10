@@ -82,7 +82,20 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="GameServiceCallBack.cs" />
     <Compile Include="GUI\DropConnectionAlert.cs" />
+    <Compile Include="GUI\Login\Game\GameWindow.xaml.cs">
+      <DependentUpon>GameWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Login\Game\PlayerLateralUserControl.xaml.cs">
+      <DependentUpon>PlayerLateralUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Login\Game\PlayerResults.xaml.cs">
+      <DependentUpon>PlayerResults.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Login\Game\TextBoxQualifiedUserControl.xaml.cs">
+      <DependentUpon>TextBoxQualifiedUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GUI\Login\Lobby\ChatWith.xaml.cs">
       <DependentUpon>ChatWith.xaml</DependentUpon>
     </Compile>
@@ -105,6 +118,22 @@
     <Compile Include="Sound.cs" />
     <Compile Include="RoomServiceCallBack.cs" />
     <Page Include="GUI\Login\ChangePassword\ChangePasswordWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\Login\Game\GameWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\Login\Game\PlayerLateralUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\Login\Game\PlayerResults.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\Login\Game\TextBoxQualifiedUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -217,6 +246,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\Proxy\item3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\Proxy\item4.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />

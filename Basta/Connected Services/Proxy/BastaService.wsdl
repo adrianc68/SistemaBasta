@@ -58,12 +58,42 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="NetTcpBinding_IGameService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <msf:WindowsTransportSecurity xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
+                  <msf:ProtectionLevel>EncryptAndSign</msf:ProtectionLevel>
+                </msf:WindowsTransportSecurity>
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:4200/?xsd=xsd0" namespace="http://tempuri.org/" />
       <xsd:import schemaLocation="http://localhost:4200/?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Basta.Contracts.Faults" />
       <xsd:import schemaLocation="http://localhost:4200/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:4200/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Domain.Domain" />
+      <xsd:import schemaLocation="http://localhost:4200/?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/System.Collections.Generic" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="ILoginService_Login_InputMessage">
@@ -174,6 +204,9 @@
   <wsdl:message name="IRoomService_KickPlayer_InputMessage">
     <wsdl:part name="parameters" element="tns:KickPlayer" />
   </wsdl:message>
+  <wsdl:message name="IRoomService_StartGamePressed_InputMessage">
+    <wsdl:part name="parameters" element="tns:StartGamePressed" />
+  </wsdl:message>
   <wsdl:message name="IRoomService_ReciveMessageFromPlayer_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:ReciveMessageFromPlayer" />
   </wsdl:message>
@@ -200,6 +233,24 @@
   </wsdl:message>
   <wsdl:message name="IRoomService_YouHaveDisconnected_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:YouHaveDisconnected" />
+  </wsdl:message>
+  <wsdl:message name="IRoomService_OpenGameWindow_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:OpenGameWindow" />
+  </wsdl:message>
+  <wsdl:message name="IGameService_StopButtonPressed_InputMessage">
+    <wsdl:part name="parameters" element="tns:StopButtonPressed" />
+  </wsdl:message>
+  <wsdl:message name="IGameService_OpenChannel_InputMessage">
+    <wsdl:part name="parameters" element="tns:OpenChannel" />
+  </wsdl:message>
+  <wsdl:message name="IGameService_RemoveChannel_InputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveChannel" />
+  </wsdl:message>
+  <wsdl:message name="IGameService_PlayerHasPressedStopButton_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:PlayerHasPressedStopButton" />
+  </wsdl:message>
+  <wsdl:message name="IGameService_GameHasStarted_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:GameHasStarted" />
   </wsdl:message>
   <wsdl:portType name="ILoginService">
     <wsdl:operation name="Login">
@@ -274,6 +325,9 @@
     <wsdl:operation name="KickPlayer">
       <wsdl:input wsaw:Action="http://tempuri.org/IRoomService/KickPlayer" message="tns:IRoomService_KickPlayer_InputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="StartGamePressed">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRoomService/StartGamePressed" message="tns:IRoomService_StartGamePressed_InputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="ReciveMessageFromPlayer">
       <wsdl:output wsaw:Action="http://tempuri.org/IRoomService/ReciveMessageFromPlayer" message="tns:IRoomService_ReciveMessageFromPlayer_OutputCallbackMessage" />
     </wsdl:operation>
@@ -300,6 +354,26 @@
     </wsdl:operation>
     <wsdl:operation name="YouHaveDisconnected">
       <wsdl:output wsaw:Action="http://tempuri.org/IRoomService/YouHaveDisconnected" message="tns:IRoomService_YouHaveDisconnected_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="OpenGameWindow">
+      <wsdl:output wsaw:Action="http://tempuri.org/IRoomService/OpenGameWindow" message="tns:IRoomService_OpenGameWindow_OutputCallbackMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="IGameService">
+    <wsdl:operation name="StopButtonPressed">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGameService/StopButtonPressed" message="tns:IGameService_StopButtonPressed_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="OpenChannel">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGameService/OpenChannel" message="tns:IGameService_OpenChannel_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveChannel">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGameService/RemoveChannel" message="tns:IGameService_RemoveChannel_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PlayerHasPressedStopButton">
+      <wsdl:output wsaw:Action="http://tempuri.org/IGameService/PlayerHasPressedStopButton" message="tns:IGameService_PlayerHasPressedStopButton_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GameHasStarted">
+      <wsdl:output wsaw:Action="http://tempuri.org/IGameService/GameHasStarted" message="tns:IGameService_GameHasStarted_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_ILoginService" type="tns:ILoginService">
@@ -468,6 +542,12 @@
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
+    <wsdl:operation name="StartGamePressed">
+      <soap12:operation soapAction="http://tempuri.org/IRoomService/StartGamePressed" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
     <wsdl:operation name="ReciveMessageFromPlayer">
       <soap12:operation soapAction="http://tempuri.org/IRoomService/ReciveMessageFromPlayer" style="document" />
       <wsdl:output>
@@ -522,6 +602,46 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="OpenGameWindow">
+      <soap12:operation soapAction="http://tempuri.org/IRoomService/OpenGameWindow" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="NetTcpBinding_IGameService" type="tns:IGameService">
+    <wsp:PolicyReference URI="#NetTcpBinding_IGameService_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="StopButtonPressed">
+      <soap12:operation soapAction="http://tempuri.org/IGameService/StopButtonPressed" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="OpenChannel">
+      <soap12:operation soapAction="http://tempuri.org/IGameService/OpenChannel" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveChannel">
+      <soap12:operation soapAction="http://tempuri.org/IGameService/RemoveChannel" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="PlayerHasPressedStopButton">
+      <soap12:operation soapAction="http://tempuri.org/IGameService/PlayerHasPressedStopButton" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GameHasStarted">
+      <soap12:operation soapAction="http://tempuri.org/IGameService/GameHasStarted" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="BastaService">
     <wsdl:port name="NetTcpBinding_ILoginService" binding="tns:NetTcpBinding_ILoginService">
@@ -534,6 +654,15 @@
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IRoomService" binding="tns:NetTcpBinding_IRoomService">
+      <soap12:address location="net.tcp://localhost:8090/BastaService" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:8090/BastaService</wsa10:Address>
+        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
+          <Upn>DESKTOP-LBRH114\adrian</Upn>
+        </Identity>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="NetTcpBinding_IGameService" binding="tns:NetTcpBinding_IGameService">
       <soap12:address location="net.tcp://localhost:8090/BastaService" />
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/BastaService</wsa10:Address>

@@ -67,7 +67,7 @@ namespace Database.DAO {
                     player.AccessAccount = new Domain.Domain.AccessAccount();
                     player.AccessAccount.Email = player.Email;
                     player.AccessAccount.Password = null;
-                    player.AccessAccount.Username = player.AccessAccount.Username;
+                    player.AccessAccount.Username = account.username;
                     player.AccessAccount.Recovery_code = null;
                     player.AccessAccount.Player = player;
                     player.AccessAccount.Account_state = player.AccessAccount.Account_state;

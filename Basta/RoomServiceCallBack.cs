@@ -2,13 +2,6 @@
 using Basta.GUI.Login.Main;
 using Basta.GUI.Login;
 using Domain.Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
-using System.Windows.Input;
 
 
 namespace Basta {
@@ -55,6 +48,11 @@ namespace Basta {
 
         public void PlayerAlreadyKicked() {
             MainWindow.PlayerKicked();
+        }
+
+        public void OpenGameWindow( GameConfiguration gameConfiguration ) {
+            LobbyWindow.GameConfiguration = gameConfiguration;
+            LobbyWindow.OpenGameWindow();
         }
     }
 }

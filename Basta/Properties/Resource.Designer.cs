@@ -142,6 +142,231 @@ namespace Basta.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Siguiente.
+        /// </summary>
+        public static string Game_Button_Next {
+            get {
+                return ResourceManager.GetString("Game_Button_Next", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a ¡Basta!.
+        /// </summary>
+        public static string Game_Button_Stop {
+            get {
+                return ResourceManager.GetString("Game_Button_Stop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Haz presiona el botón ¡Basta!, se avisará a todos los jugadores que has terminado y su tiempo se disminuirá a 15 segundos..
+        /// </summary>
+        public static string Game_Button_Stoppressed {
+            get {
+                return ResourceManager.GetString("Game_Button_Stoppressed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Animal.
+        /// </summary>
+        public static string Game_Category_Animal {
+            get {
+                return ResourceManager.GetString("Game_Category_Animal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Ciudad.
+        /// </summary>
+        public static string Game_Category_City {
+            get {
+                return ResourceManager.GetString("Game_Category_City", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Color.
+        /// </summary>
+        public static string Game_Category_Color {
+            get {
+                return ResourceManager.GetString("Game_Category_Color", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a País.
+        /// </summary>
+        public static string Game_Category_Country {
+            get {
+                return ResourceManager.GetString("Game_Category_Country", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Fruta o verdura.
+        /// </summary>
+        public static string Game_Category_Fruitvegetable {
+            get {
+                return ResourceManager.GetString("Game_Category_Fruitvegetable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Apellido.
+        /// </summary>
+        public static string Game_Category_Lastname {
+            get {
+                return ResourceManager.GetString("Game_Category_Lastname", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Nombre.
+        /// </summary>
+        public static string Game_Category_Name {
+            get {
+                return ResourceManager.GetString("Game_Category_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Cosa.
+        /// </summary>
+        public static string Game_Category_Object {
+            get {
+                return ResourceManager.GetString("Game_Category_Object", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a (ganador absoluto).
+        /// </summary>
+        public static string Game_Label_Absolutwinner {
+            get {
+                return ResourceManager.GetString("Game_Label_Absolutwinner", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Tiempo restante:.
+        /// </summary>
+        public static string Game_Label_Counter {
+            get {
+                return ResourceManager.GetString("Game_Label_Counter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Ingresa una palabra que esté en el ámbito de: .
+        /// </summary>
+        public static string Game_Label_Enterword {
+            get {
+                return ResourceManager.GetString("Game_Label_Enterword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Si ingresas una palabra que no haya sido ingresada por otro jugador entonces recibirás 150 puntos. Si ingresas una palabra que haya sido ingresada por otro jugador entonecs recibirás 100 puntos. Y por último, si ingresas una palabra que no sea válida entonces recibirás 0 puntos. Evita ingresar insultos porque puedes recibir sanciones..
+        /// </summary>
+        public static string Game_Label_Info {
+            get {
+                return ResourceManager.GetString("Game_Label_Info", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a La letra inicial de las palabras:.
+        /// </summary>
+        public static string Game_Label_LetterAssigned {
+            get {
+                return ResourceManager.GetString("Game_Label_LetterAssigned", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Letra seleccionada:.
+        /// </summary>
+        public static string Game_Label_Lettertoplabel {
+            get {
+                return ResourceManager.GetString("Game_Label_Lettertoplabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Ronda.
+        /// </summary>
+        public static string Game_Label_Roundinitialize {
+            get {
+                return ResourceManager.GetString("Game_Label_Roundinitialize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Rondas:.
+        /// </summary>
+        public static string Game_Label_Rounds {
+            get {
+                return ResourceManager.GetString("Game_Label_Rounds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Puntuación obtenida:.
+        /// </summary>
+        public static string Game_Label_ScoreWon {
+            get {
+                return ResourceManager.GetString("Game_Label_ScoreWon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a  segundos.
+        /// </summary>
+        public static string Game_Label_Seconds {
+            get {
+                return ResourceManager.GetString("Game_Label_Seconds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Comenzando....
+        /// </summary>
+        public static string Game_Label_Starting {
+            get {
+                return ResourceManager.GetString("Game_Label_Starting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a (ganador de la ronda).
+        /// </summary>
+        public static string Game_Label_Winnerroundtext {
+            get {
+                return ResourceManager.GetString("Game_Label_Winnerroundtext", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Ingresa una palabra que coincida con el ámbito.
+        /// </summary>
+        public static string Game_TextInput_Insert {
+            get {
+                return ResourceManager.GetString("Game_TextInput_Insert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Configurar.
+        /// </summary>
+        public static string Lobby_Button_Configuregame {
+            get {
+                return ResourceManager.GetString("Lobby_Button_Configuregame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Configurar sala.
         /// </summary>
         public static string Lobby_Button_Configureroom {
@@ -187,6 +412,24 @@ namespace Basta.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Configurar juego.
+        /// </summary>
+        public static string Lobby_Label_Configuregame {
+            get {
+                return ResourceManager.GetString("Lobby_Label_Configuregame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Categorias de palabras.
+        /// </summary>
+        public static string Lobby_Label_Gamecategory {
+            get {
+                return ResourceManager.GetString("Lobby_Label_Gamecategory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Límite de jugadores: .
         /// </summary>
         public static string Lobby_Label_Playerslimit {
@@ -214,6 +457,15 @@ namespace Basta.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Privacidad de la sala: .
+        /// </summary>
+        public static string Lobby_Label_Roomstate {
+            get {
+                return ResourceManager.GetString("Lobby_Label_Roomstate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Límite de rondas: .
         /// </summary>
         public static string Lobby_Label_Roundslimit {
@@ -232,6 +484,15 @@ namespace Basta.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Tiempo de terminar ronda.
+        /// </summary>
+        public static string Lobby_Label_Timetoendround {
+            get {
+                return ResourceManager.GetString("Lobby_Label_Timetoendround", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Esperando jugadores....
         /// </summary>
         public static string Lobby_Label_Waitingfor {
@@ -246,6 +507,15 @@ namespace Basta.Properties {
         public static string Lobby_ListView_Select {
             get {
                 return ResourceManager.GetString("Lobby_ListView_Select", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a ¡No hay la suficiente cantidad de jugadores!.
+        /// </summary>
+        public static string Lobby_Message_Playersnotenought {
+            get {
+                return ResourceManager.GetString("Lobby_Message_Playersnotenought", resourceCulture);
             }
         }
         
@@ -421,6 +691,24 @@ namespace Basta.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Privada.
+        /// </summary>
+        public static string Main_Label_Private {
+            get {
+                return ResourceManager.GetString("Main_Label_Private", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Pública.
+        /// </summary>
+        public static string Main_Label_Public {
+            get {
+                return ResourceManager.GetString("Main_Label_Public", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Limite de personas.
         /// </summary>
         public static string Main_Label_Roommemberlimit {
@@ -444,6 +732,15 @@ namespace Basta.Properties {
         public static string Main_Label_Roomsettings {
             get {
                 return ResourceManager.GetString("Main_Label_Roomsettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Privacidad de sala.
+        /// </summary>
+        public static string Main_Label_Roomstate {
+            get {
+                return ResourceManager.GetString("Main_Label_Roomstate", resourceCulture);
             }
         }
         
