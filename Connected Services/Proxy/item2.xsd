@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/Domain.Domain" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Domain.Domain" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:4200/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:import schemaLocation="http://localhost:4200/?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/System.Collections.Generic" />
+  <xs:complexType name="Player">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AccessAccount" nillable="true" type="tns:AccessAccount" />
+      <xs:element minOccurs="0" name="Age" type="xs:short" />
+      <xs:element minOccurs="0" name="Country" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Location" type="tns:Location" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Player" nillable="true" type="tns:Player" />
+  <xs:complexType name="AccessAccount">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Account_state" type="tns:AccountState" />
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Recovery_code" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Username" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="AccessAccount" nillable="true" type="tns:AccessAccount" />
+  <xs:simpleType name="AccountState">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="FREE" />
+      <xs:enumeration value="BANNED" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="AccountState" nillable="true" type="tns:AccountState" />
+  <xs:simpleType name="Location">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NORTH" />
+      <xs:enumeration value="SOUTH" />
+      <xs:enumeration value="EUROPE" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="Location" nillable="true" type="tns:Location" />
+  <xs:complexType name="Room">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Code" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RoomConfiguration" nillable="true" type="tns:RoomConfiguration" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Room" nillable="true" type="tns:Room" />
+  <xs:complexType name="RoomConfiguration">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Code" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PlayerLimit" type="xs:int" />
+      <xs:element minOccurs="0" name="RoomState" type="tns:RoomState" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="RoomConfiguration" nillable="true" type="tns:RoomConfiguration" />
+  <xs:simpleType name="RoomState">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="PUBLIC" />
+      <xs:enumeration value="PRIVATE" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="RoomState" nillable="true" type="tns:RoomState" />
+  <xs:complexType name="ArrayOfPlayer">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Player" nillable="true" type="tns:Player" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPlayer" nillable="true" type="tns:ArrayOfPlayer" />
+  <xs:complexType name="ArrayOfRoom">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Room" nillable="true" type="tns:Room" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfRoom" nillable="true" type="tns:ArrayOfRoom" />
+  <xs:complexType name="GameConfiguration">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ActualLetter" type="ser:char" />
+      <xs:element minOccurs="0" name="ActualRound" type="xs:int" />
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/System.Collections.Generic" minOccurs="0" name="GameCategories" nillable="true" type="q1:QueueOfGameCategoryLu8J7EUV" />
+      <xs:element minOccurs="0" name="RoundsLimit" type="xs:double" />
+      <xs:element minOccurs="0" name="TimeToEndRound" type="xs:double" />
+      <xs:element minOccurs="0" name="TimeToShowResults" type="xs:double" />
+      <xs:element minOccurs="0" name="TimeToStart" type="xs:double" />
+      <xs:element minOccurs="0" name="TimeToStopGameOnButtonStopPressed" type="xs:double" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GameConfiguration" nillable="true" type="tns:GameConfiguration" />
+  <xs:complexType name="ArrayOfGameCategory">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="GameCategory" type="tns:GameCategory" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfGameCategory" nillable="true" type="tns:ArrayOfGameCategory" />
+  <xs:simpleType name="GameCategory">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="COUNTRY" />
+      <xs:enumeration value="OBJECT" />
+      <xs:enumeration value="NAME" />
+      <xs:enumeration value="LAST_NAME" />
+      <xs:enumeration value="COLOR" />
+      <xs:enumeration value="CITY" />
+      <xs:enumeration value="FRUIT_VEGETABLE" />
+      <xs:enumeration value="ANIMAL" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="GameCategory" nillable="true" type="tns:GameCategory" />
+  <xs:complexType name="Word">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="score" type="xs:double" />
+      <xs:element minOccurs="0" name="word" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Word" nillable="true" type="tns:Word" />
+</xs:schema>

@@ -1,0 +1,550 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="changeLanguageButton" xml:space="preserve">
+    <value>a Español</value>
+  </data>
+  <data name="ChangePassword_Button_Change" xml:space="preserve">
+    <value>Change password</value>
+  </data>
+  <data name="ChangePassword_Label_Description" xml:space="preserve">
+    <value>You must enter the password for which you want to change in the text fields. Both passwords must be the same.</value>
+  </data>
+  <data name="ChangePassword_Label_Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="ChangePassword_Label_RepeatPassword" xml:space="preserve">
+    <value>Repeat password</value>
+  </data>
+  <data name="ChangePassword_Label_Toptitle" xml:space="preserve">
+    <value>Change password</value>
+  </data>
+  <data name="ChatTypePlayer" xml:space="preserve">
+    <value>Player</value>
+  </data>
+  <data name="Chat_GlobalChat" xml:space="preserve">
+    <value>Actual room chat</value>
+  </data>
+  <data name="Chat_UsersConnected" xml:space="preserve">
+    <value>Users connected</value>
+  </data>
+  <data name="Game_Button_Next" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="Game_Button_Stop" xml:space="preserve">
+    <value>Stop!</value>
+  </data>
+  <data name="Game_Button_Stoppressed" xml:space="preserve">
+    <value>You have pressed the Stop button, all players will be notified and their time will be reduced to 15 seconds.</value>
+  </data>
+  <data name="Game_Category_Animal" xml:space="preserve">
+    <value>Animal</value>
+  </data>
+  <data name="Game_Category_City" xml:space="preserve">
+    <value>City</value>
+  </data>
+  <data name="Game_Category_Color" xml:space="preserve">
+    <value>Color</value>
+  </data>
+  <data name="Game_Category_Country" xml:space="preserve">
+    <value>Country</value>
+  </data>
+  <data name="Game_Category_Fruitvegetable" xml:space="preserve">
+    <value>Fruit or vegetable</value>
+  </data>
+  <data name="Game_Category_Lastname" xml:space="preserve">
+    <value>Last name</value>
+  </data>
+  <data name="Game_Category_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Game_Category_Object" xml:space="preserve">
+    <value>Object</value>
+  </data>
+  <data name="Game_Label_Absolutwinner" xml:space="preserve">
+    <value>(absolute winner)</value>
+  </data>
+  <data name="Game_Label_Counter" xml:space="preserve">
+    <value>Time remaining:</value>
+  </data>
+  <data name="Game_Label_Enterword" xml:space="preserve">
+    <value>Enter a word that is within the scope of:</value>
+  </data>
+  <data name="Game_Label_Info" xml:space="preserve">
+    <value>If you enter a word that has not been entered by another player then you will receive 150 points. If you enter a word that has been entered by another player then you will receive 100 points. And finally, if you enter a word that is not valid then you will receive 0 points. Avoid entering insults because you can receive sanctions.</value>
+  </data>
+  <data name="Game_Label_Infotool" xml:space="preserve">
+    <value>Remember that by clicking "Next" you can't go back</value>
+  </data>
+  <data name="Game_Label_LetterAssigned" xml:space="preserve">
+    <value>The initial letter of the words:</value>
+  </data>
+  <data name="Game_Label_Lettertoplabel" xml:space="preserve">
+    <value>Selected letter:</value>
+  </data>
+  <data name="Game_Label_Nowinner" xml:space="preserve">
+    <value>Tie</value>
+  </data>
+  <data name="Game_Label_Roundinitialize" xml:space="preserve">
+    <value>Round</value>
+  </data>
+  <data name="Game_Label_Rounds" xml:space="preserve">
+    <value>Rounds:</value>
+  </data>
+  <data name="Game_Label_Saveanswers" xml:space="preserve">
+    <value>The answers was saved!</value>
+  </data>
+  <data name="Game_Label_ScoreWon" xml:space="preserve">
+    <value>Score won:</value>
+  </data>
+  <data name="Game_Label_Seconds" xml:space="preserve">
+    <value> seconds</value>
+  </data>
+  <data name="Game_Label_Starting" xml:space="preserve">
+    <value>Starting...</value>
+  </data>
+  <data name="Game_Label_Winnerroundtext" xml:space="preserve">
+    <value>(round winner)</value>
+  </data>
+  <data name="Game_TextInput_Insert" xml:space="preserve">
+    <value>Enter a word that matches the scope</value>
+  </data>
+  <data name="LobbyWindow_TextBox_StartGame" xml:space="preserve">
+    <value>Start playing now!</value>
+  </data>
+  <data name="Lobby_Button_Configuregame" xml:space="preserve">
+    <value>Configure</value>
+  </data>
+  <data name="Lobby_Button_Configureroom" xml:space="preserve">
+    <value>Room settings</value>
+  </data>
+  <data name="Lobby_Button_Destroyroom" xml:space="preserve">
+    <value>Remove room</value>
+  </data>
+  <data name="Lobby_Button_Exit" xml:space="preserve">
+    <value>Exit</value>
+  </data>
+  <data name="Lobby_Button_Play" xml:space="preserve">
+    <value>Start!</value>
+  </data>
+  <data name="Lobby_Chat_You" xml:space="preserve">
+    <value>You</value>
+  </data>
+  <data name="Lobby_Label_Configuregame" xml:space="preserve">
+    <value>Set up game</value>
+  </data>
+  <data name="Lobby_Label_Gamecategory" xml:space="preserve">
+    <value>Word categories</value>
+  </data>
+  <data name="Lobby_Label_Playerslimit" xml:space="preserve">
+    <value>Players limit: </value>
+  </data>
+  <data name="Lobby_Label_Roomcode" xml:space="preserve">
+    <value>Room code: </value>
+  </data>
+  <data name="Lobby_Label_Roomsettings" xml:space="preserve">
+    <value>Room settings</value>
+  </data>
+  <data name="Lobby_Label_Roomstate" xml:space="preserve">
+    <value>Room's privacy: </value>
+  </data>
+  <data name="Lobby_Label_Roundslimit" xml:space="preserve">
+    <value>Rounds limit: </value>
+  </data>
+  <data name="Lobby_Label_Roundstempo" xml:space="preserve">
+    <value>Round time: </value>
+  </data>
+  <data name="Lobby_Label_Timetoendround" xml:space="preserve">
+    <value>Time to end round</value>
+  </data>
+  <data name="Lobby_Label_Waitingfor" xml:space="preserve">
+    <value>Waiting players...</value>
+  </data>
+  <data name="Lobby_ListView_Select" xml:space="preserve">
+    <value>Select a room to join it</value>
+  </data>
+  <data name="Lobby_Message_Playersnotenought" xml:space="preserve">
+    <value>Not the enought players!</value>
+  </data>
+  <data name="Lobby_TextBlock_Clasification" xml:space="preserve">
+    <value>Top</value>
+  </data>
+  <data name="Lobby_TextBlock_PointsWon" xml:space="preserve">
+    <value> points won</value>
+  </data>
+  <data name="login_Button_signUp" xml:space="preserve">
+    <value>Sign Up</value>
+  </data>
+  <data name="login_Label_forgottenPassword" xml:space="preserve">
+    <value>Have you forgotten your password?</value>
+  </data>
+  <data name="login_Label_forgottenPassword2" xml:space="preserve">
+    <value>Click here</value>
+  </data>
+  <data name="login_Label_login" xml:space="preserve">
+    <value>Log in</value>
+  </data>
+  <data name="login_TextField_userOrEmail" xml:space="preserve">
+    <value>Enter your username or email</value>
+  </data>
+  <data name="MainLobby_TextField_Chat" xml:space="preserve">
+    <value>Type something to send...</value>
+  </data>
+  <data name="Main_Button_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Main_Button_Configuration" xml:space="preserve">
+    <value>Configuration</value>
+  </data>
+  <data name="Main_Button_Createroom" xml:space="preserve">
+    <value>Create room</value>
+  </data>
+  <data name="Main_Button_Exit" xml:space="preserve">
+    <value>Exit</value>
+  </data>
+  <data name="Main_Button_Joinroom" xml:space="preserve">
+    <value>Join</value>
+  </data>
+  <data name="Main_Button_Play" xml:space="preserve">
+    <value>Play</value>
+  </data>
+  <data name="Main_Button_Saveconfiguration" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Main_Button_Selectroom" xml:space="preserve">
+    <value>Select a room to join</value>
+  </data>
+  <data name="Main_ChoiceBox_English" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="Main_ChoiceBox_Spanish" xml:space="preserve">
+    <value>Spanish</value>
+  </data>
+  <data name="Main_Label_Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="Main_Label_Private" xml:space="preserve">
+    <value>Private</value>
+  </data>
+  <data name="Main_Label_Public" xml:space="preserve">
+    <value>Public</value>
+  </data>
+  <data name="Main_Label_Roommemberlimit" xml:space="preserve">
+    <value>Players limit</value>
+  </data>
+  <data name="Main_Label_Roomroundlimit" xml:space="preserve">
+    <value>Rounds limit</value>
+  </data>
+  <data name="Main_Label_Roomsettings" xml:space="preserve">
+    <value>Room settings</value>
+  </data>
+  <data name="Main_Label_Roomstate" xml:space="preserve">
+    <value>Room's privacy</value>
+  </data>
+  <data name="Main_Label_Roomtime" xml:space="preserve">
+    <value>Game time</value>
+  </data>
+  <data name="Main_Label_Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="Main_Label_Volume" xml:space="preserve">
+    <value>Music Volume</value>
+  </data>
+  <data name="Main_TextField_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Main_TextField_Code" xml:space="preserve">
+    <value>Enter the room code</value>
+  </data>
+  <data name="recoveryPassword_Button_Send" xml:space="preserve">
+    <value>Send code to email</value>
+  </data>
+  <data name="recoveryPassword_Button_Verify" xml:space="preserve">
+    <value>Verify code</value>
+  </data>
+  <data name="recoveryPassword_Label_Description" xml:space="preserve">
+    <value>You must enter your email and Basta sends you a recovery code to your email. The code you will receive must be entered in one of the text fields</value>
+  </data>
+  <data name="recoveryPassword_Label_Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="recoveryPassword_Label_Recovery" xml:space="preserve">
+    <value>Recovery Code</value>
+  </data>
+  <data name="recoveryPassword_Label_RecoveryPassword" xml:space="preserve">
+    <value>Recovery password</value>
+  </data>
+  <data name="recoveryPassword_Message_Contenthtml" xml:space="preserve">
+    <value>&lt;html&gt; 
+&lt;body&gt;
+&lt;div style=\border-style:solid;border-color:#323232;border-width:1px 1px 1px 1px;text-align:justify;background-color:#f8f8f8;width:80% !important;height:80% !important;padding:3% 3% 3% 3%;\&gt;
+      &lt;h1 style=\color:#8a8a8a;font-family:sans-serif;text-align:left;\&gt; Password Recovery &lt;/h1&gt;
+      &lt;p style=\font-family:sans-serif;\&gt; We received a request to reset your password from the &lt;b&gt; Basta System &lt;/b&gt; &lt;/p&gt;
+      &lt;p style=\font-family:sans-serif;\&gt; Enter the following code in the text field indicated in the system to recover your password. &lt;/p&gt;
+      &lt;div style=\border-style:solid;border-color:#000000;border-width:1px 1px 1px 1px;background-color:#e2e2e2;display:inline-block;padding:15px 15px 15px 15px;\&gt;  $$$  &lt;/div&gt;
+      &lt;p style=\font-size: 15px;font-family:sans-serif;color:#ff0000\&gt; If it wasn't you, &lt;u&gt; report it &lt;/u&gt; or ignore this message. &lt;/p&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</value>
+  </data>
+  <data name="recoveryPassword_TextField_Email" xml:space="preserve">
+    <value>Enter your email</value>
+  </data>
+  <data name="recoveryPassword_TextFiel_Recovery" xml:space="preserve">
+    <value>Enter recovery code</value>
+  </data>
+  <data name="signUp_Label_AccountInformation" xml:space="preserve">
+    <value>Account Information</value>
+  </data>
+  <data name="signUp_Label_Age" xml:space="preserve">
+    <value>Age</value>
+  </data>
+  <data name="signUp_Label_Country" xml:space="preserve">
+    <value>Country</value>
+  </data>
+  <data name="signUp_Label_Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="signUp_Label_LastName" xml:space="preserve">
+    <value>Last name</value>
+  </data>
+  <data name="signUp_Label_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="signUp_Label_Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="signUp_Label_PersonalInformation" xml:space="preserve">
+    <value>Personal Information</value>
+  </data>
+  <data name="signUp_Label_signUp" xml:space="preserve">
+    <value>Sign up</value>
+  </data>
+  <data name="signUp_Label_SignUpAccount" xml:space="preserve">
+    <value>Sign up account</value>
+  </data>
+  <data name="signUp_Label_Username" xml:space="preserve">
+    <value>Username</value>
+  </data>
+  <data name="signUp_TextField_AgeText" xml:space="preserve">
+    <value>Enter your age</value>
+  </data>
+  <data name="signUp_TextField_Country" xml:space="preserve">
+    <value>Enter your country</value>
+  </data>
+  <data name="signUp_TextField_Email" xml:space="preserve">
+    <value>Enter your email</value>
+  </data>
+  <data name="signUp_TextField_LastName" xml:space="preserve">
+    <value>Enter your last name</value>
+  </data>
+  <data name="signUp_TextField_Name" xml:space="preserve">
+    <value>Enter your name</value>
+  </data>
+  <data name="signUp_TextField_Username" xml:space="preserve">
+    <value>Enter your username</value>
+  </data>
+  <data name="SystemAttemptsLimitReached" xml:space="preserve">
+    <value>Attempts limit reached! Wait 10 minutes!</value>
+  </data>
+  <data name="SystemErrorSendMessage" xml:space="preserve">
+    <value>The code recovery process did not complete!</value>
+  </data>
+  <data name="SystemExistingEmail" xml:space="preserve">
+    <value>The email is already registered!</value>
+  </data>
+  <data name="SystemExistingUsername" xml:space="preserve">
+    <value>Your username is already used!</value>
+  </data>
+  <data name="SystemFatalError" xml:space="preserve">
+    <value>An error has occurred and has been logged to a file!</value>
+  </data>
+  <data name="SystemGameFull" xml:space="preserve">
+    <value>The room is full!</value>
+  </data>
+  <data name="SystemInvalidCode" xml:space="preserve">
+    <value>The code doesn't match, check it!</value>
+  </data>
+  <data name="SystemInvalidData" xml:space="preserve">
+    <value>The data is wrong!</value>
+  </data>
+  <data name="SystemLoginAccountAlreadyLogged" xml:space="preserve">
+    <value>The account is already logged in</value>
+  </data>
+  <data name="SystemLoginAccountBanned" xml:space="preserve">
+    <value>Your account has been banned!</value>
+  </data>
+  <data name="SystemLoginError" xml:space="preserve">
+    <value>You are wrong! Check your data</value>
+  </data>
+  <data name="SystemLoginWaitMinutes" xml:space="preserve">
+    <value>You have to wait 10 minutes!</value>
+  </data>
+  <data name="SystemLostConnection" xml:space="preserve">
+    <value>A problem was registered with the database!</value>
+  </data>
+  <data name="SystemMessageTitle" xml:space="preserve">
+    <value>Warning!</value>
+  </data>
+  <data name="SystemNoExistingEmail" xml:space="preserve">
+    <value>The email is not registered!</value>
+  </data>
+  <data name="SystemPasswordChangingError" xml:space="preserve">
+    <value>Couldn't change the password, try later!</value>
+  </data>
+  <data name="SystemPasswordNoMatch" xml:space="preserve">
+    <value>Passwords don't match!</value>
+  </data>
+  <data name="SystemPlayerKicked" xml:space="preserve">
+    <value>You have been kicked.</value>
+  </data>
+  <data name="SystemRoomNotFound" xml:space="preserve">
+    <value>The room was not found!</value>
+  </data>
+  <data name="SystemServerNotFound" xml:space="preserve">
+    <value>The server is having problems!</value>
+  </data>
+  <data name="Tooltip_SignUp_Country" xml:space="preserve">
+    <value>It should not contain strange characters such as ¡? =) (/ &amp;% $ # "!! ¨ * ¨ [] or numbers</value>
+  </data>
+  <data name="Tooltip_SignUp_Email" xml:space="preserve">
+    <value>It must be in the format xxxxx@xxxxx.xxx</value>
+  </data>
+  <data name="Tooltip_SignUp_LastName" xml:space="preserve">
+    <value>It should not contain strange characters such as ¡? =) (/ &amp;% $ # "!! ¨ * ¨ [] or numbers</value>
+  </data>
+  <data name="Tooltip_SignUp_Name" xml:space="preserve">
+    <value>It should not contain strange characters such as ¡? =) (/ &amp;% $ # "!! ¨ * ¨ [] or numbers</value>
+  </data>
+  <data name="Tooltip_SignUp_Password" xml:space="preserve">
+    <value>It must contain at least 8 characters.</value>
+  </data>
+  <data name="Tooltip_SignUp_Username" xml:space="preserve">
+    <value>It should not contain strange characters such as ¡? =) (/ &amp;% $ # "!! ¨ * ¨ []</value>
+  </data>
+  <data name="UserConnectedLobby_Button_KickPlayer" xml:space="preserve">
+    <value>Kick</value>
+  </data>
+  <data name="UserConnectedLobby_Button_ReportPlayer" xml:space="preserve">
+    <value>Report</value>
+  </data>
+  <data name="UserConnectedLobby_Button_SendMessage" xml:space="preserve">
+    <value>Send message</value>
+  </data>
+</root>
