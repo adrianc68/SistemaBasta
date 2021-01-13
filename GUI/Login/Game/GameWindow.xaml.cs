@@ -308,6 +308,8 @@ namespace Basta.GUI.Login.Game {
                 HideBorderAndGrids();
                 gridGame.IsEnabled = true;
                 stopButton.IsEnabled = true;
+                systemLabel.Text = "";
+                PlayerResultWrapPanel.Children.Clear();
                 Autentication.GetInstance().GameServer.StartNewRound( Room );
             } catch ( Exception ex ) {
                 if ( ex is EndpointNotFoundException || ex is CommunicationException ) {

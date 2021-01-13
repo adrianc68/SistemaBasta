@@ -182,7 +182,7 @@
         </Border>
 
 
-        <Border x:Name="winnerBorder" Grid.ColumnSpan="2" Background="#8C000000">
+        <Border x:Name="winnerBorder" Grid.ColumnSpan="2" Background="#8C000000" d:IsHidden="True">
             <StackPanel Orientation="Horizontal">
                 <Image Margin="0" Source="/Basta;component/GUI/Login/ChangePassword/Fernando_Martinez.png" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="UniformToFill"/>
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="105,0,0,0">
@@ -195,7 +195,7 @@
 
         </Border>
 
-        <Border x:Name="resultsBorder" Background="#D8000000" Grid.ColumnSpan="2" d:IsHidden="True">
+        <Border x:Name="resultsBorder" Background="#D8000000" Grid.ColumnSpan="2">
             <StackPanel>
                 <StackPanel>
                     <TextBlock Foreground="White" TextAlignment="Center" Padding="0" UseLayoutRounding="False" FontFamily="Vice City Sans" Text="Resultados" FontSize="40" TextDecorations="{x:Null}" Width="225" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="25,25,0,0"/>

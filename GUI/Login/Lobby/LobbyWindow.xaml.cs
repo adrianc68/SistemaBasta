@@ -344,7 +344,6 @@ namespace Basta.GUI.Login.Lobby {
             AddCategoryToList( GameCategory.COUNTRY, countryCheckBox );
         }
 
-
         private void AddCategoryToList( GameCategory category, CheckBox checkBox ) {
             if ( (bool) checkBox.IsChecked ) {
                 if ( categoriesSelected.Count < MIN_CATEGORIES_SELECTED ) {
@@ -411,9 +410,6 @@ namespace Basta.GUI.Login.Lobby {
 
         private void SetUpRoomConfigurationButtonClicked( object sender, RoutedEventArgs e ) {
             room.RoomConfiguration.RoomState = ( roomStateComboBox.SelectedIndex == 0 ) ? RoomState.PUBLIC : RoomState.PRIVATE;
-            // DAO CHANGES
-            // CALL SERVICE AND METHOD SETUP
-            // THEN USE A CALLBACK TO CHANGE CONFIGURATION
         }
 
         private void RoomStateComboBoxLoaded( object sender, RoutedEventArgs e ) {

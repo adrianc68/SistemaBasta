@@ -175,6 +175,12 @@
   <wsdl:message name="IRoomService_SetUpRoom_OutputMessage">
     <wsdl:part name="parameters" element="tns:SetUpRoomResponse" />
   </wsdl:message>
+  <wsdl:message name="IRoomService_GetTopTen_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTopTen" />
+  </wsdl:message>
+  <wsdl:message name="IRoomService_GetTopTen_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTopTenResponse" />
+  </wsdl:message>
   <wsdl:message name="IRoomService_SendMessageRoomChat_InputMessage">
     <wsdl:part name="parameters" element="tns:SendMessageRoomChat" />
   </wsdl:message>
@@ -325,6 +331,10 @@
     <wsdl:operation name="SetUpRoom">
       <wsdl:input wsaw:Action="http://tempuri.org/IRoomService/SetUpRoom" message="tns:IRoomService_SetUpRoom_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IRoomService/SetUpRoomResponse" message="tns:IRoomService_SetUpRoom_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTopTen">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRoomService/GetTopTen" message="tns:IRoomService_GetTopTen_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRoomService/GetTopTenResponse" message="tns:IRoomService_GetTopTen_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="SendMessageRoomChat">
       <wsdl:input wsaw:Action="http://tempuri.org/IRoomService/SendMessageRoomChat" message="tns:IRoomService_SendMessageRoomChat_InputMessage" />
@@ -533,6 +543,15 @@
     </wsdl:operation>
     <wsdl:operation name="SetUpRoom">
       <soap12:operation soapAction="http://tempuri.org/IRoomService/SetUpRoom" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTopTen">
+      <soap12:operation soapAction="http://tempuri.org/IRoomService/GetTopTen" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

@@ -164,6 +164,12 @@ namespace Basta.Proxy {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRoomService/SetUpRoom", ReplyAction="http://tempuri.org/IRoomService/SetUpRoomResponse")]
         System.Threading.Tasks.Task SetUpRoomAsync();
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRoomService/GetTopTen", ReplyAction="http://tempuri.org/IRoomService/GetTopTenResponse")]
+        System.Collections.Generic.Queue<Domain.Domain.Player> GetTopTen();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRoomService/GetTopTen", ReplyAction="http://tempuri.org/IRoomService/GetTopTenResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.Queue<Domain.Domain.Player>> GetTopTenAsync();
+        
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRoomService/SendMessageRoomChat")]
         void SendMessageRoomChat(Domain.Domain.Player player, Domain.Domain.Room room, string message);
         
@@ -305,6 +311,14 @@ namespace Basta.Proxy {
         
         public System.Threading.Tasks.Task SetUpRoomAsync() {
             return base.Channel.SetUpRoomAsync();
+        }
+        
+        public System.Collections.Generic.Queue<Domain.Domain.Player> GetTopTen() {
+            return base.Channel.GetTopTen();
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.Queue<Domain.Domain.Player>> GetTopTenAsync() {
+            return base.Channel.GetTopTenAsync();
         }
         
         public void SendMessageRoomChat(Domain.Domain.Player player, Domain.Domain.Room room, string message) {

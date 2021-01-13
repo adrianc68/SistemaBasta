@@ -15,19 +15,9 @@
         <Border Background="#C1000000" Margin="30,25,341,25" Padding="0" Width="655" BorderBrush="White" BorderThickness="1" CornerRadius="25" Grid.RowSpan="2">
             <StackPanel Margin="25">
                 <TextBox TextWrapping="Wrap" Text="{x:Static languages:Resource.Lobby_TextBlock_Clasification}" Foreground="#FFE4E4E4" FontFamily="PriceDown" FontSize="45" TextAlignment="Center"/>
-                <ListView HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0,25" BorderBrush="{x:Null}" Background="{x:Null}" Height="465" Foreground="#DD474F99">
+                <ListView x:Name="topTenListView" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0,25" BorderBrush="{x:Null}" Background="{x:Null}" Height="465" Foreground="#DD474F99">
                     <local:TopPlayerUserControl/>
-                    <local:TopPlayerUserControl/>
-                    <local:TopPlayerUserControl/>
-                    <local:TopPlayerUserControl/>
-                    <local:TopPlayerUserControl/>
-                    <local:TopPlayerUserControl/>
-                    <local:TopPlayerUserControl/>
-                    <local:TopPlayerUserControl/>
-                    <local:TopPlayerUserControl/>
-                    <local:TopPlayerUserControl/>
-                    <local:TopPlayerUserControl/>
-                    <local:TopPlayerUserControl/>
+     
                 </ListView>
             </StackPanel>
 

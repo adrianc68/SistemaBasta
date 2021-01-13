@@ -26,6 +26,7 @@ namespace Basta.GUI.Login.Main {
             autentication.RoomServiceCallBack.MainWindow = this;
             ConfigureVolumeSlider();
             usernameLabel.Text = autentication.Player.Name;
+            GetTopTen();
         }
 
         public void GameIsFull() {
@@ -87,7 +88,7 @@ namespace Basta.GUI.Login.Main {
             room.RoomConfiguration = new RoomConfiguration();
             room.RoomConfiguration.PlayerLimit = (int) personLimitComboBox.SelectedItem;
             // Ternary operator here !
-            room.RoomConfiguration.RoomState = ( roomPrivacyComboBox.SelectedIndex == 0 ) ? RoomState.PUBLIC : RoomState.PRIVATE; 
+            room.RoomConfiguration.RoomState = ( roomPrivacyComboBox.SelectedIndex == 0 ) ? RoomState.PUBLIC : RoomState.PRIVATE;
             try {
                 room.Code = Autentication.GetInstance().RoomServer.CreateRoom( Autentication.GetInstance().Player, room );
             } catch ( Exception ex ) {
@@ -108,6 +109,27 @@ namespace Basta.GUI.Login.Main {
             }
         }
 
+        private void GetTopTen() {
+            topTenListView.Items.Clear();
+            try {
+                int position = 0;
+                foreach ( var players in autentication.RoomServer.GetTopTen() ) {
+                    position += 1;
+                    TopPlayerUserControl topPlayerUserControl = new TopPlayerUserControl();
+                    topPlayerUserControl.usernameLabel.Text = players.AccessAccount.Username;
+                    topPlayerUserControl.positionNumber.Text = position.ToString();
+                    topPlayerUserControl.pointsGotIt.Text = players.Score.ToString();
+                    topTenListView.Items.Add( topPlayerUserControl );
+                }
+            } catch ( Exception ex ) {
+                if ( ex is EndpointNotFoundException || ex is CommunicationException ) {
+                    DropConnectionAlert.ShowDropConnectionAlert();
+                    autentication.LogOut();
+                    Close();
+                }
+            }
+        }
+
         private void GetRoomsFromServer() {
             roomsListView.Items.Clear();
             try {
@@ -120,7 +142,6 @@ namespace Basta.GUI.Login.Main {
                     autentication.LogOut();
                     Close();
                 }
-
             }
         }
 

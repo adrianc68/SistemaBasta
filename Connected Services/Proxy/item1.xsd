@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:4200/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Domain.Domain" />
+  <xs:import schemaLocation="http://localhost:4200/?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/System.Collections.Generic" />
   <xs:import schemaLocation="http://localhost:4200/?xsd=xsd5" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <xs:element name="Login">
     <xs:complexType>
@@ -128,11 +129,23 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetTopTen">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetTopTenResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/System.Collections.Generic" minOccurs="0" name="GetTopTenResult" nillable="true" type="q9:QueueOfPlayerLu8J7EUV" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="SendMessageRoomChat">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/Domain.Domain" minOccurs="0" name="player" nillable="true" type="q9:Player" />
-        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Domain.Domain" minOccurs="0" name="room" nillable="true" type="q10:Room" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Domain.Domain" minOccurs="0" name="player" nillable="true" type="q10:Player" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/Domain.Domain" minOccurs="0" name="room" nillable="true" type="q11:Room" />
         <xs:element minOccurs="0" name="message" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
@@ -140,24 +153,24 @@
   <xs:element name="SendMessageRoomChatToPlayer">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/Domain.Domain" minOccurs="0" name="player" nillable="true" type="q11:Player" />
-        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/Domain.Domain" minOccurs="0" name="room" nillable="true" type="q12:Room" />
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/Domain.Domain" minOccurs="0" name="player" nillable="true" type="q12:Player" />
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/Domain.Domain" minOccurs="0" name="room" nillable="true" type="q13:Room" />
         <xs:element minOccurs="0" name="message" nillable="true" type="xs:string" />
-        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/Domain.Domain" minOccurs="0" name="toPlayer" nillable="true" type="q13:Player" />
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/Domain.Domain" minOccurs="0" name="toPlayer" nillable="true" type="q14:Player" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetConnectedUsersFromRoom">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/Domain.Domain" minOccurs="0" name="room" nillable="true" type="q14:Room" />
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/Domain.Domain" minOccurs="0" name="room" nillable="true" type="q15:Room" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetConnectedUsersFromRoomResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/Domain.Domain" minOccurs="0" name="GetConnectedUsersFromRoomResult" nillable="true" type="q15:ArrayOfPlayer" />
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/Domain.Domain" minOccurs="0" name="GetConnectedUsersFromRoomResult" nillable="true" type="q16:ArrayOfPlayer" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -169,7 +182,7 @@
   <xs:element name="GetRoomsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/Domain.Domain" minOccurs="0" name="GetRoomsResult" nillable="true" type="q16:ArrayOfRoom" />
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/Domain.Domain" minOccurs="0" name="GetRoomsResult" nillable="true" type="q17:ArrayOfRoom" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -183,43 +196,35 @@
   <xs:element name="GetRoomByCodeResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/Domain.Domain" minOccurs="0" name="GetRoomByCodeResult" nillable="true" type="q17:Room" />
+        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/Domain.Domain" minOccurs="0" name="GetRoomByCodeResult" nillable="true" type="q18:Room" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UserDisconnectedFromRoom">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/Domain.Domain" minOccurs="0" name="player" nillable="true" type="q18:Player" />
-        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/Domain.Domain" minOccurs="0" name="room" nillable="true" type="q19:Room" />
+        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/Domain.Domain" minOccurs="0" name="player" nillable="true" type="q19:Player" />
+        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/Domain.Domain" minOccurs="0" name="room" nillable="true" type="q20:Room" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="KickPlayer">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/Domain.Domain" minOccurs="0" name="player" nillable="true" type="q20:Player" />
-        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/Domain.Domain" minOccurs="0" name="room" nillable="true" type="q21:Room" />
+        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/Domain.Domain" minOccurs="0" name="player" nillable="true" type="q21:Player" />
+        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/Domain.Domain" minOccurs="0" name="room" nillable="true" type="q22:Room" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="StartGamePressed">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/Domain.Domain" minOccurs="0" name="room" nillable="true" type="q22:Room" />
-        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/Domain.Domain" minOccurs="0" name="gameConfiguration" nillable="true" type="q23:GameConfiguration" />
+        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/Domain.Domain" minOccurs="0" name="room" nillable="true" type="q23:Room" />
+        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/Domain.Domain" minOccurs="0" name="gameConfiguration" nillable="true" type="q24:GameConfiguration" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ReciveMessageFromPlayer">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/Domain.Domain" minOccurs="0" name="player" nillable="true" type="q24:Player" />
-        <xs:element minOccurs="0" name="message" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="ReciveMessageRoom">
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q25="http://schemas.datacontract.org/2004/07/Domain.Domain" minOccurs="0" name="player" nillable="true" type="q25:Player" />
@@ -227,24 +232,32 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="PlayerConnected">
+  <xs:element name="ReciveMessageRoom">
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/Domain.Domain" minOccurs="0" name="player" nillable="true" type="q26:Player" />
+        <xs:element minOccurs="0" name="message" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="PlayerDisconnected">
+  <xs:element name="PlayerConnected">
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/Domain.Domain" minOccurs="0" name="player" nillable="true" type="q27:Player" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="PlayerDisconnected">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q28="http://schemas.datacontract.org/2004/07/Domain.Domain" minOccurs="0" name="player" nillable="true" type="q28:Player" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="RoomDelected">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q28="http://schemas.datacontract.org/2004/07/Domain.Domain" minOccurs="0" name="room" nillable="true" type="q28:Room" />
+        <xs:element xmlns:q29="http://schemas.datacontract.org/2004/07/Domain.Domain" minOccurs="0" name="room" nillable="true" type="q29:Room" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -276,68 +289,68 @@
   <xs:element name="StopButtonPressed">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q29="http://schemas.datacontract.org/2004/07/Domain.Domain" minOccurs="0" name="room" nillable="true" type="q29:Room" />
-        <xs:element xmlns:q30="http://schemas.datacontract.org/2004/07/Domain.Domain" minOccurs="0" name="player" nillable="true" type="q30:Player" />
+        <xs:element xmlns:q30="http://schemas.datacontract.org/2004/07/Domain.Domain" minOccurs="0" name="room" nillable="true" type="q30:Room" />
+        <xs:element xmlns:q31="http://schemas.datacontract.org/2004/07/Domain.Domain" minOccurs="0" name="player" nillable="true" type="q31:Player" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="OpenChannel">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q31="http://schemas.datacontract.org/2004/07/Domain.Domain" minOccurs="0" name="room" nillable="true" type="q31:Room" />
-        <xs:element xmlns:q32="http://schemas.datacontract.org/2004/07/Domain.Domain" minOccurs="0" name="player" nillable="true" type="q32:Player" />
+        <xs:element xmlns:q32="http://schemas.datacontract.org/2004/07/Domain.Domain" minOccurs="0" name="room" nillable="true" type="q32:Room" />
+        <xs:element xmlns:q33="http://schemas.datacontract.org/2004/07/Domain.Domain" minOccurs="0" name="player" nillable="true" type="q33:Player" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="RemoveChannel">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q33="http://schemas.datacontract.org/2004/07/Domain.Domain" minOccurs="0" name="room" nillable="true" type="q33:Room" />
-        <xs:element xmlns:q34="http://schemas.datacontract.org/2004/07/Domain.Domain" minOccurs="0" name="player" nillable="true" type="q34:Player" />
+        <xs:element xmlns:q34="http://schemas.datacontract.org/2004/07/Domain.Domain" minOccurs="0" name="room" nillable="true" type="q34:Room" />
+        <xs:element xmlns:q35="http://schemas.datacontract.org/2004/07/Domain.Domain" minOccurs="0" name="player" nillable="true" type="q35:Player" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ShowMainScreenBorder">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q35="http://schemas.datacontract.org/2004/07/Domain.Domain" minOccurs="0" name="room" nillable="true" type="q35:Room" />
+        <xs:element xmlns:q36="http://schemas.datacontract.org/2004/07/Domain.Domain" minOccurs="0" name="room" nillable="true" type="q36:Room" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ShowGridGameFromRoom">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q36="http://schemas.datacontract.org/2004/07/Domain.Domain" minOccurs="0" name="room" nillable="true" type="q36:Room" />
+        <xs:element xmlns:q37="http://schemas.datacontract.org/2004/07/Domain.Domain" minOccurs="0" name="room" nillable="true" type="q37:Room" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SendResults">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q37="http://schemas.datacontract.org/2004/07/Domain.Domain" minOccurs="0" name="room" nillable="true" type="q37:Room" />
-        <xs:element xmlns:q38="http://schemas.datacontract.org/2004/07/Domain.Domain" minOccurs="0" name="player" nillable="true" type="q38:Player" />
-        <xs:element xmlns:q39="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="answers" nillable="true" type="q39:ArrayOfKeyValueOfGameCategoryWordsptP_SN9K" />
+        <xs:element xmlns:q38="http://schemas.datacontract.org/2004/07/Domain.Domain" minOccurs="0" name="room" nillable="true" type="q38:Room" />
+        <xs:element xmlns:q39="http://schemas.datacontract.org/2004/07/Domain.Domain" minOccurs="0" name="player" nillable="true" type="q39:Player" />
+        <xs:element xmlns:q40="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="answers" nillable="true" type="q40:ArrayOfKeyValueOfGameCategoryWordsptP_SN9K" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="StartNewRound">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q40="http://schemas.datacontract.org/2004/07/Domain.Domain" minOccurs="0" name="room" nillable="true" type="q40:Room" />
+        <xs:element xmlns:q41="http://schemas.datacontract.org/2004/07/Domain.Domain" minOccurs="0" name="room" nillable="true" type="q41:Room" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="PlayerHasPressedStopButton">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q41="http://schemas.datacontract.org/2004/07/Domain.Domain" minOccurs="0" name="player" nillable="true" type="q41:Player" />
+        <xs:element xmlns:q42="http://schemas.datacontract.org/2004/07/Domain.Domain" minOccurs="0" name="player" nillable="true" type="q42:Player" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="StartRound">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q42="http://schemas.datacontract.org/2004/07/Domain.Domain" minOccurs="0" name="gameConfiguration" nillable="true" type="q42:GameConfiguration" />
+        <xs:element xmlns:q43="http://schemas.datacontract.org/2004/07/Domain.Domain" minOccurs="0" name="gameConfiguration" nillable="true" type="q43:GameConfiguration" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -351,8 +364,8 @@
   <xs:element name="StartShowResults">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q43="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="results" nillable="true" type="q43:ArrayOfKeyValueOfstringArrayOfKeyValueOfGameCategoryWordsptP_SN9Kty7Ep6D1" />
-        <xs:element xmlns:q44="http://schemas.datacontract.org/2004/07/Domain.Domain" minOccurs="0" name="player" nillable="true" type="q44:Player" />
+        <xs:element xmlns:q44="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="results" nillable="true" type="q44:ArrayOfKeyValueOfstringArrayOfKeyValueOfGameCategoryWordsptP_SN9Kty7Ep6D1" />
+        <xs:element xmlns:q45="http://schemas.datacontract.org/2004/07/Domain.Domain" minOccurs="0" name="player" nillable="true" type="q45:Player" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
