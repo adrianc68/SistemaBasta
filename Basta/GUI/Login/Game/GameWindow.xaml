@@ -1,0 +1,233 @@
+﻿<Window x:Class="Basta.GUI.Login.Game.GameWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:languages="clr-namespace:Basta.Properties" 
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:game="clr-namespace:Basta.GUI.Login.Game"
+        mc:Ignorable="d"
+        Title="GameWindow" Height="639" Width="956.4" Closed="GameWindowClosed" KeyDown="KeyDownPressed">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Basta;component/GUI/Login/Lobby/background5.jpg"/>
+        </Grid.Background>
+        <Grid x:Name="gridGame" Margin="0,0,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="10*"/>
+                <ColumnDefinition Width="89*"/>
+            </Grid.ColumnDefinitions>
+
+            <Border BorderThickness="0" Background="#D8000000" BorderBrush="Black">
+                <WrapPanel x:Name="playerUserControlWrapPanel" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Border>
+            <Border BorderThickness="0" Background="Red" Grid.Column="1">
+                <DockPanel Margin="35,35,35,25">
+                    <Border DockPanel.Dock="Top" Background="#FFEC0000" CornerRadius="25">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="91*"/>
+                                <RowDefinition Height="134*"/>
+                                <RowDefinition Height="49*"/>
+                            </Grid.RowDefinitions>
+                            <Border BorderThickness="0,0,0,1" Margin="0">
+                                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <StackPanel Orientation="Horizontal" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                        <StackPanel Margin="0,0,25,0" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                            <TextBlock Foreground="White" TextAlignment="Left" Padding="0,0,0,0" UseLayoutRounding="False" FontFamily="Vice City Sans" Height="25" Text="{x:Static languages:Resource.Game_Label_Counter}" FontSize="14" TextDecorations="{x:Null}" Margin="0,0,25,0"/>
+                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                <TextBlock x:Name="timeRemainingLabel" Foreground="White" TextAlignment="Left" Padding="0,0,0,0" UseLayoutRounding="False" FontFamily="Vice City Sans" Height="25" Text="30" FontSize="14" TextDecorations="{x:Null}" Margin="0"/>
+                                                <TextBlock Foreground="White" TextAlignment="Left" Padding="0,0,0,0" UseLayoutRounding="False" FontFamily="Vice City Sans" Height="25" Text="{x:Static languages:Resource.Game_Label_Seconds}" FontSize="14" TextDecorations="{x:Null}" Margin="0,0,25,0"/>
+                                            </StackPanel>
+                                        </StackPanel>
+
+                                        <StackPanel Margin="0,0,25,0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                            <TextBlock Foreground="White" TextAlignment="Left" Padding="0,0,0,5" UseLayoutRounding="False" FontFamily="Vice City Sans" Height="25" Text="{x:Static languages:Resource.Game_Label_Rounds}" FontSize="14" TextDecorations="{x:Null}"/>
+                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                <TextBlock x:Name="roundsActualLabel" Foreground="White" TextAlignment="Left" Padding="0,0,0,5" UseLayoutRounding="False" FontFamily="Vice City Sans" Height="25" Text="3" FontSize="14" TextDecorations="{x:Null}"/>
+                                                <TextBlock Foreground="White" TextAlignment="Left" Padding="0,0,0,5" UseLayoutRounding="False" FontFamily="Vice City Sans" Height="25" Text="/" FontSize="14" TextDecorations="{x:Null}"/>
+                                                <TextBlock x:Name="roundsLimitLabel" Foreground="White" TextAlignment="Left" Padding="0,0,0,5" UseLayoutRounding="False" FontFamily="Vice City Sans" Height="25" Text="3" FontSize="14" TextDecorations="{x:Null}"/>
+
+                                            </StackPanel>
+
+                                        </StackPanel>
+
+                                        <StackPanel Margin="25,0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                            <TextBlock Foreground="White" TextAlignment="Left" Padding="0,0,0,5" UseLayoutRounding="False" FontFamily="Vice City Sans" Height="25" Text="{x:Static languages:Resource.Game_Label_ScoreWon}" FontSize="14" TextDecorations="{x:Null}"/>
+                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                                <TextBlock x:Name="scoreWonLabel" Foreground="White" TextAlignment="Left" Padding="0,0,0,5" UseLayoutRounding="False" FontFamily="Vice City Sans" Height="25" Text="0" FontSize="14" TextDecorations="{x:Null}"/>
+                                                <TextBlock Foreground="White" TextAlignment="Left" Padding="0,0,0,5" UseLayoutRounding="False" FontFamily="Vice City Sans" Height="25" Text=" pts." FontSize="14" TextDecorations="{x:Null}"/>
+                                            </StackPanel>
+                                        </StackPanel>
+
+                                        <StackPanel Margin="0,0,25,0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                            <TextBlock Foreground="White" TextAlignment="Left" Padding="0,0,0,5" UseLayoutRounding="False" FontFamily="Vice City Sans" Height="25" Text="{x:Static languages:Resource.Game_Label_Lettertoplabel}" FontSize="14" TextDecorations="{x:Null}"/>
+                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                                <TextBlock x:Name="letterAssignedToRoundLabel" Foreground="White" TextAlignment="Left" Padding="0,0,0,5" UseLayoutRounding="False" FontFamily="Vice City Sans" Height="25" Text="A" FontSize="14" TextDecorations="{x:Null}"/>
+                                            </StackPanel>
+                                        </StackPanel>
+
+                                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0">
+                                            <Button x:Name="stopButton" Content="{x:Static languages:Resource.Game_Button_Stop}" Height="100" Padding="0" FontSize="20" BorderBrush="{x:Null}" Foreground="White" Background="{x:Null}" Width="100" Margin="0" FontFamily="Vice City Sans" Click="BastaButtonClicked">
+
+
+                                                <Button.Effect>
+                                                    <DropShadowEffect Direction="278" ShadowDepth="3" BlurRadius="0" Color="#FF6C6B6B"/>
+                                                </Button.Effect>
+                                                <Button.Template>
+                                                    <ControlTemplate TargetType="{x:Type Button}">
+                                                        <Grid>
+                                                            <Ellipse Stroke="Black" StrokeThickness="3">
+                                                                <Ellipse.Style>
+                                                                    <Style TargetType="{x:Type Ellipse}">
+                                                                        <Style.Triggers>
+                                                                            <Trigger Property="IsMouseOver" Value="False">
+                                                                                <Setter Property="Fill">
+                                                                                    <Setter.Value>
+                                                                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                                                            <GradientStop Color="#FF1700FF" Offset="0"/>
+                                                                                        </LinearGradientBrush>
+                                                                                    </Setter.Value>
+                                                                                </Setter>
+                                                                            </Trigger>
+                                                                            <Trigger Property="IsMouseOver" Value="True">
+                                                                                <Setter Property="Fill" Value="#FFB5BCE0"/>
+                                                                            </Trigger>
+                                                                        </Style.Triggers>
+                                                                    </Style>
+                                                                </Ellipse.Style>
+                                                            </Ellipse>
+                                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                        </Grid>
+                                                    </ControlTemplate>
+                                                </Button.Template>
+
+                                            </Button>
+                                        </StackPanel>
+
+
+
+
+
+
+                                    </StackPanel>
+
+
+                                    <StackPanel Margin="35,0">
+                                        <TextBlock Foreground="White" Text="{x:Static languages:Resource.Game_Label_Info}" TextAlignment="Center" Padding="0,0,0,5" UseLayoutRounding="False" FontFamily="Vice City Sans" FontSize="10" TextDecorations="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" Margin="0,20,0,0"/>
+                                    </StackPanel>
+
+                                </StackPanel>
+                            </Border>
+                            <Border BorderThickness="1" Grid.Row="1" Margin="25,15,25,25" Background="#FFB40000" CornerRadius="15">
+                                <StackPanel VerticalAlignment="Center">
+                                    <StackPanel Height="85" Orientation="Horizontal" VerticalAlignment="Center" Margin="100,0" HorizontalAlignment="Center">
+                                        <TextBlock Foreground="White" TextAlignment="Center" Padding="0" UseLayoutRounding="False" FontFamily="Vice City Sans" Text="{x:Static languages:Resource.Game_Label_Enterword}" FontSize="14" TextDecorations="{x:Null}" Width="225" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,25,0"/>
+                                        <TextBlock x:Name="categoryLabel" Foreground="White" TextAlignment="Center" Padding="0" UseLayoutRounding="False" FontFamily="Vice City Sans" Text="CATEGORY" FontSize="38" TextDecorations="{x:Null}" TextWrapping="Wrap" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    </StackPanel>
+
+                                    <StackPanel Margin="0,15,0,0">
+                                        <TextBox x:Name="inputTextBox" materialDesign:HintAssist.Hint="{x:Static languages:Resource.Game_TextInput_Insert}" TextWrapping="Wrap" Foreground="Black" Background="White" BorderBrush="#FF707070" Height="42" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="100,0" FontSize="20" FontFamily="Vice City Sans" BorderThickness="1"/>
+                                    </StackPanel>
+
+                                    <StackPanel Margin="35,0">
+                                        <TextBlock x:Name="systemLabel" Foreground="Black" TextAlignment="Justify" Padding="0,0,0,5" UseLayoutRounding="False" FontFamily="Vice City Sans" Text="{x:Static languages:Resource.Game_Label_Infotool}" TextDecorations="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" Margin="0,20,0,0"/>
+                                    </StackPanel>
+
+                                </StackPanel>
+                            </Border>
+
+
+
+                            <Border BorderThickness="1" Grid.Row="2">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,85,0">
+                                    <Button Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="10" BorderThickness="1" Foreground="White" VerticalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Height="42" Margin="0,0,25,0" Click="CloseButtonPressed">
+                                        <TextBlock Text="{x:Static languages:Resource.Lobby_Button_Exit}" TextAlignment="Center" Width="76" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" Foreground="White"/>
+                                    </Button>
+
+                                    <Button Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="10" BorderThickness="1" Foreground="White" VerticalAlignment="Center" Background="#FF071EAC" BorderBrush="#FF666666" Height="42" Click="NextCategoryButtonPressed">
+                                        <TextBlock x:Name="nextCategoryButton" Text="{x:Static languages:Resource.Game_Button_Next}" TextAlignment="Center" Width="76" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15"/>
+                                    </Button>
+
+                                </StackPanel>
+                            </Border>
+
+                        </Grid>
+                    </Border>
+                </DockPanel>
+            </Border>
+        </Grid>
+
+        <Border x:Name="mainScreenBorder" Grid.ColumnSpan="2" Background="#D8000000" d:IsHidden="True">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Foreground="White" TextAlignment="Center" Padding="0" UseLayoutRounding="False" FontFamily="Vice City Sans" Text="{x:Static languages:Resource.Game_Label_Starting}" FontSize="40" TextDecorations="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                <TextBlock Foreground="White" TextAlignment="Center" Padding="0" UseLayoutRounding="False" FontFamily="Vice City Sans" Text="{x:Static languages:Resource.Game_Label_Roundinitialize}" FontSize="40" TextDecorations="{x:Null}" Width="225" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" Margin="0,15,0,0"/>
+                <TextBlock x:Name="actualRoundLabel" Foreground="White" TextAlignment="Center" Padding="0" UseLayoutRounding="False" FontFamily="Vice City Sans" Text="1" FontSize="25" TextDecorations="{x:Null}" Width="225" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" Margin="0"/>
+
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,15,0,0">
+                    <TextBlock x:Name="counterLabel" Foreground="White" TextAlignment="Center" Padding="0" UseLayoutRounding="False" FontFamily="Vice City Sans" Text="123" FontSize="15" TextDecorations="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" Margin="0"/>
+                    <TextBlock Foreground="White" TextAlignment="Center" Padding="0" UseLayoutRounding="False" FontFamily="Vice City Sans" Text="{x:Static languages:Resource.Game_Label_Seconds}" FontSize="15" TextDecorations="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" Margin="0"/>
+                </StackPanel>
+
+                <StackPanel Margin="0,150,0,0">
+                    <TextBlock Foreground="White" TextAlignment="Justify" Padding="0,0,0,5" UseLayoutRounding="False" FontFamily="Vice City Sans" Text="{x:Static languages:Resource.Game_Label_Info}" TextDecorations="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" Margin="0" Width="733" FontSize="15"/>
+                </StackPanel>
+
+
+            </StackPanel>
+
+        </Border>
+
+
+        <Border x:Name="winnerBorder" Grid.ColumnSpan="2" Background="#8C000000" d:IsHidden="True">
+            <StackPanel Orientation="Horizontal">
+                <Image Margin="0" Source="/Basta;component/GUI/Login/ChangePassword/Fernando_Martinez.png" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="UniformToFill"/>
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="105,0,0,0">
+                    <TextBlock x:Name="winnerLabel" Foreground="White" TextAlignment="Center" Padding="0" UseLayoutRounding="False" FontFamily="Vice City Sans" Text="Username" FontSize="40" TextDecorations="{x:Null}" Width="225" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" Margin="0"/>
+                    <TextBlock x:Name="winnerSubLabel" Foreground="#FFEEEEEE" TextAlignment="Center" Padding="0" UseLayoutRounding="False" FontFamily="Vice City Sans" Text="{x:Static languages:Resource.Game_Label_Winnerroundtext}" TextDecorations="{x:Null}" Width="225" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" Margin="0" FontSize="15"/>
+                </StackPanel>
+
+            </StackPanel>
+
+
+        </Border>
+
+        <Border x:Name="resultsBorder" Background="#D8000000" Grid.ColumnSpan="2" d:IsHidden="True">
+            <StackPanel>
+                <StackPanel>
+                    <TextBlock Foreground="White" TextAlignment="Center" Padding="0" UseLayoutRounding="False" FontFamily="Vice City Sans" Text="Resultados" FontSize="40" TextDecorations="{x:Null}" Width="225" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="25,25,0,0"/>
+                </StackPanel>
+
+                <StackPanel Margin="0">
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Margin="0,35">
+                        <TextBlock Foreground="White" TextAlignment="Center" Padding="0" UseLayoutRounding="False" FontFamily="Vice City Sans" Text="Usuario" FontSize="20" TextDecorations="{x:Null}" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,0,0,0"/>
+                        <StackPanel x:Name="categoriesStackPanel" Orientation="Horizontal" Margin="25,0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel Background="#FF280091">
+                        <WrapPanel x:Name="PlayerResultWrapPanel" Margin="0,45,0,25" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
+                         
+                        </WrapPanel>
+                    </StackPanel>
+                </StackPanel>
+
+
+            </StackPanel>
+        </Border>
+
+        <Border x:Name="AssignLetterBorder" Background="#D8000000" d:IsHidden="True">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Foreground="White" TextAlignment="Center" Padding="0" UseLayoutRounding="False" FontFamily="Vice City Sans" Text="{x:Static languages:Resource.Game_Label_LetterAssigned}" FontSize="40" TextDecorations="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                <Label x:Name="letterAsigned" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="82" Content="H" Foreground="#DDFFFFFF" FontFamily="Vice City Sans" Margin="0,35,0,0"/>
+            </StackPanel>
+            
+        </Border>
+
+
+
+    </Grid>
+</Window>

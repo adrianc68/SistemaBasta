@@ -1,0 +1,85 @@
+BASE DE DATOS
+
+CREATE TABLE AccessAccount(username VARCHAR(75), email VARCHAR(125), password VARCHAR(95), recovery_code VARCHAR(8), account_state ENUM('BANNED', 'FREE'), PRIMARY KEY(email));
+CREATE TABLE Player(email VARCHAR(125), age INT, country VARCHAR(95), location ENUM('South', 'North', 'Europe'), name VARCHAR(95), FOREIGN KEY(email) REFERENCES AccessAccount(email) );
+CREATE TABLE Host(mac_address VARCHAR(75), attempts INT);
+
+DELIMITER $$
+CREATE PROCEDURE addPlayerAccount(email_in VARCHAR(125),age_in INT, country_in VARCHAR(95), username_in VARCHAR(75), password_in VARCHAR(75), name_in VARCHAR(95) )
+BEGIN
+DECLARE EXIT HANDLER FOR
+SQLEXCEPTION
+BEGIN
+SHOW ERRORS LIMIT 1;
+RESIGNAL;
+ROLLBACK;
+END;
+DECLARE EXIT HANDLER FOR
+SQLWARNING
+BEGIN
+SHOW WARNINGS LIMIT 1;
+RESIGNAL;
+ROLLBACK;
+END;
+DECLARE CONTINUE HANDLER FOR
+1329
+START TRANSACTION;
+INSERT INTO AccessAccount(username, email, password, account_state) VALUES (username_in, email_in, SHA2(password_in,256), 2);
+INSERT INTO Player(email, age, country, location, name) VALUES (email_in, age_in, country_in, 1, name_in);
+COMMIT;
+END $$
+DELIMITER ;
+
+
+
+
+Conseguir un correo existente en la base de datos
+SELECT email FROM AccessACcount WHERE email = '?';
+
+
+DELIMITER $$
+CREATE PROCEDURE sendAddress(dir varchar(64))
+BEGIN
+DECLARE EXIT HANDLER FOR SQLEXCEPTION
+ BEGIN
+ SHOW ERRORS LIMIT 1;
+RESIGNAL;
+ ROLLBACK;
+ END;
+ DECLARE EXIT HANDLER FOR SQLWARNING
+ BEGIN
+ SHOW WARNINGS LIMIT 1;
+RESIGNAL;
+ ROLLBACK;
+ END;
+DECLARE CONTINUE HANDLER FOR 1329 
+BEGIN
+ set @idMac = NULL;
+END;
+START TRANSACTION;
+SELECT SUM(attempts) FROM Host WHERE mac_address = dir INTO
+@numAttempts;
+IF @numAttempts > 4 THEN
+SIGNAL SQLSTATE '45000'
+SET MESSAGE_TEXT = 'Attempts limit reached!';
+ELSE
+SELECT mac_address FROM Host WHERE mac_address = dir LIMIT 1 INTO
+@idMac;
+IF @idMac IS NOT NULL THEN
+UPDATE Host set attempts = attempts + 1 WHERE mac_address = dir;
+ELSE
+INSERT INTO Host(mac_address, attempts) VALUES(dir, 1);
+END IF;
+END IF;
+COMMIT;
+END $$
+DELIMITER ;
+
+
+
+
+
+
+
+
+
